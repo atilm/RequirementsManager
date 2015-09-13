@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>Resources/document-open-3.ico</file>
+        <file>Resources/document-save-5.ico</file>
+        <file>Resources/document-save-as-5.ico</file>
+        <file>Resources/format-list-ordered.ico</file>
+        <file>Resources/format-list-unordered.ico</file>
+        <file>Resources/format-text-bold-2.ico</file>
+        <file>Resources/format-text-italic-2.ico</file>
+        <file>Resources/insert-image-3.ico</file>
+        <file>Resources/insert-link-2.ico</file>
+        <file>Resources/list-add.ico</file>
+        <file>Resources/list-add-3.ico</file>
+        <file>Resources/list-remove-5.ico</file>
+    </qresource>
+</RCC>

@@ -13,8 +13,26 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    richtextcontroller.cpp \
+    requirementsview.cpp \
+    descriptionview.cpp \
+    requirementsmodel.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    richtextcontroller.h \
+    requirementsview.h \
+    descriptionview.h \
+    requirementsmodel.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc
+
+unix:!macx: LIBS += -L$$PWD/../../QtTestTools/ -lQtTestTools
+
+INCLUDEPATH += $$PWD/../../QtTestTools
+DEPENDPATH += $$PWD/../../QtTestTools
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../QtTestTools/libQtTestTools.a
