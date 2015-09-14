@@ -12,5 +12,6 @@
         <file>Resources/list-add.ico</file>
         <file>Resources/list-add-3.ico</file>
         <file>Resources/list-remove-5.ico</file>
+        <file>Resources/system-settings.ico</file>
     </qresource>
 </RCC>

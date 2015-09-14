@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>742</width>
-    <height>611</height>
+    <height>533</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,16 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionAddSibling"/>
+    <addaction name="actionAddChild"/>
+    <addaction name="actionProjectSettings"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -55,6 +64,8 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionSaveAs"/>
+   <addaction name="actionAddSibling"/>
+   <addaction name="actionAddChild"/>
    <addaction name="actionBold"/>
    <addaction name="actionItalic"/>
    <addaction name="actionBulletList"/>
@@ -148,6 +159,45 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionAddSibling">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/list-add.ico</normaloff>:/icons/Resources/list-add.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Add Requirement</string>
+   </property>
+   <property name="toolTip">
+    <string>Append Requirement</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAddChild">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Add Subrequirement</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Subrequirement</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+R</string>
+   </property>
+  </action>
+  <action name="actionProjectSettings">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/system-settings.ico</normaloff>:/icons/Resources/system-settings.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Project settings...</string>
    </property>
   </action>
  </widget>

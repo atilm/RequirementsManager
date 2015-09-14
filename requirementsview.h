@@ -2,6 +2,7 @@
 #define REQUIREMENTSVIEW_H
 
 #include <QTreeView>
+#include "requirementsmodel.h"
 
 class RequirementsView : public QTreeView
 {
@@ -12,6 +13,12 @@ public:
 signals:
 
 public slots:
+    virtual void insertSibling();
+    virtual void appendChild();
+
+
+private:
+    RequirementsModel *requirementsModel();
 
 };
 

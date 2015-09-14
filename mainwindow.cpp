@@ -36,9 +36,15 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
     ui->splitter->insertWidget(0, requirementsView);
 
     requirementsView->setModel(requirements);
+    connect(ui->actionAddSibling, SIGNAL(triggered()),
+            requirementsView, SLOT(insertSibling()));
+    connect(ui->actionAddChild, SIGNAL(triggered()),
+            requirementsView, SLOT(appendChild()));
 
     this->descriptionView = descriptionView;
     delete ui->textEdit;
     ui->textEdit = descriptionView;
     ui->splitter->insertWidget(1, descriptionView);
+
+    richText->setTextEdit(descriptionView);
 }

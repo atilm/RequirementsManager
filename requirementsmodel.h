@@ -2,6 +2,7 @@
 #define REQUIREMENTSMODEL_H
 
 #include <QAbstractItemModel>
+#include "requirement.h"
 
 class RequirementsModel : public QAbstractItemModel
 {
@@ -24,10 +25,19 @@ public:
     virtual bool removeColumns(int column, int count, const QModelIndex & parent = QModelIndex());
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
+    // specific functions
+    virtual bool appendSibling(const QModelIndex &index);
+    virtual bool appendChild(const QModelIndex &index);
+
 signals:
 
 public slots:
 
+private:
+    Requirement *root;
+
+    Requirement *asRequirement(const QModelIndex &index) const;
+    Requirement *getValidItem(const QModelIndex &index) const;
 };
 
 #endif // REQUIREMENTSMODEL_H

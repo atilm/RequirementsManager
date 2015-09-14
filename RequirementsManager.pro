@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     richtextcontroller.cpp \
     requirementsview.cpp \
     descriptionview.cpp \
-    requirementsmodel.cpp
+    requirementsmodel.cpp \
+    requirement.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
     requirementsview.h \
     descriptionview.h \
-    requirementsmodel.h
+    requirementsmodel.h \
+    requirement.h
 
 FORMS    += mainwindow.ui
 
