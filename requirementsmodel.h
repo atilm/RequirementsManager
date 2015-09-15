@@ -3,12 +3,16 @@
 
 #include <QAbstractItemModel>
 #include "requirement.h"
+#include "requirementfactory.h"
 
 class RequirementsModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit RequirementsModel(QObject *parent = 0);
+    explicit RequirementsModel(RequirementFactory *factory,
+                               QObject *parent = 0);
+
+    virtual ~RequirementsModel();
 
     // required overriden functions
     virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;
@@ -23,6 +27,7 @@ public:
     virtual bool insertColumns(int column, int count, const QModelIndex & parent = QModelIndex());
     virtual bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
     virtual bool removeColumns(int column, int count, const QModelIndex & parent = QModelIndex());
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
     // specific functions
@@ -34,6 +39,7 @@ signals:
 public slots:
 
 private:
+    RequirementFactory *factory;
     Requirement *root;
 
     Requirement *asRequirement(const QModelIndex &index) const;

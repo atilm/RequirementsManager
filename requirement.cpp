@@ -1,6 +1,6 @@
 #include "requirement.h"
 
-Requirement::Requirement()
+Requirement::Requirement(unsigned int _id) : id(_id)
 {
     parent = NULL;
     title = "Requirement";
@@ -58,24 +58,18 @@ int Requirement::childCount() const
     return children.size();
 }
 
-void Requirement::insertChildren(int beforeIndex, int count)
+void Requirement::insertChild(int beforeIndex, Requirement *item)
 {
     if(beforeIndex <= childCount()){
-        for(int i=0;i<count;i++){
-            Requirement *r = new Requirement();
-            r->setParent(this);
-
-            children.insert(beforeIndex, r);
-        }
+        item->setParent(this);
+        children.insert(beforeIndex, item);
     }
 }
 
-void Requirement::appendChild()
+void Requirement::appendChild(Requirement *item)
 {
-    Requirement *r = new Requirement();
-    r->setParent(this);
-
-    children.append(r);
+    item->setParent(this);
+    children.append(item);
 }
 
 int Requirement::indexOf(const Requirement *item) const

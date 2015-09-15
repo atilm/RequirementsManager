@@ -2,11 +2,18 @@
 #include <iostream>
 using namespace std;
 
-RequirementsModel::RequirementsModel(QObject *parent) :
+RequirementsModel::RequirementsModel(RequirementFactory *factory,
+                                     QObject *parent) :
     QAbstractItemModel(parent)
 {
-    root = new Requirement();
-    root->appendChild();
+    this->factory = factory;
+    root = factory->newRequirement();
+    root->appendChild(factory->newRequirement());
+}
+
+RequirementsModel::~RequirementsModel()
+{
+    delete factory;
 }
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const
@@ -26,7 +33,7 @@ QVariant RequirementsModel::data(const QModelIndex &index, int role) const
     if(!index.isValid())
         return QVariant();
 
-    if(index.column() == 0 && role == Qt::DisplayRole)
+    if(index.column() == 0 && ( role == Qt::DisplayRole || role == Qt::EditRole ) )
         return asRequirement(index)->getTitle();
     else
         return QVariant();
@@ -85,13 +92,15 @@ bool RequirementsModel::insertRows(int row, int count, const QModelIndex &parent
 
     if(parentItem->childCount() == 0){
         beginInsertRows(parent, 0, 0 + count - 1);
-        parentItem->insertChildren(0, count);
+        for(int i=0;i<count;i++)
+            parentItem->insertChild(0, factory->newRequirement());
         endInsertRows();
         return true;
     }
     else if(row <= parentItem->childCount()){
         beginInsertRows(parent, row, row + count - 1);
-        parentItem->insertChildren(row, count);
+        for(int i=0;i<count;i++)
+            parentItem->insertChild(row, factory->newRequirement());
         endInsertRows();
         return true;
     }
@@ -114,19 +123,34 @@ bool RequirementsModel::removeColumns(int column, int count, const QModelIndex &
     return true;
 }
 
+Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
+{
+    if(!index.isValid())
+        return 0;
+    else
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+}
+
 bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    return true;
+    if (!index.isValid())
+        return false;
+
+    if(role == Qt::EditRole){
+        asRequirement(index)->setTitle(value.toString());
+        emit dataChanged(index, index);
+        return true;
+    }
+    else
+        return false;
 }
 
 bool RequirementsModel::appendSibling(const QModelIndex &index)
 {
     Requirement *item = getValidItem(index);
 
-    if(item == root)
-        insertRows(0, 1, createIndex(0,0,root));
-    else
-        insertRows(index.row(), 1, parent(index));
+    if(item != root)
+        insertRows(index.row()+1, 1, parent(index));
 
     return true;
 }

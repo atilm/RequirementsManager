@@ -5,7 +5,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    RequirementsModel *requirements = new RequirementsModel();
+    UniqueIDManager *idManager = new UniqueIDManager();
+    RequirementFactory *factory = new RequirementFactory(idManager);
+    RequirementsModel *requirements = new RequirementsModel(factory);
+
     RichTextController *richText = new RichTextController();
 
     RequirementsView *requirementsView = new RequirementsView();

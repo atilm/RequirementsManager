@@ -18,14 +18,22 @@ SOURCES += main.cpp\
     requirementsview.cpp \
     descriptionview.cpp \
     requirementsmodel.cpp \
-    requirement.cpp
+    requirement.cpp \
+    uniqueidmanager.cpp \
+    requirementattribute.cpp \
+    requirementlink.cpp \
+    requirementfactory.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
     requirementsview.h \
     descriptionview.h \
     requirementsmodel.h \
-    requirement.h
+    requirement.h \
+    uniqueidmanager.h \
+    requirementattribute.h \
+    requirementlink.h \
+    requirementfactory.h
 
 FORMS    += mainwindow.ui
 

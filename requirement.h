@@ -1,6 +1,8 @@
 #ifndef REQUIREMENT_H
 #define REQUIREMENT_H
 
+#include "uniqueidmanager.h"
+
 #include <QTextDocument>
 #include <QVector>
 #include <exception>
@@ -19,7 +21,7 @@ class InvalidIndexException : public exception{
 class Requirement
 {
 public:
-    Requirement();
+    Requirement(unsigned int _id);
     virtual ~Requirement();
 
     virtual void setTitle(const QString &title);
@@ -34,12 +36,14 @@ public:
     virtual Requirement *getChild(int index);
 
     virtual int childCount() const;
-    virtual void insertChildren(int beforeIndex, int count);
-    virtual void appendChild();
+    virtual void insertChild(int beforeIndex, Requirement *item);
+    virtual void appendChild(Requirement *item);
 
     virtual int indexOf(const Requirement *item) const;
 
 private:
+    const unsigned int id;
+
     Requirement *parent;
     QVector<Requirement*> children;
 
