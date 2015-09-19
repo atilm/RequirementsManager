@@ -8,7 +8,7 @@ RequirementsModel::RequirementsModel(RequirementFactory *factory,
 {
     this->factory = factory;
     root = factory->newRequirement();
-    root->appendChild(factory->newRequirement());
+    //root->appendChild(factory->newRequirement());
 }
 
 RequirementsModel::~RequirementsModel()
@@ -63,7 +63,7 @@ QModelIndex RequirementsModel::parent(const QModelIndex &index) const
     Requirement *childItem = asRequirement(index);
     Requirement *parentItem = childItem->getParent();
 
-    if(parentItem == root)
+    if(parentItem == NULL || parentItem == root)
         return QModelIndex();
     else
         return createIndex(parentItem->getRow(), 0, parentItem);
@@ -79,48 +79,6 @@ QVariant RequirementsModel::headerData(int section,
     }
 
     return QVariant();
-}
-
-bool RequirementsModel::insertRows(int row, int count, const QModelIndex &parent)
-{
-    Requirement *parentItem;
-
-    if(!parent.isValid())
-        parentItem = root;
-    else
-        parentItem = asRequirement(parent);
-
-    if(parentItem->childCount() == 0){
-        beginInsertRows(parent, 0, 0 + count - 1);
-        for(int i=0;i<count;i++)
-            parentItem->insertChild(0, factory->newRequirement());
-        endInsertRows();
-        return true;
-    }
-    else if(row <= parentItem->childCount()){
-        beginInsertRows(parent, row, row + count - 1);
-        for(int i=0;i<count;i++)
-            parentItem->insertChild(row, factory->newRequirement());
-        endInsertRows();
-        return true;
-    }
-    else
-        return false;
-}
-
-bool RequirementsModel::insertColumns(int column, int count, const QModelIndex &parent)
-{
-    return true;
-}
-
-bool RequirementsModel::removeRows(int row, int count, const QModelIndex &parent)
-{
-    return true;
-}
-
-bool RequirementsModel::removeColumns(int column, int count, const QModelIndex &parent)
-{
-    return true;
 }
 
 Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
@@ -147,29 +105,70 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
 
 bool RequirementsModel::appendSibling(const QModelIndex &index)
 {
-    Requirement *item = getValidItem(index);
+    if(!index.isValid())
+        return appendChild(index);
+    else{
+        Requirement *parent = getValidItem(index.parent());
 
-    if(item != root)
-        insertRows(index.row()+1, 1, parent(index));
-
-    return true;
+        if(index.row() < parent->childCount()){
+            beginInsertRows(index.parent(), index.row()+1, index.row()+1);
+            parent->insertChild(index.row()+1, factory->newRequirement());
+            endInsertRows();
+            return true;
+        }
+        else
+            return false;
+    }
 }
 
 bool RequirementsModel::appendChild(const QModelIndex &index)
 {
     Requirement *item = getValidItem(index);
-    int beforeRow;
 
-    if(item == root){
-        beforeRow = root->childCount();
-        insertRows(beforeRow, 1, index);
-    }
-    else{
-        beforeRow = asRequirement(index)->childCount();
-        insertRows(beforeRow, 1, index);
-    }
+    beginInsertRows(index, item->childCount(), item->childCount());
+    item->appendChild(factory->newRequirement());
+    endInsertRows();
 
     return true;
+}
+
+bool RequirementsModel::removeRequirement(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return false;
+    else{
+        Requirement *parent = getValidItem(index.parent());
+        beginRemoveRows(index.parent(), index.row(), index.row());
+        parent->removeChild(index.row());
+        endRemoveRows();
+        return true;
+    }
+}
+
+void RequirementsModel::setDescription(const QModelIndex &index, const QString &description)
+{
+    if(!index.isValid())
+        throw InvalidModelIndexException();
+
+    Requirement *item = asRequirement(index);
+    return item->setDescription(description);
+}
+
+QString RequirementsModel::getDescription(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw InvalidModelIndexException();
+
+    Requirement *item = asRequirement(index);
+    return item->getDescription();
+}
+
+uint RequirementsModel::getID(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw InvalidModelIndexException();
+
+    return asRequirement(index)->getID();
 }
 
 Requirement *RequirementsModel::asRequirement(const QModelIndex &index) const

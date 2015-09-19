@@ -1,15 +1,32 @@
 #include "requirement.h"
 
-Requirement::Requirement(unsigned int _id) : id(_id)
+Requirement::Requirement(UniqueIDManager *idManager) :
+    id(idManager->newUniqueID())
 {
+    this->idManager = idManager;
     parent = NULL;
     title = "Requirement";
-    description = new QTextDocument();
+}
+
+Requirement::Requirement(UniqueIDManager *idManager, uint proposedID) :
+    id(idManager->newUniqueID(proposedID))
+{
+    this->idManager = idManager;
+    parent = NULL;
+    title = "Requirement";
 }
 
 Requirement::~Requirement()
 {
-    delete description;
+    idManager->removeID(id);
+
+    for(int i=0;i<childCount();i++)
+        delete children[i];
+}
+
+uint Requirement::getID()
+{
+    return id;
 }
 
 void Requirement::setTitle(const QString &title)
@@ -22,7 +39,12 @@ QString Requirement::getTitle() const
     return title;
 }
 
-QTextDocument *Requirement::getDescription()
+void Requirement::setDescription(const QString &d)
+{
+    description = d;
+}
+
+QString Requirement::getDescription()
 {
     return description;
 }
@@ -47,10 +69,9 @@ int Requirement::getRow() const
 
 Requirement *Requirement::getChild(int index)
 {
-    if(index < 0 || index > children.size()-1)
-        throw InvalidIndexException();
-    else
-        return children.at(index);
+    assertValidIndex(index);
+
+    return children.at(index);
 }
 
 int Requirement::childCount() const
@@ -58,18 +79,26 @@ int Requirement::childCount() const
     return children.size();
 }
 
-void Requirement::insertChild(int beforeIndex, Requirement *item)
+void Requirement::insertChild(int beforeIndex, Requirement *child)
 {
     if(beforeIndex <= childCount()){
-        item->setParent(this);
-        children.insert(beforeIndex, item);
+        child->setParent(this);
+        children.insert(beforeIndex, child);
     }
 }
 
-void Requirement::appendChild(Requirement *item)
+void Requirement::appendChild(Requirement *child)
 {
-    item->setParent(this);
-    children.append(item);
+    child->setParent(this);
+    children.append(child);
+}
+
+void Requirement::removeChild(int index)
+{
+    assertValidIndex(index);
+
+    delete children[index];
+    children.remove(index);
 }
 
 int Requirement::indexOf(const Requirement *item) const
@@ -78,4 +107,10 @@ int Requirement::indexOf(const Requirement *item) const
         if(item == children.at(i))
             return i;
     }
+}
+
+void Requirement::assertValidIndex(int index)
+{
+    if(index < 0 || index > children.size()-1)
+        throw InvalidIndexException();
 }

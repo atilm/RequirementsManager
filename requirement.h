@@ -21,34 +21,44 @@ class InvalidIndexException : public exception{
 class Requirement
 {
 public:
-    Requirement(unsigned int _id);
+    Requirement(UniqueIDManager *idManager);
+    Requirement(UniqueIDManager *idManager, uint proposedID);
     virtual ~Requirement();
+
+    virtual uint getID();
+
+    virtual void setParent(Requirement *parent);
+    virtual Requirement* getParent();
 
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
 
-    virtual QTextDocument* getDescription();
+    virtual void setDescription(const QString &d);
+    virtual QString getDescription();
 
-    virtual void setParent(Requirement *parent);
-    virtual Requirement* getParent();
     virtual int getRow() const;
 
     virtual Requirement *getChild(int index);
 
     virtual int childCount() const;
-    virtual void insertChild(int beforeIndex, Requirement *item);
-    virtual void appendChild(Requirement *item);
+    virtual void insertChild(int beforeIndex, Requirement *child);
+    virtual void appendChild(Requirement *child);
+
+    virtual void removeChild(int index);
 
     virtual int indexOf(const Requirement *item) const;
 
 private:
     const unsigned int id;
 
+    UniqueIDManager *idManager;
     Requirement *parent;
     QVector<Requirement*> children;
 
     QString title;
-    QTextDocument *description;
+    QString description;
+
+    void assertValidIndex(int index);
 };
 
 #endif // REQUIREMENT_H

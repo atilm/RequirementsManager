@@ -2,6 +2,7 @@
 #define DESCRIPTIONVIEW_H
 
 #include <QTextEdit>
+#include "requirementsmodel.h"
 
 class DescriptionView : public QTextEdit
 {
@@ -9,10 +10,16 @@ class DescriptionView : public QTextEdit
 public:
     explicit DescriptionView(QWidget *parent = 0);
 
+    void setModel(RequirementsModel *data);
+
 signals:
 
 public slots:
 
+    void switchItem(const QModelIndex &previous, const QModelIndex &current);
+
+private:
+    RequirementsModel *data;
 };
 
 #endif // DESCRIPTIONVIEW_H

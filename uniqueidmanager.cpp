@@ -2,6 +2,7 @@
 
 UniqueIDManager::UniqueIDManager()
 {
+    maxID = 0;
 }
 
 UniqueIDManager::~UniqueIDManager()
@@ -11,15 +12,37 @@ UniqueIDManager::~UniqueIDManager()
 
 bool UniqueIDManager::hasID(unsigned int id) const
 {
-    return false;
+    return ids.contains(id);
 }
 
-void UniqueIDManager::addID(unsigned int id)
+void UniqueIDManager::removeID(unsigned int id)
 {
-
+    if(ids.contains(id))
+        ids.remove(id);
+    else
+        throw IDCollisionException();
 }
 
 unsigned int UniqueIDManager::newUniqueID()
 {
-    return 0;
+    maxID += 1;
+    ids.insert(maxID);
+    return maxID;
+}
+
+unsigned int UniqueIDManager::newUniqueID(unsigned int requestedId)
+{
+    if(!ids.contains(requestedId)){
+        ids.insert(requestedId);
+        updateMax(requestedId);
+        return requestedId;
+    }
+    else
+        throw IDCollisionException();
+}
+
+void UniqueIDManager::updateMax(unsigned int id)
+{
+    if(id >= maxID)
+        maxID = id;
 }

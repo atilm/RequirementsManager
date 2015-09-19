@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "requirementsview.h"
 
 MainWindow::MainWindow(RequirementsModel *requirements,
                        RichTextController *richText,
@@ -40,11 +41,17 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             requirementsView, SLOT(insertSibling()));
     connect(ui->actionAddChild, SIGNAL(triggered()),
             requirementsView, SLOT(appendChild()));
+    connect(ui->actionRemoveRequirement, SIGNAL(triggered()),
+            requirementsView, SLOT(removeCurrent()));
 
+    descriptionView->setModel(requirements);
     this->descriptionView = descriptionView;
     delete ui->textEdit;
     ui->textEdit = descriptionView;
     ui->splitter->insertWidget(1, descriptionView);
 
     richText->setTextEdit(descriptionView);
+
+    connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
 }

@@ -10,17 +10,16 @@ RequirementFactory::~RequirementFactory()
     delete idManager;
 }
 
-Requirement *RequirementFactory::newRequirement()
+Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
-    return new Requirement(idManager->newUniqueID());
+    Requirement *item = new Requirement(idManager);
+    item->setParent(parent);
+    return item;
 }
 
-Requirement *RequirementFactory::newRequirement(unsigned int proposedID)
+Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
-    if(idManager->hasID(proposedID))
-        throw IDCollisionException();
-    else{
-        idManager->addID(proposedID);
-        return new Requirement(proposedID);
-    }
+    Requirement *item = new Requirement(idManager, proposedID);
+    item->setParent(parent);
+    return item;
 }

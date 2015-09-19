@@ -4,6 +4,11 @@
 #include <QAbstractItemModel>
 #include "requirement.h"
 #include "requirementfactory.h"
+#include <exception>
+
+class InvalidModelIndexException : public std::exception{
+
+};
 
 class RequirementsModel : public QAbstractItemModel
 {
@@ -23,17 +28,18 @@ public:
 
     // additional overriden functions
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    virtual bool insertRows(int row, int count, const QModelIndex & parent = QModelIndex());
-    virtual bool insertColumns(int column, int count, const QModelIndex & parent = QModelIndex());
-    virtual bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
-    virtual bool removeColumns(int column, int count, const QModelIndex & parent = QModelIndex());
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
     // specific functions
     virtual bool appendSibling(const QModelIndex &index);
     virtual bool appendChild(const QModelIndex &index);
+    virtual bool removeRequirement(const QModelIndex &index);
 
+    virtual void setDescription(const QModelIndex &index, const QString &description);
+    virtual QString getDescription(const QModelIndex &index);
+
+    virtual uint getID(const QModelIndex &index);
 signals:
 
 public slots:

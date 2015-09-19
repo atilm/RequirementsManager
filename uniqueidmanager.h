@@ -1,6 +1,7 @@
 #ifndef UNIQUEIDMANAGER_H
 #define UNIQUEIDMANAGER_H
 
+#include <QSet>
 #include <exception>
 using namespace std;
 
@@ -14,10 +15,16 @@ public:
     UniqueIDManager();
     virtual ~UniqueIDManager();
 
-    bool hasID(unsigned int id) const;
-    void addID(unsigned int id);
+    virtual bool hasID(unsigned int id) const;
+    virtual void removeID(unsigned int id);
     unsigned int newUniqueID();
+    unsigned int newUniqueID(unsigned int requestedId);
 
+private:
+    QSet<unsigned int> ids;
+    unsigned int maxID;
+
+    void updateMax(unsigned int id);
 };
 
 #endif // UNIQUEIDMANAGER_H

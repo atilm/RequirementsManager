@@ -15,6 +15,7 @@ signals:
 public slots:
     virtual void insertSibling();
     virtual void appendChild();
+    virtual void removeCurrent();
 
 
 private:

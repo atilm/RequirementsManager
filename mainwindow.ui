@@ -49,6 +49,7 @@
     </property>
     <addaction name="actionAddSibling"/>
     <addaction name="actionAddChild"/>
+    <addaction name="actionRemoveRequirement"/>
     <addaction name="actionProjectSettings"/>
    </widget>
    <addaction name="menuFile"/>
@@ -66,6 +67,7 @@
    <addaction name="actionSaveAs"/>
    <addaction name="actionAddSibling"/>
    <addaction name="actionAddChild"/>
+   <addaction name="actionRemoveRequirement"/>
    <addaction name="actionBold"/>
    <addaction name="actionItalic"/>
    <addaction name="actionBulletList"/>
@@ -198,6 +200,21 @@
    </property>
    <property name="text">
     <string>Project settings...</string>
+   </property>
+  </action>
+  <action name="actionRemoveRequirement">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Requirement</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Requirement</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
  </widget>
