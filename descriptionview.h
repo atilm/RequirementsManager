@@ -16,7 +16,7 @@ signals:
 
 public slots:
 
-    void switchItem(const QModelIndex &previous, const QModelIndex &current);
+    void switchItem(const QModelIndex &current, const QModelIndex &previous);
 
 private:
     RequirementsModel *data;

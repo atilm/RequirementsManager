@@ -48,6 +48,7 @@ public:
 
     virtual int indexOf(const Requirement *item) const;
 
+
 private:
     const unsigned int id;
 

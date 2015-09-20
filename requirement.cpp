@@ -107,6 +107,7 @@ int Requirement::indexOf(const Requirement *item) const
         if(item == children.at(i))
             return i;
     }
+    return -1;
 }
 
 void Requirement::assertValidIndex(int index)

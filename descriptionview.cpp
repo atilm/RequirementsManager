@@ -14,11 +14,12 @@ void DescriptionView::setModel(RequirementsModel *data)
     this->data = data;
 }
 
-void DescriptionView::switchItem(const QModelIndex &previous, const QModelIndex &current)
+void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &previous)
 {
     try{
         data->setDescription(previous, document()->toHtml());
         document()->setHtml(data->getDescription(current));
+
         setEnabled(true);
     }
     catch(...){
@@ -26,3 +27,4 @@ void DescriptionView::switchItem(const QModelIndex &previous, const QModelIndex 
         cout << "exception " << endl;
     }
 }
+

@@ -17,7 +17,6 @@ public slots:
     virtual void appendChild();
     virtual void removeCurrent();
 
-
 private:
     RequirementsModel *requirementsModel();
 

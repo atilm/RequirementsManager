@@ -124,9 +124,10 @@ bool RequirementsModel::appendSibling(const QModelIndex &index)
 bool RequirementsModel::appendChild(const QModelIndex &index)
 {
     Requirement *item = getValidItem(index);
+    Requirement *newItem = factory->newRequirement();
 
     beginInsertRows(index, item->childCount(), item->childCount());
-    item->appendChild(factory->newRequirement());
+    item->appendChild(newItem);
     endInsertRows();
 
     return true;
