@@ -19,6 +19,7 @@ public slots:
     void switchItem(const QModelIndex &current, const QModelIndex &previous);
 
 private:
+    QTextDocument *defaultDocument;
     RequirementsModel *data;
 };
 

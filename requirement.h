@@ -33,8 +33,7 @@ public:
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
 
-    virtual void setDescription(const QString &d);
-    virtual QString getDescription();
+    virtual QTextDocument *getDescription();
 
     virtual int getRow() const;
 
@@ -57,7 +56,7 @@ private:
     QVector<Requirement*> children;
 
     QString title;
-    QString description;
+    QTextDocument *description;
 
     void assertValidIndex(int index);
 };

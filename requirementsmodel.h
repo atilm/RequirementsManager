@@ -36,8 +36,7 @@ public:
     virtual bool appendChild(const QModelIndex &index);
     virtual bool removeRequirement(const QModelIndex &index);
 
-    virtual void setDescription(const QModelIndex &index, const QString &description);
-    virtual QString getDescription(const QModelIndex &index);
+    virtual QTextDocument* getDescription(const QModelIndex &index);
 
     virtual uint getID(const QModelIndex &index);
 signals:

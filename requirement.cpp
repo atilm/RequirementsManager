@@ -6,6 +6,7 @@ Requirement::Requirement(UniqueIDManager *idManager) :
     this->idManager = idManager;
     parent = NULL;
     title = "Requirement";
+    description = new QTextDocument();
 }
 
 Requirement::Requirement(UniqueIDManager *idManager, uint proposedID) :
@@ -14,6 +15,7 @@ Requirement::Requirement(UniqueIDManager *idManager, uint proposedID) :
     this->idManager = idManager;
     parent = NULL;
     title = "Requirement";
+    description = new QTextDocument();
 }
 
 Requirement::~Requirement()
@@ -39,12 +41,7 @@ QString Requirement::getTitle() const
     return title;
 }
 
-void Requirement::setDescription(const QString &d)
-{
-    description = d;
-}
-
-QString Requirement::getDescription()
+QTextDocument *Requirement::getDescription()
 {
     return description;
 }

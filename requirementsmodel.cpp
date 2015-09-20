@@ -146,16 +146,7 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
     }
 }
 
-void RequirementsModel::setDescription(const QModelIndex &index, const QString &description)
-{
-    if(!index.isValid())
-        throw InvalidModelIndexException();
-
-    Requirement *item = asRequirement(index);
-    return item->setDescription(description);
-}
-
-QString RequirementsModel::getDescription(const QModelIndex &index)
+QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
 {
     if(!index.isValid())
         throw InvalidModelIndexException();
