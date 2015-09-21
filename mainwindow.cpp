@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "requirementsview.h"
 
-MainWindow::MainWindow(RequirementsModel *requirements,
+MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
                        RichTextController *richText,
                        QWidget *parent) :
     QMainWindow(parent),
@@ -12,8 +12,13 @@ MainWindow::MainWindow(RequirementsModel *requirements,
 
     setWindowTitle("Requirements Manager");
 
+    this->fileController = fileController;
     this->requirements = requirements;
+
+    fileController->setModel(requirements);
+
     this->richText = richText;
+
     richText->setTextEdit(ui->textEdit);
     richText->setItalicAction(ui->actionItalic);
     richText->setBoldAction(ui->actionBold);
@@ -22,6 +27,7 @@ MainWindow::MainWindow(RequirementsModel *requirements,
 
 MainWindow::~MainWindow()
 {
+    delete fileController;
     delete requirements;
     delete richText;
     delete descriptionView;

@@ -1,8 +1,5 @@
 #include "descriptionview.h"
 
-#include <iostream>
-using namespace std;
-
 DescriptionView::DescriptionView(QWidget *parent) :
     QTextEdit(parent)
 {

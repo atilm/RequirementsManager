@@ -14,7 +14,15 @@ int main(int argc, char *argv[])
     RequirementsView *requirementsView = new RequirementsView();
     DescriptionView *descriptionView = new DescriptionView();
 
-    MainWindow w(requirements, richText);
+    QFileDialogAdapter *fileDialog = new QFileDialogAdapter();
+    QFileAdapter *file = new QFileAdapter();
+    ProjectFileReader *reader = new ProjectFileReader();
+    ProjectFileWriter *writer = new ProjectFileWriter();
+    ProjectFileController *fileController =
+            new ProjectFileController(fileDialog, file,
+                                      reader, writer);
+
+    MainWindow w(fileController, requirements, richText);
     w.injectViews(requirementsView, descriptionView);
     w.show();
 

@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     uniqueidmanager.cpp \
     requirementattribute.cpp \
     requirementlink.cpp \
-    requirementfactory.cpp
+    requirementfactory.cpp \
+    projectfilecontroller.cpp \
+    projectfilereader.cpp \
+    projectfilewriter.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -33,7 +36,10 @@ HEADERS  += mainwindow.h \
     uniqueidmanager.h \
     requirementattribute.h \
     requirementlink.h \
-    requirementfactory.h
+    requirementfactory.h \
+    projectfilecontroller.h \
+    projectfilereader.h \
+    projectfilewriter.h
 
 FORMS    += mainwindow.ui
 

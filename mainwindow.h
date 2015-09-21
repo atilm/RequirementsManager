@@ -6,6 +6,7 @@
 #include "requirementsview.h"
 #include "descriptionview.h"
 #include "requirementsmodel.h"
+#include "projectfilecontroller.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +17,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(RequirementsModel *requirements,
+    explicit MainWindow(ProjectFileController *fileController,
+                        RequirementsModel *requirements,
                         RichTextController *richText,
                         QWidget *parent = 0);
     ~MainWindow();
@@ -28,6 +30,7 @@ private:
     Ui::MainWindow *ui;
     RequirementsModel *requirements;
     RichTextController *richText;
+    ProjectFileController *fileController;
     RequirementsView *requirementsView;
     DescriptionView *descriptionView;
 };
