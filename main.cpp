@@ -5,9 +5,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    AppSettings *appSettings = new AppSettings();
+    FileStateTracker *fileState = new FileStateTracker();
+
     UniqueIDManager *idManager = new UniqueIDManager();
     RequirementFactory *factory = new RequirementFactory(idManager);
     RequirementsModel *requirements = new RequirementsModel(factory);
+    requirements->init();
 
     RichTextController *richText = new RichTextController();
 
@@ -20,7 +24,8 @@ int main(int argc, char *argv[])
     ProjectFileWriter *writer = new ProjectFileWriter();
     ProjectFileController *fileController =
             new ProjectFileController(fileDialog, file,
-                                      reader, writer);
+                                      reader, writer,
+                                      fileState, appSettings);
 
     MainWindow w(fileController, requirements, richText);
     w.injectViews(requirementsView, descriptionView);

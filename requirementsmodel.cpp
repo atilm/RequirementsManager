@@ -7,13 +7,17 @@ RequirementsModel::RequirementsModel(RequirementFactory *factory,
     QAbstractItemModel(parent)
 {
     this->factory = factory;
-    root = factory->newRequirement();
-    //root->appendChild(factory->newRequirement());
 }
 
 RequirementsModel::~RequirementsModel()
 {
     delete factory;
+}
+
+void RequirementsModel::init()
+{
+    root = factory->newRequirement();
+    //root->appendChild(factory->newRequirement());
 }
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const

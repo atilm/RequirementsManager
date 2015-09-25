@@ -19,6 +19,8 @@ public:
 
     virtual ~RequirementsModel();
 
+    virtual void init();
+
     // required overriden functions
     virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;
     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const ;

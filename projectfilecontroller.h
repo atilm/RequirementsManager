@@ -6,6 +6,8 @@
 #include "requirementsmodel.h"
 #include "projectfilereader.h"
 #include "projectfilewriter.h"
+#include "filestatetracker.h"
+#include "appsettings.h"
 
 //! Encapsulates all read/write operations to load and save the project
 /*!
@@ -20,7 +22,8 @@ class ProjectFileController : public QObject
     Q_OBJECT
 public:
     ProjectFileController(QFileDialogAdapter *fileDialog, QFileAdapter *file,
-                          ProjectFileReader *reader, ProjectFileWriter *writer);
+                          ProjectFileReader *reader, ProjectFileWriter *writer,
+                          FileStateTracker *stateTracker, AppSettings *settings);
     virtual ~ProjectFileController();
 
     virtual void setModel(RequirementsModel *model);
@@ -36,6 +39,8 @@ private:
     QFileAdapter *projectFile;
     ProjectFileReader *reader;
     ProjectFileWriter *writer;
+    FileStateTracker *stateTracker;
+    AppSettings *settings;
 };
 
 #endif // PROJECTFILECONTROLLER_H

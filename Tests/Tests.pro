@@ -13,16 +13,23 @@ QMAKE_CXXFLAGS += -std=c++11
 SOURCES += main.cpp \
     RequirementTests.cpp \
     uniqueidmanagertests.cpp \
-    projectfilecontrollertests.cpp
+    projectfilecontrollertests.cpp \
+    randomdatagenerator.cpp
 
 INCLUDEPATH += $$PWD/../
 
 LIBS += $$PWD/../../build-RequirementsManager-Desktop-Release/uniqueidmanager.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/requirement.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementfactory.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementsmodel.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_requirementsmodel.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilecontroller.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/moc_projectfilecontroller.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilereader.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilewriter.o
+        $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilewriter.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/appsettings.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/filestatetracker.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_filestatetracker.o
 
 
 unix:!macx: LIBS += -L$$PWD/../../../GMock/qt/ -lGMock
@@ -46,4 +53,8 @@ unix:!macx: PRE_TARGETDEPS += $$PWD/../../../QtTestTools/libQtTestTools.a
 
 HEADERS += \
     projectfilereadermock.h \
-    projectfilewritermock.h
+    projectfilewritermock.h \
+    filestatetrackermock.h \
+    appsettingsmock.h \
+    randomdatagenerator.h \
+    requirementsmodelmock.h

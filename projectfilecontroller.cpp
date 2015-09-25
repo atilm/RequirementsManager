@@ -3,7 +3,9 @@
 ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              QFileAdapter *file,
                                              ProjectFileReader *reader,
-                                             ProjectFileWriter *writer) : QObject()
+                                             ProjectFileWriter *writer,
+                                             FileStateTracker *stateTracker,
+                                             AppSettings *settings) : QObject()
 {
     model = NULL;
 
@@ -11,6 +13,8 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
     this->projectFile = file;
     this->reader = reader;
     this->writer = writer;
+    this->stateTracker = stateTracker;
+    this->settings = settings;
 }
 
 ProjectFileController::~ProjectFileController()

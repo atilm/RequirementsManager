@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     requirementfactory.cpp \
     projectfilecontroller.cpp \
     projectfilereader.cpp \
-    projectfilewriter.cpp
+    projectfilewriter.cpp \
+    filestatetracker.cpp \
+    appsettings.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -39,7 +41,9 @@ HEADERS  += mainwindow.h \
     requirementfactory.h \
     projectfilecontroller.h \
     projectfilereader.h \
-    projectfilewriter.h
+    projectfilewriter.h \
+    filestatetracker.h \
+    appsettings.h
 
 FORMS    += mainwindow.ui
 
