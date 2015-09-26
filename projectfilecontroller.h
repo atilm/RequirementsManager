@@ -41,6 +41,8 @@ private:
     ProjectFileWriter *writer;
     FileStateTracker *stateTracker;
     AppSettings *settings;
+
+    QString filterString;
 };
 
 #endif // PROJECTFILECONTROLLER_H

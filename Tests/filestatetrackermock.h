@@ -8,6 +8,8 @@ class FileStateTrackerMock : public FileStateTracker {
  public:
 
     MOCK_METHOD1(setFilePath, void (const QString &path));
+    MOCK_CONST_METHOD0(filePath, QString ());
+    MOCK_METHOD1(setChanged, void (bool state));
 };
 
 #endif // FILESTATETRACKERMOCK_H

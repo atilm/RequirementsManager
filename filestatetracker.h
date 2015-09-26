@@ -11,7 +11,9 @@ public:
     FileStateTracker();
     virtual ~FileStateTracker();
 
+    virtual QString filePath() const;
     virtual void setFilePath(const QString &path);
+    virtual void setChanged(bool state);
 };
 
 #endif // FILESTATETRACKER_H
