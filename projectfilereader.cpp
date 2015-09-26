@@ -1,15 +1,16 @@
 #include "projectfilereader.h"
 
-ProjectFileReader::ProjectFileReader()
+ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml)
 {
+    this->xml = xml;
 }
 
 ProjectFileReader::~ProjectFileReader()
 {
-
+    delete xml;
 }
 
-void ProjectFileReader::load(RequirementsModel *model, const QString &filePath)
+void ProjectFileReader::load(RequirementsModel *model, QFileAdapter *file)
 {
 
 }

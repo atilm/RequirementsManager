@@ -2,15 +2,20 @@
 #define PROJECTFILEWRITER_H
 
 #include "requirementsmodel.h"
+#include "qfileadapter.h"
 #include <QString>
+#include <QXmlStreamWriter>
 
 class ProjectFileWriter
 {
 public:
-    ProjectFileWriter();
+    ProjectFileWriter(QXmlStreamWriter *xml);
     virtual ~ProjectFileWriter();
 
-    virtual void save(RequirementsModel *model, const QString &filePath);
+    virtual void save(RequirementsModel *model, QFileAdapter *file);
+
+private:
+    QXmlStreamWriter *xml;
 };
 
 #endif // PROJECTFILEWRITER_H

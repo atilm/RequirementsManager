@@ -1,16 +1,17 @@
 #include "projectfilewriter.h"
 
-ProjectFileWriter::ProjectFileWriter()
+ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml)
 {
+    this->xml = xml;
 }
 
 ProjectFileWriter::~ProjectFileWriter()
 {
-
+    delete xml;
 }
 
 void ProjectFileWriter::save(RequirementsModel *model,
-                             const QString &filePath)
+                             QFileAdapter *file)
 {
 
 }

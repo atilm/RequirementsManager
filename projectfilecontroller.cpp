@@ -39,7 +39,8 @@ void ProjectFileController::save()
     if(currentPath.isEmpty())
         saveAs();
     else{
-        writer->save(model, currentPath);
+        projectFile->setFileName(currentPath);
+        writer->save(model, projectFile);
         stateTracker->setChanged(false);
     }
 }
@@ -52,7 +53,8 @@ void ProjectFileController::saveAs()
                                                        startDir, filterString);
 
     if(!filePath.isEmpty()){
-        writer->save(model, filePath);
+        projectFile->setFileName(filePath);
+        writer->save(model, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
     }
@@ -66,7 +68,8 @@ void ProjectFileController::load()
                                                        startDir, filterString);
 
     if(!filePath.isEmpty()){
-        reader->load(model, filePath);
+        projectFile->setFileName(filePath);
+        reader->load(model, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
     }

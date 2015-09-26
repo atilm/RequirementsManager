@@ -25,7 +25,7 @@ protected:
     RequirementsModelMock *modelMock;
 
     QString currentDir;
-    QString filePath;
+    QString defaultfilePath;
 
     ProjectFileControllerTests(){
         dialogMock = new QFileDialogAdapterMock();
@@ -55,14 +55,14 @@ protected:
     void init(){
         controller->setModel(modelMock);
         currentDir = "C:/directory/";
-        filePath = currentDir + "name.req";
+        defaultfilePath = currentDir + "name.req";
     }
 
     void setDefaultExpectations(){
         EXPECT_CALL(*dialogMock, getSaveFileName(_, _, _, _, _))
-                .WillRepeatedly(Return(filePath));
+                .WillRepeatedly(Return(defaultfilePath));
         EXPECT_CALL(*dialogMock, getOpenFileName(_, _, _, _, _))
-                .WillRepeatedly(Return(filePath));
+                .WillRepeatedly(Return(defaultfilePath));
         EXPECT_CALL(*writerMock, save(_, _))
                 .Times(AtLeast(0));
         EXPECT_CALL(*settingsMock, directory())
@@ -70,8 +70,12 @@ protected:
         EXPECT_CALL(*stateMock, setFilePath(_))
                 .Times(AtLeast(0));
         EXPECT_CALL(*stateMock, filePath())
-                .WillRepeatedly(Return(filePath));
+                .WillRepeatedly(Return(defaultfilePath));
+        EXPECT_CALL(*stateMock, setChanged(_))
+                .Times(AtLeast(0));
         EXPECT_CALL(*readerMock, load(_, _))
+                .Times(AtLeast(0));
+        EXPECT_CALL(*fileMock, setFileName(_))
                 .Times(AtLeast(0));
     }
 };
@@ -81,32 +85,42 @@ TEST_F(ProjectFileControllerTests, when_saveAs_is_called_for_new_file_a_file_dia
     EXPECT_CALL(*stateMock, filePath())
             .WillRepeatedly(Return(QString()));
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
-            .WillOnce(Return(filePath));
+            .WillOnce(Return(defaultfilePath));
 
     controller->saveAs();
 }
 
 TEST_F(ProjectFileControllerTests, when_saveAs_is_called_for_known_file_the_file_dialog_is_shown){
     EXPECT_CALL(*stateMock, filePath())
-            .WillRepeatedly(Return(filePath));
+            .WillRepeatedly(Return(defaultfilePath));
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
-            .WillOnce(Return(filePath));
+            .WillOnce(Return(defaultfilePath));
+
+    controller->saveAs();
+}
+
+TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_files_path_is_set){
+    QString fPath = rand.getQString(20,1);
+    EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
+            .WillOnce(Return(fPath));
+
+    EXPECT_CALL(*fileMock, setFileName(fPath));
 
     controller->saveAs();
 }
 
 TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_set_model_is_saved){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
             .WillOnce(Return(fPath));
 
-    EXPECT_CALL(*writerMock, save(modelMock, fPath));
+    EXPECT_CALL(*writerMock, save(modelMock, fileMock));
 
     controller->saveAs();
 }
 
 TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_path_is_registered){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
             .WillOnce(Return(fPath));
 
@@ -125,32 +139,42 @@ TEST_F(ProjectFileControllerTests, when_save_is_called_for_new_file_a_file_dialo
     EXPECT_CALL(*stateMock, filePath())
             .WillOnce(Return(QString()));
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
-            .WillOnce(Return(filePath));
+            .WillOnce(Return(defaultfilePath));
 
     controller->save();
 }
 
 TEST_F(ProjectFileControllerTests, when_save_is_called_for_known_file_no_file_dialog_is_shown){
     EXPECT_CALL(*stateMock, filePath())
-            .WillOnce(Return(filePath));
+            .WillOnce(Return(defaultfilePath));
     EXPECT_CALL(*dialogMock, getSaveFileName(_, _, _, _, _))
             .Times(0);
 
     controller->save();
 }
 
-TEST_F(ProjectFileControllerTests, when_save_is_called_the_set_model_is_saved){
-    QString fPath = rand.getQString();
+TEST_F(ProjectFileControllerTests, when_save_is_called_the_files_path_is_set){
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*stateMock, filePath())
             .WillOnce(Return(fPath));
 
-    EXPECT_CALL(*writerMock, save(modelMock, fPath));
+    EXPECT_CALL(*fileMock, setFileName(fPath));
+
+    controller->save();
+}
+
+TEST_F(ProjectFileControllerTests, when_save_is_called_the_set_model_is_saved){
+    QString fPath = rand.getQString(20,1);
+    EXPECT_CALL(*stateMock, filePath())
+            .WillOnce(Return(fPath));
+
+    EXPECT_CALL(*writerMock, save(modelMock, fileMock));
 
     controller->save();
 }
 
 TEST_F(ProjectFileControllerTests, when_save_is_called_for_known_file_no_path_is_registered){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*stateMock, filePath())
             .WillOnce(Return(fPath));
 
@@ -161,7 +185,7 @@ TEST_F(ProjectFileControllerTests, when_save_is_called_for_known_file_no_path_is
 }
 
 TEST_F(ProjectFileControllerTests, when_save_is_called_for_new_file_the_path_is_registered){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*stateMock, filePath())
             .WillOnce(Return(QString()));
     EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
@@ -180,23 +204,33 @@ TEST_F(ProjectFileControllerTests, when_save_is_called_for_known_file_the_file_s
 
 TEST_F(ProjectFileControllerTests, when_load_is_called_a_file_dialog_is_shown){
     EXPECT_CALL(*dialogMock, getOpenFileName(_, QString("Open file"), currentDir, _, _))
-            .WillOnce(Return(filePath));
+            .WillOnce(Return(defaultfilePath));
+
+    controller->load();
+}
+
+TEST_F(ProjectFileControllerTests, when_load_is_called_the_files_path_is_set){
+    QString fPath = rand.getQString(20,1);
+    EXPECT_CALL(*dialogMock, getOpenFileName(_, QString("Open file"), currentDir, _, _))
+            .WillOnce(Return(fPath));
+
+    EXPECT_CALL(*fileMock, setFileName(fPath));
 
     controller->load();
 }
 
 TEST_F(ProjectFileControllerTests, when_load_is_called_the_selected_file_is_loaded_to_the_model){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*dialogMock, getOpenFileName(_, QString("Open file"), currentDir, _, _))
             .WillOnce(Return(fPath));
 
-    EXPECT_CALL(*readerMock, load(modelMock, fPath));
+    EXPECT_CALL(*readerMock, load(modelMock, fileMock));
 
     controller->load();
 }
 
 TEST_F(ProjectFileControllerTests, when_load_is_called_the_selected_path_is_registered){
-    QString fPath = rand.getQString();
+    QString fPath = rand.getQString(20,1);
     EXPECT_CALL(*dialogMock, getOpenFileName(_, QString("Open file"), currentDir, _, _))
             .WillOnce(Return(fPath));
 
