@@ -23,6 +23,9 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setItalicAction(ui->actionItalic);
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
+
+    connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
+    connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
 }
 
 MainWindow::~MainWindow()
