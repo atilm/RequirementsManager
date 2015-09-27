@@ -15,6 +15,12 @@ public:
 
 private:
     QXmlStreamReader *xml;
+    QFileAdapter *file;
+    RequirementsModel *model;
+
+    void readContents();
+    void parseRequirement(QModelIndex item);
+    QString getAttribute(const QString &name);
 };
 
 #endif // PROJECTFILEREADER_H

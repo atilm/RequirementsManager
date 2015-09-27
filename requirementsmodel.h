@@ -20,6 +20,7 @@ public:
     virtual ~RequirementsModel();
 
     virtual void init();
+    virtual void clearModel();
 
     // required overriden functions
     virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;

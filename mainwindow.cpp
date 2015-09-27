@@ -26,6 +26,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
 
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
+    connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
 }
 
 MainWindow::~MainWindow()

@@ -68,6 +68,7 @@ void ProjectFileController::load()
                                                        startDir, filterString);
 
     if(!filePath.isEmpty()){
+        model->clearModel();
         projectFile->setFileName(filePath);
         reader->load(model, projectFile);
         stateTracker->setFilePath(filePath);

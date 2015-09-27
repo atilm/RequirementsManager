@@ -17,7 +17,15 @@ RequirementsModel::~RequirementsModel()
 void RequirementsModel::init()
 {
     root = factory->newRequirement();
-    //root->appendChild(factory->newRequirement());
+}
+
+void RequirementsModel::clearModel()
+{
+    int rows = rowCount();
+
+    for(int r=0;r<rows;r++){
+        removeRequirement(index(0, 0));
+    }
 }
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const
