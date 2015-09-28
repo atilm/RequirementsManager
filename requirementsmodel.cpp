@@ -2,11 +2,12 @@
 #include <iostream>
 using namespace std;
 
-RequirementsModel::RequirementsModel(RequirementFactory *factory,
+RequirementsModel::RequirementsModel(RequirementFactory *factory, FileStateTracker *fileState,
                                      QObject *parent) :
     QAbstractItemModel(parent)
 {
     this->factory = factory;
+    this->fileState = fileState;
 }
 
 RequirementsModel::~RequirementsModel()
@@ -109,6 +110,7 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
     if(role == Qt::EditRole){
         asRequirement(index)->setTitle(value.toString());
         emit dataChanged(index, index);
+        fileState->setChanged(true);
         return true;
     }
     else
@@ -124,9 +126,13 @@ QModelIndex RequirementsModel::appendSibling(const QModelIndex &index)
 
         if(index.row() < parent->childCount()){
             beginInsertRows(index.parent(), index.row()+1, index.row()+1);
-            parent->insertChild(index.row()+1, factory->newRequirement());
+            Requirement *child = factory->newRequirement();
+            parent->insertChild(index.row()+1, child);
             endInsertRows();
 
+            fileState->setChanged(true);
+            connect(child->getDescription(), SIGNAL(contentsChanged()),
+                    this, SLOT(handleDescriptionChanged()));
             return this->index(index.row()+1, 0, index.parent());
         }
         else
@@ -143,6 +149,9 @@ QModelIndex RequirementsModel::appendChild(const QModelIndex &index)
     item->appendChild(newItem);
     endInsertRows();
 
+    fileState->setChanged(true);
+    connect(newItem->getDescription(), SIGNAL(contentsChanged()),
+            this, SLOT(handleDescriptionChanged()));
     return this->index(item->childCount()-1, 0, index);
 }
 
@@ -155,6 +164,7 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
         beginRemoveRows(index.parent(), index.row(), index.row());
         parent->removeChild(index.row());
         endRemoveRows();
+        fileState->setChanged(true);
         return true;
     }
 }
@@ -187,6 +197,11 @@ Requirement *RequirementsModel::getValidItem(const QModelIndex &index) const
         return root;
     else
         return asRequirement(index);
+}
+
+void RequirementsModel::handleDescriptionChanged()
+{
+    fileState->setChanged(true);
 }
 
 

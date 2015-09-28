@@ -4,6 +4,7 @@
 #include <QAbstractItemModel>
 #include "requirement.h"
 #include "requirementfactory.h"
+#include "filestatetracker.h"
 #include <exception>
 
 class InvalidModelIndexException : public std::exception{
@@ -15,6 +16,7 @@ class RequirementsModel : public QAbstractItemModel
     Q_OBJECT
 public:
     explicit RequirementsModel(RequirementFactory *factory,
+                               FileStateTracker *fileState,
                                QObject *parent = 0);
 
     virtual ~RequirementsModel();
@@ -49,9 +51,13 @@ public slots:
 private:
     RequirementFactory *factory;
     Requirement *root;
+    FileStateTracker *fileState;
 
     Requirement *asRequirement(const QModelIndex &index) const;
     Requirement *getValidItem(const QModelIndex &index) const;
+
+private slots:
+    void handleDescriptionChanged();
 };
 
 #endif // REQUIREMENTSMODEL_H

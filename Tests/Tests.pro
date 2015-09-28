@@ -14,7 +14,9 @@ SOURCES += main.cpp \
     RequirementTests.cpp \
     uniqueidmanagertests.cpp \
     projectfilecontrollertests.cpp \
-    randomdatagenerator.cpp
+    randomdatagenerator.cpp \
+    filestatetrackertests.cpp \
+    eventlistener.cpp
 
 INCLUDEPATH += $$PWD/../
 
@@ -57,4 +59,5 @@ HEADERS += \
     filestatetrackermock.h \
     appsettingsmock.h \
     randomdatagenerator.h \
-    requirementsmodelmock.h
+    requirementsmodelmock.h \
+    eventlistener.h

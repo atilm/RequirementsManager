@@ -3,15 +3,17 @@
 #include "requirementsview.h"
 
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
-                       RichTextController *richText,
+                       RichTextController *richText, FileStateTracker *fileState,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Requirements Manager");
+    applicationName = "Requirements Manager";
+    setWindowTitle(applicationName);
 
+    this->fileState = fileState;
     this->fileController = fileController;
     this->requirements = requirements;
 
@@ -27,6 +29,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
+    connect(fileState, SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
+    connect(fileState, SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -64,4 +68,18 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 
     connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
+}
+
+void MainWindow::handleFilePathChanged(const QString &fPath)
+{
+    setWindowTitle(applicationName + " - " + fPath);
+}
+
+void MainWindow::handleChangedStateChanged(bool unsavedChanges)
+{
+    QString windowTitle = applicationName + " - " + fileState->filePath();
+    if(unsavedChanges)
+        windowTitle += "*";
+
+    setWindowTitle(windowTitle);
 }

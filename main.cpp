@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     UniqueIDManager *idManager = new UniqueIDManager();
     RequirementFactory *factory = new RequirementFactory(idManager);
-    RequirementsModel *requirements = new RequirementsModel(factory);
+    RequirementsModel *requirements = new RequirementsModel(factory, fileState);
     requirements->init();
 
     RichTextController *richText = new RichTextController();
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
                                       reader, writer,
                                       fileState, appSettings);
 
-    MainWindow w(fileController, requirements, richText);
+    MainWindow w(fileController, requirements, richText, fileState);
     w.injectViews(requirementsView, descriptionView);
     w.show();
 

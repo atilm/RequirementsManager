@@ -77,6 +77,8 @@ protected:
                 .Times(AtLeast(0));
         EXPECT_CALL(*fileMock, setFileName(_))
                 .Times(AtLeast(0));
+        EXPECT_CALL(*modelMock, clearModel())
+                .Times(AtLeast(0));
     }
 };
 

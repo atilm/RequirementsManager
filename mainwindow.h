@@ -7,6 +7,7 @@
 #include "descriptionview.h"
 #include "requirementsmodel.h"
 #include "projectfilecontroller.h"
+#include "filestatetracker.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,7 @@ public:
     explicit MainWindow(ProjectFileController *fileController,
                         RequirementsModel *requirements,
                         RichTextController *richText,
+                        FileStateTracker *fileState,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -27,12 +29,18 @@ public:
                      DescriptionView *descriptionView);
 
 private:
+    QString applicationName;
     Ui::MainWindow *ui;
     RequirementsModel *requirements;
     RichTextController *richText;
     ProjectFileController *fileController;
     RequirementsView *requirementsView;
     DescriptionView *descriptionView;
+    FileStateTracker *fileState;
+
+private slots:
+    void handleFilePathChanged(const QString &fPath);
+    void handleChangedStateChanged(bool unsavedChanges);
 };
 
 #endif // MAINWINDOW_H
