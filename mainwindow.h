@@ -8,6 +8,7 @@
 #include "requirementsmodel.h"
 #include "projectfilecontroller.h"
 #include "filestatetracker.h"
+#include "qmessageboxprovider.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ public:
                         RequirementsModel *requirements,
                         RichTextController *richText,
                         FileStateTracker *fileState,
+                        QMessageBoxProvider *messageBox,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -37,6 +39,9 @@ private:
     RequirementsView *requirementsView;
     DescriptionView *descriptionView;
     FileStateTracker *fileState;
+    QMessageBoxProvider *messageBox;
+
+    void closeEvent(QCloseEvent *);
 
 private slots:
     void handleFilePathChanged(const QString &fPath);

@@ -5,7 +5,8 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              ProjectFileReader *reader,
                                              ProjectFileWriter *writer,
                                              FileStateTracker *stateTracker,
-                                             AppSettings *settings) : QObject()
+                                             AppSettings *settings,
+                                             QMessageBoxProvider *messageBox) : QObject()
 {
     model = NULL;
 
@@ -15,6 +16,7 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
     this->writer = writer;
     this->stateTracker = stateTracker;
     this->settings = settings;
+    this->messageBox = messageBox;
 
     filterString = tr("Requirment Files (*.req)");
 }
@@ -25,6 +27,7 @@ ProjectFileController::~ProjectFileController()
     delete projectFile;
     delete reader;
     delete writer;
+    delete messageBox;
 }
 
 void ProjectFileController::setModel(RequirementsModel *model)
@@ -62,6 +65,8 @@ void ProjectFileController::saveAs()
 
 void ProjectFileController::load()
 {
+    askSaveUnsavedChanges();
+
     QString startDir = settings->directory();
 
     QString filePath = dialogProvider->getOpenFileName(0, tr("Open file"),
@@ -73,5 +78,17 @@ void ProjectFileController::load()
         reader->load(model, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
+    }
+}
+
+void ProjectFileController::askSaveUnsavedChanges()
+{
+    if(stateTracker->unsavedChanges()){
+        QString title = tr("Unsaved changes");
+        QString question = tr("Save changes?");
+        QMessageBox::StandardButton result = messageBox->showQuestion(0, title, question);
+        if(result == QMessageBox::Yes){
+            save();
+        }
     }
 }

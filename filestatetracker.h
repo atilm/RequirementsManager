@@ -13,6 +13,7 @@ public:
 
     virtual QString filePath() const;
     virtual void setFilePath(const QString &path);
+    virtual bool unsavedChanges() const;
     virtual void setChanged(bool state);
 
 signals:
@@ -21,7 +22,7 @@ signals:
 
 private:
     QString _filePath;
-    bool changed;
+    bool _changed;
 };
 
 #endif // FILESTATETRACKER_H

@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "requirementsview.h"
+#include <QCloseEvent>
 
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
-                       RichTextController *richText, FileStateTracker *fileState,
+                       RichTextController *richText, FileStateTracker *fileState, QMessageBoxProvider *messageBox,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,6 +14,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     applicationName = "Requirements Manager";
     setWindowTitle(applicationName);
 
+    this->messageBox = messageBox;
     this->fileState = fileState;
     this->fileController = fileController;
     this->requirements = requirements;
@@ -40,6 +42,7 @@ MainWindow::~MainWindow()
     delete richText;
     delete descriptionView;
     delete requirementsView;
+    delete messageBox;
     delete ui;
 }
 
@@ -70,6 +73,12 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
 }
 
+void MainWindow::closeEvent(QCloseEvent *e)
+{
+    fileController->askSaveUnsavedChanges();
+    e->accept();
+}
+
 void MainWindow::handleFilePathChanged(const QString &fPath)
 {
     setWindowTitle(applicationName + " - " + fPath);
@@ -83,3 +92,4 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
 
     setWindowTitle(windowTitle);
 }
+

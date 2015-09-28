@@ -22,12 +22,18 @@ int main(int argc, char *argv[])
     QFileAdapter *file = new QFileAdapter();
     ProjectFileReader *reader = new ProjectFileReader(new QXmlStreamReader());
     ProjectFileWriter *writer = new ProjectFileWriter(new QXmlStreamWriter());
+
+    QMessageBoxProvider *fileControllerMsg = new QMessageBoxProvider();
+
     ProjectFileController *fileController =
             new ProjectFileController(fileDialog, file,
                                       reader, writer,
-                                      fileState, appSettings);
+                                      fileState, appSettings,
+                                      fileControllerMsg);
 
-    MainWindow w(fileController, requirements, richText, fileState);
+    QMessageBoxProvider *msg = new QMessageBoxProvider();
+
+    MainWindow w(fileController, requirements, richText, fileState, msg);
     w.injectViews(requirementsView, descriptionView);
     w.show();
 

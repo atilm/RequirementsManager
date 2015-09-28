@@ -8,6 +8,7 @@
 #include "projectfilewriter.h"
 #include "filestatetracker.h"
 #include "appsettings.h"
+#include "qmessageboxprovider.h"
 
 //! Encapsulates all read/write operations to load and save the project
 /*!
@@ -23,7 +24,8 @@ class ProjectFileController : public QObject
 public:
     ProjectFileController(QFileDialogAdapter *fileDialog, QFileAdapter *file,
                           ProjectFileReader *reader, ProjectFileWriter *writer,
-                          FileStateTracker *stateTracker, AppSettings *settings);
+                          FileStateTracker *stateTracker, AppSettings *settings,
+                          QMessageBoxProvider *messageBox);
     virtual ~ProjectFileController();
 
     virtual void setModel(RequirementsModel *model);
@@ -33,6 +35,8 @@ public slots:
     virtual void saveAs();
     virtual void load();
 
+    void askSaveUnsavedChanges();
+
 private:
     RequirementsModel *model;
     QFileDialogAdapter *dialogProvider;
@@ -41,6 +45,7 @@ private:
     ProjectFileWriter *writer;
     FileStateTracker *stateTracker;
     AppSettings *settings;
+    QMessageBoxProvider *messageBox;
 
     QString filterString;
 };

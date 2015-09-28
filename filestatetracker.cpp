@@ -3,7 +3,7 @@
 FileStateTracker::FileStateTracker() : QObject()
 {
     _filePath = "";
-    changed = false;
+    _changed = false;
 }
 
 FileStateTracker::~FileStateTracker()
@@ -24,10 +24,15 @@ void FileStateTracker::setFilePath(const QString &path)
     _filePath = path;
 }
 
+bool FileStateTracker::unsavedChanges() const
+{
+    return _changed;
+}
+
 void FileStateTracker::setChanged(bool state)
 {
-    if(state != changed)
+    if(state != _changed)
         emit changedStateChanged(state);
 
-    changed = state;
+    _changed = state;
 }
