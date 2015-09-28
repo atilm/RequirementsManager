@@ -115,7 +115,7 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
         return false;
 }
 
-bool RequirementsModel::appendSibling(const QModelIndex &index)
+QModelIndex RequirementsModel::appendSibling(const QModelIndex &index)
 {
     if(!index.isValid())
         return appendChild(index);
@@ -126,14 +126,15 @@ bool RequirementsModel::appendSibling(const QModelIndex &index)
             beginInsertRows(index.parent(), index.row()+1, index.row()+1);
             parent->insertChild(index.row()+1, factory->newRequirement());
             endInsertRows();
-            return true;
+
+            return this->index(index.row()+1, 0, index.parent());
         }
         else
-            return false;
+            return QModelIndex();
     }
 }
 
-bool RequirementsModel::appendChild(const QModelIndex &index)
+QModelIndex RequirementsModel::appendChild(const QModelIndex &index)
 {
     Requirement *item = getValidItem(index);
     Requirement *newItem = factory->newRequirement();
@@ -142,7 +143,7 @@ bool RequirementsModel::appendChild(const QModelIndex &index)
     item->appendChild(newItem);
     endInsertRows();
 
-    return true;
+    return this->index(item->childCount()-1, 0, index);
 }
 
 bool RequirementsModel::removeRequirement(const QModelIndex &index)

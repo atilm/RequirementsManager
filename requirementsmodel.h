@@ -35,8 +35,8 @@ public:
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
     // specific functions
-    virtual bool appendSibling(const QModelIndex &index);
-    virtual bool appendChild(const QModelIndex &index);
+    virtual QModelIndex appendSibling(const QModelIndex &index);
+    virtual QModelIndex appendChild(const QModelIndex &index);
     virtual bool removeRequirement(const QModelIndex &index);
 
     virtual QTextDocument* getDescription(const QModelIndex &index);

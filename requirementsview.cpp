@@ -9,33 +9,24 @@ RequirementsView::RequirementsView(QWidget *parent) :
 
 void RequirementsView::insertSibling()
 {
-//    QModelIndexList selectedRows = selectionModel()->selectedRows();
+    QModelIndex newIdx = requirementsModel()->appendSibling(selectionModel()->currentIndex());
 
-//    if(selectedRows.isEmpty())
-//        requirementsModel()->appendChild(QModelIndex());
-//    else
-//        requirementsModel()->appendSibling(selectedRows.first());
-
-    requirementsModel()->appendSibling(selectionModel()->currentIndex());
+    if(newIdx.isValid())
+        selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 void RequirementsView::appendChild()
 {
-//    QModelIndexList selectedRows = selectionModel()->selectedRows();
+    QModelIndex newIdx = requirementsModel()->appendChild(selectionModel()->currentIndex());
 
-//    if(selectedRows.isEmpty())
-//        requirementsModel()->appendChild(QModelIndex());
-//    else
-//        requirementsModel()->appendChild(selectedRows.first());
-
-    requirementsModel()->appendChild(selectionModel()->currentIndex());
+    if(newIdx.isValid())
+        selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 void RequirementsView::removeCurrent()
 {
-    QModelIndexList selectedRows = selectionModel()->selectedRows();
-    if(!selectedRows.empty()){
-        requirementsModel()->removeRequirement(selectedRows.first());
+    if(selectionModel()->currentIndex().isValid()){
+        requirementsModel()->removeRequirement(selectionModel()->currentIndex());
     }
 }
 

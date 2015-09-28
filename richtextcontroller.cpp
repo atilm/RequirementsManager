@@ -4,12 +4,20 @@
 
 RichTextController::RichTextController()
 {
+    edit = NULL;
+    italicAction = NULL;
+    boldAction = NULL;
+    bulletAction = NULL;
 }
 
 void RichTextController::setTextEdit(QTextEdit *edit)
 {
     this->edit = edit;
     connect(edit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(handleFormatChanged(QTextCharFormat)));
+
+    if(italicAction){
+        connect(italicAction, SIGNAL(toggled(bool)), edit, SLOT(setFontItalic(bool)));
+    }
 }
 
 void RichTextController::setBoldAction(QAction *boldAction)
@@ -23,7 +31,6 @@ void RichTextController::setItalicAction(QAction *italicAction)
 {
     this->italicAction = italicAction;
     italicAction->setCheckable(true);
-    connect(italicAction, SIGNAL(toggled(bool)), edit, SLOT(setFontItalic(bool)));
 }
 
 void RichTextController::setBulletAction(QAction *bulletAction)
