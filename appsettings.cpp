@@ -10,6 +10,7 @@ AppSettings::AppSettings()
     defaultDirectory = ".";
 
     clear();
+    load();
 }
 
 AppSettings::~AppSettings()

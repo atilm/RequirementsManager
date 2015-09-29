@@ -78,6 +78,7 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 void MainWindow::closeEvent(QCloseEvent *e)
 {
     fileController->askSaveUnsavedChanges();
+    settings->save();
     e->accept();
 }
 

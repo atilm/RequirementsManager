@@ -48,6 +48,8 @@ private:
     QMessageBoxProvider *messageBox;
 
     QString filterString;
+
+    void saveAsStartDirectory(const QString &fPath);
 };
 
 #endif // PROJECTFILECONTROLLER_H

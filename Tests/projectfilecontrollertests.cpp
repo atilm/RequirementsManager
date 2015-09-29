@@ -82,6 +82,8 @@ protected:
                 .Times(AtLeast(0));
         EXPECT_CALL(*modelMock, clearModel())
                 .Times(AtLeast(0));
+        EXPECT_CALL(*settingsMock, setDirectory(_))
+                .Times(AtLeast(0));
     }
 };
 
@@ -136,6 +138,19 @@ TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_path_is_registered)
 
 TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_file_state_is_set_to_unchanged){
     EXPECT_CALL(*stateMock, setChanged(false));
+
+    controller->saveAs();
+}
+
+TEST_F(ProjectFileControllerTests, when_file_is_savedAs_the_start_directory_is_set){
+    QString dirPath = "/home/directory";
+    QString fileName = "file.req";
+    QString filePath = dirPath + "/" + fileName;
+
+    EXPECT_CALL(*dialogMock, getSaveFileName(_, QString("Save file"), currentDir, _, _))
+            .WillOnce(Return(filePath));
+
+    EXPECT_CALL(*settingsMock, setDirectory(dirPath));
 
     controller->saveAs();
 }
@@ -246,6 +261,19 @@ TEST_F(ProjectFileControllerTests, when_load_is_called_the_selected_path_is_regi
 
 TEST_F(ProjectFileControllerTests, when_load_is_called_the_file_state_is_set_to_unchanged){
     EXPECT_CALL(*stateMock, setChanged(false));
+
+    controller->load();
+}
+
+TEST_F(ProjectFileControllerTests, when_file_is_loaded_the_start_directory_is_set){
+    QString dirPath = "/home/directory";
+    QString fileName = "file.req";
+    QString filePath = dirPath + "/" + fileName;
+
+    EXPECT_CALL(*dialogMock, getOpenFileName(_, QString("Open file"), currentDir, _, _))
+            .WillOnce(Return(filePath));
+
+    EXPECT_CALL(*settingsMock, setDirectory(dirPath));
 
     controller->load();
 }

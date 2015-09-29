@@ -1,4 +1,5 @@
 #include "projectfilecontroller.h"
+#include <QFileInfo>
 
 ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              QFileAdapter *file,
@@ -60,6 +61,7 @@ void ProjectFileController::saveAs()
         writer->save(model, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
+        saveAsStartDirectory(filePath);
     }
 }
 
@@ -78,6 +80,7 @@ void ProjectFileController::load()
         reader->load(model, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
+        saveAsStartDirectory(filePath);
     }
 }
 
@@ -91,4 +94,12 @@ void ProjectFileController::askSaveUnsavedChanges()
             save();
         }
     }
+}
+
+void ProjectFileController::saveAsStartDirectory(const QString &fPath)
+{
+    QFileInfo fInfo(fPath);
+    QString directoryPath = fInfo.absolutePath();
+
+    settings->setDirectory(directoryPath);
 }
