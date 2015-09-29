@@ -4,7 +4,7 @@
 #include <QCloseEvent>
 
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
-                       RichTextController *richText, FileStateTracker *fileState, QMessageBoxProvider *messageBox,
+                       RichTextController *richText, FileStateTracker *fileState, QMessageBoxProvider *messageBox, AppSettings *settings,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -14,6 +14,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     applicationName = "Requirements Manager";
     setWindowTitle(applicationName);
 
+    this->settings = settings;
     this->messageBox = messageBox;
     this->fileState = fileState;
     this->fileController = fileController;
@@ -43,6 +44,7 @@ MainWindow::~MainWindow()
     delete descriptionView;
     delete requirementsView;
     delete messageBox;
+    delete settings;
     delete ui;
 }
 

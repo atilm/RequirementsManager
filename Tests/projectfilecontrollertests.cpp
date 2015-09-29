@@ -8,6 +8,7 @@
 #include "appsettingsmock.h"
 #include "randomdatagenerator.h"
 #include "requirementsmodelmock.h"
+#include "QMessageBoxProviderMock.h"
 using ::testing::AtLeast;
 using ::testing::_;
 using ::testing::Return;
@@ -23,6 +24,7 @@ protected:
     FileStateTrackerMock *stateMock;
     AppSettingsMock *settingsMock;
     RequirementsModelMock *modelMock;
+    QMessageBoxProviderMock *msgMock;
 
     QString currentDir;
     QString defaultfilePath;
@@ -35,10 +37,11 @@ protected:
         stateMock = new FileStateTrackerMock();
         settingsMock = new AppSettingsMock();
         modelMock = new RequirementsModelMock();
+        msgMock = new QMessageBoxProviderMock();
 
         controller = new ProjectFileController(dialogMock, fileMock,
                                                readerMock, writerMock,
-                                               stateMock, settingsMock);
+                                               stateMock, settingsMock, msgMock);
 
         init();
 

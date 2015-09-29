@@ -9,6 +9,7 @@
 #include "projectfilecontroller.h"
 #include "filestatetracker.h"
 #include "qmessageboxprovider.h"
+#include "appsettings.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ public:
                         RichTextController *richText,
                         FileStateTracker *fileState,
                         QMessageBoxProvider *messageBox,
+                        AppSettings *settings,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -40,6 +42,7 @@ private:
     DescriptionView *descriptionView;
     FileStateTracker *fileState;
     QMessageBoxProvider *messageBox;
+    AppSettings *settings;
 
     void closeEvent(QCloseEvent *);
 

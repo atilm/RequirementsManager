@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     projectfilecontrollertests.cpp \
     randomdatagenerator.cpp \
     filestatetrackertests.cpp \
-    eventlistener.cpp
+    eventlistener.cpp \
+    appsettingstests.cpp
 
 INCLUDEPATH += $$PWD/../
 
