@@ -44,12 +44,10 @@ void RequirementsView::startDrag(Qt::DropActions supportedActions)
 void RequirementsView::dropEvent(QDropEvent *event)
 {
     QModelIndex destination = indexAt(event->pos());
-    cout << "row: " << destination.row() << " col: " << destination.column() << endl;
 
     requirementsModel()->moveRequirement(currentlyDragged, destination);
 
     event->accept();
-    //QTreeView::dropEvent(event);
 }
 
 RequirementsModel *RequirementsView::requirementsModel()

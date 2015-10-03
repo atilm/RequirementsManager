@@ -98,6 +98,15 @@ void Requirement::removeChild(int index)
     children.remove(index);
 }
 
+Requirement *Requirement::popChild(int index)
+{
+    assertValidIndex(index);
+
+    Requirement* child = children[index];
+    children.remove(index);
+    return child;
+}
+
 int Requirement::indexOf(const Requirement *item) const
 {
     for(int i=0;i<childCount();i++){

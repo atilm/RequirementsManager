@@ -44,6 +44,7 @@ public:
     virtual void appendChild(Requirement *child);
 
     virtual void removeChild(int index);
+    virtual Requirement* popChild(int index);
 
     virtual int indexOf(const Requirement *item) const;
 

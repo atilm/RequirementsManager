@@ -42,9 +42,8 @@ public:
     // specific functions
     virtual QModelIndex appendSibling(const QModelIndex &index);
     virtual QModelIndex appendChild(const QModelIndex &index);
-    virtual QModelIndex insertChild(const QModelIndex &index, int beforeRow);
+    virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
-    virtual void copyRequirement(const QModelIndex &source, const QModelIndex &destination);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
 
     virtual QTextDocument* getDescription(const QModelIndex &index);

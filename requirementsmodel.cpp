@@ -161,10 +161,9 @@ QModelIndex RequirementsModel::appendChild(const QModelIndex &index)
     return this->index(item->childCount()-1, 0, index);
 }
 
-QModelIndex RequirementsModel::insertChild(const QModelIndex &index, int beforeRow)
+QModelIndex RequirementsModel::insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow)
 {
     Requirement *item = getValidItem(index);
-    Requirement *newItem = factory->newRequirement();
 
     beginInsertRows(index, beforeRow, beforeRow);
     item->insertChild(beforeRow, newItem);
@@ -190,40 +189,37 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
     }
 }
 
-void RequirementsModel::copyRequirement(const QModelIndex &source, const QModelIndex &destination)
-{
-    QModelIndex sourceParent = parent(source);
-    QModelIndex destinationParent = parent(destination);
-
-    insertChild(destinationParent, destination.row());
-
-    if(sourceParent == destinationParent){
-        if(source.row() > destination.row()){
-
-        }
-        else if(source.row() < destination.row()){
-
-        }
-        else
-            return;
-    }
-    else{
-
-    }
-}
-
 void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelIndex &destination)
 {
     QModelIndex sourceParent = parent(source);
     QModelIndex destinationParent = parent(destination);
 
-    //beginMoveRows(sourceParent, source.row(), source.row(), destinationParent, destination.row());
+    Requirement *sourceItem = asRequirement(source);
 
-    if(sourceParent != destinationParent){
-        insertChild(destinationParent, destination.row());
+    beginMoveRows(sourceParent, source.row(), source.row(), destinationParent, destination.row());
+
+    if(destination.row() < 0)
+        return;
+
+    insertChild(sourceItem, destinationParent, destination.row());
+
+    int removeIndex = source.row();
+
+    // when a copy of source is inserted before source, then the index
+    // of source is shifted to its former position + 1:
+    if(sourceParent == destinationParent){
+        if(source.row() > destination.row()){
+            removeIndex += 1;
+        }
     }
 
-    //endMoveRows();
+    Requirement *sourceParentItem = getValidItem(sourceParent);
+
+    sourceParentItem->popChild(removeIndex);
+
+    fileState->setChanged(true);
+
+    endMoveRows();
 }
 
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
