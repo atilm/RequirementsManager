@@ -36,10 +36,16 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
+    // functions needed for drag and drop
+    Qt::DropActions supportedDropActions() const;
+
     // specific functions
     virtual QModelIndex appendSibling(const QModelIndex &index);
     virtual QModelIndex appendChild(const QModelIndex &index);
+    virtual QModelIndex insertChild(const QModelIndex &index, int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
+    virtual void copyRequirement(const QModelIndex &source, const QModelIndex &destination);
+    virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
 
     virtual QTextDocument* getDescription(const QModelIndex &index);
 

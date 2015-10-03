@@ -97,9 +97,10 @@ QVariant RequirementsModel::headerData(int section,
 Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
 {
     if(!index.isValid())
-        return 0;
+        return Qt::ItemIsDropEnabled;
     else
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable |
+               Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
 }
 
 bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -115,6 +116,11 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
     }
     else
         return false;
+}
+
+Qt::DropActions RequirementsModel::supportedDropActions() const
+{
+    return Qt::MoveAction;
 }
 
 QModelIndex RequirementsModel::appendSibling(const QModelIndex &index)
@@ -155,6 +161,21 @@ QModelIndex RequirementsModel::appendChild(const QModelIndex &index)
     return this->index(item->childCount()-1, 0, index);
 }
 
+QModelIndex RequirementsModel::insertChild(const QModelIndex &index, int beforeRow)
+{
+    Requirement *item = getValidItem(index);
+    Requirement *newItem = factory->newRequirement();
+
+    beginInsertRows(index, beforeRow, beforeRow);
+    item->insertChild(beforeRow, newItem);
+    endInsertRows();
+
+    fileState->setChanged(true);
+    connect(newItem->getDescription(), SIGNAL(contentsChanged()),
+            this, SLOT(handleDescriptionChanged()));
+    return this->index(beforeRow-1, 0, index);
+}
+
 bool RequirementsModel::removeRequirement(const QModelIndex &index)
 {
     if(!index.isValid())
@@ -167,6 +188,42 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
         fileState->setChanged(true);
         return true;
     }
+}
+
+void RequirementsModel::copyRequirement(const QModelIndex &source, const QModelIndex &destination)
+{
+    QModelIndex sourceParent = parent(source);
+    QModelIndex destinationParent = parent(destination);
+
+    insertChild(destinationParent, destination.row());
+
+    if(sourceParent == destinationParent){
+        if(source.row() > destination.row()){
+
+        }
+        else if(source.row() < destination.row()){
+
+        }
+        else
+            return;
+    }
+    else{
+
+    }
+}
+
+void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelIndex &destination)
+{
+    QModelIndex sourceParent = parent(source);
+    QModelIndex destinationParent = parent(destination);
+
+    //beginMoveRows(sourceParent, source.row(), source.row(), destinationParent, destination.row());
+
+    if(sourceParent != destinationParent){
+        insertChild(destinationParent, destination.row());
+    }
+
+    //endMoveRows();
 }
 
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)

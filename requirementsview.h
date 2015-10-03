@@ -1,6 +1,7 @@
 #ifndef REQUIREMENTSVIEW_H
 #define REQUIREMENTSVIEW_H
 
+#include <QDropEvent>
 #include <QTreeView>
 #include "requirementsmodel.h"
 
@@ -17,7 +18,13 @@ public slots:
     virtual void appendChild();
     virtual void removeCurrent();
 
+protected:
+    virtual void startDrag(Qt::DropActions supportedActions);
+    virtual void dropEvent(QDropEvent *event);
+
 private:
+    QModelIndex currentlyDragged;
+
     RequirementsModel *requirementsModel();
 
 };

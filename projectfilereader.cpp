@@ -1,5 +1,6 @@
 #include "projectfilereader.h"
 #include <stdexcept>
+#include <iostream>
 using namespace std;
 
 ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml)
@@ -21,7 +22,6 @@ void ProjectFileReader::load(RequirementsModel *model, QFileAdapter *file)
     this->model = model;
 
     readContents();
-
     this->file->close();
     this->model = NULL;
     this->file = NULL;

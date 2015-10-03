@@ -5,6 +5,10 @@ using namespace std;
 RequirementsView::RequirementsView(QWidget *parent) :
     QTreeView(parent)
 {
+    setDragEnabled(true);
+    setAcceptDrops(true);
+    setDropIndicatorShown(true);
+    setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 void RequirementsView::insertSibling()
@@ -28,6 +32,24 @@ void RequirementsView::removeCurrent()
     if(selectionModel()->currentIndex().isValid()){
         requirementsModel()->removeRequirement(selectionModel()->currentIndex());
     }
+}
+
+void RequirementsView::startDrag(Qt::DropActions supportedActions)
+{
+    currentlyDragged = selectionModel()->currentIndex();
+
+    QTreeView::startDrag(supportedActions);
+}
+
+void RequirementsView::dropEvent(QDropEvent *event)
+{
+    QModelIndex destination = indexAt(event->pos());
+    cout << "row: " << destination.row() << " col: " << destination.column() << endl;
+
+    requirementsModel()->moveRequirement(currentlyDragged, destination);
+
+    event->accept();
+    //QTreeView::dropEvent(event);
 }
 
 RequirementsModel *RequirementsView::requirementsModel()
