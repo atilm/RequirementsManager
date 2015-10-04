@@ -9,6 +9,18 @@ AttributeContext::~AttributeContext()
 
 }
 
+QVariant AttributeContext::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(role == Qt::DisplayRole && orientation == Qt::Horizontal){
+        if(section == 0)
+            return tr("Name");
+        else if(section == 1)
+            return tr("Data Type");
+    }
+
+    return QVariant();
+}
+
 int AttributeContext::rowCount(const QModelIndex &parent) const
 {
     return attributes.size();
@@ -28,7 +40,7 @@ QVariant AttributeContext::data(const QModelIndex &index, int role) const
         if(col == 0)
             return attributes[row].name;
         else if(col == 1)
-            return attributes[row].type;
+            return typeString(attributes[row].type);
         else
             return QVariant();
     }
@@ -64,19 +76,19 @@ void AttributeContext::removeAttribute(int row)
 }
 
 
-QList<QString> AttributeContext::names() const
+QString AttributeContext::names(int index) const
 {
-    return attributes.keys();
+    return attributes[index].name;
 }
 
-AttributeContext::DataType AttributeContext::type(const QString &name) const
+AttributeContext::DataType AttributeContext::type(int index) const
 {
-    return attributes[name];
+    return attributes[index].type;
 }
 
-QString AttributeContext::typeString(const QString &name) const
+QString AttributeContext::typeString(int index) const
 {
-    return typeString(attributes[name]);
+    return typeString(attributes[index].type);
 }
 
 QString AttributeContext::typeString(AttributeContext::DataType type) const

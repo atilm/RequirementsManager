@@ -23,15 +23,16 @@ public:
     AttributeContext();
     virtual ~AttributeContext();
 
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     virtual int rowCount(const QModelIndex &parent) const;
     virtual int columnCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
     virtual void addAttribute(const QString &name, DataType type);
     virtual void removeAttribute(int row);
-    virtual QList<QString> names() const;
-    virtual DataType type(const QString &name) const;
-    virtual QString typeString(const QString &name) const;
+    virtual QString names(int index) const;
+    virtual DataType type(int index) const;
+    virtual QString typeString(int index) const;
     virtual QString typeString(DataType type) const;
 
 signals:
