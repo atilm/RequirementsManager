@@ -2,12 +2,13 @@
 #include <iostream>
 using namespace std;
 
-RequirementsModel::RequirementsModel(RequirementFactory *factory, FileStateTracker *fileState,
+RequirementsModel::RequirementsModel(RequirementFactory *factory, FileStateTracker *fileState, AttributeContext *attributeContext,
                                      QObject *parent) :
     QAbstractItemModel(parent)
 {
     this->factory = factory;
     this->fileState = fileState;
+    this->attributeContext = attributeContext;
 }
 
 RequirementsModel::~RequirementsModel()
@@ -46,10 +47,31 @@ QVariant RequirementsModel::data(const QModelIndex &index, int role) const
     if(!index.isValid())
         return QVariant();
 
-    if(index.column() == 0 && ( role == Qt::DisplayRole || role == Qt::EditRole ) )
-        return asRequirement(index)->getTitle();
-    else
-        return QVariant();
+    int column = index.column();
+
+    if(column == 0){
+        if( role == Qt::DisplayRole || role == Qt::EditRole )
+            return asRequirement(index)->getTitle();
+    }
+    else if(column <= attributeContext->rowCount()){
+        AttributeContext::DataType type = attributeContext->type(column);
+
+        switch(type){
+        case AttributeContext::BOOLEAN:
+            if(role == Qt::CheckStateRole)
+                return asRequirement(index)->getAttribute(column);
+            break;
+        case AttributeContext::INTEGER:
+            if(role == Qt::DisplayRole || role == Qt::EditRole)
+                return asRequirement(index)->getAttribute(column);
+            break;
+        case AttributeContext::TEXT:
+            if(role == Qt::DisplayRole || role == Qt::EditRole)
+                return asRequirement(index)->getAttribute(column);
+        }
+    }
+
+    return QVariant();
 }
 
 QModelIndex RequirementsModel::index(int row, int column, const QModelIndex &parent) const

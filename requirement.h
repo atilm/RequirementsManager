@@ -2,6 +2,7 @@
 #define REQUIREMENT_H
 
 #include "uniqueidmanager.h"
+#include "attributecontainer.h"
 
 #include <QTextDocument>
 #include <QVector>
@@ -21,8 +22,8 @@ class InvalidIndexException : public exception{
 class Requirement
 {
 public:
-    Requirement(UniqueIDManager *idManager);
-    Requirement(UniqueIDManager *idManager, uint proposedID);
+    Requirement(UniqueIDManager *idManager, AttributeContainer *attributes);
+    Requirement(UniqueIDManager *idManager, uint proposedID, AttributeContainer *attributes);
     virtual ~Requirement();
 
     virtual uint getID();
@@ -32,6 +33,7 @@ public:
 
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
+    virtual QVariant getAttribute(int index) const;
 
     virtual QTextDocument *getDescription();
 
@@ -58,6 +60,7 @@ private:
 
     QString title;
     QTextDocument *description;
+    AttributeContainer *attributes;
 
     void assertValidIndex(int index);
 };

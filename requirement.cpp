@@ -1,19 +1,25 @@
 #include "requirement.h"
 
-Requirement::Requirement(UniqueIDManager *idManager) :
+Requirement::Requirement(UniqueIDManager *idManager, AttributeContainer *attributes) :
     id(idManager->newUniqueID())
 {
+    this->attributes = attributes;
     this->idManager = idManager;
     parent = NULL;
+
     title = "Requirement";
     description = new QTextDocument();
 }
 
-Requirement::Requirement(UniqueIDManager *idManager, uint proposedID) :
+Requirement::Requirement(UniqueIDManager *idManager,
+                         uint proposedID,
+                         AttributeContainer *attributes) :
     id(idManager->newUniqueID(proposedID))
 {
+    this->attributes = attributes;
     this->idManager = idManager;
     parent = NULL;
+
     title = "Requirement";
     description = new QTextDocument();
 }
@@ -21,6 +27,8 @@ Requirement::Requirement(UniqueIDManager *idManager, uint proposedID) :
 Requirement::~Requirement()
 {
     idManager->removeID(id);
+
+    delete attributes;
 
     for(int i=0;i<childCount();i++)
         delete children[i];
@@ -39,6 +47,11 @@ void Requirement::setTitle(const QString &title)
 QString Requirement::getTitle() const
 {
     return title;
+}
+
+QVariant Requirement::getAttribute(int index) const
+{
+    return attributes->getField(index);
 }
 
 QTextDocument *Requirement::getDescription()

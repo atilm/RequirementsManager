@@ -24,8 +24,8 @@ public:
     virtual ~AttributeContext();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    virtual int rowCount(const QModelIndex &parent) const;
-    virtual int columnCount(const QModelIndex &parent) const;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
     virtual void addAttribute(const QString &name, DataType type);
@@ -36,8 +36,8 @@ public:
     virtual QString typeString(DataType type) const;
 
 signals:
-    void newAttribute(const QString &name, DataType type);
-    void removedAttribute(const QString &name);
+    void newAttribute(int beforeIndex);
+    void removedAttribute(int index);
 
 private:
     QVector<Attribute> attributes;

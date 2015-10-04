@@ -1,6 +1,7 @@
 #include "requirementfactory.h"
 
-RequirementFactory::RequirementFactory(UniqueIDManager *idManager)
+RequirementFactory::RequirementFactory(UniqueIDManager *idManager,
+                                       AttributeContext *attributeContext)
 {
     this->idManager = idManager;
 }

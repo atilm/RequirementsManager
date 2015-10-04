@@ -3,11 +3,12 @@
 
 #include "uniqueidmanager.h"
 #include "requirement.h"
+#include "attributecontext.h"
 
 class RequirementFactory
 {
 public:
-    RequirementFactory(UniqueIDManager *idManager);
+    RequirementFactory(UniqueIDManager *idManager, AttributeContext *attributeContext);
     virtual ~RequirementFactory();
 
     Requirement* newRequirement(Requirement *parent = 0);

@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     filestatetracker.cpp \
     appsettings.cpp \
     attributecontext.cpp \
-    attributeeditor.cpp
+    attributeeditor.cpp \
+    attributecontainer.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -47,7 +48,8 @@ HEADERS  += mainwindow.h \
     filestatetracker.h \
     appsettings.h \
     attributecontext.h \
-    attributeeditor.h
+    attributeeditor.h \
+    attributecontainer.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui
