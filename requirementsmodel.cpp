@@ -194,12 +194,16 @@ void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelI
     QModelIndex sourceParent = parent(source);
     QModelIndex destinationParent = parent(destination);
 
-    Requirement *sourceItem = asRequirement(source);
-
-    beginMoveRows(sourceParent, source.row(), source.row(), destinationParent, destination.row());
+    if(sourceParent == destinationParent &&
+       source.row() == destination.row() - 1)
+        return;
 
     if(destination.row() < 0)
         return;
+
+    Requirement *sourceItem = asRequirement(source);
+
+    //beginMoveRows(sourceParent, source.row(), source.row(), destinationParent, destination.row());
 
     insertChild(sourceItem, destinationParent, destination.row());
 
@@ -215,11 +219,13 @@ void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelI
 
     Requirement *sourceParentItem = getValidItem(sourceParent);
 
+    beginRemoveRows(sourceParent, removeIndex, removeIndex);
     sourceParentItem->popChild(removeIndex);
+    endRemoveRows();
 
     fileState->setChanged(true);
 
-    endMoveRows();
+    //endMoveRows();
 }
 
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
