@@ -10,6 +10,7 @@
 #include "filestatetracker.h"
 #include "qmessageboxprovider.h"
 #include "appsettings.h"
+#include "attributeeditor.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,7 @@ public:
                         FileStateTracker *fileState,
                         QMessageBoxProvider *messageBox,
                         AppSettings *settings,
+                        AttributeEditor *attributeDialog,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -43,12 +45,14 @@ private:
     FileStateTracker *fileState;
     QMessageBoxProvider *messageBox;
     AppSettings *settings;
+    AttributeEditor *attributeDialog;
 
     void closeEvent(QCloseEvent *);
 
 private slots:
     void handleFilePathChanged(const QString &fPath);
     void handleChangedStateChanged(bool unsavedChanges);
+    void handleEditAttributes();
 };
 
 #endif // MAINWINDOW_H

@@ -50,6 +50,7 @@
     <addaction name="actionAddSibling"/>
     <addaction name="actionAddChild"/>
     <addaction name="actionRemoveRequirement"/>
+    <addaction name="actionAttributes"/>
     <addaction name="actionProjectSettings"/>
    </widget>
    <addaction name="menuFile"/>
@@ -215,6 +216,11 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionAttributes">
+   <property name="text">
+    <string>Attributes...</string>
    </property>
   </action>
  </widget>

@@ -18,10 +18,13 @@ public:
 
 public slots:
     void updateView();
+    void exec();
 
 private:
     Ui::AttributeEditor *ui;
     AttributeContext *context;
+
+    void initTypeBox();
 
 private slots:
     void handleAddClicked();

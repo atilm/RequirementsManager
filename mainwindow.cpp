@@ -4,7 +4,9 @@
 #include <QCloseEvent>
 
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
-                       RichTextController *richText, FileStateTracker *fileState, QMessageBoxProvider *messageBox, AppSettings *settings,
+                       RichTextController *richText, FileStateTracker *fileState,
+                       QMessageBoxProvider *messageBox, AppSettings *settings,
+                       AttributeEditor *attributeDialog,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,6 +21,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->fileState = fileState;
     this->fileController = fileController;
     this->requirements = requirements;
+    this->attributeDialog = attributeDialog;
 
     fileController->setModel(requirements);
 
@@ -29,6 +32,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
 
+    connect(ui->actionAttributes, SIGNAL(triggered()), this, SLOT(handleEditAttributes()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
@@ -45,6 +49,7 @@ MainWindow::~MainWindow()
     delete requirementsView;
     delete messageBox;
     delete settings;
+    delete attributeDialog;
     delete ui;
 }
 
@@ -94,5 +99,10 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
         windowTitle += "*";
 
     setWindowTitle(windowTitle);
+}
+
+void MainWindow::handleEditAttributes()
+{
+    attributeDialog->exec();
 }
 

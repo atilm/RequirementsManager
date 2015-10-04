@@ -33,7 +33,10 @@ int main(int argc, char *argv[])
 
     QMessageBoxProvider *msg = new QMessageBoxProvider();
 
-    MainWindow w(fileController, requirements, richText, fileState, msg, appSettings);
+    AttributeContext *attributes = new AttributeContext();
+    AttributeEditor *attributeEditor = new AttributeEditor(attributes);
+
+    MainWindow w(fileController, requirements, richText, fileState, msg, appSettings, attributeEditor);
     w.injectViews(requirementsView, descriptionView);
     w.show();
 
