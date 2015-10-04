@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     projectfilereader.cpp \
     projectfilewriter.cpp \
     filestatetracker.cpp \
-    appsettings.cpp
+    appsettings.cpp \
+    attributecontext.cpp \
+    attributeeditor.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -43,9 +45,12 @@ HEADERS  += mainwindow.h \
     projectfilereader.h \
     projectfilewriter.h \
     filestatetracker.h \
-    appsettings.h
+    appsettings.h \
+    attributecontext.h \
+    attributeeditor.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    attributeeditor.ui
 
 RESOURCES += \
     resources.qrc
