@@ -58,7 +58,7 @@ void AttributeContext::addAttribute(const QString &name, AttributeContext::DataT
     attributes.append(a);
     endInsertRows();
 
-    emit newAttribute(name, type);
+    emit newAttribute(attributes.size() - 1);
 }
 
 void AttributeContext::removeAttribute(int row)
@@ -66,17 +66,15 @@ void AttributeContext::removeAttribute(int row)
     if(row < 0 || row >= attributes.size())
         return;
 
-    QString name = attributes[row].name;
-
     beginRemoveRows(QModelIndex(), row, row);
     attributes.remove(row);
     endRemoveRows();
 
-    emit removedAttribute(name);
+    emit removedAttribute(row);
 }
 
 
-QString AttributeContext::names(int index) const
+QString AttributeContext::name(int index) const
 {
     return attributes[index].name;
 }

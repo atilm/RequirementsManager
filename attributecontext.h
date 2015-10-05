@@ -30,7 +30,7 @@ public:
 
     virtual void addAttribute(const QString &name, DataType type);
     virtual void removeAttribute(int row);
-    virtual QString names(int index) const;
+    virtual QString name(int index) const;
     virtual DataType type(int index) const;
     virtual QString typeString(int index) const;
     virtual QString typeString(DataType type) const;

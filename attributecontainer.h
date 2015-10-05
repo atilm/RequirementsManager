@@ -20,6 +20,8 @@ private:
     AttributeContext *context;
     QVector<QVariant> attributes;
 
+    void initialize();
+
 private slots:
     void attributeAdded(int beforeIndex);
     void attributeRemoved(int index);

@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     appsettings.cpp \
     attributecontext.cpp \
     attributeeditor.cpp \
-    attributecontainer.cpp
+    attributecontainer.cpp \
+    attributecontainerfactory.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -49,7 +50,8 @@ HEADERS  += mainwindow.h \
     appsettings.h \
     attributecontext.h \
     attributeeditor.h \
-    attributecontainer.h
+    attributecontainer.h \
+    attributecontainerfactory.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui

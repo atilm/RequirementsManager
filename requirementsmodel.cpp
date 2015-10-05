@@ -32,7 +32,7 @@ void RequirementsModel::clearModel()
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const
 {
-    return 1;
+    return attributeContext->rowCount() + 1;
 }
 
 int RequirementsModel::rowCount(const QModelIndex &parent) const
@@ -111,6 +111,8 @@ QVariant RequirementsModel::headerData(int section,
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole){
         if(section == 0)
             return tr("Requirement");
+        else if(section <= attributeContext->rowCount())
+            return attributeContext->name(section-1);
     }
 
     return QVariant();

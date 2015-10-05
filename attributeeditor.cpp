@@ -20,6 +20,7 @@ AttributeEditor::AttributeEditor(AttributeContext *context, QWidget *parent) :
 
 AttributeEditor::~AttributeEditor()
 {
+    delete context;
     delete ui;
 }
 

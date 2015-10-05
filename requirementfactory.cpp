@@ -1,9 +1,10 @@
 #include "requirementfactory.h"
 
 RequirementFactory::RequirementFactory(UniqueIDManager *idManager,
-                                       AttributeContext *attributeContext)
+                                       AttributeContainerFactory *attrContainerFactory)
 {
     this->idManager = idManager;
+    this->attrContainerFactory = attrContainerFactory;
 }
 
 RequirementFactory::~RequirementFactory()
@@ -13,14 +14,16 @@ RequirementFactory::~RequirementFactory()
 
 Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
-    Requirement *item = new Requirement(idManager);
+    Requirement *item = new Requirement(idManager,
+                                        attrContainerFactory->newContainer());
     item->setParent(parent);
     return item;
 }
 
 Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
-    Requirement *item = new Requirement(idManager, proposedID);
+    Requirement *item = new Requirement(idManager,
+                                        attrContainerFactory->newContainer());
     item->setParent(parent);
     return item;
 }

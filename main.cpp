@@ -8,9 +8,12 @@ int main(int argc, char *argv[])
     AppSettings *appSettings = new AppSettings();
     FileStateTracker *fileState = new FileStateTracker();
 
+    AttributeContext *attributeContext = new AttributeContext();
+    AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
+
     UniqueIDManager *idManager = new UniqueIDManager();
-    RequirementFactory *factory = new RequirementFactory(idManager);
-    RequirementsModel *requirements = new RequirementsModel(factory, fileState);
+    RequirementFactory *factory = new RequirementFactory(idManager, attributes);
+    RequirementsModel *requirements = new RequirementsModel(factory, fileState, attributeContext);
     requirements->init();
 
     RichTextController *richText = new RichTextController();
@@ -33,8 +36,7 @@ int main(int argc, char *argv[])
 
     QMessageBoxProvider *msg = new QMessageBoxProvider();
 
-    AttributeContext *attributes = new AttributeContext();
-    AttributeEditor *attributeEditor = new AttributeEditor(attributes);
+    AttributeEditor *attributeEditor = new AttributeEditor(attributeContext);
 
     MainWindow w(fileController, requirements, richText, fileState, msg, appSettings, attributeEditor);
     w.injectViews(requirementsView, descriptionView);
