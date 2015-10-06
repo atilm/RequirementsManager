@@ -35,7 +35,8 @@ void AttributeEditor::initTypeBox()
 void AttributeEditor::handleAddClicked()
 {
     QString name = ui->nameEdit->text();
-    AttributeContext::DataType type = static_cast<AttributeContext::DataType>(ui->typeBox->itemData(ui->typeBox->currentIndex()).toInt());
+    int typeIndex = ui->typeBox->itemData(ui->typeBox->currentIndex()).toInt();
+    AttributeContext::DataType type = static_cast<AttributeContext::DataType>(typeIndex);
     context->addAttribute(name, type);
     ui->nameEdit->clear();
 }

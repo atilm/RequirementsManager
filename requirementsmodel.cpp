@@ -2,13 +2,15 @@
 #include <iostream>
 using namespace std;
 
-RequirementsModel::RequirementsModel(RequirementFactory *factory, FileStateTracker *fileState, AttributeContext *attributeContext,
+RequirementsModel::RequirementsModel(RequirementFactory *factory,
+                                     FileStateTracker *fileState,
+                                     RequirementToModelMapper *dataMapper,
                                      QObject *parent) :
     QAbstractItemModel(parent)
 {
     this->factory = factory;
     this->fileState = fileState;
-    this->attributeContext = attributeContext;
+    this->dataMapper = dataMapper;
 }
 
 RequirementsModel::~RequirementsModel()
@@ -32,7 +34,7 @@ void RequirementsModel::clearModel()
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const
 {
-    return attributeContext->rowCount() + 1;
+    return dataMapper->columns();
 }
 
 int RequirementsModel::rowCount(const QModelIndex &parent) const
@@ -48,27 +50,15 @@ QVariant RequirementsModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     int column = index.column();
+    Requirement *requirement = asRequirement(index);
 
-    if(column == 0){
-        if( role == Qt::DisplayRole || role == Qt::EditRole )
-            return asRequirement(index)->getTitle();
-    }
-    else if(column <= attributeContext->rowCount()){
-        AttributeContext::DataType type = attributeContext->type(column);
-
-        switch(type){
-        case AttributeContext::BOOLEAN:
-            if(role == Qt::CheckStateRole)
-                return asRequirement(index)->getAttribute(column);
-            break;
-        case AttributeContext::INTEGER:
-            if(role == Qt::DisplayRole || role == Qt::EditRole)
-                return asRequirement(index)->getAttribute(column);
-            break;
-        case AttributeContext::TEXT:
-            if(role == Qt::DisplayRole || role == Qt::EditRole)
-                return asRequirement(index)->getAttribute(column);
-        }
+    switch(role){
+    case Qt::DisplayRole:
+        return dataMapper->getDisplayRole(requirement, column);
+    case Qt::EditRole:
+        return dataMapper->getEditRole(requirement, column);
+    case Qt::CheckStateRole:
+        return dataMapper->getCheckStateRole(requirement, column);
     }
 
     return QVariant();
@@ -108,23 +98,18 @@ QVariant RequirementsModel::headerData(int section,
                                        Qt::Orientation orientation,
                                        int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole){
-        if(section == 0)
-            return tr("Requirement");
-        else if(section <= attributeContext->rowCount())
-            return attributeContext->name(section-1);
-    }
-
-    return QVariant();
+    if(role == Qt::DisplayRole)
+        return dataMapper->getHeaderDisplayRole(section, orientation);
+    else
+        return QVariant();
 }
 
 Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
 {
     if(!index.isValid())
         return Qt::ItemIsDropEnabled;
-    else
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable |
-               Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
+
+    return dataMapper->flags(index.column());
 }
 
 bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -132,14 +117,24 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
     if (!index.isValid())
         return false;
 
-    if(role == Qt::EditRole){
-        asRequirement(index)->setTitle(value.toString());
+    int column = index.column();
+    Requirement *requirement = asRequirement(index);
+
+    bool dataSet = false;
+
+    switch(role){
+    case Qt::EditRole:
+        dataSet =  dataMapper->setEditRole(value, requirement, column);
+    case Qt::CheckStateRole:
+        dataSet =  dataMapper->setCheckStateRole(value, requirement, column);
+    }
+
+    if(dataSet){
         emit dataChanged(index, index);
         fileState->setChanged(true);
-        return true;
     }
-    else
-        return false;
+
+    return dataSet;
 }
 
 Qt::DropActions RequirementsModel::supportedDropActions() const

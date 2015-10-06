@@ -13,7 +13,8 @@ int main(int argc, char *argv[])
 
     UniqueIDManager *idManager = new UniqueIDManager();
     RequirementFactory *factory = new RequirementFactory(idManager, attributes);
-    RequirementsModel *requirements = new RequirementsModel(factory, fileState, attributeContext);
+    RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
+    RequirementsModel *requirements = new RequirementsModel(factory, fileState, dataMapper);
     requirements->init();
 
     RichTextController *richText = new RichTextController();

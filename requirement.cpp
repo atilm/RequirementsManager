@@ -54,6 +54,11 @@ QVariant Requirement::getAttribute(int index) const
     return attributes->getField(index);
 }
 
+void Requirement::setAttribute(int index, const QVariant &value)
+{
+    attributes->setField(index, value);
+}
+
 QTextDocument *Requirement::getDescription()
 {
     return description;

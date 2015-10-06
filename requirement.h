@@ -34,6 +34,7 @@ public:
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
     virtual QVariant getAttribute(int index) const;
+    virtual void setAttribute(int index, const QVariant &value);
 
     virtual QTextDocument *getDescription();
 

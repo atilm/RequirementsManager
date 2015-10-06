@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     attributecontext.cpp \
     attributeeditor.cpp \
     attributecontainer.cpp \
-    attributecontainerfactory.cpp
+    attributecontainerfactory.cpp \
+    requirementtomodelmapper.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -51,7 +52,8 @@ HEADERS  += mainwindow.h \
     attributecontext.h \
     attributeeditor.h \
     attributecontainer.h \
-    attributecontainerfactory.h
+    attributecontainerfactory.h \
+    requirementtomodelmapper.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui

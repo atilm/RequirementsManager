@@ -6,6 +6,7 @@
 #include "requirementfactory.h"
 #include "filestatetracker.h"
 #include "attributecontext.h"
+#include "requirementtomodelmapper.h"
 #include <exception>
 
 class InvalidModelIndexException : public std::exception{
@@ -18,7 +19,7 @@ class RequirementsModel : public QAbstractItemModel
 public:
     explicit RequirementsModel(RequirementFactory *factory,
                                FileStateTracker *fileState,
-                               AttributeContext *attributeContext,
+                               RequirementToModelMapper *dataMapper,
                                QObject *parent = 0);
 
     virtual ~RequirementsModel();
@@ -60,6 +61,7 @@ private:
     Requirement *root;
     AttributeContext *attributeContext;
     FileStateTracker *fileState;
+    RequirementToModelMapper *dataMapper;
 
     Requirement *asRequirement(const QModelIndex &index) const;
     Requirement *getValidItem(const QModelIndex &index) const;
