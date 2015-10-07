@@ -63,7 +63,7 @@ QVariant RequirementToModelMapper::getCheckStateRole(const Requirement *requirem
     if(column > 0 && column <= context->rowCount()){
         int attributeIndex = column - 1;
         if(context->type(attributeIndex) == AttributeContext::BOOLEAN)
-            return requirement->getAttribute(column).toInt();
+            return requirement->getAttribute(attributeIndex).toInt();
     }
 
     return QVariant();
