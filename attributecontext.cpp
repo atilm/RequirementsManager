@@ -58,7 +58,9 @@ void AttributeContext::addAttribute(const QString &name, AttributeContext::DataT
     attributes.append(a);
     endInsertRows();
 
+    emit attributeAboutToBeInserted(attributes.size() - 1);
     emit newAttribute(attributes.size() - 1);
+    emit attributeInserted();
 }
 
 void AttributeContext::removeAttribute(int row)
@@ -70,7 +72,9 @@ void AttributeContext::removeAttribute(int row)
     attributes.remove(row);
     endRemoveRows();
 
+    emit attributeAboutToBeRemoved(row);
     emit removedAttribute(row);
+    emit attributeRemoved();
 }
 
 

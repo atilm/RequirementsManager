@@ -38,6 +38,10 @@ public:
 signals:
     void newAttribute(int beforeIndex);
     void removedAttribute(int index);
+    void attributeAboutToBeInserted(int index);
+    void attributeInserted();
+    void attributeAboutToBeRemoved(int index);
+    void attributeRemoved();
 
 private:
     QVector<Attribute> attributes;

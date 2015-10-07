@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
     UniqueIDManager *idManager = new UniqueIDManager();
     RequirementFactory *factory = new RequirementFactory(idManager, attributes);
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
-    RequirementsModel *requirements = new RequirementsModel(factory, fileState, dataMapper);
+    RequirementsModel *requirements = new RequirementsModel(factory, fileState,
+                                                            attributeContext, dataMapper);
     requirements->init();
 
     RichTextController *richText = new RichTextController();

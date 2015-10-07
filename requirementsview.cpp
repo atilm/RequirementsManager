@@ -11,6 +11,14 @@ RequirementsView::RequirementsView(QWidget *parent) :
     setDragDropMode(QAbstractItemView::InternalMove);
 }
 
+void RequirementsView::setModel(RequirementsModel *model)
+{
+    QTreeView::setModel(model);
+
+    connect(model, SIGNAL(columnsChanged()), this, SLOT(resizeColumns()));
+}
+
+
 void RequirementsView::insertSibling()
 {
     QModelIndex newIdx = requirementsModel()->appendSibling(selectionModel()->currentIndex());
@@ -32,6 +40,12 @@ void RequirementsView::removeCurrent()
     if(selectionModel()->currentIndex().isValid()){
         requirementsModel()->removeRequirement(selectionModel()->currentIndex());
     }
+}
+
+void RequirementsView::resizeColumns()
+{
+    for(int c=0;c < model()->columnCount();c++)
+        resizeColumnToContents(c);
 }
 
 void RequirementsView::startDrag(Qt::DropActions supportedActions)

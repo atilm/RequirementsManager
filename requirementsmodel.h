@@ -19,6 +19,7 @@ class RequirementsModel : public QAbstractItemModel
 public:
     explicit RequirementsModel(RequirementFactory *factory,
                                FileStateTracker *fileState,
+                               AttributeContext *attributeContext,
                                RequirementToModelMapper *dataMapper,
                                QObject *parent = 0);
 
@@ -52,9 +53,16 @@ public:
     virtual QTextDocument* getDescription(const QModelIndex &index);
 
     virtual uint getID(const QModelIndex &index);
+
 signals:
+    void columnsChanged();
 
 public slots:
+
+    void handleAttributeAboutToBeInserted(int index);
+    void handleAttributeInserted();
+    void handleAttributeAboutToBeRemoved(int index);
+    void handleAttributeRemoved();
 
 private:
     RequirementFactory *factory;

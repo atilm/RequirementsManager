@@ -5,6 +5,8 @@
 #include "requirement.h"
 #include "attributecontext.h"
 
+class RequirementsModel;
+
 //! Encapsulates communication of RequirementsModel and individual requirements
 /*!
   - Returns the correct flags for all columns

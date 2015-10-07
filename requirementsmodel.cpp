@@ -3,14 +3,24 @@
 using namespace std;
 
 RequirementsModel::RequirementsModel(RequirementFactory *factory,
-                                     FileStateTracker *fileState,
+                                     FileStateTracker *fileState, AttributeContext *attributeContext,
                                      RequirementToModelMapper *dataMapper,
                                      QObject *parent) :
     QAbstractItemModel(parent)
 {
     this->factory = factory;
     this->fileState = fileState;
+    this->attributeContext = attributeContext;
     this->dataMapper = dataMapper;
+
+    connect(attributeContext, SIGNAL(attributeAboutToBeInserted(int)),
+            this, SLOT(handleAttributeAboutToBeInserted(int)));
+    connect(attributeContext, SIGNAL(attributeInserted()),
+            this, SLOT(handleAttributeInserted()));
+    connect(attributeContext, SIGNAL(attributeAboutToBeRemoved(int)),
+            this, SLOT(handleAttributeAboutToBeRemoved(int)));
+    connect(attributeContext, SIGNAL(attributeRemoved()),
+            this, SLOT(handleAttributeRemoved()));
 }
 
 RequirementsModel::~RequirementsModel()
@@ -262,6 +272,28 @@ uint RequirementsModel::getID(const QModelIndex &index)
         throw InvalidModelIndexException();
 
     return asRequirement(index)->getID();
+}
+
+void RequirementsModel::handleAttributeAboutToBeInserted(int index)
+{
+    beginInsertColumns(QModelIndex(), index+1, index+1);
+}
+
+void RequirementsModel::handleAttributeInserted()
+{
+    endInsertColumns();
+    emit columnsChanged();
+}
+
+void RequirementsModel::handleAttributeAboutToBeRemoved(int index)
+{
+    beginRemoveColumns(QModelIndex(), index, index);
+}
+
+void RequirementsModel::handleAttributeRemoved()
+{
+    endRemoveColumns();
+    emit columnsChanged();
 }
 
 Requirement *RequirementsModel::asRequirement(const QModelIndex &index) const

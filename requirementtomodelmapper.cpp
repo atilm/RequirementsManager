@@ -13,8 +13,9 @@ int RequirementToModelMapper::columns() const
 Qt::ItemFlags RequirementToModelMapper::flags(int column) const
 {
     Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable |
-                          Qt::ItemIsEditable | Qt::ItemIsDragEnabled |
+                          Qt::ItemIsDragEnabled |
                           Qt::ItemIsDropEnabled;
+
 
     if(column > 0 && column  <= context->rowCount()){
         int attributeIndex = column - 1;
@@ -22,7 +23,11 @@ Qt::ItemFlags RequirementToModelMapper::flags(int column) const
         if(context->type(attributeIndex) == AttributeContext::BOOLEAN){
             flags |= Qt::ItemIsUserCheckable;
         }
+        else
+            flags |= Qt::ItemIsEditable;
     }
+    else if(column == 0)
+        flags |= Qt::ItemIsEditable;
 
     return flags;
 }

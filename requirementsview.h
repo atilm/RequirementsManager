@@ -11,12 +11,15 @@ class RequirementsView : public QTreeView
 public:
     explicit RequirementsView(QWidget *parent = 0);
 
+    virtual void setModel(RequirementsModel *model);
+
 signals:
 
 public slots:
     virtual void insertSibling();
     virtual void appendChild();
     virtual void removeCurrent();
+    virtual void resizeColumns();
 
 protected:
     virtual void startDrag(Qt::DropActions supportedActions);
