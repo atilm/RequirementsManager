@@ -24,6 +24,7 @@ public:
 
     QVariant getHeaderDisplayRole(int section, Qt::Orientation orientation) const;
 
+    QVariant getForegroundRole(const Requirement *requirement, int column) const;
     QVariant getDisplayRole(const Requirement *requirement, int column) const;
     QVariant getEditRole(const Requirement *requirement, int column) const;
     QVariant getCheckStateRole(const Requirement *requirement, int column) const;

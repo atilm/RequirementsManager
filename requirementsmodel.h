@@ -39,6 +39,7 @@ public:
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+    virtual void setType(const QModelIndex &index, Requirement::Type type);
 
     // functions needed for drag and drop
     Qt::DropActions supportedDropActions() const;

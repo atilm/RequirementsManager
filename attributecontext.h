@@ -11,7 +11,6 @@ public:
 
     enum DataType{
         BOOLEAN,
-        INTEGER,
         TEXT
     };
 

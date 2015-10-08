@@ -98,8 +98,6 @@ QString AttributeContext::typeString(AttributeContext::DataType type) const
     switch(type){
     case BOOLEAN:
         return tr("Boolean");
-    case INTEGER:
-        return tr("Integer");
     case TEXT:
         return tr("Text");
     }

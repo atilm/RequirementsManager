@@ -1,14 +1,15 @@
 #include "requirementsview.h"
-#include <iostream>
-using namespace std;
+#include <QAction>
 
-RequirementsView::RequirementsView(QWidget *parent) :
+RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
     QTreeView(parent)
 {
     setDragEnabled(true);
     setAcceptDrops(true);
     setDropIndicatorShown(true);
     setDragDropMode(QAbstractItemView::InternalMove);
+
+    setUpContextMenu(contextMenu);
 }
 
 void RequirementsView::setModel(RequirementsModel *model)
@@ -67,4 +68,40 @@ void RequirementsView::dropEvent(QDropEvent *event)
 RequirementsModel *RequirementsView::requirementsModel()
 {
     return static_cast<RequirementsModel*>(model());
+}
+
+void RequirementsView::setUpContextMenu(QMenu *contextMenu)
+{
+    this->contextMenu = contextMenu;
+
+    contextMenu->addAction(tr("User Requirement"), this, SLOT(handleToUserRequirement()));
+    contextMenu->addAction(tr("Functional Requirement"), this, SLOT(handleToFunctionalRequirement()));
+    contextMenu->addAction(tr("Design Requirement"), this, SLOT(handleToDesignRequirement()));
+
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(handleCustomContextMenu(QPoint)));
+}
+
+void RequirementsView::handleCustomContextMenu(QPoint point)
+{
+    QModelIndex index = indexAt(point);
+    if (index.isValid()) {
+        contextMenu->exec(mapToGlobal(point));
+    }
+}
+
+void RequirementsView::handleToUserRequirement()
+{
+    requirementsModel()->setType(currentIndex(), Requirement::UserRequirement);
+}
+
+void RequirementsView::handleToFunctionalRequirement()
+{
+    requirementsModel()->setType(currentIndex(), Requirement::FunctionalRequirement);
+}
+
+void RequirementsView::handleToDesignRequirement()
+{
+    requirementsModel()->setType(currentIndex(), Requirement::DesignRequirement);
 }

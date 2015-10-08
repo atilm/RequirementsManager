@@ -69,6 +69,8 @@ QVariant RequirementsModel::data(const QModelIndex &index, int role) const
         return dataMapper->getEditRole(requirement, column);
     case Qt::CheckStateRole:
         return dataMapper->getCheckStateRole(requirement, column);
+    case Qt::ForegroundRole:
+        return dataMapper->getForegroundRole(requirement, column);
     }
 
     return QVariant();
@@ -145,6 +147,14 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
     }
 
     return dataSet;
+}
+
+void RequirementsModel::setType(const QModelIndex &index, Requirement::Type type)
+{
+    if(!index.isValid())
+        return;
+
+    asRequirement(index)->setType(type);
 }
 
 Qt::DropActions RequirementsModel::supportedDropActions() const

@@ -22,11 +22,21 @@ class InvalidIndexException : public exception{
 class Requirement
 {
 public:
+
+    enum Type{
+        UserRequirement,
+        FunctionalRequirement,
+        DesignRequirement
+    };
+
     Requirement(UniqueIDManager *idManager, AttributeContainer *attributes);
     Requirement(UniqueIDManager *idManager, uint proposedID, AttributeContainer *attributes);
     virtual ~Requirement();
 
     virtual uint getID();
+
+    virtual void setType(Type type);
+    virtual Type getType() const;
 
     virtual void setParent(Requirement *parent);
     virtual Requirement* getParent();
@@ -55,6 +65,7 @@ public:
 private:
     const unsigned int id;
 
+    Type type;
     UniqueIDManager *idManager;
     Requirement *parent;
     QVector<Requirement*> children;

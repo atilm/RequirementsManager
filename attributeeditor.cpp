@@ -28,7 +28,6 @@ AttributeEditor::~AttributeEditor()
 void AttributeEditor::initTypeBox()
 {
     ui->typeBox->addItem(context->typeString(AttributeContext::BOOLEAN), AttributeContext::BOOLEAN);
-    ui->typeBox->addItem(context->typeString(AttributeContext::INTEGER), AttributeContext::INTEGER);
     ui->typeBox->addItem(context->typeString(AttributeContext::TEXT), AttributeContext::TEXT);
 }
 

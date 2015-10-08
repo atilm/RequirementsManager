@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
 
     RichTextController *richText = new RichTextController();
 
-    RequirementsView *requirementsView = new RequirementsView();
+    QMenu *requirementsContextMenu = new QMenu();
+    RequirementsView *requirementsView = new RequirementsView(requirementsContextMenu);
     DescriptionView *descriptionView = new DescriptionView();
 
     QFileDialogAdapter *fileDialog = new QFileDialogAdapter();

@@ -1,4 +1,5 @@
 #include "requirementtomodelmapper.h"
+#include <QColor>
 
 RequirementToModelMapper::RequirementToModelMapper(AttributeContext *context)
 {
@@ -41,6 +42,22 @@ QVariant RequirementToModelMapper::getHeaderDisplayRole(int section, Qt::Orienta
             return context->name(section - 1);
     }
     return QVariant();
+}
+
+QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirement, int column) const
+{
+    if(column == 0){
+        switch(requirement->getType()){
+        case Requirement::UserRequirement:
+            return QColor("#000000");
+        case Requirement::FunctionalRequirement:
+            return QColor("#268bd2");
+        case Requirement::DesignRequirement:
+            return QColor("#d33682");
+        }
+    }
+    else
+        return QVariant();
 }
 
 QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement, int column) const
