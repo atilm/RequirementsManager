@@ -51,6 +51,7 @@ public:
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
 
+    virtual AttributeContext* getAttributeContext() const;
     virtual QTextDocument* getDescription(const QModelIndex &index);
 
     virtual uint getID(const QModelIndex &index);

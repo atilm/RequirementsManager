@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     requirementsmodel.cpp \
     requirement.cpp \
     uniqueidmanager.cpp \
-    requirementattribute.cpp \
     requirementlink.cpp \
     requirementfactory.cpp \
     projectfilecontroller.cpp \
@@ -41,7 +40,6 @@ HEADERS  += mainwindow.h \
     requirementsmodel.h \
     requirement.h \
     uniqueidmanager.h \
-    requirementattribute.h \
     requirementlink.h \
     requirementfactory.h \
     projectfilecontroller.h \

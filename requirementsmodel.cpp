@@ -267,6 +267,11 @@ void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelI
     //endMoveRows();
 }
 
+AttributeContext *RequirementsModel::getAttributeContext() const
+{
+    return attributeContext;
+}
+
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
 {
     if(!index.isValid())

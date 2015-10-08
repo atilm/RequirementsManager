@@ -17,10 +17,14 @@ public:
 private:
     QXmlStreamWriter *xml;
     RequirementsModel *model;
+    AttributeContext *attributeContext;
     QFileAdapter *file;
 
+    void writeAttributeContext();
+    void writeAttributeDeclaration(int index);
     void writeChildrenOf(QModelIndex parent);
     void writeRequirement(int row, QModelIndex parent);
+    void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
 };
 
 #endif // PROJECTFILEWRITER_H
