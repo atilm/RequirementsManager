@@ -4,6 +4,12 @@
 #include "requirementsmodel.h"
 #include "qfileadapter.h"
 #include <QXmlStreamReader>
+#include <stdexcept>
+
+class ParsingError : public runtime_error{
+public:
+    ParsingError(const string &arg) : runtime_error(arg) {}
+};
 
 class ProjectFileReader
 {
@@ -17,9 +23,11 @@ private:
     QXmlStreamReader *xml;
     QFileAdapter *file;
     RequirementsModel *model;
+    AttributeContext *attributeContext;
 
     void readContents();
-    void parseRequirement(QModelIndex item);
+    void parseAttributeDeclaration();
+    void parseRequirement(QModelIndex parent);
     QString getAttribute(const QString &name);
 };
 

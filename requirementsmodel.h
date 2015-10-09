@@ -48,7 +48,9 @@ public:
     virtual void setType(const QModelIndex &index, Requirement::Type type);
     virtual Requirement::Type getType(const QModelIndex &index) const;
     virtual QModelIndex appendSibling(const QModelIndex &index);
-    virtual QModelIndex appendChild(const QModelIndex &index);
+    virtual QModelIndex appendChild(const QModelIndex &index, const QString &name = "",
+                                    Requirement::Type type = Requirement::UserRequirement,
+                                    uint requestedID = 0);
     virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);

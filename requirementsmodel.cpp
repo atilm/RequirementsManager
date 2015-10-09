@@ -35,6 +35,8 @@ void RequirementsModel::init()
 
 void RequirementsModel::clearModel()
 {
+    attributeContext->clear();
+
     int rows = rowCount();
 
     for(int r=0;r<rows;r++){
@@ -193,10 +195,20 @@ QModelIndex RequirementsModel::appendSibling(const QModelIndex &index)
     }
 }
 
-QModelIndex RequirementsModel::appendChild(const QModelIndex &index)
+QModelIndex RequirementsModel::appendChild(const QModelIndex &index, const QString &name,
+                                           Requirement::Type type, uint requestedID)
 {
     Requirement *item = getValidItem(index);
-    Requirement *newItem = factory->newRequirement();
+    Requirement *newItem;
+
+    if(requestedID == 0)
+        newItem = factory->newRequirement();
+    else
+        newItem = factory->newRequirement(requestedID);
+
+    newItem->setType(type);
+    if(!name.isEmpty())
+        newItem->setTitle(name);
 
     beginInsertRows(index, item->childCount(), item->childCount());
     item->appendChild(newItem);

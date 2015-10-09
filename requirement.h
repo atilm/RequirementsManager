@@ -62,6 +62,7 @@ public:
     virtual int indexOf(const Requirement *item) const;
 
     static QString typeToString(Type type);
+    static Type stringToType(const QString &typeString);
 private:
     const unsigned int id;
 

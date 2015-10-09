@@ -2,6 +2,8 @@
 
 AttributeContext::AttributeContext()
 {
+    booleanTypeString = tr("Boolean");
+    textTypeString = tr("Text");
 }
 
 AttributeContext::~AttributeContext()
@@ -48,7 +50,15 @@ QVariant AttributeContext::data(const QModelIndex &index, int role) const
         return QVariant();
 }
 
-void AttributeContext::addAttribute(const QString &name, AttributeContext::DataType type)
+void AttributeContext::clear()
+{
+    int rows = rowCount();
+
+    for(int a=0;a<rows;a++)
+        removeAttribute(0);
+}
+
+void AttributeContext::addAttribute(const QString &name, DataType type)
 {
     Attribute a;
     a.name = name;
@@ -61,6 +71,13 @@ void AttributeContext::addAttribute(const QString &name, AttributeContext::DataT
     emit attributeAboutToBeInserted(attributes.size() - 1);
     emit newAttribute(attributes.size() - 1);
     emit attributeInserted();
+}
+
+void AttributeContext::addAttribute(const QString &name, const QString &typeString)
+{
+    DataType type = stringToDataType(typeString);
+
+    addAttribute(name, type);
 }
 
 void AttributeContext::removeAttribute(int row)
@@ -97,9 +114,21 @@ QString AttributeContext::typeString(AttributeContext::DataType type) const
 {
     switch(type){
     case BOOLEAN:
-        return tr("Boolean");
+        return booleanTypeString;
     case TEXT:
-        return tr("Text");
+        return textTypeString;
+    default:
+        return "";
     }
+}
+
+AttributeContext::DataType AttributeContext::stringToDataType(const QString &typeString)
+{
+    if(typeString == booleanTypeString)
+        return BOOLEAN;
+    else if(typeString == textTypeString)
+        return TEXT;
+    else
+        return INVALID;
 }
 

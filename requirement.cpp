@@ -160,6 +160,16 @@ QString Requirement::typeToString(Requirement::Type type)
     }
 }
 
+Requirement::Type Requirement::stringToType(const QString &typeString)
+{
+    if(typeString == "DesignRequirement")
+        return DesignRequirement;
+    else if(typeString == "FunctionalRequirement")
+        return FunctionalRequirement;
+    else
+        return UserRequirement;
+}
+
 void Requirement::assertValidIndex(int index)
 {
     if(index < 0 || index > children.size()-1)

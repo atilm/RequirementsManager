@@ -11,7 +11,8 @@ public:
 
     enum DataType{
         BOOLEAN,
-        TEXT
+        TEXT,
+        INVALID
     };
 
     struct Attribute{
@@ -27,7 +28,9 @@ public:
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
+    virtual void clear();
     virtual void addAttribute(const QString &name, DataType type);
+    virtual void addAttribute(const QString &name, const QString &typeString);
     virtual void removeAttribute(int row);
     virtual QString name(int index) const;
     virtual DataType type(int index) const;
@@ -43,7 +46,11 @@ signals:
     void attributeRemoved();
 
 private:
+    QString booleanTypeString;
+    QString textTypeString;
     QVector<Attribute> attributes;
+
+    DataType stringToDataType(const QString &typeString);
 };
 
 #endif // ATTRIBUTECONTEXT_H

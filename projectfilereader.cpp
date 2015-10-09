@@ -20,8 +20,10 @@ void ProjectFileReader::load(RequirementsModel *model, QFileAdapter *file)
 
     this->file = file;
     this->model = model;
+    this->attributeContext = model->getAttributeContext();
 
     readContents();
+
     this->file->close();
     this->model = NULL;
     this->file = NULL;
@@ -35,13 +37,11 @@ void ProjectFileReader::readContents()
         QXmlStreamReader::TokenType token = xml->readNext();
 
         if(token == QXmlStreamReader::StartElement){
-            if(xml->name() == "Requirement"){
-
-                model->appendChild(QModelIndex());
-                int rowIdx = model->rowCount() - 1;
-                QModelIndex newIdx = model->index(rowIdx, 0, QModelIndex());
-
-                parseRequirement(newIdx);
+            if(xml->name() == "AttributeDeclaration"){
+                parseAttributeDeclaration();
+            }
+            else if(xml->name() == "Requirement"){
+                parseRequirement(QModelIndex());
             }
             else
                 continue;
@@ -54,10 +54,30 @@ void ProjectFileReader::readContents()
     xml->clear();
 }
 
-void ProjectFileReader::parseRequirement(QModelIndex item)
+void ProjectFileReader::parseAttributeDeclaration()
 {
+    uint index = getAttribute("index").toUInt();
+
+    if(index != attributeContext->rowCount())
+        throw ParsingError(QObject::tr("Unexpected index in attribute declaration.").toStdString());
+
+    QString name = getAttribute("name");
+    QString typeString = getAttribute("type");
+
+    attributeContext->addAttribute(name, typeString);
+}
+
+void ProjectFileReader::parseRequirement(QModelIndex parent)
+{  
+    uint id = getAttribute("id").toUInt();
+    QString typeString = getAttribute("type");
+    Requirement::Type type = Requirement::stringToType(typeString);
     QString title = getAttribute("name");
-    model->setData(item, title);
+
+    model->appendChild(parent, title, type, id);
+
+    int rowIdx = model->rowCount(parent) - 1;
+    QModelIndex itemIdx = model->index(rowIdx, 0, parent);
 
     xml->readNext();
 
@@ -66,18 +86,13 @@ void ProjectFileReader::parseRequirement(QModelIndex item)
 
         if(xml->tokenType() == QXmlStreamReader::StartElement){
             if(xml->name() == "Requirement"){
-
-                model->appendChild(item);
-                int rowIdx = model->rowCount(item) - 1;
-                QModelIndex newIdx = model->index(rowIdx, 0, item);
-
-                parseRequirement(newIdx);
+                parseRequirement(itemIdx);
             }
             else if(xml->name() == "description"){
                 xml->readNext();
                 if(xml->isCDATA()){
                     QString characters = xml->text().toString();
-                    model->getDescription(item)->setHtml(characters);
+                    model->getDescription(itemIdx)->setHtml(characters);
                 }
             }
         }
