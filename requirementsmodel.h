@@ -39,12 +39,14 @@ public:
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
-    virtual void setType(const QModelIndex &index, Requirement::Type type);
 
     // functions needed for drag and drop
     Qt::DropActions supportedDropActions() const;
 
-    // specific functions
+    // requirement-specific functions
+    virtual uint getID(const QModelIndex &index);
+    virtual void setType(const QModelIndex &index, Requirement::Type type);
+    virtual Requirement::Type getType(const QModelIndex &index) const;
     virtual QModelIndex appendSibling(const QModelIndex &index);
     virtual QModelIndex appendChild(const QModelIndex &index);
     virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
@@ -53,8 +55,6 @@ public:
 
     virtual AttributeContext* getAttributeContext() const;
     virtual QTextDocument* getDescription(const QModelIndex &index);
-
-    virtual uint getID(const QModelIndex &index);
 
 signals:
     void columnsChanged();

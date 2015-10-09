@@ -22,9 +22,13 @@ private:
 
     void writeAttributeContext();
     void writeAttributeDeclaration(int index);
+    void writeRequirementSpecification();
     void writeChildrenOf(QModelIndex parent);
     void writeRequirement(int row, QModelIndex parent);
     void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
+
+    QString getAttributeValue(const QModelIndex &parent, int row, int attributeIndex);
+    QString checkStateToString(const QVariant &value);
 };
 
 #endif // PROJECTFILEWRITER_H

@@ -32,7 +32,7 @@ void ProjectFileWriter::save(RequirementsModel *model,
     xml->writeAttribute("version", "1.0");
 
     writeAttributeContext();
-    writeChildrenOf(QModelIndex());
+    writeRequirementSpecification();
 
     xml->writeEndElement(); // RequirementSpecification
     xml->writeEndDocument();
@@ -61,6 +61,13 @@ void ProjectFileWriter::writeAttributeDeclaration(int index)
     xml->writeEndElement(); // Attribute
 }
 
+void ProjectFileWriter::writeRequirementSpecification()
+{
+    xml->writeStartElement("RequirementSpecification");
+    writeChildrenOf(QModelIndex());
+    xml->writeEndElement();
+}
+
 void ProjectFileWriter::writeChildrenOf(QModelIndex parent)
 {
     int rowCount = model->rowCount(parent);
@@ -75,8 +82,12 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
 
     QModelIndex itemIdx = model->index(row, 0, parent);
     QString title = model->data(itemIdx).toString();
+    QString id = QString("%1").arg(model->getID(itemIdx));
+    QString type = Requirement::typeToString(model->getType(itemIdx));
     QTextDocument *description = model->getDescription(itemIdx);
 
+    xml->writeAttribute("id", id);
+    xml->writeAttribute("type", type);
     xml->writeAttribute("name", title);
 
     xml->writeStartElement("description");
@@ -93,10 +104,35 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
 
 void ProjectFileWriter::writeAttribute(const QModelIndex &parent, int row, int attributeIndex)
 {
-    QModelIndex itemIdx = model->index(row, attributeIndex+1, parent);
+    QString value = getAttributeValue(parent, row, attributeIndex);
+
     xml->writeStartElement("Attribute");
     xml->writeAttribute("index", QString("%1").arg(attributeIndex));
-    xml->writeCharacters(model->data(itemIdx).toString());
+    xml->writeAttribute("value", value);
     xml->writeEndElement();
+}
+
+QString ProjectFileWriter::getAttributeValue(const QModelIndex &parent, int row, int attributeIndex)
+{
+    QModelIndex itemIdx = model->index(row, attributeIndex+1, parent);
+
+    switch(attributeContext->type(attributeIndex)){
+    case AttributeContext::BOOLEAN:
+        return checkStateToString(model->data(itemIdx, Qt::CheckStateRole));
+    case AttributeContext::TEXT:
+        return model->data(itemIdx, Qt::DisplayRole).toString();
+    }
+}
+
+QString ProjectFileWriter::checkStateToString(const QVariant &value)
+{
+    switch(value.toInt()){
+    case Qt::Checked:
+        return "yes";
+    case Qt::Unchecked:
+        return "no";
+    default:
+        return "";
+    }
 }
 

@@ -157,6 +157,14 @@ void RequirementsModel::setType(const QModelIndex &index, Requirement::Type type
     asRequirement(index)->setType(type);
 }
 
+Requirement::Type RequirementsModel::getType(const QModelIndex &index) const
+{
+    if(!index.isValid())
+        throw InvalidIndexException();
+
+    return asRequirement(index)->getType();
+}
+
 Qt::DropActions RequirementsModel::supportedDropActions() const
 {
     return Qt::MoveAction;

@@ -146,6 +146,20 @@ int Requirement::indexOf(const Requirement *item) const
     return -1;
 }
 
+QString Requirement::typeToString(Requirement::Type type)
+{
+    switch(type){
+    case UserRequirement:
+        return "UserRequirement";
+    case FunctionalRequirement:
+        return "FunctionalRequirement";
+    case DesignRequirement:
+        return "DesignRequirement";
+    default:
+        return "";
+    }
+}
+
 void Requirement::assertValidIndex(int index)
 {
     if(index < 0 || index > children.size()-1)
