@@ -28,6 +28,12 @@ private:
     void readContents();
     void parseAttributeDeclaration();
     void parseRequirement(QModelIndex parent);
+    void parseDescription(QModelIndex itemIdx);
+    void parseRequirementAttribute(QModelIndex itemIdx);
+    void storeAttributeValue(const QModelIndex &itemIdx,
+                             int attributeIndex,
+                             const QString &valueString);
+    Qt::CheckState toCheckState(const QString &s);
     QString getAttribute(const QString &name);
 };
 

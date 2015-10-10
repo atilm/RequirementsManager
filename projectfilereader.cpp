@@ -89,16 +89,57 @@ void ProjectFileReader::parseRequirement(QModelIndex parent)
                 parseRequirement(itemIdx);
             }
             else if(xml->name() == "description"){
-                xml->readNext();
-                if(xml->isCDATA()){
-                    QString characters = xml->text().toString();
-                    model->getDescription(itemIdx)->setHtml(characters);
-                }
+                parseDescription(itemIdx);
+            }
+            else if(xml->name() == "Attribute"){
+                parseRequirementAttribute(itemIdx);
             }
         }
 
         xml->readNext();
     }
+}
+
+void ProjectFileReader::parseDescription(QModelIndex itemIdx)
+{
+    xml->readNext();
+    if(xml->isCDATA()){
+        QString characters = xml->text().toString();
+        model->getDescription(itemIdx)->setHtml(characters);
+    }
+}
+
+void ProjectFileReader::parseRequirementAttribute(QModelIndex itemIdx)
+{
+    int index = getAttribute("index").toInt();
+    QString valueString = getAttribute("value");
+
+    storeAttributeValue(itemIdx, index, valueString);
+}
+
+void ProjectFileReader::storeAttributeValue(const QModelIndex &itemIdx,
+                                            int attributeIndex,
+                                            const QString &valueString)
+{
+    QModelIndex attributeItemIndex = model->index(itemIdx.row(),
+                                                  attributeIndex+1,
+                                                  itemIdx.parent());
+
+    switch(attributeContext->type(attributeIndex)){
+    case AttributeContext::BOOLEAN:
+        model->setData(attributeItemIndex, toCheckState(valueString), Qt::CheckStateRole);
+        break;
+    case AttributeContext::TEXT:
+        model->setData(attributeItemIndex, valueString, Qt::EditRole);
+    }
+}
+
+Qt::CheckState ProjectFileReader::toCheckState(const QString &s)
+{
+    if(s == "yes")
+        return Qt::Checked;
+    else
+        return Qt::Unchecked;
 }
 
 QString ProjectFileReader::getAttribute(const QString &name)
