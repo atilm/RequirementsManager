@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+//! Used in tests for file state tracker
 class EventListener : public QObject
 {
     Q_OBJECT

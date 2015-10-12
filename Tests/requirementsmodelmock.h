@@ -7,7 +7,7 @@
 class RequirementsModelMock : public RequirementsModel {
  public:
 
-    RequirementsModelMock() : RequirementsModel(NULL, NULL) {}
+    RequirementsModelMock() : RequirementsModel(nullptr, nullptr, nullptr, nullptr, nullptr) {}
 
     MOCK_METHOD2(save, void (RequirementsModel *model, const QString &filePath));
     MOCK_METHOD0(clearModel, void ());

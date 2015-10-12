@@ -1,4 +1,5 @@
 #include "requirement.h"
+#include <QDebug>
 
 Requirement::Requirement(UniqueIDManager *idManager, AttributeContainer *attributes) :
     id(idManager->newUniqueID())

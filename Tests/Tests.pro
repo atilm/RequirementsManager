@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     randomdatagenerator.cpp \
     filestatetrackertests.cpp \
     eventlistener.cpp \
-    appsettingstests.cpp
+    appsettingstests.cpp \
+    mockattributecontainerfactory.cpp
 
 INCLUDEPATH += $$PWD/../
 
@@ -32,7 +33,11 @@ LIBS += $$PWD/../../build-RequirementsManager-Desktop-Release/uniqueidmanager.o 
         $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilewriter.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/appsettings.o \
         $$PWD/../../build-RequirementsManager-Desktop-Release/filestatetracker.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_filestatetracker.o
+        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_filestatetracker.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/attributecontainer.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_attributecontainer.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementtomodelmapper.o \
+        $$PWD/../../build-RequirementsManager-Desktop-Release/attributecontainerfactory.o
 
 
 unix:!macx: LIBS += -L$$PWD/../../../GMock/qt/ -lGMock
@@ -61,4 +66,6 @@ HEADERS += \
     appsettingsmock.h \
     randomdatagenerator.h \
     requirementsmodelmock.h \
-    eventlistener.h
+    eventlistener.h \
+    attributecontainermock.h \
+    mockattributecontainerfactory.h
