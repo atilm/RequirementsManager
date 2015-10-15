@@ -55,7 +55,7 @@
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <layout class="QVBoxLayout" name="riskVLayout">
           <item>
            <layout class="QHBoxLayout" name="riskHeadLayout">
@@ -102,7 +102,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <layout class="QVBoxLayout" name="preventiveActionVLayout">
           <item>
            <layout class="QHBoxLayout" name="preventiveActionHeadLayout">
@@ -150,7 +150,7 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <layout class="QVBoxLayout" name="riskDescVLayout">
          <item>
           <widget class="QLabel" name="label_3">

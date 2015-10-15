@@ -41,8 +41,13 @@ int main(int argc, char *argv[])
 
     AttributeEditor *attributeEditor = new AttributeEditor(attributeContext);
 
+    RiskDescriptionView *riskDescriptionView = new RiskDescriptionView();
+    RiskTableView *riskTableView = new RiskTableView();
+    PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
+
     MainWindow w(fileController, requirements, richText, fileState, msg, appSettings, attributeEditor);
     w.injectViews(requirementsView, descriptionView);
+    w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();
 
     return a.exec();

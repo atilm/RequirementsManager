@@ -32,7 +32,12 @@ SOURCES += main.cpp\
     attributeeditor.cpp \
     attributecontainer.cpp \
     attributecontainerfactory.cpp \
-    requirementtomodelmapper.cpp
+    requirementtomodelmapper.cpp \
+    risktableview.cpp \
+    preventiveactiontableview.cpp \
+    riskdescriptionview.cpp \
+    riskassessmenttable.cpp \
+    riskassessmentdialog.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -52,10 +57,17 @@ HEADERS  += mainwindow.h \
     attributeeditor.h \
     attributecontainer.h \
     attributecontainerfactory.h \
-    requirementtomodelmapper.h
+    requirementtomodelmapper.h \
+    risktableview.h \
+    preventiveactiontableview.h \
+    riskdescriptionview.h \
+    riskassessmenttable.h \
+    riskassessmentdialog.h
 
 FORMS    += mainwindow.ui \
-    attributeeditor.ui
+    attributeeditor.ui \
+    riskassessmenttable.ui \
+    riskassessmentdialog.ui
 
 RESOURCES += \
     resources.qrc

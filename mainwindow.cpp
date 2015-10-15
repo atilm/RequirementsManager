@@ -80,6 +80,31 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
 }
 
+void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
+                                 RiskTableView *riskTableView,
+                                 PreventiveActionTableView *preventiveActionTableView)
+{
+    int index;
+
+    this->riskDescriptionView = riskDescriptionView;
+    index = ui->riskDescVLayout->indexOf(ui->riskDescriptionView);
+    delete ui->riskDescriptionView;
+    ui->riskDescriptionView = riskDescriptionView;
+    ui->riskDescVLayout->insertWidget(index, riskDescriptionView);
+
+    this->riskTableView = riskTableView;
+    index = ui->riskVLayout->indexOf(ui->riskView);
+    delete ui->riskView;
+    ui->riskView = riskTableView;
+    ui->riskVLayout->insertWidget(index, riskTableView);
+
+    this->preventiveActionTableView = preventiveActionTableView;
+    index = ui->preventiveActionVLayout->indexOf(ui->preventiveActionView);
+    delete ui->preventiveActionView;
+    ui->preventiveActionView = preventiveActionTableView;
+    ui->preventiveActionVLayout->insertWidget(index, preventiveActionTableView);
+}
+
 void MainWindow::closeEvent(QCloseEvent *e)
 {
     fileController->askSaveUnsavedChanges();

@@ -11,6 +11,9 @@
 #include "qmessageboxprovider.h"
 #include "appsettings.h"
 #include "attributeeditor.h"
+#include "riskdescriptionview.h"
+#include "risktableview.h"
+#include "preventiveactiontableview.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +36,9 @@ public:
 
     void injectViews(RequirementsView *requirementsView,
                      DescriptionView *descriptionView);
+    void injectRiskViews(RiskDescriptionView *riskDescriptionView,
+                         RiskTableView *riskTableView,
+                         PreventiveActionTableView *preventiveActionTableView);
 
 private:
     QString applicationName;
@@ -46,6 +52,9 @@ private:
     QMessageBoxProvider *messageBox;
     AppSettings *settings;
     AttributeEditor *attributeDialog;
+    RiskDescriptionView *riskDescriptionView;
+    RiskTableView *riskTableView;
+    PreventiveActionTableView *preventiveActionTableView;
 
     void closeEvent(QCloseEvent *);
 

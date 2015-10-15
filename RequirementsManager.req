@@ -5,7 +5,7 @@
         <AttributeDeclaration index="1" name="Priority" type="Text"/>
     </AttributeContext>
     <RequirementSpecification>
-        <Requirement id="2" type="UserRequirement" name="Hierarchical structure">
+        <Requirement id="3" type="UserRequirement" name="Hierarchical structure">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -17,7 +17,7 @@ p, li { white-space: pre-wrap; }
 <li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">copying requirements</li></ul></body></html>]]></description>
             <Attribute index="0" value="no"/>
             <Attribute index="1" value=""/>
-            <Requirement id="3" type="FunctionalRequirement" name="Display to user">
+            <Requirement id="4" type="FunctionalRequirement" name="Display to user">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -26,7 +26,7 @@ p, li { white-space: pre-wrap; }
 <li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">It is possible to &quot;collapse nodes&quot; to make their sub-requirements invisible</li></ul></body></html>]]></description>
                 <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
-                <Requirement id="24" type="DesignRequirement" name="class RequirementsView">
+                <Requirement id="5" type="DesignRequirement" name="class RequirementsView">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -37,7 +37,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="1" value=""/>
                 </Requirement>
             </Requirement>
-            <Requirement id="4" type="UserRequirement" name="The structure is editable">
+            <Requirement id="6" type="UserRequirement" name="The structure is editable">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -45,7 +45,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The requirement tree structure can be edited by the user.</p></body></html>]]></description>
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
-                <Requirement id="30" type="FunctionalRequirement" name="Edit titles">
+                <Requirement id="7" type="FunctionalRequirement" name="Edit titles">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="yes"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="17" type="FunctionalRequirement" name="Adding as child">
+                <Requirement id="8" type="FunctionalRequirement" name="Adding as child">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -68,7 +68,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="yes"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="31" type="FunctionalRequirement" name="Adding as sibling">
+                <Requirement id="9" type="FunctionalRequirement" name="Adding as sibling">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -82,7 +82,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="yes"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="18" type="FunctionalRequirement" name="Removing">
+                <Requirement id="10" type="FunctionalRequirement" name="Removing">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
                     <Attribute index="0" value="yes"/>
                     <Attribute index="1" value=""/>
-                    <Requirement id="34" type="FunctionalRequirement" name="Saveguard question">
+                    <Requirement id="11" type="FunctionalRequirement" name="Saveguard question">
                         <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -106,7 +106,7 @@ p, li { white-space: pre-wrap; }
                         <Attribute index="1" value="2"/>
                     </Requirement>
                 </Requirement>
-                <Requirement id="19" type="FunctionalRequirement" name="Moving">
+                <Requirement id="12" type="FunctionalRequirement" name="Moving">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -115,7 +115,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="yes"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="32" type="FunctionalRequirement" name="Copying">
+                <Requirement id="13" type="FunctionalRequirement" name="Copying">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -126,7 +126,7 @@ p, li { white-space: pre-wrap; }
                 </Requirement>
             </Requirement>
         </Requirement>
-        <Requirement id="5" type="UserRequirement" name="Requirement types">
+        <Requirement id="14" type="UserRequirement" name="Requirement types">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -138,7 +138,7 @@ p, li { white-space: pre-wrap; }
 <li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Design Requirements</li></ul></body></html>]]></description>
             <Attribute index="0" value="yes"/>
             <Attribute index="1" value=""/>
-            <Requirement id="6" type="FunctionalRequirement" name="Display">
+            <Requirement id="15" type="FunctionalRequirement" name="Display">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -151,7 +151,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="7" type="FunctionalRequirement" name="Editing">
+            <Requirement id="16" type="FunctionalRequirement" name="Editing">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -163,7 +163,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="1" value=""/>
             </Requirement>
         </Requirement>
-        <Requirement id="8" type="UserRequirement" name="Rich text descriptions">
+        <Requirement id="17" type="UserRequirement" name="Rich text descriptions">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -171,7 +171,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">For each requirement a rich text description can be edited to specify its details.</p></body></html>]]></description>
             <Attribute index="0" value="no"/>
             <Attribute index="1" value=""/>
-            <Requirement id="25" type="FunctionalRequirement" name="Bold Text">
+            <Requirement id="18" type="FunctionalRequirement" name="Bold Text">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -183,7 +183,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="28" type="FunctionalRequirement" name="Lists">
+            <Requirement id="19" type="FunctionalRequirement" name="Lists">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -195,7 +195,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="26" type="FunctionalRequirement" name="Italic Text">
+            <Requirement id="20" type="FunctionalRequirement" name="Italic Text">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -207,7 +207,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="27" type="FunctionalRequirement" name="Code">
+            <Requirement id="21" type="FunctionalRequirement" name="Code">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -220,7 +220,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value="3"/>
             </Requirement>
-            <Requirement id="29" type="FunctionalRequirement" name="Images">
+            <Requirement id="22" type="FunctionalRequirement" name="Images">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -230,7 +230,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="1" value="3"/>
             </Requirement>
         </Requirement>
-        <Requirement id="9" type="UserRequirement" name="Saving and Loading of Projects">
+        <Requirement id="23" type="UserRequirement" name="Saving and Loading of Projects">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -238,7 +238,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">All information edited in the software can be saved to file and loaded again.</p></body></html>]]></description>
             <Attribute index="0" value="yes"/>
             <Attribute index="1" value="3"/>
-            <Requirement id="10" type="FunctionalRequirement" name="Display of unsaved changes">
+            <Requirement id="24" type="FunctionalRequirement" name="Display of unsaved changes">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -247,7 +247,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="37" type="FunctionalRequirement" name="Load">
+            <Requirement id="25" type="FunctionalRequirement" name="Load">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -256,7 +256,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="38" type="FunctionalRequirement" name="Save">
+            <Requirement id="26" type="FunctionalRequirement" name="Save">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -265,7 +265,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="39" type="FunctionalRequirement" name="Save As">
+            <Requirement id="27" type="FunctionalRequirement" name="Save As">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -274,7 +274,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="41" type="FunctionalRequirement" name="Storage format">
+            <Requirement id="28" type="FunctionalRequirement" name="Storage format">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -284,7 +284,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file.</p></body></html>]]></description>
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
-                <Requirement id="42" type="DesignRequirement" name="Requirement storage">
+                <Requirement id="29" type="DesignRequirement" name="Requirement storage">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -293,7 +293,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="no"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="43" type="DesignRequirement" name="Attribute storage">
+                <Requirement id="30" type="DesignRequirement" name="Attribute storage">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -302,7 +302,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="no"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="44" type="DesignRequirement" name="Richt Text storage">
+                <Requirement id="31" type="DesignRequirement" name="Richt Text storage">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -311,7 +311,7 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="no"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
-                <Requirement id="45" type="DesignRequirement" name="Image storage">
+                <Requirement id="32" type="DesignRequirement" name="Image storage">
                     <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -322,7 +322,7 @@ p, li { white-space: pre-wrap; }
                 </Requirement>
             </Requirement>
         </Requirement>
-        <Requirement id="11" type="UserRequirement" name="Exporting Reports">
+        <Requirement id="33" type="UserRequirement" name="Exporting Reports">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -334,9 +334,9 @@ p, li { white-space: pre-wrap; }
 <li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">OpenDocument</li></ul>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
             <Attribute index="0" value="no"/>
-            <Attribute index="1" value="3"/>
+            <Attribute index="1" value="2"/>
         </Requirement>
-        <Requirement id="12" type="UserRequirement" name="Digital Signatures">
+        <Requirement id="34" type="UserRequirement" name="Digital Signatures">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -345,7 +345,7 @@ p, li { white-space: pre-wrap; }
             <Attribute index="0" value="no"/>
             <Attribute index="1" value="1"/>
         </Requirement>
-        <Requirement id="13" type="UserRequirement" name="Attributes">
+        <Requirement id="35" type="UserRequirement" name="Attributes">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -367,7 +367,7 @@ p, li { white-space: pre-wrap; }
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
             <Attribute index="0" value="no"/>
             <Attribute index="1" value="3"/>
-            <Requirement id="35" type="FunctionalRequirement" name="Attribute Context Editor">
+            <Requirement id="36" type="FunctionalRequirement" name="Attribute Context Editor">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -376,7 +376,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="36" type="FunctionalRequirement" name="Display of Attributes">
+            <Requirement id="37" type="FunctionalRequirement" name="Display of Attributes">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -385,7 +385,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="46" type="FunctionalRequirement" name="Editing Requirments">
+            <Requirement id="38" type="FunctionalRequirement" name="Editing Attributes">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -395,16 +395,16 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="1" value=""/>
             </Requirement>
         </Requirement>
-        <Requirement id="14" type="UserRequirement" name="Links">
+        <Requirement id="39" type="UserRequirement" name="Links">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">For each project an arbitrary number of user-configurable &quot;requirement links&quot; can be used. Links can be used to specify relationships like &quot;requirement A affects / contradicts / ... requirements B, C, D, ...&quot;</p></body></html>]]></description>
             <Attribute index="0" value="no"/>
-            <Attribute index="1" value="2"/>
+            <Attribute index="1" value="3"/>
         </Requirement>
-        <Requirement id="15" type="UserRequirement" name="Risk Assessment">
+        <Requirement id="40" type="UserRequirement" name="Risk Assessment">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -419,7 +419,20 @@ p, li { white-space: pre-wrap; }
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
             <Attribute index="0" value="no"/>
             <Attribute index="1" value="3"/>
-            <Requirement id="50" type="FunctionalRequirement" name="Display">
+            <Requirement id="41" type="FunctionalRequirement" name="Display">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">When a requirement in the tree view is selected, the table view &quot;Risks&quot; is updated with the list of risks related to this requirement. Each entry in the &quot;Risks&quot; view consists of the following fields</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">When a risk in the list is selected, a detailed report of the risk is shown in the &quot;Risk / Action Description&quot; text view.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="42" type="FunctionalRequirement" name="Adding risks">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -428,7 +441,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="52" type="FunctionalRequirement" name="Adding risks">
+            <Requirement id="43" type="FunctionalRequirement" name="Assessing risks">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -437,7 +450,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="55" type="FunctionalRequirement" name="Assessing risks">
+            <Requirement id="44" type="FunctionalRequirement" name="Adding preventive actions">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -446,16 +459,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="0" value="no"/>
                 <Attribute index="1" value=""/>
             </Requirement>
-            <Requirement id="53" type="FunctionalRequirement" name="Adding preventive actions">
-                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
-<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
-                <Attribute index="1" value=""/>
-            </Requirement>
-            <Requirement id="54" type="FunctionalRequirement" name="Assessing preventive actions">
+            <Requirement id="45" type="FunctionalRequirement" name="Assessing preventive actions">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -465,7 +469,7 @@ p, li { white-space: pre-wrap; }
                 <Attribute index="1" value=""/>
             </Requirement>
         </Requirement>
-        <Requirement id="16" type="UserRequirement" name="Source Code Extraction">
+        <Requirement id="46" type="UserRequirement" name="Source Code Extraction">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
