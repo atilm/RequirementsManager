@@ -6,7 +6,7 @@
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
                        RichTextController *richText, FileStateTracker *fileState,
                        QMessageBoxProvider *messageBox, AppSettings *settings,
-                       AttributeEditor *attributeDialog,
+                       AttributeEditor *attributeDialog, RiskAssessmentDialog *riskAssessmentDialog,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -22,6 +22,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->fileController = fileController;
     this->requirements = requirements;
     this->attributeDialog = attributeDialog;
+    this->riskAssessmentDialog = riskAssessmentDialog;
 
     fileController->setModel(requirements);
 
@@ -32,6 +33,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
 
+    connect(ui->addRiskButton, SIGNAL(clicked()), riskAssessmentDialog, SLOT(show()));
     connect(ui->actionAttributes, SIGNAL(triggered()), this, SLOT(handleEditAttributes()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));

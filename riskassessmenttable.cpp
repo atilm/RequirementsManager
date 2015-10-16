@@ -6,6 +6,8 @@ RiskAssessmentTable::RiskAssessmentTable(QWidget *parent) :
     ui(new Ui::RiskAssessmentTable)
 {
     ui->setupUi(this);
+    setMinimumWidth(555);
+    setMinimumHeight(190);
 }
 
 RiskAssessmentTable::~RiskAssessmentTable()

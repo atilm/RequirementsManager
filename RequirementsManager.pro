@@ -37,7 +37,11 @@ SOURCES += main.cpp\
     preventiveactiontableview.cpp \
     riskdescriptionview.cpp \
     riskassessmenttable.cpp \
-    riskassessmentdialog.cpp
+    riskassessmentdialog.cpp \
+    riskassessmentmodel.cpp \
+    preventiveactionmodel.cpp \
+    riskassessment.cpp \
+    risk.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -62,7 +66,11 @@ HEADERS  += mainwindow.h \
     preventiveactiontableview.h \
     riskdescriptionview.h \
     riskassessmenttable.h \
-    riskassessmentdialog.h
+    riskassessmentdialog.h \
+    riskassessmentmodel.h \
+    preventiveactionmodel.h \
+    riskassessment.h \
+    risk.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

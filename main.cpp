@@ -45,7 +45,14 @@ int main(int argc, char *argv[])
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
 
-    MainWindow w(fileController, requirements, richText, fileState, msg, appSettings, attributeEditor);
+
+    RiskAssessmentDialog *riskDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
+                                                                new RiskAssessmentTable(),
+                                                                new RiskAssessmentTable());
+
+    MainWindow w(fileController, requirements, richText,
+                 fileState, msg, appSettings, attributeEditor,
+                 riskDialog);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();
