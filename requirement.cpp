@@ -81,6 +81,11 @@ QTextDocument *Requirement::getDescription()
     return description;
 }
 
+RiskAssessmentModel *Requirement::getRiskAssessment()
+{
+    return riskAssessment;
+}
+
 void Requirement::setParent(Requirement *parent)
 {
     this->parent = parent;

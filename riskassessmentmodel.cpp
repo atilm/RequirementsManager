@@ -52,22 +52,24 @@ QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-void RiskAssessmentModel::add(int beforeIndex)
+void RiskAssessmentModel::add(const QModelIndex &beforeIndex)
 {
-    if(beforeIndex < 0 || beforeIndex > assessments.count())
-        return;
+    int beforeRow = 0;
 
-    beginInsertRows(QModelIndex(), beforeIndex, beforeIndex);
-    assessments.insert(beforeIndex, factory->newAssessment());
+    if(beforeIndex.isValid())
+        beforeRow = beforeIndex.row();
+
+    beginInsertRows(QModelIndex(), beforeRow, beforeRow);
+    assessments.insert(beforeRow, factory->newAssessment());
     endInsertRows();
 }
 
-void RiskAssessmentModel::remove(int index)
+void RiskAssessmentModel::remove(const QModelIndex &index)
 {
-    if(index < 0 || index >= assessments.count())
+    if(!index.isValid())
         return;
 
-    beginRemoveRows(QModelIndex(), index, index);
-    assessments.remove(index);
+    beginRemoveRows(QModelIndex(), index.row(), index.row());
+    assessments.remove(index.row());
     endRemoveRows();
 }

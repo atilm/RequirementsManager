@@ -18,8 +18,8 @@ public:
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
-    virtual void add(int beforeIndex);
-    virtual void remove(int index);
+    virtual void add(const QModelIndex &beforeIndex);
+    virtual void remove(const QModelIndex &index);
 
 private:
     RiskAssessmentFactory *factory;

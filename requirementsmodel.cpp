@@ -301,6 +301,15 @@ QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
     return item->getDescription();
 }
 
+RiskAssessmentModel* RequirementsModel::getRiskAssessment(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw InvalidIndexException();
+
+    Requirement *item = asRequirement(index);
+    return item->getRiskAssessment();
+}
+
 uint RequirementsModel::getID(const QModelIndex &index)
 {
     if(!index.isValid())

@@ -50,6 +50,7 @@ public:
     virtual void setAttribute(int index, const QVariant &value);
 
     virtual QTextDocument *getDescription();
+    virtual RiskAssessmentModel* getRiskAssessment();
 
     virtual int getRow() const;
 

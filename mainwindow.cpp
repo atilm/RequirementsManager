@@ -33,7 +33,6 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
 
-    connect(ui->addRiskButton, SIGNAL(clicked()), riskAssessmentDialog, SLOT(show()));
     connect(ui->actionAttributes, SIGNAL(triggered()), this, SLOT(handleEditAttributes()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
@@ -105,6 +104,14 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
     delete ui->preventiveActionView;
     ui->preventiveActionView = preventiveActionTableView;
     ui->preventiveActionVLayout->insertWidget(index, preventiveActionTableView);
+
+    riskTableView->setRequirementsModel(requirements);
+    connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            riskTableView, SLOT(currentRequirementChanged(QModelIndex, QModelIndex)));
+    connect(ui->addRiskButton, SIGNAL(clicked()),
+            riskTableView, SLOT(insertBeforeCurrent()));
+    connect(ui->removeRiskButton, SIGNAL(clicked()),
+            riskTableView, SLOT(removeCurrent()));
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
