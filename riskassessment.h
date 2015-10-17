@@ -2,20 +2,23 @@
 #define RISKASSESSMENT_H
 
 #include <QString>
+#include "preventiveactionmodel.h"
 
 class RiskAssessment
 {
 public:
 
-    RiskAssessment();
+    RiskAssessment(PreventiveActionModel *preventiveActions);
     virtual ~RiskAssessment();
 
-    QString shortScenario() const;
-    QString initialRisk() const;
-    QString finalRisk() const;
+    virtual QString shortScenario() const;
+    virtual QString initialRisk() const;
+    virtual QString finalRisk() const;
+
+    virtual PreventiveActionModel* getPreventiveActions();
 
 private:
-
+    PreventiveActionModel *preventiveActions;
 };
 
 #endif // RISKASSESSMENT_H

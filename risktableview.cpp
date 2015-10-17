@@ -41,7 +41,7 @@ void RiskTableView::removeCurrent()
     RiskAssessmentModel *ra = riskAssessmentModel();
 
     if(ra)
-        riskAssessmentModel()->remove(selectionModel()->currentIndex());
+        ra->remove(selectionModel()->currentIndex());
 }
 
 RiskAssessmentModel* RiskTableView::riskAssessmentModel()

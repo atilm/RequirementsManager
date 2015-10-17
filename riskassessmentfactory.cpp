@@ -11,5 +11,5 @@ RiskAssessmentFactory::~RiskAssessmentFactory()
 
 RiskAssessment *RiskAssessmentFactory::newAssessment()
 {
-    return new RiskAssessment();
+    return new RiskAssessment(new PreventiveActionModel());
 }

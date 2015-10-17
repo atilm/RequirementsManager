@@ -1,12 +1,13 @@
 #include "riskassessment.h"
 
-RiskAssessment::RiskAssessment()
+RiskAssessment::RiskAssessment(PreventiveActionModel *preventiveActions)
 {
+    this->preventiveActions = preventiveActions;
 }
 
 RiskAssessment::~RiskAssessment()
 {
-
+    delete preventiveActions;
 }
 
 QString RiskAssessment::shortScenario() const
@@ -22,4 +23,9 @@ QString RiskAssessment::initialRisk() const
 QString RiskAssessment::finalRisk() const
 {
     return QString("Reasonable");
+}
+
+PreventiveActionModel *RiskAssessment::getPreventiveActions()
+{
+    return preventiveActions;
 }

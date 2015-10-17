@@ -1,4 +1,6 @@
 #include "riskassessmentmodel.h"
+#include <stdexcept>
+using namespace std;
 
 RiskAssessmentModel::RiskAssessmentModel(RiskAssessmentFactory *factory)
 {
@@ -72,4 +74,12 @@ void RiskAssessmentModel::remove(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     assessments.remove(index.row());
     endRemoveRows();
+}
+
+PreventiveActionModel *RiskAssessmentModel::getPreventiveActions(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw runtime_error("Invalid risk assessment index");
+
+    return assessments[index.row()]->getPreventiveActions();
 }

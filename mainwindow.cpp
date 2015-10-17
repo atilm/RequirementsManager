@@ -112,6 +112,15 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
             riskTableView, SLOT(insertBeforeCurrent()));
     connect(ui->removeRiskButton, SIGNAL(clicked()),
             riskTableView, SLOT(removeCurrent()));
+
+    preventiveActionTableView->setRequirementModel(requirements);
+    preventiveActionTableView->setRiskTableView(riskTableView);
+    connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            preventiveActionTableView, SLOT(currentRequirementChanged(QModelIndex,QModelIndex)));
+    connect(ui->addPreventiveActionButton, SIGNAL(clicked()),
+            preventiveActionTableView, SLOT(insertBeforeCurrent()));
+    connect(ui->removePreventiveActionButton, SIGNAL(clicked()),
+            preventiveActionTableView, SLOT(removeCurrent()));
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
