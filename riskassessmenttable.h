@@ -2,6 +2,7 @@
 #define RISKASSESSMENTTABLE_H
 
 #include <QWidget>
+#include "riskmodel.h"
 
 namespace Ui {
 class RiskAssessmentTable;
@@ -14,6 +15,8 @@ class RiskAssessmentTable : public QWidget
 public:
     explicit RiskAssessmentTable(QWidget *parent = 0);
     virtual ~RiskAssessmentTable();
+
+    virtual void setModel(RiskModel *model);
 
 private:
     Ui::RiskAssessmentTable *ui;

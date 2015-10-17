@@ -14,3 +14,8 @@ RiskAssessmentTable::~RiskAssessmentTable()
 {
     delete ui;
 }
+
+void RiskAssessmentTable::setModel(RiskModel *model)
+{
+    ui->riskView->setModel(model);
+}

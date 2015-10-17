@@ -4,6 +4,7 @@
 #include "uniqueidmanager.h"
 #include "requirement.h"
 #include "attributecontainerfactory.h"
+#include "riskassessmentfactory.h"
 
 class RequirementFactory
 {

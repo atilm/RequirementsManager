@@ -2,6 +2,7 @@
 #define RISKASSESSMENTDIALOG_H
 
 #include <QDialog>
+#include "riskmodel.h"
 #include "riskassessmenttable.h"
 #include "qplaintexteditadapter.h"
 

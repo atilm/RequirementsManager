@@ -14,7 +14,10 @@ RequirementFactory::~RequirementFactory()
 
 Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
+    RiskAssessmentModel *raModel = new RiskAssessmentModel(new RiskAssessmentFactory());
+
     Requirement *item = new Requirement(idManager,
+                                        raModel,
                                         attrContainerFactory->newContainer());
     item->setParent(parent);
     return item;
@@ -22,8 +25,12 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
 
 Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
+    RiskAssessmentModel *raModel = new RiskAssessmentModel(new RiskAssessmentFactory());
+
     Requirement *item = new Requirement(idManager,
-                                        attrContainerFactory->newContainer());
+                                        raModel,
+                                        attrContainerFactory->newContainer(),
+                                        proposedID);
     item->setParent(parent);
     return item;
 }

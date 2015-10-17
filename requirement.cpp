@@ -1,10 +1,12 @@
 #include "requirement.h"
 #include <QDebug>
 
-Requirement::Requirement(UniqueIDManager *idManager, AttributeContainer *attributes) :
+Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                         AttributeContainer *attributes) :
     id(idManager->newUniqueID())
 {
     this->attributes = attributes;
+    this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
 
@@ -13,12 +15,13 @@ Requirement::Requirement(UniqueIDManager *idManager, AttributeContainer *attribu
     description = new QTextDocument();
 }
 
-Requirement::Requirement(UniqueIDManager *idManager,
-                         uint proposedID,
-                         AttributeContainer *attributes) :
+Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                         AttributeContainer *attributes,
+                         uint proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
     this->attributes = attributes;
+    this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
 
@@ -31,6 +34,7 @@ Requirement::~Requirement()
 {
     idManager->removeID(id);
 
+    delete riskAssessment;
     delete attributes;
 
     for(int i=0;i<childCount();i++)
