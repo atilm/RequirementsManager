@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     riskassessment.cpp \
     riskmodel.cpp \
     riskassessmentfactory.cpp \
-    preventiveaction.cpp
+    preventiveaction.cpp \
+    riskassessmenteditcontroller.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -74,7 +75,8 @@ HEADERS  += mainwindow.h \
     riskassessment.h \
     riskmodel.h \
     riskassessmentfactory.h \
-    preventiveaction.h
+    preventiveaction.h \
+    riskassessmenteditcontroller.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

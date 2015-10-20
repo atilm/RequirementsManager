@@ -76,6 +76,14 @@ void RiskAssessmentModel::remove(const QModelIndex &index)
     endRemoveRows();
 }
 
+RiskAssessment *RiskAssessmentModel::getRiskAssessment(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw runtime_error("Invalid risk assessment index");
+
+    return assessments[index.row()];
+}
+
 PreventiveActionModel *RiskAssessmentModel::getPreventiveActions(const QModelIndex &index)
 {
     if(!index.isValid())
@@ -83,3 +91,4 @@ PreventiveActionModel *RiskAssessmentModel::getPreventiveActions(const QModelInd
 
     return assessments[index.row()]->getPreventiveActions();
 }
+

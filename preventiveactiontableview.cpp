@@ -1,6 +1,4 @@
 #include "preventiveactiontableview.h"
-#include <iostream>
-using namespace std;
 
 PreventiveActionTableView::PreventiveActionTableView(QWidget *parent) :
     QTableView(parent)
@@ -39,13 +37,11 @@ void PreventiveActionTableView::currentRequirementChanged(const QModelIndex &cur
 
 void PreventiveActionTableView::currentRiskChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    cout << "risk changed" << endl;
     if(risks){
         try{
             setModel(risks->getPreventiveActions(current));
         }
         catch(...){
-            cout << "exception" << endl;
         }
     }
 }

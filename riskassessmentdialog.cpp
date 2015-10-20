@@ -19,6 +19,17 @@ RiskAssessmentDialog::~RiskAssessmentDialog()
     delete ui;
 }
 
+void RiskAssessmentDialog::setModel(RiskAssessmentModel *model)
+{
+    this->model = model;
+}
+
+int RiskAssessmentDialog::exec(const QModelIndex &index)
+{
+    setCurrentIndex(index);
+    return QDialog::exec();
+}
+
 void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
                                          RiskAssessmentTable *initialRiskEdit,
                                          RiskAssessmentTable *finalRiskEdit)

@@ -4,15 +4,18 @@
 #include <QTableView>
 #include "requirementsmodel.h"
 #include "riskassessmentmodel.h"
+#include "riskassessmenteditcontroller.h"
 
 class RiskTableView : public QTableView
 {
     Q_OBJECT
 public:
-    explicit RiskTableView(QWidget *parent = 0);
+    explicit RiskTableView(RiskAssessmentEditController *editController,
+                           QWidget *parent = 0);
     virtual ~RiskTableView();
 
     virtual void setRequirementsModel(RequirementsModel *requirements);
+    virtual void setEditController(RiskAssessmentEditController *editController);
 
 signals:
 
@@ -23,6 +26,7 @@ public slots:
 
 private:
     RequirementsModel *requirements;
+    RiskAssessmentEditController *editController;
 
     RiskAssessmentModel* riskAssessmentModel();
 };
