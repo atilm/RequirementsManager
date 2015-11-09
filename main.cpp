@@ -42,17 +42,20 @@ int main(int argc, char *argv[])
     AttributeEditor *attributeEditor = new AttributeEditor(attributeContext);
 
     RiskDescriptionView *riskDescriptionView = new RiskDescriptionView();
+
+    RiskAssessmentDialog *raDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
+                                                                new RiskAssessmentTable(),
+                                                                new RiskAssessmentTable());
+
+    RiskAssessmentEditController *raEditController = new RiskAssessmentEditController(raDialog);
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
 
 
-    RiskAssessmentDialog *riskDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
-                                                                new RiskAssessmentTable(),
-                                                                new RiskAssessmentTable());
+
 
     MainWindow w(fileController, requirements, richText,
-                 fileState, msg, appSettings, attributeEditor,
-                 riskDialog);
+                 fileState, msg, appSettings, attributeEditor, raEditController);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

@@ -26,6 +26,7 @@ public:
 
 public slots:
     virtual int exec(const QModelIndex &index);
+    virtual void accept();
 
 private:
     Ui::RiskAssessmentDialog *ui;
@@ -33,6 +34,7 @@ private:
     RiskAssessmentTable *initialRiskEdit;
     RiskAssessmentTable *finalRiskEdit;
     RiskAssessmentModel *model;
+    RiskAssessment *currentRA;
 
     void injectWidgets(QPlainTextEditAdapter *scenarioEdit,
                        RiskAssessmentTable *initialRiskEdit,

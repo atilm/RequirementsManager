@@ -3,8 +3,8 @@
 RiskAssessmentEditController::RiskAssessmentEditController(RiskAssessmentDialog *dialog) :
     QObject(0)
 {
-    model = nullptr;
-    view = nullptr;
+    riskModel = nullptr;
+    riskView = nullptr;
     this->dialog = dialog;
 }
 
@@ -13,36 +13,67 @@ RiskAssessmentEditController::~RiskAssessmentEditController()
     delete dialog;
 }
 
-void RiskAssessmentEditController::setModel(RiskAssessmentModel *model)
+void RiskAssessmentEditController::setRequirementsModel(RequirementsModel *requirements)
 {
-    this->model = model;
+    this->reqModel = requirements;
+}
+
+void RiskAssessmentEditController::setRequirementsView(RequirementsView *reqView)
+{
+    this->reqView = reqView;
+    connect(reqView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(currentRequirementChanged(QModelIndex,QModelIndex)));
+}
+
+void RiskAssessmentEditController::setRiskModel(RiskAssessmentModel *model)
+{
+    this->riskModel = model;
     dialog->setModel(model);
 }
 
-void RiskAssessmentEditController::setView(RiskTableView *view)
+void RiskAssessmentEditController::setRiskView(RiskTableView *view)
 {
-    this->model = view;
+    this->riskView = view;
+    connect(view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editRiskAssessment(QModelIndex)));
+}
+
+void RiskAssessmentEditController::setAddRiskButton(QToolButton *addRiskButton)
+{
+    connect(addRiskButton, SIGNAL(clicked()), this, SLOT(insertBeforeCurrent()));
+}
+
+void RiskAssessmentEditController::setRemoveRiskButton(QToolButton *removeRiskButton)
+{
+    connect(removeRiskButton, SIGNAL(clicked()), this, SLOT(removeCurrent()));
+}
+
+void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    riskModel = reqModel->getRiskAssessment(current);
+    riskView->setModel(riskModel);
+    dialog->setModel(riskModel);
 }
 
 void RiskAssessmentEditController::insertBeforeCurrent()
 {
-    if(!model)
+    if(!riskModel)
         return;
 
-    QModelIndex newIndex = model->add(view->currentIndex());
-    dialog->exec(newIndex);
+//    QModelIndex newIndex = riskModel->add(riskView->currentIndex());
+//    dialog->exec(newIndex);
+    riskModel->add(riskView->currentIndex());
 }
 
 void RiskAssessmentEditController::removeCurrent()
 {
-    if(model)
-        model->remove(view->currentIndex());
+    if(riskModel)
+        riskModel->remove(riskView->currentIndex());
 }
 
-void RiskAssessmentEditController::editCurrent()
+void RiskAssessmentEditController::editRiskAssessment(const QModelIndex &index)
 {
-    if(!model)
+    if(!riskModel)
         return;
 
-    dialog->exec(view->currentIndex());
+    dialog->exec(index);
 }

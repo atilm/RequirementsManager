@@ -15,6 +15,7 @@
 #include "risktableview.h"
 #include "preventiveactiontableview.h"
 #include "riskassessmentdialog.h"
+#include "riskassessmenteditcontroller.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +33,7 @@ public:
                         QMessageBoxProvider *messageBox,
                         AppSettings *settings,
                         AttributeEditor *attributeDialog,
-                        RiskAssessmentDialog *riskAssessmentDialog,
+                        RiskAssessmentEditController *riskAssessmentEditController,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -56,8 +57,8 @@ private:
     AttributeEditor *attributeDialog;
     RiskDescriptionView *riskDescriptionView;
     RiskTableView *riskTableView;
+    RiskAssessmentEditController *riskAssessmentEditController;
     PreventiveActionTableView *preventiveActionTableView;
-    RiskAssessmentDialog *riskAssessmentDialog;
 
     void closeEvent(QCloseEvent *);
 

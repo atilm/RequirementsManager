@@ -8,6 +8,7 @@ RiskAssessmentDialog::RiskAssessmentDialog(QPlainTextEditAdapter *scenarioEdit,
     QDialog(parent),
     ui(new Ui::RiskAssessmentDialog)
 {
+    model = nullptr;
     ui->setupUi(this);
     setWindowTitle(tr("Risk Assessment"));
 
@@ -28,6 +29,12 @@ int RiskAssessmentDialog::exec(const QModelIndex &index)
 {
     setCurrentIndex(index);
     return QDialog::exec();
+}
+
+void RiskAssessmentDialog::accept()
+{
+    currentRA->setScenario(scenarioEdit->toPlainText());
+    QDialog::accept();
 }
 
 void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
@@ -64,4 +71,13 @@ void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
     RiskModel *model = new RiskModel();
     initialRiskEdit->setModel(model);
     finalRiskEdit->setModel(model);
+}
+
+void RiskAssessmentDialog::setCurrentIndex(const QModelIndex &index)
+{
+    if(!model)
+        return;
+
+    currentRA = model->getRiskAssessment(index);
+    scenarioEdit->setPlainText(currentRA->scenario());
 }

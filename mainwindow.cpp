@@ -6,7 +6,8 @@
 MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
                        RichTextController *richText, FileStateTracker *fileState,
                        QMessageBoxProvider *messageBox, AppSettings *settings,
-                       AttributeEditor *attributeDialog, RiskAssessmentDialog *riskAssessmentDialog,
+                       AttributeEditor *attributeDialog,
+                       RiskAssessmentEditController *riskAssessmentEditController,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -22,7 +23,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->fileController = fileController;
     this->requirements = requirements;
     this->attributeDialog = attributeDialog;
-    this->riskAssessmentDialog = riskAssessmentDialog;
+    this->riskAssessmentEditController = riskAssessmentEditController;
 
     fileController->setModel(requirements);
 
@@ -51,6 +52,7 @@ MainWindow::~MainWindow()
     delete messageBox;
     delete settings;
     delete attributeDialog;
+    delete riskAssessmentEditController;
     delete ui;
 }
 
@@ -105,13 +107,11 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
     ui->preventiveActionView = preventiveActionTableView;
     ui->preventiveActionVLayout->insertWidget(index, preventiveActionTableView);
 
-    riskTableView->setRequirementsModel(requirements);
-    connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            riskTableView, SLOT(currentRequirementChanged(QModelIndex, QModelIndex)));
-    connect(ui->addRiskButton, SIGNAL(clicked()),
-            riskTableView, SLOT(insertBeforeCurrent()));
-    connect(ui->removeRiskButton, SIGNAL(clicked()),
-            riskTableView, SLOT(removeCurrent()));
+    riskAssessmentEditController->setRequirementsModel(requirements);
+    riskAssessmentEditController->setRequirementsView(requirementsView);
+    riskAssessmentEditController->setRiskView(riskTableView);
+    riskAssessmentEditController->setAddRiskButton(ui->addRiskButton);
+    riskAssessmentEditController->setRemoveRiskButton(ui->removeRiskButton);
 
     preventiveActionTableView->setRequirementModel(requirements);
     preventiveActionTableView->setRiskTableView(riskTableView);
@@ -121,6 +121,7 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
             preventiveActionTableView, SLOT(insertBeforeCurrent()));
     connect(ui->removePreventiveActionButton, SIGNAL(clicked()),
             preventiveActionTableView, SLOT(removeCurrent()));
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)

@@ -1,26 +1,18 @@
 #include "risktableview.h"
 
-RiskTableView::RiskTableView(RiskAssessmentEditController *editController,
-                             QWidget *parent) :
+RiskTableView::RiskTableView(QWidget *parent) :
     QTableView(parent)
 {
     requirements = nullptr;
-    this->editController = editController;
 }
 
 RiskTableView::~RiskTableView()
 {
-    delete editController;
 }
 
 void RiskTableView::setRequirementsModel(RequirementsModel *requirements)
 {
     this->requirements = requirements;
-}
-
-void RiskTableView::setEditController(RiskAssessmentEditController *editController)
-{
-    this->editController = editController;
 }
 
 void RiskTableView::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
