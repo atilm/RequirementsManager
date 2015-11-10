@@ -47,11 +47,35 @@ void RiskAssessmentEditController::setRemoveRiskButton(QToolButton *removeRiskBu
     connect(removeRiskButton, SIGNAL(clicked()), this, SLOT(removeCurrent()));
 }
 
+void RiskAssessmentEditController::setActionView(PreventiveActionTableView *actionView)
+{
+    this->actionView = actionView;
+}
+
+void RiskAssessmentEditController::setAddActionButton(QToolButton *addActionButton)
+{
+    connect(addActionButton, SIGNAL(clicked()), this, SLOT(insertActionBeforeCurrent()));
+}
+
+void RiskAssessmentEditController::setRemoveActionButton(QToolButton *removeActionButton)
+{
+    connect(removeActionButton, SIGNAL(clicked()), this, SLOT(removeCurrentAction()));
+}
+
 void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     riskModel = reqModel->getRiskAssessment(current);
     riskView->setModel(riskModel);
     dialog->setModel(riskModel);
+    actionView->setModel(nullptr);
+    connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
+}
+
+void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    actionModel = riskModel->getPreventiveActions(current);
+    actionView->setModel(actionModel);
 }
 
 void RiskAssessmentEditController::insertBeforeCurrent()
@@ -68,6 +92,20 @@ void RiskAssessmentEditController::removeCurrent()
 {
     if(riskModel)
         riskModel->remove(riskView->currentIndex());
+}
+
+void RiskAssessmentEditController::insertActionBeforeCurrent()
+{
+    if(!actionModel)
+        return;
+
+    actionModel->add(actionView->currentIndex());
+}
+
+void RiskAssessmentEditController::removeCurrentAction()
+{
+    if(actionModel)
+        actionModel->remove(actionView->currentIndex());
 }
 
 void RiskAssessmentEditController::editRiskAssessment(const QModelIndex &index)

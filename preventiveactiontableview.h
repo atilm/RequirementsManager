@@ -14,23 +14,6 @@ public:
     explicit PreventiveActionTableView(QWidget *parent = 0);
     virtual ~PreventiveActionTableView();
 
-    virtual void setRequirementModel(RequirementsModel *requirements);
-    virtual void setRiskTableView(RiskTableView *riskView);
-
-signals:
-
-public slots:
-    virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous);
-    virtual void currentRiskChanged(const QModelIndex &current, const QModelIndex &previous);
-    virtual void insertBeforeCurrent();
-    virtual void removeCurrent();
-
-private:
-    RequirementsModel *requirements;
-    RiskAssessmentModel *risks;
-    RiskTableView *riskView;
-
-    PreventiveActionModel* preventiveActionModel();
 };
 
 #endif // PREVENTIVEACTIONTABLEVIEW_H
