@@ -15,12 +15,17 @@ public:
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
+    virtual void setCurrentRisk(const QModelIndex &index);
+    virtual QModelIndex getCurrentRisk() const;
+    virtual QString damageExtent() const;
+    virtual QString probability() const;
 
 signals:
 
 public slots:
 
 private:
+    QModelIndex currentRisk;
     QStringList probabilities;
     QStringList damageExtents;
     QStringList resultingRisks;

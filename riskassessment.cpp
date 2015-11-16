@@ -1,12 +1,18 @@
 #include "riskassessment.h"
 
-RiskAssessment::RiskAssessment(PreventiveActionModel *preventiveActions)
+RiskAssessment::RiskAssessment(RiskModel *initialRisk,
+                               RiskModel *finalRisk,
+                               PreventiveActionModel *preventiveActions)
 {
+    this->initial = initialRisk;
+    this->final = finalRisk;
     this->preventiveActions = preventiveActions;
 }
 
 RiskAssessment::~RiskAssessment()
 {
+    delete initial;
+    delete final;
     delete preventiveActions;
 }
 
@@ -30,14 +36,24 @@ void RiskAssessment::setScenario(const QString &s)
     scenarioText = s;
 }
 
-QString RiskAssessment::initialRisk() const
+QVariant RiskAssessment::initialRisk(int role) const
 {
-    return QString("Unacceptable");
+    return initial->data(initial->getCurrentRisk(), role);
 }
 
-QString RiskAssessment::finalRisk() const
+QVariant RiskAssessment::finalRisk(int role) const
 {
-    return QString("Reasonable");
+    return final->data(final->getCurrentRisk(), role);
+}
+
+RiskModel *RiskAssessment::initialRiskModel()
+{
+    return initial;
+}
+
+RiskModel *RiskAssessment::finalRiskModel()
+{
+    return final;
 }
 
 PreventiveActionModel *RiskAssessment::getPreventiveActions()

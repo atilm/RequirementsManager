@@ -2,6 +2,7 @@
 #define RISKASSESSMENTFACTORY_H
 
 #include "riskassessment.h"
+#include "riskmodel.h"
 
 class RiskAssessmentFactory
 {

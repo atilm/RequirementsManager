@@ -18,8 +18,12 @@ public:
 
     virtual void setModel(RiskModel *model);
 
+public slots:
+    virtual void handleIndexChanged(const QModelIndex &current, const QModelIndex &previous);
+
 private:
     Ui::RiskAssessmentTable *ui;
+    RiskModel *model;
 };
 
 #endif // RISKASSESSMENTTABLE_H

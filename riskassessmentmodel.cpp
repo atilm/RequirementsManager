@@ -38,16 +38,18 @@ int RiskAssessmentModel::columnCount(const QModelIndex &parent) const
 
 QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
 {
-    if(index.isValid() && role == Qt::DisplayRole){
+    if(index.isValid()){
         RiskAssessment *a = assessments[index.row()];
 
         switch(index.column()){
         case 0:
-            return a->shortScenario();
+            if(role == Qt::DisplayRole)
+                return a->shortScenario();
+            break;
         case 1:
-            return a->initialRisk();
+            return a->initialRisk(role);
         case 2:
-            return a->finalRisk();
+            return a->finalRisk(role);
         }
     }
 

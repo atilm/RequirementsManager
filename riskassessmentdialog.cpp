@@ -80,4 +80,6 @@ void RiskAssessmentDialog::setCurrentIndex(const QModelIndex &index)
 
     currentRA = model->getRiskAssessment(index);
     scenarioEdit->setPlainText(currentRA->scenario());
+    initialRiskEdit->setModel(currentRA->initialRiskModel());
+    finalRiskEdit->setModel(currentRA->finalRiskModel());
 }

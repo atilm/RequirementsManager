@@ -57,6 +57,26 @@ QVariant RiskModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+void RiskModel::setCurrentRisk(const QModelIndex &index)
+{
+    currentRisk = index;
+}
+
+QModelIndex RiskModel::getCurrentRisk() const
+{
+    return currentRisk;
+}
+
+QString RiskModel::damageExtent() const
+{
+    return damageExtents[currentRisk.row()];
+}
+
+QString RiskModel::probability() const
+{
+    return probabilities[currentRisk.column()];
+}
+
 int RiskModel::resultingRisk(int probability, int damageExtent) const
 {
     int riskIndex = (probability+1) * (damageExtent+1);
