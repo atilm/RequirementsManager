@@ -1,4 +1,6 @@
 #include "preventiveactionmodel.h"
+#include <exception>
+using namespace std;
 
 PreventiveActionModel::PreventiveActionModel(QObject *parent) :
     QAbstractTableModel(parent)
@@ -59,4 +61,12 @@ void PreventiveActionModel::remove(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     actions.remove(index.row());
     endRemoveRows();
+}
+
+PreventiveAction *PreventiveActionModel::getAction(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw runtime_error("Invalid preventive action index");
+
+    return actions[index.row()];
 }

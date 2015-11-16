@@ -47,7 +47,16 @@ int main(int argc, char *argv[])
                                                                 new RiskAssessmentTable(),
                                                                 new RiskAssessmentTable());
 
-    RiskAssessmentEditController *raEditController = new RiskAssessmentEditController(raDialog);
+    PreventiveActionDialog *paDialog = new PreventiveActionDialog();
+    paDialog->injectWidgets(new QLineEditAdapter(),
+                            new QLineEditAdapter(),
+                            new QLineEditAdapter(),
+                            new QPlainTextEditAdapter(),
+                            new QPlainTextEditAdapter(),
+                            new QPlainTextEditAdapter());
+
+    RiskAssessmentEditController *raEditController = new RiskAssessmentEditController(raDialog,
+                                                                                      paDialog);
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
 

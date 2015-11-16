@@ -1,16 +1,18 @@
 #include "riskassessmenteditcontroller.h"
 
-RiskAssessmentEditController::RiskAssessmentEditController(RiskAssessmentDialog *dialog) :
+RiskAssessmentEditController::RiskAssessmentEditController(RiskAssessmentDialog *dialog, PreventiveActionDialog *actionDialog) :
     QObject(0)
 {
     riskModel = nullptr;
     riskView = nullptr;
     this->dialog = dialog;
+    this->actionDialog = actionDialog;
 }
 
 RiskAssessmentEditController::~RiskAssessmentEditController()
 {
     delete dialog;
+    delete actionDialog;
 }
 
 void RiskAssessmentEditController::setRequirementsModel(RequirementsModel *requirements)
@@ -50,6 +52,7 @@ void RiskAssessmentEditController::setRemoveRiskButton(QToolButton *removeRiskBu
 void RiskAssessmentEditController::setActionView(PreventiveActionTableView *actionView)
 {
     this->actionView = actionView;
+    connect(actionView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editPreventiveAction(QModelIndex)));
 }
 
 void RiskAssessmentEditController::setAddActionButton(QToolButton *addActionButton)
@@ -76,6 +79,14 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
 {
     actionModel = riskModel->getPreventiveActions(current);
     actionView->setModel(actionModel);
+    actionDialog->setModel(actionModel);
+    connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(currentActionChanged(QModelIndex, QModelIndex)));
+}
+
+void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+
 }
 
 void RiskAssessmentEditController::insertBeforeCurrent()
@@ -114,4 +125,12 @@ void RiskAssessmentEditController::editRiskAssessment(const QModelIndex &index)
         return;
 
     dialog->exec(index);
+}
+
+void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index)
+{
+    if(!actionModel)
+        return;
+
+    actionDialog->exec(index);
 }

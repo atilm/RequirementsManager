@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     riskmodel.cpp \
     riskassessmentfactory.cpp \
     preventiveaction.cpp \
-    riskassessmenteditcontroller.cpp
+    riskassessmenteditcontroller.cpp \
+    preventiveactiondialog.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -76,12 +77,14 @@ HEADERS  += mainwindow.h \
     riskmodel.h \
     riskassessmentfactory.h \
     preventiveaction.h \
-    riskassessmenteditcontroller.h
+    riskassessmenteditcontroller.h \
+    preventiveactiondialog.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
     riskassessmenttable.ui \
-    riskassessmentdialog.ui
+    riskassessmentdialog.ui \
+    preventiveactiondialog.ui
 
 RESOURCES += \
     resources.qrc

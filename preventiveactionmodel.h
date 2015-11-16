@@ -19,6 +19,7 @@ public:
 
     virtual void add(const QModelIndex &beforeIndex);
     virtual void remove(const QModelIndex &index);
+    virtual PreventiveAction* getAction(const QModelIndex &index);
 signals:
 
 public slots:
