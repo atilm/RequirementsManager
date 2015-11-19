@@ -11,6 +11,7 @@
 #include "risktableview.h"
 #include "preventiveactiontableview.h"
 #include "preventiveactiondialog.h"
+#include "riskdescriptionview.h"
 
 class RiskAssessmentEditController : public QObject
 {
@@ -29,6 +30,7 @@ public:
     virtual void setActionView(PreventiveActionTableView *actionView);
     virtual void setAddActionButton(QToolButton *addActionButton);
     virtual void setRemoveActionButton(QToolButton *removeActionButton);
+    virtual void setDescriptionView(RiskDescriptionView *descriptionView);
 
 public slots:
     virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous);
@@ -50,6 +52,7 @@ private:
     PreventiveActionDialog *actionDialog;
     PreventiveActionModel *actionModel;
     PreventiveActionTableView *actionView;
+    RiskDescriptionView *descriptionView;
 
 };
 

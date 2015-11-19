@@ -18,12 +18,12 @@ public:
     void setAction(const QString &action);
     void setExpectedResult(const QString &expectedResult);
 
-    QString getTestCase();
-    QString getTestName();
-    QString getShortDescription();
-    QString getPreparation();
-    QString getAction();
-    QString getExpectedResult();
+    QString getTestCase() const;
+    QString getTestName() const;
+    QString getShortDescription() const;
+    QString getPreparation() const;
+    QString getAction() const;
+    QString getExpectedResult() const;
 
 private:
     QString testCase;

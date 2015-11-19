@@ -110,6 +110,7 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
     riskAssessmentEditController->setRequirementsModel(requirements);
     riskAssessmentEditController->setRequirementsView(requirementsView);
     riskAssessmentEditController->setRiskView(riskTableView);
+    riskAssessmentEditController->setDescriptionView(riskDescriptionView);
     riskAssessmentEditController->setAddRiskButton(ui->addRiskButton);
     riskAssessmentEditController->setRemoveRiskButton(ui->removeRiskButton);
     riskAssessmentEditController->setActionView(preventiveActionTableView);

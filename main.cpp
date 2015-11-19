@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
 
     AttributeEditor *attributeEditor = new AttributeEditor(attributeContext);
 
-    RiskDescriptionView *riskDescriptionView = new RiskDescriptionView();
+    HtmlGenerator *displayHtml = new HtmlGenerator(new HtmlTemplateFactory());
+    RiskDescriptionView *riskDescriptionView = new RiskDescriptionView(displayHtml);
 
     RiskAssessmentDialog *raDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
                                                                 new RiskAssessmentTable(),

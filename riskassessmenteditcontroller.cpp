@@ -65,6 +65,12 @@ void RiskAssessmentEditController::setRemoveActionButton(QToolButton *removeActi
     connect(removeActionButton, SIGNAL(clicked()), this, SLOT(removeCurrentAction()));
 }
 
+void RiskAssessmentEditController::setDescriptionView(RiskDescriptionView *descriptionView)
+{
+    this->descriptionView = descriptionView;
+    descriptionView->setReadOnly(true);
+}
+
 void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     riskModel = reqModel->getRiskAssessment(current);
@@ -86,7 +92,8 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
 
 void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-
+    PreventiveAction *a = actionModel->getAction(current);
+    descriptionView->displayAction(a);
 }
 
 void RiskAssessmentEditController::insertBeforeCurrent()
