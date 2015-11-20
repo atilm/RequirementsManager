@@ -1,7 +1,10 @@
 #include "preventiveaction.h"
+#include <QObject>
 
 PreventiveAction::PreventiveAction()
 {
+    testCase = "TestCase";
+    testName = "TestName";
 }
 
 PreventiveAction::~PreventiveAction()

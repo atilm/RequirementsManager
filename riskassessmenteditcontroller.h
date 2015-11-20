@@ -42,6 +42,8 @@ public slots:
     virtual void removeCurrentAction();
     virtual void editRiskAssessment(const QModelIndex &index);
     virtual void editPreventiveAction(const QModelIndex &index);
+    virtual void actionClicked(const QModelIndex &index);
+    virtual void riskClicked(const QModelIndex &index);
 
 private:
     RequirementsModel *reqModel;

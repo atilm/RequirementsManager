@@ -7,6 +7,7 @@ RiskAssessment::RiskAssessment(RiskModel *initialRisk,
     this->initial = initialRisk;
     this->final = finalRisk;
     this->preventiveActions = preventiveActions;
+    scenarioText = QObject::tr("new risk assessment");
 }
 
 RiskAssessment::~RiskAssessment()

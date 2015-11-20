@@ -79,6 +79,8 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
     actionView->setModel(nullptr);
     connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
+    connect(riskView, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(riskClicked(QModelIndex)));
 }
 
 void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current, const QModelIndex &previous)
@@ -86,8 +88,11 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
     actionModel = riskModel->getPreventiveActions(current);
     actionView->setModel(actionModel);
     actionDialog->setModel(actionModel);
+    descriptionView->displayRisk(riskModel->getRiskAssessment(current));
     connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             this, SLOT(currentActionChanged(QModelIndex, QModelIndex)));
+    connect(actionView, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(actionClicked(QModelIndex)));
 }
 
 void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)
@@ -132,6 +137,7 @@ void RiskAssessmentEditController::editRiskAssessment(const QModelIndex &index)
         return;
 
     dialog->exec(index);
+    descriptionView->displayRisk(riskModel->getRiskAssessment(riskView->currentIndex()));
 }
 
 void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index)
@@ -140,4 +146,17 @@ void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index
         return;
 
     actionDialog->exec(index);
+    descriptionView->displayAction(actionModel->getAction(actionView->currentIndex()));
+}
+
+void RiskAssessmentEditController::actionClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+        descriptionView->displayAction(actionModel->getAction(index));
+}
+
+void RiskAssessmentEditController::riskClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+        descriptionView->displayRisk(riskModel->getRiskAssessment(index));
 }

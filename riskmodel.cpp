@@ -4,6 +4,7 @@ RiskModel::RiskModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
     initTable();
+    currentRisk = index(3,3);
 }
 
 RiskModel::~RiskModel()
