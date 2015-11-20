@@ -97,6 +97,8 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
     for(int a=0;a < attributeContext->rowCount();a++)
         writeAttribute(parent, row, a);
 
+    writeRiskAssessmentModel(model->getRiskAssessment(itemIdx));
+
     writeChildrenOf(itemIdx);
 
     xml->writeEndElement(); // Requirement
@@ -109,6 +111,47 @@ void ProjectFileWriter::writeAttribute(const QModelIndex &parent, int row, int a
     xml->writeStartElement("Attribute");
     xml->writeAttribute("index", QString("%1").arg(attributeIndex));
     xml->writeAttribute("value", value);
+    xml->writeEndElement();
+}
+
+void ProjectFileWriter::writeRiskAssessmentModel(RiskAssessmentModel *risks)
+{
+    for(int r=0;r<risks->rowCount();r++)
+        writeRiskAssessment(risks->getRiskAssessment(risks->index(r,0)));
+}
+
+void ProjectFileWriter::writeRiskAssessment(RiskAssessment *risk)
+{
+    xml->writeStartElement("RiskAssessment");
+    xml->writeAttribute("initialProbability",
+                        intToString(risk->initialRiskModel()->getCurrentRisk().column()));
+    xml->writeAttribute("initialDamage",
+                        intToString(risk->initialRiskModel()->getCurrentRisk().row()));
+    xml->writeAttribute("finalProbability",
+                        intToString(risk->finalRiskModel()->getCurrentRisk().column()));
+    xml->writeAttribute("finalDamage",
+                        intToString(risk->finalRiskModel()->getCurrentRisk().row()));
+    xml->writeTextElement("scenario", risk->scenario());
+    writePreventiveActions(risk->getPreventiveActions());
+
+    xml->writeEndElement();
+}
+
+void ProjectFileWriter::writePreventiveActions(PreventiveActionModel *actions)
+{
+    for(int r=0;r<actions->rowCount();r++)
+        writePreventiveAction(actions->getAction(actions->index(r,0)));
+}
+
+void ProjectFileWriter::writePreventiveAction(PreventiveAction *action)
+{
+    xml->writeStartElement("Action");
+    xml->writeAttribute("case", action->getTestCase());
+    xml->writeAttribute("name", action->getTestName());
+    xml->writeTextElement("short", action->getShortDescription());
+    xml->writeTextElement("preparation", action->getPreparation());
+    xml->writeTextElement("action", action->getAction());
+    xml->writeTextElement("result", action->getExpectedResult());
     xml->writeEndElement();
 }
 
@@ -134,5 +177,10 @@ QString ProjectFileWriter::checkStateToString(const QVariant &value)
     default:
         return "";
     }
+}
+
+QString ProjectFileWriter::intToString(int n)
+{
+    return QString("%1").arg(n);
 }
 
