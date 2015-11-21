@@ -73,27 +73,37 @@ void RiskAssessmentEditController::setDescriptionView(RiskDescriptionView *descr
 
 void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    riskModel = reqModel->getRiskAssessment(current);
-    riskView->setModel(riskModel);
-    dialog->setModel(riskModel);
-    actionView->setModel(nullptr);
-    descriptionView->clearDisplay();
-    connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
-    connect(riskView, SIGNAL(clicked(QModelIndex)),
-            this, SLOT(riskClicked(QModelIndex)));
+    try{
+        riskModel = reqModel->getRiskAssessment(current);
+        riskView->setModel(riskModel);
+        dialog->setModel(riskModel);
+        actionView->setModel(nullptr);
+        descriptionView->clearDisplay();
+        connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
+        connect(riskView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(riskClicked(QModelIndex)));
+    }
+    catch(const InvalidIndexException &e){
+
+    }
 }
 
 void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    actionModel = riskModel->getPreventiveActions(current);
-    actionView->setModel(actionModel);
-    actionDialog->setModel(actionModel);
-    descriptionView->displayRisk(riskModel->getRiskAssessment(current));
-    connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            this, SLOT(currentActionChanged(QModelIndex, QModelIndex)));
-    connect(actionView, SIGNAL(clicked(QModelIndex)),
-            this, SLOT(actionClicked(QModelIndex)));
+    try{
+        actionModel = riskModel->getPreventiveActions(current);
+        actionView->setModel(actionModel);
+        actionDialog->setModel(actionModel);
+        descriptionView->displayRisk(riskModel->getRiskAssessment(current));
+        connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this, SLOT(currentActionChanged(QModelIndex, QModelIndex)));
+        connect(actionView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(actionClicked(QModelIndex)));
+    }
+    catch(const InvalidIndexException &e){
+
+    }
 }
 
 void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)

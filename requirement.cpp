@@ -182,6 +182,7 @@ Requirement::Type Requirement::stringToType(const QString &typeString)
 
 void Requirement::assertValidIndex(int index)
 {
-    if(index < 0 || index > children.size()-1)
+    if(index < 0 || index > children.size()-1){
         throw InvalidIndexException();
+    }
 }
