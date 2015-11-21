@@ -67,10 +67,6 @@ void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
     ui->finalRiskTable = finalRiskEdit;
     ui->gridLayout->addWidget(finalRiskEdit, row, col, rowSpan, colSpan);
     ui->finalRiskTable->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-
-    RiskModel *model = new RiskModel();
-    initialRiskEdit->setModel(model);
-    finalRiskEdit->setModel(model);
 }
 
 void RiskAssessmentDialog::setCurrentIndex(const QModelIndex &index)

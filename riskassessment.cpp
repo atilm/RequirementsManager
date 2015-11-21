@@ -1,9 +1,11 @@
 #include "riskassessment.h"
 
-RiskAssessment::RiskAssessment(RiskModel *initialRisk,
+RiskAssessment::RiskAssessment(FileStateTracker *fileState,
+                               RiskModel *initialRisk,
                                RiskModel *finalRisk,
                                PreventiveActionModel *preventiveActions)
 {
+    this->fileState = fileState;
     this->initial = initialRisk;
     this->final = finalRisk;
     this->preventiveActions = preventiveActions;
@@ -34,7 +36,10 @@ QString RiskAssessment::scenario() const
 
 void RiskAssessment::setScenario(const QString &s)
 {
-    scenarioText = s;
+    if(s != scenarioText){
+        scenarioText = s;
+        fileState->setChanged(true);
+    }
 }
 
 QVariant RiskAssessment::initialRisk(int role) const

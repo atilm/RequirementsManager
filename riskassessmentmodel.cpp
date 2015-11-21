@@ -2,8 +2,10 @@
 #include <stdexcept>
 using namespace std;
 
-RiskAssessmentModel::RiskAssessmentModel(RiskAssessmentFactory *factory)
+RiskAssessmentModel::RiskAssessmentModel(FileStateTracker *fileState,
+                                         RiskAssessmentFactory *factory)
 {
+    this->fileState = fileState;
     this->factory = factory;
 }
 
@@ -66,6 +68,7 @@ void RiskAssessmentModel::add(const QModelIndex &beforeIndex)
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
     assessments.insert(beforeRow, factory->newAssessment());
     endInsertRows();
+    fileState->setChanged(true);
 }
 
 void RiskAssessmentModel::remove(const QModelIndex &index)
@@ -76,6 +79,7 @@ void RiskAssessmentModel::remove(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     assessments.remove(index.row());
     endRemoveRows();
+    fileState->setChanged(true);
 }
 
 RiskAssessment *RiskAssessmentModel::getRiskAssessment(const QModelIndex &index)

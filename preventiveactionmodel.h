@@ -4,12 +4,13 @@
 #include <QAbstractTableModel>
 #include <QVector>
 #include "preventiveaction.h"
+#include "filestatetracker.h"
 
 class PreventiveActionModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit PreventiveActionModel(QObject *parent = 0);
+    explicit PreventiveActionModel(FileStateTracker *fileState, QObject *parent = 0);
     virtual ~PreventiveActionModel();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -25,6 +26,7 @@ signals:
 public slots:
 
 private:
+    FileStateTracker *fileState;
     QVector<PreventiveAction*> actions;
 };
 

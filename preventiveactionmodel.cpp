@@ -2,9 +2,11 @@
 #include <exception>
 using namespace std;
 
-PreventiveActionModel::PreventiveActionModel(QObject *parent) :
+PreventiveActionModel::PreventiveActionModel(FileStateTracker *fileState,
+                                             QObject *parent) :
     QAbstractTableModel(parent)
 {
+    this->fileState = fileState;
 }
 
 PreventiveActionModel::~PreventiveActionModel()
@@ -49,8 +51,9 @@ void PreventiveActionModel::add(const QModelIndex &beforeIndex)
         beforeRow = beforeIndex.row();
 
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
-    actions.insert(beforeRow, new PreventiveAction());
+    actions.insert(beforeRow, new PreventiveAction(fileState));
     endInsertRows();
+    fileState->setChanged(true);
 }
 
 void PreventiveActionModel::remove(const QModelIndex &index)
@@ -61,6 +64,7 @@ void PreventiveActionModel::remove(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     actions.remove(index.row());
     endRemoveRows();
+    fileState->setChanged(true);
 }
 
 PreventiveAction *PreventiveActionModel::getAction(const QModelIndex &index)

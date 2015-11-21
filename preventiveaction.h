@@ -2,11 +2,12 @@
 #define PREVENTIVEACTION_H
 
 #include <QString>
+#include "filestatetracker.h"
 
 class PreventiveAction
 {
 public:
-    PreventiveAction();
+    PreventiveAction(FileStateTracker *fileState);
     virtual ~PreventiveAction();
 
     virtual QString getShortAction() const;
@@ -26,6 +27,7 @@ public:
     QString getExpectedResult() const;
 
 private:
+    FileStateTracker *fileState;
     QString testCase;
     QString testName;
     QString shortDescription;

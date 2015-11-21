@@ -6,12 +6,14 @@
 #include "riskassessmentfactory.h"
 #include "riskassessment.h"
 #include "preventiveactionmodel.h"
+#include "filestatetracker.h"
 
 class RiskAssessmentModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    RiskAssessmentModel(RiskAssessmentFactory *factory);
+    RiskAssessmentModel(FileStateTracker *fileState,
+                        RiskAssessmentFactory *factory);
     virtual ~RiskAssessmentModel();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -27,6 +29,7 @@ public:
     virtual PreventiveActionModel* getPreventiveActions(const QModelIndex &index);
 
 private:
+    FileStateTracker *fileState;
     RiskAssessmentFactory *factory;
     QVector<RiskAssessment*> assessments;
 };

@@ -1,9 +1,10 @@
 #include "riskmodel.h"
 
-RiskModel::RiskModel(QObject *parent) :
+RiskModel::RiskModel(FileStateTracker *fileState, QObject *parent) :
     QAbstractTableModel(parent)
 {
     initTable();
+    this->fileState = fileState;
     currentRisk = index(3,3);
 }
 
@@ -60,7 +61,10 @@ QVariant RiskModel::data(const QModelIndex &index, int role) const
 
 void RiskModel::setCurrentRisk(const QModelIndex &index)
 {
-    currentRisk = index;
+    if(index != currentRisk){
+        currentRisk = index;
+        fileState->setChanged(true);
+    }
 }
 
 QModelIndex RiskModel::getCurrentRisk() const

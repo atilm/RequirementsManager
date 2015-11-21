@@ -1,7 +1,8 @@
 #include "riskassessmentfactory.h"
 
-RiskAssessmentFactory::RiskAssessmentFactory()
+RiskAssessmentFactory::RiskAssessmentFactory(FileStateTracker *fileState)
 {
+    this->fileState = fileState;
 }
 
 RiskAssessmentFactory::~RiskAssessmentFactory()
@@ -11,7 +12,8 @@ RiskAssessmentFactory::~RiskAssessmentFactory()
 
 RiskAssessment *RiskAssessmentFactory::newAssessment()
 {
-    return new RiskAssessment(new RiskModel(),
-                              new RiskModel(),
-                              new PreventiveActionModel());
+    return new RiskAssessment(fileState,
+                              new RiskModel(fileState),
+                              new RiskModel(fileState),
+                              new PreventiveActionModel(fileState));
 }

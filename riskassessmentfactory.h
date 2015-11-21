@@ -7,10 +7,13 @@
 class RiskAssessmentFactory
 {
 public:
-    RiskAssessmentFactory();
+    RiskAssessmentFactory(FileStateTracker *fileState);
     virtual ~RiskAssessmentFactory();
 
     RiskAssessment* newAssessment();
+
+private:
+    FileStateTracker *fileState;
 };
 
 #endif // RISKASSESSMENTFACTORY_H

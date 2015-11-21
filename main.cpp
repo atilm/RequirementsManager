@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
 
     UniqueIDManager *idManager = new UniqueIDManager();
-    RequirementFactory *factory = new RequirementFactory(idManager, attributes);
+    RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes);
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,
                                                             attributeContext, dataMapper);

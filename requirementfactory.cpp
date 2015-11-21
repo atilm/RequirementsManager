@@ -1,8 +1,10 @@
 #include "requirementfactory.h"
 
-RequirementFactory::RequirementFactory(UniqueIDManager *idManager,
+RequirementFactory::RequirementFactory(FileStateTracker *fileState,
+                                       UniqueIDManager *idManager,
                                        AttributeContainerFactory *attrContainerFactory)
 {
+    this->fileState = fileState;
     this->idManager = idManager;
     this->attrContainerFactory = attrContainerFactory;
 }
@@ -14,7 +16,7 @@ RequirementFactory::~RequirementFactory()
 
 Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(new RiskAssessmentFactory());
+    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
@@ -25,7 +27,7 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
 
 Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(new RiskAssessmentFactory());
+    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,

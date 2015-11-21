@@ -1,8 +1,9 @@
 #include "preventiveaction.h"
 #include <QObject>
 
-PreventiveAction::PreventiveAction()
+PreventiveAction::PreventiveAction(FileStateTracker *fileState)
 {
+    this->fileState = fileState;
     testCase = "TestCase";
     testName = "TestName";
 }
@@ -19,32 +20,50 @@ QString PreventiveAction::getShortAction() const
 
 void PreventiveAction::setTestCase(const QString &testCase)
 {
-    this->testCase = testCase;
+    if(testCase != this->testCase){
+        this->testCase = testCase;
+        fileState->setChanged(true);
+    }
 }
 
 void PreventiveAction::setTestName(const QString &testName)
 {
-    this->testName = testName;
+    if(testName != testName){
+        this->testName = testName;
+        fileState->setChanged(true);
+    }
 }
 
 void PreventiveAction::setShortDescription(const QString &description)
 {
-    this->shortDescription = description;
+    if(description != this->shortDescription){
+        this->shortDescription = description;
+        fileState->setChanged(true);
+    }
 }
 
 void PreventiveAction::setPreparation(const QString &preparation)
 {
-    this->preparation = preparation;
+    if(preparation != this->preparation){
+        this->preparation = preparation;
+        fileState->setChanged(true);
+    }
 }
 
 void PreventiveAction::setAction(const QString &action)
 {
-    this->action = action;
+    if(action != this->action){
+        this->action = action;
+        fileState->setChanged(true);
+    }
 }
 
 void PreventiveAction::setExpectedResult(const QString &expectedResult)
 {
-    this->expectedResult = expectedResult;
+    if(expectedResult != this->expectedResult){
+        this->expectedResult = expectedResult;
+        fileState->setChanged(true);
+    }
 }
 
 QString PreventiveAction::getTestCase() const

@@ -4,12 +4,14 @@
 #include <QString>
 #include "preventiveactionmodel.h"
 #include "riskmodel.h"
+#include "filestatetracker.h"
 
 class RiskAssessment
 {
 public:
 
-    RiskAssessment(RiskModel *initialRisk,
+    RiskAssessment(FileStateTracker *fileState,
+                   RiskModel *initialRisk,
                    RiskModel *finalRisk,
                    PreventiveActionModel *preventiveActions);
     virtual ~RiskAssessment();
@@ -25,6 +27,7 @@ public:
     virtual PreventiveActionModel* getPreventiveActions();
 
 private:
+    FileStateTracker *fileState;
     RiskModel *initial;
     RiskModel *final;
     QString scenarioText;
