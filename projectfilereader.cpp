@@ -143,6 +143,9 @@ void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
             if(xml->name() == "scenario"){
                 parseRiskScenario(ra);
             }
+            else if(xml->name() == "Action"){
+                parsePreventiveAction(ra);
+            }
         }
 
         xml->readNext();
@@ -155,6 +158,36 @@ void ProjectFileReader::parseRiskScenario(RiskAssessment *ra)
     if(xml->isCharacters()){
         QString characters = xml->text().toString();
         ra->setScenario(characters);
+    }
+}
+
+void ProjectFileReader::parsePreventiveAction(RiskAssessment *ra)
+{
+    PreventiveActionModel *actionModel = ra->getPreventiveActions();
+    actionModel->add(actionModel->index(actionModel->rowCount(), 0));
+    PreventiveAction *action = actionModel->getAction(
+                actionModel->index(actionModel->rowCount()-1, 0));
+
+    action->setTestCase(getAttribute("case"));
+    action->setTestName(getAttribute("name"));
+
+    xml->readNext();
+
+    while(!(xml->tokenType() == QXmlStreamReader::EndElement &&
+            xml->name() == "Action")){
+
+        if(xml->tokenType() == QXmlStreamReader::StartElement){
+            if(xml->name() == "short")
+                action->setShortDescription(parseCharacters());
+            else if(xml->name() == "preparation")
+                action->setPreparation(parseCharacters());
+            else if(xml->name() == "action")
+                action->setAction(parseCharacters());
+            else if(xml->name() == "result")
+                action->setExpectedResult(parseCharacters());
+        }
+
+        xml->readNext();
     }
 }
 
@@ -195,4 +228,13 @@ QString ProjectFileReader::getAttribute(const QString &name)
         s = "";
 
     return s;
+}
+
+QString ProjectFileReader::parseCharacters()
+{
+    xml->readNext();
+    if(xml->isCharacters())
+        return xml->text().toString();
+    else
+        return QString();
 }

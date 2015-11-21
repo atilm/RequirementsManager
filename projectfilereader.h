@@ -32,11 +32,13 @@ private:
     void parseRequirementAttribute(QModelIndex itemIdx);
     void parseRiskAssessment(QModelIndex itemIdx);
     void parseRiskScenario(RiskAssessment *ra);
+    void parsePreventiveAction(RiskAssessment *ra);
     void storeAttributeValue(const QModelIndex &itemIdx,
                              int attributeIndex,
                              const QString &valueString);
     Qt::CheckState toCheckState(const QString &s);
     QString getAttribute(const QString &name);
+    QString parseCharacters();
 };
 
 #endif // PROJECTFILEREADER_H

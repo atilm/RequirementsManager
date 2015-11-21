@@ -17,6 +17,7 @@ public:
 
     virtual void displayAction(PreventiveAction *action);
     virtual void displayRisk(RiskAssessment *risk);
+    virtual void clearDisplay();
 
 signals:
 

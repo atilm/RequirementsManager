@@ -77,6 +77,7 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
     riskView->setModel(riskModel);
     dialog->setModel(riskModel);
     actionView->setModel(nullptr);
+    descriptionView->clearDisplay();
     connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
     connect(riskView, SIGNAL(clicked(QModelIndex)),

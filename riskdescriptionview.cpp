@@ -25,3 +25,8 @@ void RiskDescriptionView::displayRisk(RiskAssessment *risk)
 {
     document()->setHtml(html->toHtml(*risk));
 }
+
+void RiskDescriptionView::clearDisplay()
+{
+    document()->clear();
+}
