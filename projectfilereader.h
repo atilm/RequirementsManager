@@ -30,6 +30,8 @@ private:
     void parseRequirement(QModelIndex parent);
     void parseDescription(QModelIndex itemIdx);
     void parseRequirementAttribute(QModelIndex itemIdx);
+    void parseRiskAssessment(QModelIndex itemIdx);
+    void parseRiskScenario(RiskAssessment *ra);
     void storeAttributeValue(const QModelIndex &itemIdx,
                              int attributeIndex,
                              const QString &valueString);

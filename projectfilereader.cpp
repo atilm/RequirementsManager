@@ -94,6 +94,9 @@ void ProjectFileReader::parseRequirement(QModelIndex parent)
             else if(xml->name() == "Attribute"){
                 parseRequirementAttribute(itemIdx);
             }
+            else if(xml->name() == "RiskAssessment"){
+                parseRiskAssessment(itemIdx);
+            }
         }
 
         xml->readNext();
@@ -115,6 +118,44 @@ void ProjectFileReader::parseRequirementAttribute(QModelIndex itemIdx)
     QString valueString = getAttribute("value");
 
     storeAttributeValue(itemIdx, index, valueString);
+}
+
+void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
+{
+    RiskAssessmentModel *riskModel = model->getRiskAssessment(itemIdx);
+    riskModel->add(riskModel->index(riskModel->rowCount(),0));
+    RiskAssessment *ra = riskModel->getRiskAssessment(riskModel->index(riskModel->rowCount()-1, 0));
+
+    int initialProbability = getAttribute("initialProbability").toInt();
+    int initialDamage = getAttribute("initialDamage").toInt();
+    ra->initialRiskModel()->setCurrentRisk(ra->initialRiskModel()->index(initialDamage, initialProbability));
+
+    int finalProbability = getAttribute("finalProbability").toInt();
+    int finalDamage = getAttribute("finalDamage").toInt();
+    ra->finalRiskModel()->setCurrentRisk(ra->finalRiskModel()->index(finalDamage, finalProbability));
+
+    xml->readNext();
+
+    while(!(xml->tokenType() == QXmlStreamReader::EndElement &&
+            xml->name() == "RiskAssessment")){
+
+        if(xml->tokenType() == QXmlStreamReader::StartElement){
+            if(xml->name() == "scenario"){
+                parseRiskScenario(ra);
+            }
+        }
+
+        xml->readNext();
+    }
+}
+
+void ProjectFileReader::parseRiskScenario(RiskAssessment *ra)
+{
+    xml->readNext();
+    if(xml->isCharacters()){
+        QString characters = xml->text().toString();
+        ra->setScenario(characters);
+    }
 }
 
 void ProjectFileReader::storeAttributeValue(const QModelIndex &itemIdx,
