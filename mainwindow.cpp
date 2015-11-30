@@ -8,6 +8,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
+                       LinkTypeEditor *linkTypeEditor,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,6 +25,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->requirements = requirements;
     this->attributeDialog = attributeDialog;
     this->riskAssessmentEditController = riskAssessmentEditController;
+    this->linkTypeEditor = linkTypeEditor;
 
     fileController->setModel(requirements);
 
@@ -34,7 +36,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
 
-    connect(ui->actionAttributes, SIGNAL(triggered()), this, SLOT(handleEditAttributes()));
+    connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));
+    connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
@@ -53,6 +56,7 @@ MainWindow::~MainWindow()
     delete settings;
     delete attributeDialog;
     delete riskAssessmentEditController;
+    delete linkTypeEditor;
     delete ui;
 }
 
@@ -139,8 +143,4 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
     setWindowTitle(windowTitle);
 }
 
-void MainWindow::handleEditAttributes()
-{
-    attributeDialog->exec();
-}
 

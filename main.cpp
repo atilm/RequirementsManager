@@ -61,11 +61,12 @@ int main(int argc, char *argv[])
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
 
-
+    LinkTypeEditor *linkTypeEditor = new LinkTypeEditor();
 
 
     MainWindow w(fileController, requirements, richText,
-                 fileState, msg, appSettings, attributeEditor, raEditController);
+                 fileState, msg, appSettings, attributeEditor, raEditController,
+                 linkTypeEditor);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

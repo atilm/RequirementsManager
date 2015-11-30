@@ -365,15 +365,44 @@ p, li { white-space: pre-wrap; }
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-            <Attribute index="0" value="no"/>
+            <Attribute index="0" value="yes"/>
             <Attribute index="1" value="3"/>
+            <Requirement id="54" type="DesignRequirement" name="Attribute Context">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">There's one shared instance of class AttributeContext. It store's which attributes exist and passes information about changes to all requirements.</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The AttributContext can be edited in a dedicated dialog.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="55" type="DesignRequirement" name="Attribute Container">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Every requirement contains an object of class AttributeContainer. AttributeContainer stores a pointer to the AttributContext instance and a list of concrete attributes for the parent requirement.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="56" type="DesignRequirement" name="RequirementToModelMapper">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The class RequirmentToModelMapper returns attributes for the DisplayRole of Columns greater 0.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
             <Requirement id="36" type="FunctionalRequirement" name="Attribute Context Editor">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head><meta name="qrichtext" content="1" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="37" type="FunctionalRequirement" name="Display of Attributes">
@@ -382,7 +411,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="38" type="FunctionalRequirement" name="Editing Attributes">
@@ -391,8 +420,17 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
+                <Requirement id="59" type="DesignRequirement" name="class AttributeEditor">
+                    <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
+                    <Attribute index="0" value="no"/>
+                    <Attribute index="1" value=""/>
+                </Requirement>
             </Requirement>
         </Requirement>
         <Requirement id="39" type="UserRequirement" name="Links">
@@ -403,6 +441,85 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">For each project an arbitrary number of user-configurable &quot;requirement links&quot; can be used. Links can be used to specify relationships like &quot;requirement A affects / contradicts / ... requirements B, C, D, ...&quot;</p></body></html>]]></description>
             <Attribute index="0" value="no"/>
             <Attribute index="1" value="3"/>
+            <Requirement id="57" type="DesignRequirement" name="class LinkContext">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">There's one shared instance of class LinkContext. It store's which links exist and passes information about changes to all LinkContainers (one in each requirement).</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Link Context inherites from QAbstractTableModel.</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The AttributContext can be edited in a dedicated dialog.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="58" type="DesignRequirement" name="class LinkContainer">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="49" type="FunctionalRequirement" name="Configuration Dialog">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"><li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Via the menu bar entry &quot;Edit&quot; a configuration dialog for the available links can be opened.</li>
+<li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The dialog shows the list of defined link types (e.g. &quot;affects&quot;, &quot;contradicts&quot;, etc).</li>
+<li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Link types can be added, renamed and deleted.</li></ul></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="48" type="FunctionalRequirement" name="Display">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"><li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The links for the selected requirement are shown in a tree view at the right border of the main window.</li>
+<li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The uppermost level of the tree structure contains the link types. The link types' children are the actual links of the selected requirment.</li></ul></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="50" type="FunctionalRequirement" name="Adding Links">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">To add links, the user switches the application into <span style=" font-style:italic;">linking mode </span>by activating a toggle button. In linking mode, double click on a requirement entry adds the requirement to the currently selected link type.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+                <Requirement id="52" type="DesignRequirement" name="Checkable Tool Button">
+                    <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-style:italic;">Linking mode</span> is visualised by using a <span style=" font-style:italic;">checkable QToolButton</span> with a plus sign. As long as the tool button is checked, linking mode is active.</p></body></html>]]></description>
+                    <Attribute index="0" value="no"/>
+                    <Attribute index="1" value=""/>
+                </Requirement>
+            </Requirement>
+            <Requirement id="51" type="FunctionalRequirement" name="Removing links">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Links can be removed by selecting them and either clicking a remove button (minus sign) or pressing <span style=" font-style:italic;">delete</span>.</p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+                <Requirement id="53" type="DesignRequirement" name="Tool Button">
+                    <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">When a tool button is clicked, the currently selected link is deleted.</p></body></html>]]></description>
+                    <Attribute index="0" value="no"/>
+                    <Attribute index="1" value=""/>
+                </Requirement>
+            </Requirement>
         </Requirement>
         <Requirement id="40" type="UserRequirement" name="Risk Assessment">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
@@ -417,7 +534,7 @@ p, li { white-space: pre-wrap; }
 <li style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-            <Attribute index="0" value="no"/>
+            <Attribute index="0" value="yes"/>
             <Attribute index="1" value="3"/>
             <Requirement id="41" type="FunctionalRequirement" name="Display">
                 <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
@@ -429,7 +546,7 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk</p>
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">When a risk in the list is selected, a detailed report of the risk is shown in the &quot;Risk / Action Description&quot; text view.</p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="42" type="FunctionalRequirement" name="Adding risks">
@@ -438,7 +555,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="43" type="FunctionalRequirement" name="Assessing risks">
@@ -447,7 +564,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="44" type="FunctionalRequirement" name="Adding preventive actions">
@@ -456,7 +573,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
             <Requirement id="45" type="FunctionalRequirement" name="Assessing preventive actions">
@@ -465,7 +582,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
 <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></description>
-                <Attribute index="0" value="no"/>
+                <Attribute index="0" value="yes"/>
                 <Attribute index="1" value=""/>
             </Requirement>
         </Requirement>

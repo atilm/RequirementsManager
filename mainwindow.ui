@@ -22,152 +22,228 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QSplitter" name="splitter_2">
+     <widget class="QSplitter" name="splitter_3">
       <property name="orientation">
-       <enum>Qt::Vertical</enum>
+       <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QSplitter" name="splitter">
+      <widget class="QSplitter" name="splitter_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Vertical</enum>
        </property>
-       <widget class="QTreeView" name="treeView">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
+        <widget class="QTreeView" name="treeView">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="textEdit">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+        </widget>
        </widget>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
+       <widget class="QSplitter" name="riskLayoutHSplitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
+        <widget class="QSplitter" name="riskLayoutVSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="riskVLayout">
+           <item>
+            <layout class="QHBoxLayout" name="riskHeadLayout">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Risks</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="addRiskButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="removeRiskButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="riskView">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QVBoxLayout" name="preventiveActionVLayout">
+           <item>
+            <layout class="QHBoxLayout" name="preventiveActionHeadLayout">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Preventive Actions</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="addPreventiveActionButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="removePreventiveActionButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="preventiveActionView">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <layout class="QVBoxLayout" name="riskDescVLayout">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Risk / Action Description</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="riskDescriptionView">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
-      <widget class="QSplitter" name="riskLayoutHSplitter">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QToolBox" name="linkViewContainer">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
        </property>
-       <widget class="QSplitter" name="riskLayoutVSplitter">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>335</width>
+          <height>683</height>
+         </rect>
         </property>
-        <widget class="QWidget" name="layoutWidget">
-         <layout class="QVBoxLayout" name="riskVLayout">
-          <item>
-           <layout class="QHBoxLayout" name="riskHeadLayout">
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Risks</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="addRiskButton">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resources.qrc">
-                <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="removeRiskButton">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resources.qrc">
-                <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QTableView" name="riskView">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="layoutWidget">
-         <layout class="QVBoxLayout" name="preventiveActionVLayout">
-          <item>
-           <layout class="QHBoxLayout" name="preventiveActionHeadLayout">
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Preventive Actions</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="addPreventiveActionButton">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resources.qrc">
-                <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QToolButton" name="removePreventiveActionButton">
-              <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset resource="resources.qrc">
-                <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QTableView" name="preventiveActionView">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <layout class="QVBoxLayout" name="riskDescVLayout">
+        <attribute name="label">
+         <string>Linked Requirements</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Risk / Action Description</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QToolButton" name="addLinksButton">
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/Resources/list-add-3.ico</normaloff>:/icons/Resources/list-add-3.ico</iconset>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="removeLinkButton">
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/Resources/list-remove-5.ico</normaloff>:/icons/Resources/list-remove-5.ico</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QTextEdit" name="riskDescriptionView">
-           <property name="font">
-            <font>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-          </widget>
+          <widget class="QTreeView" name="treeView_2"/>
          </item>
         </layout>
        </widget>
@@ -201,6 +277,7 @@
     <addaction name="actionAddChild"/>
     <addaction name="actionRemoveRequirement"/>
     <addaction name="actionAttributes"/>
+    <addaction name="actionLinkTypes"/>
     <addaction name="actionProjectSettings"/>
    </widget>
    <addaction name="menuFile"/>
@@ -371,6 +448,14 @@
   <action name="actionAttributes">
    <property name="text">
     <string>Attributes...</string>
+   </property>
+  </action>
+  <action name="actionLinkTypes">
+   <property name="text">
+    <string>Link Types ...</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit Link Types</string>
    </property>
   </action>
  </widget>

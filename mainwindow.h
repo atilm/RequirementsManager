@@ -16,6 +16,7 @@
 #include "preventiveactiontableview.h"
 #include "riskassessmentdialog.h"
 #include "riskassessmenteditcontroller.h"
+#include "linkeditor.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,7 @@ public:
                         AppSettings *settings,
                         AttributeEditor *attributeDialog,
                         RiskAssessmentEditController *riskAssessmentEditController,
+                        LinkTypeEditor *linkTypeEditor,
                         QWidget *parent = 0);
     ~MainWindow();
 
@@ -59,13 +61,13 @@ private:
     RiskTableView *riskTableView;
     RiskAssessmentEditController *riskAssessmentEditController;
     PreventiveActionTableView *preventiveActionTableView;
+    LinkTypeEditor *linkTypeEditor;
 
     void closeEvent(QCloseEvent *);
 
 private slots:
     void handleFilePathChanged(const QString &fPath);
     void handleChangedStateChanged(bool unsavedChanges);
-    void handleEditAttributes();
 };
 
 #endif // MAINWINDOW_H

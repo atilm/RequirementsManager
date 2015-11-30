@@ -48,7 +48,8 @@ SOURCES += main.cpp\
     preventiveactiondialog.cpp \
     htmlgenerator.cpp \
     htmltemplate.cpp \
-    htmltemplatefactory.cpp
+    htmltemplatefactory.cpp \
+    linkeditor.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -84,13 +85,15 @@ HEADERS  += mainwindow.h \
     preventiveactiondialog.h \
     htmlgenerator.h \
     htmltemplate.h \
-    htmltemplatefactory.h
+    htmltemplatefactory.h \
+    linkeditor.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
     riskassessmenttable.ui \
     riskassessmentdialog.ui \
-    preventiveactiondialog.ui
+    preventiveactiondialog.ui \
+    linkeditor.ui
 
 RESOURCES += \
     resources.qrc
