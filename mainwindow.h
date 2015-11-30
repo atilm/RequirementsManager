@@ -16,7 +16,7 @@
 #include "preventiveactiontableview.h"
 #include "riskassessmentdialog.h"
 #include "riskassessmenteditcontroller.h"
-#include "linkeditor.h"
+#include "linktypeeditor.h"
 
 namespace Ui {
 class MainWindow;

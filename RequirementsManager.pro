@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     requirementsmodel.cpp \
     requirement.cpp \
     uniqueidmanager.cpp \
-    requirementlink.cpp \
     requirementfactory.cpp \
     projectfilecontroller.cpp \
     projectfilereader.cpp \
@@ -49,7 +48,8 @@ SOURCES += main.cpp\
     htmlgenerator.cpp \
     htmltemplate.cpp \
     htmltemplatefactory.cpp \
-    linkeditor.cpp
+    linktypeeditor.cpp \
+    linkcontext.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -58,7 +58,6 @@ HEADERS  += mainwindow.h \
     requirementsmodel.h \
     requirement.h \
     uniqueidmanager.h \
-    requirementlink.h \
     requirementfactory.h \
     projectfilecontroller.h \
     projectfilereader.h \
@@ -86,7 +85,8 @@ HEADERS  += mainwindow.h \
     htmlgenerator.h \
     htmltemplate.h \
     htmltemplatefactory.h \
-    linkeditor.h
+    linktypeeditor.h \
+    linkcontext.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

@@ -61,7 +61,9 @@ int main(int argc, char *argv[])
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
 
-    LinkTypeEditor *linkTypeEditor = new LinkTypeEditor();
+    LinkContext *linkContext = new LinkContext();
+
+    LinkTypeEditor *linkTypeEditor = new LinkTypeEditor(linkContext);
 
 
     MainWindow w(fileController, requirements, richText,
