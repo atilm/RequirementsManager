@@ -2,11 +2,13 @@
 
 RequirementFactory::RequirementFactory(FileStateTracker *fileState,
                                        UniqueIDManager *idManager,
-                                       AttributeContainerFactory *attrContainerFactory)
+                                       AttributeContainerFactory *attrContainerFactory,
+                                       LinkContainerFactory *linkContainerFactory)
 {
     this->fileState = fileState;
     this->idManager = idManager;
     this->attrContainerFactory = attrContainerFactory;
+    this->linkContainerFactory = linkContainerFactory;
 }
 
 RequirementFactory::~RequirementFactory()
@@ -20,7 +22,8 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
-                                        attrContainerFactory->newContainer());
+                                        attrContainerFactory->newContainer(),
+                                        linkContainerFactory->newContainer());
     item->setParent(parent);
     return item;
 }
@@ -32,6 +35,7 @@ Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Require
     Requirement *item = new Requirement(idManager,
                                         raModel,
                                         attrContainerFactory->newContainer(),
+                                        linkContainerFactory->newContainer(),
                                         proposedID);
     item->setParent(parent);
     return item;

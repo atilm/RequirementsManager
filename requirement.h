@@ -3,6 +3,7 @@
 
 #include "uniqueidmanager.h"
 #include "attributecontainer.h"
+#include "linkcontainer.h"
 #include "riskassessmentmodel.h"
 
 #include <QTextDocument>
@@ -31,9 +32,10 @@ public:
     };
 
     Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
-                AttributeContainer *attributes);
+                AttributeContainer *attributes, LinkContainer *links);
     Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
-                AttributeContainer *attributes, uint proposedID);
+                AttributeContainer *attributes, LinkContainer *links,
+                uint proposedID);
     virtual ~Requirement();
 
     virtual uint getID();
@@ -78,6 +80,8 @@ private:
     QString title;
     QTextDocument *description;
     AttributeContainer *attributes;
+    LinkContainer *links;
+
     RiskAssessmentModel *riskAssessment;
 
     void assertValidIndex(int index);

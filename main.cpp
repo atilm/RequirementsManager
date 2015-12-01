@@ -11,8 +11,11 @@ int main(int argc, char *argv[])
     AttributeContext *attributeContext = new AttributeContext();
     AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
 
+    LinkContext *linkContext = new LinkContext();
+    LinkContainerFactory *links = new LinkContainerFactory(linkContext);
+
     UniqueIDManager *idManager = new UniqueIDManager();
-    RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes);
+    RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes, links);
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,
                                                             attributeContext, dataMapper);
@@ -60,8 +63,6 @@ int main(int argc, char *argv[])
                                                                                       paDialog);
     RiskTableView *riskTableView = new RiskTableView();
     PreventiveActionTableView *actionTableView = new PreventiveActionTableView();
-
-    LinkContext *linkContext = new LinkContext();
 
     LinkTypeEditor *linkTypeEditor = new LinkTypeEditor(linkContext);
 

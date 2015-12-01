@@ -2,10 +2,11 @@
 #include <QDebug>
 
 Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
-                         AttributeContainer *attributes) :
+                         AttributeContainer *attributes, LinkContainer *links) :
     id(idManager->newUniqueID())
 {
     this->attributes = attributes;
+    this->links = links;
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
@@ -16,11 +17,12 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
 }
 
 Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
-                         AttributeContainer *attributes,
+                         AttributeContainer *attributes, LinkContainer *links,
                          uint proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
     this->attributes = attributes;
+    this->links = links;
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
@@ -36,6 +38,7 @@ Requirement::~Requirement()
 
     delete riskAssessment;
     delete attributes;
+    delete links;
 
     for(int i=0;i<childCount();i++)
         delete children[i];

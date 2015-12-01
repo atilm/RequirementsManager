@@ -4,6 +4,7 @@
 #include "uniqueidmanager.h"
 #include "requirement.h"
 #include "attributecontainerfactory.h"
+#include "linkcontainerfactory.h"
 #include "riskassessmentfactory.h"
 #include "filestatetracker.h"
 
@@ -12,7 +13,8 @@ class RequirementFactory
 public:
     RequirementFactory(FileStateTracker *fileState,
                        UniqueIDManager *idManager,
-                       AttributeContainerFactory *attrContainerFactory);
+                       AttributeContainerFactory *attrContainerFactory,
+                       LinkContainerFactory *linkContainerFactory);
     virtual ~RequirementFactory();
 
     Requirement* newRequirement(Requirement *parent = 0);
@@ -21,6 +23,7 @@ public:
 private:
     FileStateTracker *fileState;
     AttributeContainerFactory *attrContainerFactory;
+    LinkContainerFactory *linkContainerFactory;
     UniqueIDManager *idManager;
 };
 

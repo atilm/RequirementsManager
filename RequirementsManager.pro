@@ -49,7 +49,9 @@ SOURCES += main.cpp\
     htmltemplate.cpp \
     htmltemplatefactory.cpp \
     linktypeeditor.cpp \
-    linkcontext.cpp
+    linkcontext.cpp \
+    linkcontainer.cpp \
+    linkcontainerfactory.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -86,7 +88,9 @@ HEADERS  += mainwindow.h \
     htmltemplate.h \
     htmltemplatefactory.h \
     linktypeeditor.h \
-    linkcontext.h
+    linkcontext.h \
+    linkcontainer.h \
+    linkcontainerfactory.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
