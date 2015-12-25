@@ -89,6 +89,11 @@ RiskAssessmentModel *Requirement::getRiskAssessment()
     return riskAssessment;
 }
 
+LinkContainer *Requirement::getLinkContainer()
+{
+    return links;
+}
+
 void Requirement::setParent(Requirement *parent)
 {
     this->parent = parent;

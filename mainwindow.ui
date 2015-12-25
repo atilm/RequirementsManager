@@ -12,8 +12,8 @@
   </property>
   <property name="font">
    <font>
-    <weight>75</weight>
-    <bold>true</bold>
+    <weight>50</weight>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -65,6 +65,12 @@
             <layout class="QHBoxLayout" name="riskHeadLayout">
              <item>
               <widget class="QLabel" name="label">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Risks</string>
                </property>
@@ -112,6 +118,12 @@
             <layout class="QHBoxLayout" name="preventiveActionHeadLayout">
              <item>
               <widget class="QLabel" name="label_2">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Preventive Actions</string>
                </property>
@@ -158,6 +170,12 @@
          <layout class="QVBoxLayout" name="riskDescVLayout">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Risk / Action Description</string>
             </property>
@@ -180,8 +198,8 @@
       <widget class="QToolBox" name="linkViewContainer">
        <property name="font">
         <font>
-         <weight>50</weight>
-         <bold>false</bold>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="currentIndex">
@@ -193,7 +211,7 @@
           <x>0</x>
           <y>0</y>
           <width>335</width>
-          <height>683</height>
+          <height>699</height>
          </rect>
         </property>
         <attribute name="label">
@@ -243,7 +261,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTreeView" name="treeView_2"/>
+          <widget class="QTreeView" name="linkView"/>
          </item>
         </layout>
        </widget>
@@ -258,7 +276,7 @@
      <x>0</x>
      <y>0</y>
      <width>989</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

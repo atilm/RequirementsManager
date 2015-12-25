@@ -51,7 +51,11 @@ SOURCES += main.cpp\
     linktypeeditor.cpp \
     linkcontext.cpp \
     linkcontainer.cpp \
-    linkcontainerfactory.cpp
+    linkcontainerfactory.cpp \
+    linktorequirement.cpp \
+    linkgroup.cpp \
+    linkcontroller.cpp \
+    linknode.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -90,7 +94,11 @@ HEADERS  += mainwindow.h \
     linktypeeditor.h \
     linkcontext.h \
     linkcontainer.h \
-    linkcontainerfactory.h
+    linkcontainerfactory.h \
+    linktorequirement.h \
+    linkgroup.h \
+    linkcontroller.h \
+    linknode.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
@@ -108,3 +116,12 @@ INCLUDEPATH += $$PWD/../../QtTestTools
 DEPENDPATH += $$PWD/../../QtTestTools
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/../../QtTestTools/libQtTestTools.a
+
+
+win32: LIBS += -L$$PWD/../QtTestTools/release/ -lQtTestTools
+
+INCLUDEPATH += $$PWD/../QtTestTools
+DEPENDPATH += $$PWD/../QtTestTools
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../QtTestTools/release/QtTestTools.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/../QtTestTools/release/libQtTestTools.a

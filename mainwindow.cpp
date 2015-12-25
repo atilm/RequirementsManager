@@ -8,7 +8,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
-                       LinkTypeEditor *linkTypeEditor,
+                       LinkTypeEditor *linkTypeEditor, LinkController *linkController,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,6 +26,9 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->attributeDialog = attributeDialog;
     this->riskAssessmentEditController = riskAssessmentEditController;
     this->linkTypeEditor = linkTypeEditor;
+    this->linkController = linkController;
+
+    linkController->setLinkView(ui->linkView);
 
     fileController->setModel(requirements);
 
@@ -85,6 +88,8 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 
     connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
+
+    linkController->setUpConnections();
 }
 
 void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,

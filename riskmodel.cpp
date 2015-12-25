@@ -1,4 +1,5 @@
 #include "riskmodel.h"
+#include <QColor>
 
 RiskModel::RiskModel(FileStateTracker *fileState, QObject *parent) :
     QAbstractTableModel(parent)
@@ -48,11 +49,11 @@ QVariant RiskModel::data(const QModelIndex &index, int role) const
     else if(role == Qt::BackgroundRole){
         switch(risk){
         case 0:
-            return Qt::green;
+            return QColor(Qt::green);
         case 1:
-            return Qt::yellow;
+            return QColor(Qt::yellow);
         case 2:
-            return Qt::red;
+            return QColor(Qt::red);
         }
     }
 

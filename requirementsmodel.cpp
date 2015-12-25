@@ -310,6 +310,14 @@ RiskAssessmentModel* RequirementsModel::getRiskAssessment(const QModelIndex &ind
     return item->getRiskAssessment();
 }
 
+LinkContainer *RequirementsModel::getLinkContainer(const QModelIndex &index)
+{
+    if(!index.isValid())
+        throw InvalidIndexException();
+
+    return asRequirement(index)->getLinkContainer();
+}
+
 uint RequirementsModel::getID(const QModelIndex &index)
 {
     if(!index.isValid())

@@ -66,10 +66,12 @@ int main(int argc, char *argv[])
 
     LinkTypeEditor *linkTypeEditor = new LinkTypeEditor(linkContext);
 
+    LinkController *linkController = new LinkController();
+    linkController->setRequirementsView(requirementsView);
 
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
-                 linkTypeEditor);
+                 linkTypeEditor, linkController, 0);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

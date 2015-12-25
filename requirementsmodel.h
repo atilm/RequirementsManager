@@ -58,7 +58,7 @@ public:
     virtual AttributeContext* getAttributeContext() const;
     virtual QTextDocument* getDescription(const QModelIndex &index);
     virtual RiskAssessmentModel* getRiskAssessment(const QModelIndex &index);
-
+    virtual LinkContainer* getLinkContainer(const QModelIndex &index);
 signals:
     void columnsChanged();
 

@@ -17,6 +17,7 @@
 #include "riskassessmentdialog.h"
 #include "riskassessmenteditcontroller.h"
 #include "linktypeeditor.h"
+#include "linkcontroller.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,7 +37,8 @@ public:
                         AttributeEditor *attributeDialog,
                         RiskAssessmentEditController *riskAssessmentEditController,
                         LinkTypeEditor *linkTypeEditor,
-                        QWidget *parent = 0);
+                        LinkController *linkController,
+                        QWidget *parent);
     ~MainWindow();
 
     void injectViews(RequirementsView *requirementsView,
@@ -62,6 +64,7 @@ private:
     RiskAssessmentEditController *riskAssessmentEditController;
     PreventiveActionTableView *preventiveActionTableView;
     LinkTypeEditor *linkTypeEditor;
+    LinkController *linkController;
 
     void closeEvent(QCloseEvent *);
 

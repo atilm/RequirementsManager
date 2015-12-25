@@ -30,11 +30,18 @@ QVariant LinkContext::data(const QModelIndex &index, int role) const
         return QVariant();
 }
 
+QString LinkContext::typeName(int index) const
+{
+    if(isValidIndex(index))
+        return linkTypes[index];
+}
+
 void LinkContext::addLinkType(const QString &name)
 {
     beginInsertRows(QModelIndex(), linkTypes.size(), linkTypes.size());
     linkTypes.append(name);
     endInsertRows();
+    emit newLinkType(linkTypes.count()-1);
 }
 
 void LinkContext::removeLinkType(const QModelIndex &index)
@@ -45,6 +52,7 @@ void LinkContext::removeLinkType(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     linkTypes.remove(index.row());
     endRemoveRows();
+    emit linkTypeRemoved(index.row());
 }
 
 void LinkContext::renameLinkType(const QModelIndex &index, const QString &newName)
@@ -54,4 +62,12 @@ void LinkContext::renameLinkType(const QModelIndex &index, const QString &newNam
 
     linkTypes[index.row()] = newName;
     emit dataChanged(index, index);
+}
+
+bool LinkContext::isValidIndex(int index) const
+{
+    if(index < linkTypes.count() && index >= 0)
+        return true;
+    else
+        return false;
 }

@@ -53,6 +53,7 @@ public:
 
     virtual QTextDocument *getDescription();
     virtual RiskAssessmentModel* getRiskAssessment();
+    virtual LinkContainer* getLinkContainer();
 
     virtual int getRow() const;
 

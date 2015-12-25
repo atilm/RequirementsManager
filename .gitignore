@@ -1,1 +1,5 @@
 *.pro.user
+Makefile*
+object_script.*
+release/
+ui_*
