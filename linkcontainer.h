@@ -6,6 +6,7 @@
 
 #include "linkcontext.h"
 #include "linknode.h"
+#include "linkgroup.h"
 
 class LinkContainer : public QAbstractItemModel
 {
@@ -36,6 +37,7 @@ private:
 
     LinkNode* getValidItem(const QModelIndex &index) const;
     LinkNode* asLinkNode(const QModelIndex &index) const;
+    LinkGroup* asLinkGroup(const QModelIndex &index) const;
 };
 
 #endif // LINKCONTAINER_H

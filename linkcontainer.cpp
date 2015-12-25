@@ -38,8 +38,12 @@ QVariant LinkContainer::data(const QModelIndex &index, int role) const
     if(!index.isValid())
         return QVariant();
 
-    if(role == Qt::DisplayRole)
-        return asLinkNode(index)->toString();
+    if(role == Qt::DisplayRole){
+        if(asLinkGroup(index))
+            return context->typeName(index.row());
+        else
+            return asLinkNode(index)->toString();
+    }
     else
         return QVariant();
 }
@@ -48,9 +52,7 @@ void LinkContainer::handleLinkTypeInserted(int before)
 {
     if(before <= root->childCount() && before >= 0){
         beginInsertRows(QModelIndex(), before, before);
-        LinkGroup *group = new LinkGroup();
-        group->setName(context->typeName(before));
-        root->insertChild(group, before);
+        root->insertChild(new LinkGroup(), before);
         endInsertRows();
     }
 }
@@ -66,11 +68,8 @@ void LinkContainer::handleLinkTypeRemoved(int index)
 
 void LinkContainer::initialize()
 {
-    for(int i=0;i<context->rowCount();i++){
-        LinkGroup *group = new LinkGroup();
-        group->setName(context->typeName(i));
-        root->insertChild(group,i);
-    }
+    for(int i=0;i<context->rowCount();i++)
+        root->insertChild(new LinkGroup(),i);
 }
 
 LinkNode *LinkContainer::getValidItem(const QModelIndex &index) const
@@ -84,6 +83,14 @@ LinkNode *LinkContainer::getValidItem(const QModelIndex &index) const
 LinkNode *LinkContainer::asLinkNode(const QModelIndex &index) const
 {
     return static_cast<LinkNode*>(index.internalPointer());
+}
+
+LinkGroup *LinkContainer::asLinkGroup(const QModelIndex &index) const
+{
+    // call to asLinkNode() because dynamic_cast only takes
+    // pointers to classes and index.internalPointer() returns
+    // a void*
+    return dynamic_cast<LinkGroup*>(asLinkNode(index));
 }
 
 QModelIndex LinkContainer::index(int row, int column, const QModelIndex &parent) const

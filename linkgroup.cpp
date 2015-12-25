@@ -5,18 +5,3 @@ LinkGroup::LinkGroup()
 {
 
 }
-
-QString LinkGroup::getName() const
-{
-    return name;
-}
-
-void LinkGroup::setName(const QString &name)
-{
-    this->name = name;
-}
-
-QString LinkGroup::toString() const
-{
-    return name;
-}
