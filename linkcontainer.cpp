@@ -66,6 +66,24 @@ void LinkContainer::handleLinkTypeRemoved(int index)
     }
 }
 
+void LinkContainer::addLink(const QModelIndex &index, LinkToRequirement *link)
+{
+    if(!index.isValid())
+        return;
+
+    QModelIndex groupIndex = index;
+    LinkGroup *group = asLinkGroup(groupIndex);
+    if(!group){
+        groupIndex = index.parent();
+        group = asLinkGroup(groupIndex);
+    }
+
+    int before = group->childCount();
+    beginInsertRows(groupIndex, before, before);
+    group->insertChild(link, group->childCount());
+    endInsertRows();
+}
+
 void LinkContainer::initialize()
 {
     for(int i=0;i<context->rowCount();i++)

@@ -54,6 +54,7 @@ public:
     virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
+    virtual Requirement* getRequirement(const QModelIndex &index) const;
 
     virtual AttributeContext* getAttributeContext() const;
     virtual QTextDocument* getDescription(const QModelIndex &index);

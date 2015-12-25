@@ -92,7 +92,7 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
 
     linkController->setDescriptionView(descriptionView);
-    linkController->setUpConnections();
+    linkController->setUpSelectionModeConnections();
 }
 
 void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,

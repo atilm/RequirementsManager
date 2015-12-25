@@ -1,4 +1,5 @@
 #include "linkcontroller.h"
+#include "linktorequirement.h"
 #include <QDebug>
 
 LinkController::LinkController(QObject *parent)
@@ -42,32 +43,52 @@ void LinkController::setRemoveButton(QToolButton *button)
             this, SLOT(handleRemoveButtonClicked()));
 }
 
-void LinkController::setUpConnections()
+void LinkController::setUpSelectionModeConnections()
 {
+    reqView->setEditTriggers(QAbstractItemView::DoubleClicked |
+                             QAbstractItemView::EditKeyPressed);
+    disconnect(reqView, SIGNAL(doubleClicked(QModelIndex)),
+               this, SLOT(handleAddRequirementLink(QModelIndex)));
     connect(reqView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             this, SLOT(handleCurrentRequirementChanged(QModelIndex, QModelIndex)));
+}
+
+void LinkController::setUpAddModeConnections()
+{
+    reqView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    disconnect(reqView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            this, SLOT(handleCurrentRequirementChanged(QModelIndex, QModelIndex)));
+    connect(reqView, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(handleAddRequirementLink(QModelIndex)));
 }
 
 void LinkController::handleCurrentRequirementChanged(const QModelIndex &current,
                                                      const QModelIndex &previous)
 {
     RequirementsModel *model = static_cast<RequirementsModel*>(reqView->model());
-    linkView->setModel(model->getLinkContainer(current));
+    currentLinks = model->getLinkContainer(current);
+    linkView->setModel(currentLinks);
 }
 
 void LinkController::handleAddButtonToggled(bool on)
 {
-    if(on){
-        reqView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    }
-    else{
-        reqView->setEditTriggers(QAbstractItemView::DoubleClicked |
-                                 QAbstractItemView::EditKeyPressed);
-    }
+    if(on)
+        setUpAddModeConnections();
+    else
+        setUpSelectionModeConnections();
 }
 
 void LinkController::handleRemoveButtonClicked()
 {
+}
 
+void LinkController::handleAddRequirementLink(const QModelIndex &index)
+{
+    QModelIndex current = linkView->selectionModel()->currentIndex();
+    RequirementsModel *model = static_cast<RequirementsModel*>(reqView->model());
+    Requirement *req = model->getRequirement(index);
+    LinkToRequirement *link = new LinkToRequirement(req);
+
+    currentLinks->addLink(current, link);
 }
 

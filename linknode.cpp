@@ -33,8 +33,10 @@ int LinkNode::childCount() const
 
 void LinkNode::insertChild(LinkNode *node, int before)
 {
-    if(before >= 0 && before <= children.count())
+    if(before >= 0 && before <= children.count()){
+        node->setParent(this);
         children.insert(before, node);
+    }
 }
 
 void LinkNode::removeChildAt(int index)

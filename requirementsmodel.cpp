@@ -287,6 +287,14 @@ void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelI
     //endMoveRows();
 }
 
+Requirement *RequirementsModel::getRequirement(const QModelIndex &index) const
+{
+    if(!index.isValid())
+        throw InvalidModelIndexException();
+
+    return asRequirement(index);
+}
+
 AttributeContext *RequirementsModel::getAttributeContext() const
 {
     return attributeContext;

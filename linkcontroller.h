@@ -22,7 +22,8 @@ public:
     virtual void setAddButton(QToolButton *button);
     virtual void setRemoveButton(QToolButton *button);
 
-    virtual void setUpConnections();
+    virtual void setUpSelectionModeConnections();
+    virtual void setUpAddModeConnections();
 signals:
 
 public slots:
@@ -30,6 +31,7 @@ public slots:
                                          const QModelIndex &previous);
     void handleAddButtonToggled(bool on);
     void handleRemoveButtonClicked();
+    void handleAddRequirementLink(const QModelIndex &index);
 
 private:
     QToolButton *addButton;
@@ -37,6 +39,7 @@ private:
     QTreeView *linkView;
     RequirementsView *reqView;
     DescriptionView *descriptionView;
+    LinkContainer *currentLinks;
 
 };
 

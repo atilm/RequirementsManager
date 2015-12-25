@@ -1,4 +1,5 @@
 #include "linktorequirement.h"
+#include "requirement.h"
 
 LinkToRequirement::LinkToRequirement(Requirement *link)
     : LinkNode()
@@ -13,6 +14,7 @@ LinkToRequirement::~LinkToRequirement()
 
 QString LinkToRequirement::toString() const
 {
-    return "link to requirement";
+    if(linkedRequirement)
+        return linkedRequirement->getTitle();
 }
 

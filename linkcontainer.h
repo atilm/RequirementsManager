@@ -7,6 +7,7 @@
 #include "linkcontext.h"
 #include "linknode.h"
 #include "linkgroup.h"
+#include "linktorequirement.h"
 
 class LinkContainer : public QAbstractItemModel
 {
@@ -28,6 +29,8 @@ signals:
 public slots:
     virtual void handleLinkTypeInserted(int before);
     virtual void handleLinkTypeRemoved(int index);
+    virtual void addLink(const QModelIndex &index,
+                         LinkToRequirement *link);
 
 private:
     LinkNode *root;
