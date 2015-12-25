@@ -29,6 +29,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->linkController = linkController;
 
     linkController->setLinkView(ui->linkView);
+    linkController->setAddButton(ui->addLinksButton);
+    linkController->setRemoveButton(ui->removeLinkButton);
 
     fileController->setModel(requirements);
 
@@ -89,6 +91,7 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
     connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
 
+    linkController->setDescriptionView(descriptionView);
     linkController->setUpConnections();
 }
 

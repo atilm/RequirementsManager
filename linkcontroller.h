@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "requirementsview.h"
+#include "descriptionview.h"
 
 class LinkController : public QObject
 {
@@ -17,6 +18,9 @@ public:
 
     virtual void setLinkView(QTreeView *view);
     virtual void setRequirementsView(RequirementsView *view);
+    virtual void setDescriptionView(DescriptionView *view);
+    virtual void setAddButton(QToolButton *button);
+    virtual void setRemoveButton(QToolButton *button);
 
     virtual void setUpConnections();
 signals:
@@ -24,10 +28,15 @@ signals:
 public slots:
     void handleCurrentRequirementChanged(const QModelIndex &current,
                                          const QModelIndex &previous);
+    void handleAddButtonToggled(bool on);
+    void handleRemoveButtonClicked();
 
 private:
+    QToolButton *addButton;
+    QToolButton *removeButton;
     QTreeView *linkView;
     RequirementsView *reqView;
+    DescriptionView *descriptionView;
 
 };
 
