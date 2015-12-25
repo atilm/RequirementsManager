@@ -66,7 +66,9 @@ void Requirement::setTitle(const QString &title)
 
 QString Requirement::getTitle() const
 {
-    return title;
+    return QString("%1 %2")
+            .arg(number())
+            .arg(title);
 }
 
 QVariant Requirement::getAttribute(int index) const
@@ -102,6 +104,22 @@ void Requirement::setParent(Requirement *parent)
 Requirement *Requirement::getParent()
 {
     return parent;
+}
+
+QString Requirement::number() const
+{
+    if(!parent)
+        return "";
+
+    int myNumber = parent->indexOf(this) + 1;
+    QString parentNumber = parent->number();
+
+    if(parentNumber.isEmpty())
+        return QString("%1").arg(myNumber);
+    else
+        return QString("%1.%2")
+                .arg(parentNumber)
+                .arg(myNumber);
 }
 
 int Requirement::getRow() const

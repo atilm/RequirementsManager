@@ -46,6 +46,7 @@ public:
     virtual void setParent(Requirement *parent);
     virtual Requirement* getParent();
 
+    virtual QString number() const;
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
     virtual QVariant getAttribute(int index) const;
