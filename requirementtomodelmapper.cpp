@@ -63,7 +63,7 @@ QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirem
 QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement, int column) const
 {
     if(column == 0)
-        return requirement->getTitle();
+        return requirement->getNumberedTitle();
     else if(column  <= context->rowCount()){
         int attributeIndex = column - 1;
         if(context->type(attributeIndex) == AttributeContext::BOOLEAN)
@@ -77,7 +77,10 @@ QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement
 
 QVariant RequirementToModelMapper::getEditRole(const Requirement *requirement, int column) const
 {
-    return getDisplayRole(requirement, column);
+    if(column == 0)
+        return requirement->getTitle();
+    else
+        return getDisplayRole(requirement, column);
 }
 
 QVariant RequirementToModelMapper::getCheckStateRole(const Requirement *requirement, int column) const

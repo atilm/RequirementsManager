@@ -81,7 +81,7 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
     xml->writeStartElement("Requirement");
 
     QModelIndex itemIdx = model->index(row, 0, parent);
-    QString title = model->data(itemIdx).toString();
+    QString title = model->getRequirement(itemIdx)->getTitle();
     QString id = QString("%1").arg(model->getID(itemIdx));
     QString type = Requirement::typeToString(model->getType(itemIdx));
     QTextDocument *description = model->getDescription(itemIdx);

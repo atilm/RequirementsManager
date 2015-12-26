@@ -80,6 +80,8 @@ void LinkController::handleAddButtonToggled(bool on)
 
 void LinkController::handleRemoveButtonClicked()
 {
+    QModelIndex current = linkView->selectionModel()->currentIndex();
+    currentLinks->removeLink(current);
 }
 
 void LinkController::handleAddRequirementLink(const QModelIndex &index)

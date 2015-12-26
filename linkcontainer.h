@@ -9,12 +9,15 @@
 #include "linkgroup.h"
 #include "linktorequirement.h"
 
+class Requirement;
+
 class LinkContainer : public QAbstractItemModel
 {
     Q_OBJECT
 public:
     explicit LinkContainer(LinkContext *context, QObject *parent = 0);
     virtual ~LinkContainer();
+    virtual void setOwner(Requirement *r);
 
     // required overriden functions
     virtual int columnCount(const QModelIndex &parent) const;
@@ -31,8 +34,10 @@ public slots:
     virtual void handleLinkTypeRemoved(int index);
     virtual void addLink(const QModelIndex &index,
                          LinkToRequirement *link);
+    virtual void removeLink(const QModelIndex &index);
 
 private:
+    Requirement *owner;
     LinkNode *root;
     LinkContext *context;
 

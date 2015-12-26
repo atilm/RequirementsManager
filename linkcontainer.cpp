@@ -1,10 +1,12 @@
 #include "linkcontainer.h"
 #include "linkgroup.h"
+#include "requirement.h"
 #include <QDebug>
 
 LinkContainer::LinkContainer(LinkContext *context, QObject *parent)
     : QAbstractItemModel(parent)
 {
+    this->owner = nullptr;
     this->context = context;
     this->root = new LinkNode();
 
@@ -19,6 +21,11 @@ LinkContainer::LinkContainer(LinkContext *context, QObject *parent)
 LinkContainer::~LinkContainer()
 {
 
+}
+
+void LinkContainer::setOwner(Requirement *r)
+{
+    owner = r;
 }
 
 int LinkContainer::columnCount(const QModelIndex &parent) const
@@ -82,6 +89,20 @@ void LinkContainer::addLink(const QModelIndex &index, LinkToRequirement *link)
     beginInsertRows(groupIndex, before, before);
     group->insertChild(link, group->childCount());
     endInsertRows();
+}
+
+void LinkContainer::removeLink(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return;
+
+    if(asLinkGroup(index))
+        return;
+
+    LinkGroup *group = asLinkGroup(index.parent());
+    beginRemoveRows(index.parent(),index.row(),index.row());
+    group->removeChildAt(index.row());
+    endRemoveRows();
 }
 
 void LinkContainer::initialize()
@@ -148,7 +169,7 @@ QVariant LinkContainer::headerData(int section, Qt::Orientation orientation, int
     if(orientation == Qt::Horizontal
             && section == 0
             && role == Qt::DisplayRole)
-        return tr("Links");
+        return tr("Links to %1").arg(owner->getNumberedTitle());
     else
         return QVariant();
 }

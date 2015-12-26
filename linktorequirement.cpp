@@ -15,6 +15,6 @@ LinkToRequirement::~LinkToRequirement()
 QString LinkToRequirement::toString() const
 {
     if(linkedRequirement)
-        return linkedRequirement->getTitle();
+        return linkedRequirement->getNumberedTitle();
 }
 

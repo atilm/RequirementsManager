@@ -7,6 +7,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
 {
     this->attributes = attributes;
     this->links = links;
+    this->links->setOwner(this);
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
@@ -23,6 +24,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
 {
     this->attributes = attributes;
     this->links = links;
+    this->links->setOwner(this);
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     parent = NULL;
@@ -65,6 +67,11 @@ void Requirement::setTitle(const QString &title)
 }
 
 QString Requirement::getTitle() const
+{
+    return title;
+}
+
+QString Requirement::getNumberedTitle() const
 {
     return QString("%1 %2")
             .arg(number())

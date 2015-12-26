@@ -49,6 +49,7 @@ public:
     virtual QString number() const;
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
+    virtual QString getNumberedTitle() const;
     virtual QVariant getAttribute(int index) const;
     virtual void setAttribute(int index, const QVariant &value);
 
