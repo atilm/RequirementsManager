@@ -10,6 +10,14 @@ LinkContext::~LinkContext()
 
 }
 
+void LinkContext::clear()
+{
+    int rows = rowCount();
+
+    for(int i=0;i<rows;i++)
+        removeLinkType(index(0,0));
+}
+
 QVariant LinkContext::headerData(int section, Qt::Orientation orientation, int role) const
 {
     return QVariant();

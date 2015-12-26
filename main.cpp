@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
     RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes, links);
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,
-                                                            attributeContext, dataMapper);
+                                                            attributeContext, linkContext,
+                                                            dataMapper);
     requirements->init();
 
     RichTextController *richText = new RichTextController();

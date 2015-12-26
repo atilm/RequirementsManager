@@ -1,9 +1,10 @@
 #include "requirementsmodel.h"
+#include <QDebug>
 #include <iostream>
 using namespace std;
 
 RequirementsModel::RequirementsModel(RequirementFactory *factory,
-                                     FileStateTracker *fileState, AttributeContext *attributeContext,
+                                     FileStateTracker *fileState, AttributeContext *attributeContext, LinkContext *linkContext,
                                      RequirementToModelMapper *dataMapper,
                                      QObject *parent) :
     QAbstractItemModel(parent)
@@ -11,6 +12,7 @@ RequirementsModel::RequirementsModel(RequirementFactory *factory,
     this->factory = factory;
     this->fileState = fileState;
     this->attributeContext = attributeContext;
+    this->linkContext = linkContext;
     this->dataMapper = dataMapper;
 
     connect(attributeContext, SIGNAL(attributeAboutToBeInserted(int)),
@@ -36,6 +38,7 @@ void RequirementsModel::init()
 void RequirementsModel::clearModel()
 {
     attributeContext->clear();
+    linkContext->clear();
 
     int rows = rowCount();
 
@@ -298,6 +301,11 @@ Requirement *RequirementsModel::getRequirement(const QModelIndex &index) const
 AttributeContext *RequirementsModel::getAttributeContext() const
 {
     return attributeContext;
+}
+
+LinkContext *RequirementsModel::getLinkContext() const
+{
+    return linkContext;
 }
 
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)

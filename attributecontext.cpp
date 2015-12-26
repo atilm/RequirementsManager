@@ -1,4 +1,5 @@
 #include "attributecontext.h"
+#include <QDebug>
 
 AttributeContext::AttributeContext()
 {
@@ -53,6 +54,7 @@ QVariant AttributeContext::data(const QModelIndex &index, int role) const
 void AttributeContext::clear()
 {
     int rows = rowCount();
+
 
     for(int a=0;a<rows;a++)
         removeAttribute(0);

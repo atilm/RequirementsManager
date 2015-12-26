@@ -24,9 +24,11 @@ private:
     QFileAdapter *file;
     RequirementsModel *model;
     AttributeContext *attributeContext;
+    LinkContext *linkContext;
 
     void readContents();
     void parseAttributeDeclaration();
+    void parseLinkDeclaration();
     void parseRequirement(QModelIndex parent);
     void parseDescription(QModelIndex itemIdx);
     void parseRequirementAttribute(QModelIndex itemIdx);

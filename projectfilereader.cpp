@@ -21,6 +21,7 @@ void ProjectFileReader::load(RequirementsModel *model, QFileAdapter *file)
     this->file = file;
     this->model = model;
     this->attributeContext = model->getAttributeContext();
+    this->linkContext = model->getLinkContext();
 
     readContents();
 
@@ -37,12 +38,12 @@ void ProjectFileReader::readContents()
         QXmlStreamReader::TokenType token = xml->readNext();
 
         if(token == QXmlStreamReader::StartElement){
-            if(xml->name() == "AttributeDeclaration"){
+            if(xml->name() == "AttributeDeclaration")
                 parseAttributeDeclaration();
-            }
-            else if(xml->name() == "Requirement"){
+            else if(xml->name() == "LinkDeclaration")
+                parseLinkDeclaration();
+            else if(xml->name() == "Requirement")
                 parseRequirement(QModelIndex());
-            }
             else
                 continue;
         }
@@ -65,6 +66,17 @@ void ProjectFileReader::parseAttributeDeclaration()
     QString typeString = getAttribute("type");
 
     attributeContext->addAttribute(name, typeString);
+}
+
+void ProjectFileReader::parseLinkDeclaration()
+{
+    uint index = getAttribute("index").toUInt();
+
+    if(index != linkContext->rowCount())
+        throw ParsingError(QObject::tr("Unexpected index in link declaration.").toStdString());
+
+    QString name = getAttribute("name");
+    linkContext->addLinkType(name);
 }
 
 void ProjectFileReader::parseRequirement(QModelIndex parent)

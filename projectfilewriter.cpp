@@ -24,6 +24,7 @@ void ProjectFileWriter::save(RequirementsModel *model,
     this->file = file;
     this->model = model;
     this->attributeContext = model->getAttributeContext();
+    this->linkContext = model->getLinkContext();
 
     xml->setDevice(file);
     xml->setAutoFormatting(true);
@@ -32,6 +33,7 @@ void ProjectFileWriter::save(RequirementsModel *model,
     xml->writeAttribute("version", "1.0");
 
     writeAttributeContext();
+    writeLinkContext();
     writeRequirementSpecification();
 
     xml->writeEndElement(); // RequirementSpecification
@@ -50,6 +52,24 @@ void ProjectFileWriter::writeAttributeContext()
         writeAttributeDeclaration(a);
 
     xml->writeEndElement(); // AttributeContext
+}
+
+void ProjectFileWriter::writeLinkContext()
+{
+    xml->writeStartElement("LinkContext");
+
+    for(int i=0;i < linkContext->rowCount();i++)
+        writeLinkGroupDeclaration(i);
+
+    xml->writeEndElement();
+}
+
+void ProjectFileWriter::writeLinkGroupDeclaration(int index)
+{
+    xml->writeStartElement("LinkDeclaration");
+    xml->writeAttribute("index", QString("%1").arg(index));
+    xml->writeAttribute("name", linkContext->typeName(index));
+    xml->writeEndElement();
 }
 
 void ProjectFileWriter::writeAttributeDeclaration(int index)

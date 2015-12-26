@@ -20,10 +20,13 @@ private:
     QXmlStreamWriter *xml;
     RequirementsModel *model;
     AttributeContext *attributeContext;
+    LinkContext *linkContext;
     QFileAdapter *file;
 
     void writeAttributeContext();
     void writeAttributeDeclaration(int index);
+    void writeLinkContext();
+    void writeLinkGroupDeclaration(int index);
     void writeRequirementSpecification();
     void writeChildrenOf(QModelIndex parent);
     void writeRequirement(int row, QModelIndex parent);

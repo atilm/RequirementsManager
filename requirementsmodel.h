@@ -20,6 +20,7 @@ public:
     explicit RequirementsModel(RequirementFactory *factory,
                                FileStateTracker *fileState,
                                AttributeContext *attributeContext,
+                               LinkContext *linkContext,
                                RequirementToModelMapper *dataMapper,
                                QObject *parent = 0);
 
@@ -57,6 +58,7 @@ public:
     virtual Requirement* getRequirement(const QModelIndex &index) const;
 
     virtual AttributeContext* getAttributeContext() const;
+    virtual LinkContext* getLinkContext() const;
     virtual QTextDocument* getDescription(const QModelIndex &index);
     virtual RiskAssessmentModel* getRiskAssessment(const QModelIndex &index);
     virtual LinkContainer* getLinkContainer(const QModelIndex &index);
@@ -74,6 +76,7 @@ private:
     RequirementFactory *factory;
     Requirement *root;
     AttributeContext *attributeContext;
+    LinkContext *linkContext;
     FileStateTracker *fileState;
     RequirementToModelMapper *dataMapper;
 

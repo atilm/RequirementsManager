@@ -66,8 +66,13 @@ void LinkController::handleCurrentRequirementChanged(const QModelIndex &current,
                                                      const QModelIndex &previous)
 {
     RequirementsModel *model = static_cast<RequirementsModel*>(reqView->model());
-    currentLinks = model->getLinkContainer(current);
-    linkView->setModel(currentLinks);
+    try{
+        currentLinks = model->getLinkContainer(current);
+        linkView->setModel(currentLinks);
+    }
+    catch(const InvalidIndexException &e){
+        linkView->setModel(nullptr);
+    }
 }
 
 void LinkController::handleAddButtonToggled(bool on)
