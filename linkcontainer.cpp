@@ -133,6 +133,9 @@ void LinkContainer::removeLink(const QModelIndex &index)
 
 void LinkContainer::initialize()
 {
+    if(!context)
+        return;
+
     for(int i=0;i<context->rowCount();i++)
         root->insertChild(new LinkGroup(),i);
 }

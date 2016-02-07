@@ -22,42 +22,68 @@ SOURCES += main.cpp \
 
 INCLUDEPATH += $$PWD/../
 
-LIBS += $$PWD/../../build-RequirementsManager-Desktop-Release/uniqueidmanager.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/requirement.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementfactory.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementsmodel.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_requirementsmodel.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilecontroller.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_projectfilecontroller.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilereader.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/projectfilewriter.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/appsettings.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/filestatetracker.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_filestatetracker.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/attributecontainer.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/moc_attributecontainer.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/requirementtomodelmapper.o \
-        $$PWD/../../build-RequirementsManager-Desktop-Release/attributecontainerfactory.o
-
+LIBS += $$PWD/../release/uniqueidmanager.o \
+        $$PWD/../release/moc_uniqueidmanager.o \
+        $$PWD/../release/requirement.o \
+        $$PWD/../release/requirementfactory.o \
+        $$PWD/../release/requirementsmodel.o \
+        $$PWD/../release/moc_requirementsmodel.o \
+        $$PWD/../release/projectfilecontroller.o \
+        $$PWD/../release/moc_projectfilecontroller.o \
+        $$PWD/../release/projectfilereader.o \
+        $$PWD/../release/projectfilewriter.o \
+        $$PWD/../release/appsettings.o \
+        $$PWD/../release/filestatetracker.o \
+        $$PWD/../release/moc_filestatetracker.o \
+        $$PWD/../release/attributecontainer.o \
+        $$PWD/../release/moc_attributecontainer.o \
+        $$PWD/../release/requirementtomodelmapper.o \
+        $$PWD/../release/attributecontainerfactory.o \
+        $$PWD/../release/riskassessmentmodel.o \
+        $$PWD/../release/moc_riskassessmentmodel.o \
+        $$PWD/../release/linkcontainer.o \
+        $$PWD/../release/moc_linkcontainer.o \
+        $$PWD/../release/riskassessmentfactory.o \
+        $$PWD/../release/linkcontainerfactory.o \
+        $$PWD/../release/preventiveaction.o \
+        $$PWD/../release/preventiveactionmodel.o \
+        $$PWD/../release/moc_preventiveactionmodel.o \
+        $$PWD/../release/linkgroup.o \
+        $$PWD/../release/linknode.o \
+        $$PWD/../release/linktorequirement.o \
+        $$PWD/../release/riskmodel.o \
+        $$PWD/../release/moc_riskmodel.o \
+        $$PWD/../release/riskassessment.o \
 
 unix:!macx: LIBS += -L$$PWD/../../../GMock/qt/ -lGMock
 
-INCLUDEPATH += $$PWD/../../../GMock/include
-DEPENDPATH += $$PWD/../../../GMock/include
-INCLUDEPATH += $$PWD/../../../GMock/gtest/include
-DEPENDPATH += $$PWD/../../../GMock/gtest/include
+unix:!macx: INCLUDEPATH += $$PWD/../../../GMock/include
+unix:!macx: DEPENDPATH += $$PWD/../../../GMock/include
+unix:!macx: INCLUDEPATH += $$PWD/../../../GMock/gtest/include
+unix:!macx: DEPENDPATH += $$PWD/../../../GMock/gtest/include
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/../../../GMock/qt/libGMock.a
 
 
+win32: LIBS += -L$$PWD/../../GTest/QtMingw/release/ -lgmock
+
+INCLUDEPATH += $$PWD/../../GTest/googletest/include
+DEPENDPATH += $$PWD/../../GTest/googletest/include
+INCLUDEPATH += $$PWD/../../GTest/googlemock/include
+DEPENDPATH += $$PWD/../../GTest/googlemock/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../GTest/QtMingw/release/gmock.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/../../GTest/QtMingw/release/libgmock.a
 
 
-unix:!macx: LIBS += -L$$PWD/../../../QtTestTools/ -lQtTestTools
+win32: LIBS += -L$$PWD/../../QtTestTools/release/ -lQtTestTools
 
-INCLUDEPATH += $$PWD/../../../QtTestTools
-DEPENDPATH += $$PWD/../../../QtTestTools
+INCLUDEPATH += $$PWD/../../QtTestTools
+DEPENDPATH += $$PWD/../../QtTestTools
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/../../../QtTestTools/libQtTestTools.a
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../QtTestTools/release/QtTestTools.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/../../QtTestTools/release/libQtTestTools.a
+
 
 HEADERS += \
     projectfilereadermock.h \
@@ -68,4 +94,6 @@ HEADERS += \
     requirementsmodelmock.h \
     eventlistener.h \
     attributecontainermock.h \
-    mockattributecontainerfactory.h
+    mockattributecontainerfactory.h \
+    riskassessmentmodelmock.h \
+    linkcontainermock.h

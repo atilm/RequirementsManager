@@ -71,7 +71,7 @@ protected:
             std::uniform_int_distribution<int> dist(0,unusedIds.size()-1);
             int index = dist(rng);
 
-            ASSERT_THROW( manager->removeID(unusedIds.at(index)), IDCollisionException);
+            ASSERT_THROW( manager->removeID(unusedIds.at(index)), IDUnknownException);
         }
     }
 

@@ -35,7 +35,7 @@ public:
                 AttributeContainer *attributes, LinkContainer *links);
     Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links,
-                uint proposedID);
+                unsigned int proposedID);
     virtual ~Requirement();
 
     virtual uint getID();

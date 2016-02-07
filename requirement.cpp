@@ -20,7 +20,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
 
 Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
                          AttributeContainer *attributes, LinkContainer *links,
-                         uint proposedID) :
+                         unsigned int proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
     this->attributes = attributes;
@@ -44,8 +44,9 @@ Requirement::~Requirement()
     delete attributes;
     delete links;
 
-    for(int i=0;i<childCount();i++)
+    for(int i=0;i<childCount();i++){
         delete children[i];
+    }
 }
 
 uint Requirement::getID()
