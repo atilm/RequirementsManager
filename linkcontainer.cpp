@@ -19,6 +19,8 @@ LinkContainer::LinkContainer(LinkContext *context,
             this, SLOT(handleLinkTypeInserted(int)));
     connect(context, SIGNAL(linkTypeRemoved(int)),
             this, SLOT(handleLinkTypeRemoved(int)));
+    connect(idManager, SIGNAL(idRemoved(unsigned int)),
+            this, SLOT(handleRequirementRemoved(unsigned int)));
 }
 
 LinkContainer::~LinkContainer()
@@ -75,6 +77,18 @@ void LinkContainer::handleLinkTypeRemoved(int index)
         beginRemoveRows(QModelIndex(), index, index);
         root->removeChildAt(index);
         endRemoveRows();
+    }
+}
+
+void LinkContainer::handleRequirementRemoved(unsigned int id)
+{
+    for(int g=0;g < root->childCount();g++){
+        LinkNode *group = root->getChild(g);
+        for(int i=0;i < group->childCount();i++){
+            LinkToRequirement *link = static_cast<LinkToRequirement*>(group->getChild(i));
+            if(link->getID() == id)
+                group->removeChildAt(i);
+        }
     }
 }
 

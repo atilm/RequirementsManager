@@ -64,6 +64,7 @@ public:
     virtual LinkContainer* getLinkContainer(const QModelIndex &index);
 signals:
     void columnsChanged();
+    void requirementRemoved(unsigned int id);
 
 public slots:
 

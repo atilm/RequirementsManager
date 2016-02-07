@@ -37,6 +37,7 @@ signals:
 public slots:
     virtual void handleLinkTypeInserted(int before);
     virtual void handleLinkTypeRemoved(int index);
+    virtual void handleRequirementRemoved(unsigned int id);
     virtual void addLink(const QModelIndex &index,
                          LinkToRequirement *link);
     virtual void addLink(int groupIdx, unsigned int requirementID);

@@ -1,6 +1,7 @@
 #include "uniqueidmanager.h"
 
-UniqueIDManager::UniqueIDManager()
+UniqueIDManager::UniqueIDManager(QObject *parent)
+    : QObject(parent)
 {
     maxID = 0;
 }
@@ -17,8 +18,10 @@ bool UniqueIDManager::hasID(unsigned int id) const
 
 void UniqueIDManager::removeID(unsigned int id)
 {
-    if(ids.contains(id))
+    if(ids.contains(id)){
         ids.remove(id);
+        emit idRemoved(id);
+    }
     else
         throw IDUnknownException();
 }
