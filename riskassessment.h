@@ -23,8 +23,8 @@ public:
     virtual void setMitigationStrategy(const QString &s);
     virtual QVariant initialRisk(int role) const;
     virtual QVariant finalRisk(int role) const;
-    virtual RiskModel* initialRiskModel();
-    virtual RiskModel* finalRiskModel();
+    virtual RiskModel* initialRiskModel() const;
+    virtual RiskModel* finalRiskModel() const;
 
     virtual PreventiveActionModel* getPreventiveActions();
 

@@ -15,7 +15,9 @@ th {
     background-color: #d0d0d0;
     color: black;
     font-weight: bold;
-    width: 20%;
+}
+th.assessment{
+    width: 10%;
 }
 table{
     width: 100%;
@@ -26,12 +28,26 @@ table{
 <table>
 <tr>
 <th>Scenarios</th>
-<th>Initial Risk</th>
-<th>Final Risk</th>
+<th class="assessment">Initial Probability</th>
+<th class="assessment">Initial Extent of Damage</th>
+<th class="assessment">Resulting Risk</th>
 </tr>
 <tr>
 <td><!--SCENARIO--></td>
+<td><!--INITIAL_PROBABILITY--></td>
+<td><!--INITIAL_DAMAGE--></td>
 <td><!--INITIAL_RISK--></td>
+</tr>
+<tr>
+<th>Mitigation Strategy</th>
+<th>Final Probability</th>
+<th>Final Extent of Damage</th>
+<th>Resulting Risk</th>
+</tr>
+<tr>
+<td><!--MITIGATION_STRATEGY--></td>
+<td><!--FINAL_PROBABILITY--></td>
+<td><!--FINAL_DAMAGE--></td>
 <td><!--FINAL_RISK--></td>
 </tr>
 </table>

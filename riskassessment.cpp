@@ -65,12 +65,12 @@ QVariant RiskAssessment::finalRisk(int role) const
     return final->data(final->getCurrentRisk(), role);
 }
 
-RiskModel *RiskAssessment::initialRiskModel()
+RiskModel *RiskAssessment::initialRiskModel() const
 {
     return initial;
 }
 
-RiskModel *RiskAssessment::finalRiskModel()
+RiskModel *RiskAssessment::finalRiskModel() const
 {
     return final;
 }

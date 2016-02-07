@@ -40,7 +40,14 @@ QString HtmlGenerator::toHtml(const PreventiveAction &action)
 QString HtmlGenerator::toHtml(const RiskAssessment &risk)
 {
     riskAssessmentTemplate->setField("SCENARIO", toHtml(risk.scenario()));
+    riskAssessmentTemplate->setField("MITIGATION_STRATEGY", toHtml(risk.mitigationStrategy()));
+
+    riskAssessmentTemplate->setField("INITIAL_PROBABILITY", risk.initialRiskModel()->probability());
+    riskAssessmentTemplate->setField("INITIAL_DAMAGE", risk.initialRiskModel()->damageExtent());
     riskAssessmentTemplate->setField("INITIAL_RISK", risk.initialRisk(Qt::DisplayRole).toString());
+
+    riskAssessmentTemplate->setField("FINAL_PROBABILITY", risk.finalRiskModel()->probability());
+    riskAssessmentTemplate->setField("FINAL_DAMAGE", risk.finalRiskModel()->damageExtent());
     riskAssessmentTemplate->setField("FINAL_RISK", risk.finalRisk(Qt::DisplayRole).toString());
 
     return riskAssessmentTemplate->getHtml();
