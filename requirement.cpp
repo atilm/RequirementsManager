@@ -10,6 +10,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
     this->links->setOwner(this);
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
+    this->idManager->setRequirement(id, this);
     parent = NULL;
 
     type = UserRequirement;
@@ -27,6 +28,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
     this->links->setOwner(this);
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
+    this->idManager->setRequirement(id, this);
     parent = NULL;
 
     type = UserRequirement;
@@ -101,6 +103,11 @@ RiskAssessmentModel *Requirement::getRiskAssessment()
 LinkContainer *Requirement::getLinkContainer()
 {
     return links;
+}
+
+void Requirement::addRequirementLink(int groupIdx, uint reqID)
+{
+    links->addLink(groupIdx, reqID);
 }
 
 void Requirement::setParent(Requirement *parent)

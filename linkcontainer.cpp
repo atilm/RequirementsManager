@@ -3,11 +3,14 @@
 #include "requirement.h"
 #include <QDebug>
 
-LinkContainer::LinkContainer(LinkContext *context, QObject *parent)
+LinkContainer::LinkContainer(LinkContext *context,
+                             UniqueIDManager *idManager,
+                             QObject *parent)
     : QAbstractItemModel(parent)
 {
     this->owner = nullptr;
     this->context = context;
+    this->idManager = idManager;
     this->root = new LinkNode();
 
     initialize();
@@ -48,8 +51,10 @@ QVariant LinkContainer::data(const QModelIndex &index, int role) const
     if(role == Qt::DisplayRole){
         if(asLinkGroup(index))
             return context->typeName(index.row());
-        else
-            return asLinkNode(index)->toString();
+        else{
+            unsigned int requirementID = asLinkToRequirement(index)->getID();
+            return requirementIDToString(requirementID);
+        }
     }
     else
         return QVariant();
@@ -89,6 +94,13 @@ void LinkContainer::addLink(const QModelIndex &index, LinkToRequirement *link)
     beginInsertRows(groupIndex, before, before);
     group->insertChild(link, group->childCount());
     endInsertRows();
+}
+
+void LinkContainer::addLink(int groupIdx, unsigned int requirementID)
+{
+    QModelIndex groupModelIdx = index(groupIdx, 0, QModelIndex());
+
+    addLink(groupModelIdx, new LinkToRequirement(requirementID));
 }
 
 void LinkContainer::removeLink(const QModelIndex &index)
@@ -132,6 +144,25 @@ LinkGroup *LinkContainer::asLinkGroup(const QModelIndex &index) const
     return dynamic_cast<LinkGroup*>(asLinkNode(index));
 }
 
+LinkToRequirement *LinkContainer::asLinkToRequirement(const QModelIndex &index) const
+{
+    // call to asLinkNode() because dynamic_cast only takes
+    // pointers to classes and index.internalPointer() returns
+    // a void*
+    return dynamic_cast<LinkToRequirement*>(asLinkNode(index));
+}
+
+QString LinkContainer::requirementIDToString(unsigned int id) const
+{
+    try{
+        Requirement *r = idManager->getRequirement(id);
+        return r->getNumberedTitle();
+    }
+    catch(const IDUnknownException &e){
+        return QString("unresolved id(%1)").arg(id);
+    }
+}
+
 QModelIndex LinkContainer::index(int row, int column, const QModelIndex &parent) const
 {
     if(!hasIndex(row, column, parent))
@@ -172,4 +203,9 @@ QVariant LinkContainer::headerData(int section, Qt::Orientation orientation, int
         return tr("Links to %1").arg(owner->getNumberedTitle());
     else
         return QVariant();
+}
+
+LinkGroup *LinkContainer::getLinkGroup(int row) const
+{
+    return asLinkGroup(index(row, 0, QModelIndex()));
 }

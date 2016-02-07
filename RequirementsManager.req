@@ -4,6 +4,7 @@
         <AttributeDeclaration index="0" name="Implemented" type="Boolean"/>
         <AttributeDeclaration index="1" name="Priority" type="Text"/>
     </AttributeContext>
+    <LinkContext/>
     <RequirementSpecification>
         <Requirement id="3" type="UserRequirement" name="Hierarchical structure">
             <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
@@ -518,6 +519,24 @@ p, li { white-space: pre-wrap; }
                     <Attribute index="0" value="no"/>
                     <Attribute index="1" value=""/>
                 </Requirement>
+            </Requirement>
+            <Requirement id="60" type="FunctionalRequirement" name="Saving Links">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Ubuntu'; font-size:11pt;">The information about links is saved into the project file.</span></p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
+            </Requirement>
+            <Requirement id="61" type="FunctionalRequirement" name="Loading Links">
+                <description><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Ubuntu'; font-size:11pt;">The information about links can be loaded to the project file.</span></p></body></html>]]></description>
+                <Attribute index="0" value="no"/>
+                <Attribute index="1" value=""/>
             </Requirement>
         </Requirement>
         <Requirement id="40" type="UserRequirement" name="Risk Assessment">

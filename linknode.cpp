@@ -13,7 +13,7 @@ QString LinkNode::toString() const
     return QString();
 }
 
-LinkNode *LinkNode::getChild(int index)
+LinkNode *LinkNode::getChild(int index) const
 {
     if(isValidIndex(index))
         return children[index];

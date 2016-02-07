@@ -117,6 +117,8 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
     for(int a=0;a < attributeContext->rowCount();a++)
         writeAttribute(parent, row, a);
 
+    writeLinks(itemIdx);
+
     writeRiskAssessmentModel(model->getRiskAssessment(itemIdx));
 
     writeChildrenOf(itemIdx);
@@ -132,6 +134,21 @@ void ProjectFileWriter::writeAttribute(const QModelIndex &parent, int row, int a
     xml->writeAttribute("index", QString("%1").arg(attributeIndex));
     xml->writeAttribute("value", value);
     xml->writeEndElement();
+}
+
+void ProjectFileWriter::writeLinks(const QModelIndex &itemIdx)
+{
+    LinkContainer *links = model->getLinkContainer(itemIdx);
+    for(int g=0; g<links->rowCount(); g++){
+        LinkGroup *group = links->getLinkGroup(g);
+        for(int c=0; c<group->childCount(); c++){
+            LinkToRequirement *link = group->getLink(c);
+            xml->writeStartElement("Link");
+            xml->writeAttribute("group", QString("%1").arg(g));
+            xml->writeAttribute("id", QString("%1").arg(link->getID()));
+            xml->writeEndElement();
+        }
+    }
 }
 
 void ProjectFileWriter::writeRiskAssessmentModel(RiskAssessmentModel *risks)

@@ -55,7 +55,9 @@ public:
 
     virtual QTextDocument *getDescription();
     virtual RiskAssessmentModel* getRiskAssessment();
+
     virtual LinkContainer* getLinkContainer();
+    virtual void addRequirementLink(int groupIdx, uint reqID);
 
     virtual int getRow() const;
 

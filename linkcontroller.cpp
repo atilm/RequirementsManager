@@ -94,7 +94,7 @@ void LinkController::handleAddRequirementLink(const QModelIndex &index)
     QModelIndex current = linkView->selectionModel()->currentIndex();
     RequirementsModel *model = static_cast<RequirementsModel*>(reqView->model());
     Requirement *req = model->getRequirement(index);
-    LinkToRequirement *link = new LinkToRequirement(req);
+    LinkToRequirement *link = new LinkToRequirement(req->getID());
 
     currentLinks->addLink(current, link);
 }

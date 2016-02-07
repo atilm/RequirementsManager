@@ -106,6 +106,9 @@ void ProjectFileReader::parseRequirement(QModelIndex parent)
             else if(xml->name() == "Attribute"){
                 parseRequirementAttribute(itemIdx);
             }
+            else if(xml->name() == "Link"){
+                parseRequirementsLink(itemIdx);
+            }
             else if(xml->name() == "RiskAssessment"){
                 parseRiskAssessment(itemIdx);
             }
@@ -130,6 +133,15 @@ void ProjectFileReader::parseRequirementAttribute(QModelIndex itemIdx)
     QString valueString = getAttribute("value");
 
     storeAttributeValue(itemIdx, index, valueString);
+}
+
+void ProjectFileReader::parseRequirementsLink(QModelIndex itemIdx)
+{
+    int groupIndex = getAttribute("group").toInt();
+    uint requirementID = getAttribute("id").toUInt();
+
+    Requirement *requirement = model->getRequirement(itemIdx);
+    requirement->addRequirementLink(groupIndex, requirementID);
 }
 
 void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)

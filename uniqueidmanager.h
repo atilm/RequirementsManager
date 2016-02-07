@@ -1,11 +1,17 @@
 #ifndef UNIQUEIDMANAGER_H
 #define UNIQUEIDMANAGER_H
 
-#include <QSet>
+#include <QHash>
 #include <exception>
 using namespace std;
 
+class Requirement;
+
 class IDCollisionException : public exception{
+
+};
+
+class IDUnknownException : public exception{
 
 };
 
@@ -17,11 +23,13 @@ public:
 
     virtual bool hasID(unsigned int id) const;
     virtual void removeID(unsigned int id);
-    unsigned int newUniqueID();
-    unsigned int newUniqueID(unsigned int requestedId);
+    virtual unsigned int newUniqueID();
+    virtual unsigned int newUniqueID(unsigned int requestedId);
+    virtual void setRequirement(unsigned int id, Requirement *req);
+    virtual Requirement* getRequirement(unsigned int id) const;
 
 private:
-    QSet<unsigned int> ids;
+    QHash<unsigned int, Requirement*> ids;
     unsigned int maxID;
 
     void updateMax(unsigned int id);

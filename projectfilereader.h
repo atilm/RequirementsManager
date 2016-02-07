@@ -32,6 +32,7 @@ private:
     void parseRequirement(QModelIndex parent);
     void parseDescription(QModelIndex itemIdx);
     void parseRequirementAttribute(QModelIndex itemIdx);
+    void parseRequirementsLink(QModelIndex itemIdx);
     void parseRiskAssessment(QModelIndex itemIdx);
     void parseRiskScenario(RiskAssessment *ra);
     void parsePreventiveAction(RiskAssessment *ra);

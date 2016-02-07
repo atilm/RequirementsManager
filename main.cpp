@@ -11,10 +11,11 @@ int main(int argc, char *argv[])
     AttributeContext *attributeContext = new AttributeContext();
     AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
 
-    LinkContext *linkContext = new LinkContext();
-    LinkContainerFactory *links = new LinkContainerFactory(linkContext);
-
     UniqueIDManager *idManager = new UniqueIDManager();
+
+    LinkContext *linkContext = new LinkContext();
+    LinkContainerFactory *links = new LinkContainerFactory(linkContext, idManager);
+
     RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes, links);
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,

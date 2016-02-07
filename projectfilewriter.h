@@ -31,6 +31,7 @@ private:
     void writeChildrenOf(QModelIndex parent);
     void writeRequirement(int row, QModelIndex parent);
     void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
+    void writeLinks(const QModelIndex &itemIdx);
     void writeRiskAssessmentModel(RiskAssessmentModel *risks);
     void writeRiskAssessment(RiskAssessment *risk);
     void writePreventiveActions(PreventiveActionModel *actions);

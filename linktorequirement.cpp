@@ -1,10 +1,10 @@
 #include "linktorequirement.h"
 #include "requirement.h"
 
-LinkToRequirement::LinkToRequirement(Requirement *link)
+LinkToRequirement::LinkToRequirement(unsigned int id)
     : LinkNode()
 {
-    linkedRequirement = link;
+    linkedID = id;
 }
 
 LinkToRequirement::~LinkToRequirement()
@@ -12,9 +12,7 @@ LinkToRequirement::~LinkToRequirement()
 
 }
 
-QString LinkToRequirement::toString() const
+unsigned int LinkToRequirement::getID() const
 {
-    if(linkedRequirement)
-        return linkedRequirement->getNumberedTitle();
+    return linkedID;
 }
-

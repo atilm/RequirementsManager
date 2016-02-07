@@ -9,7 +9,7 @@ public:
     LinkNode();
 
     virtual QString toString() const;
-    virtual LinkNode* getChild(int index);
+    virtual LinkNode* getChild(int index) const;
     virtual LinkNode* getParent();
     virtual int childCount() const;
     virtual void insertChild(LinkNode* node,

@@ -1,8 +1,9 @@
 #include "linkcontainerfactory.h"
 
-LinkContainerFactory::LinkContainerFactory(LinkContext *context)
+LinkContainerFactory::LinkContainerFactory(LinkContext *context, UniqueIDManager *idManager)
 {
     this->context = context;
+    this->idManager = idManager;
 }
 
 LinkContainerFactory::~LinkContainerFactory()
@@ -11,5 +12,5 @@ LinkContainerFactory::~LinkContainerFactory()
 
 LinkContainer *LinkContainerFactory::newContainer()
 {
-    return new LinkContainer(context);
+    return new LinkContainer(context, idManager);
 }

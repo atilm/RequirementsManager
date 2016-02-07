@@ -5,3 +5,8 @@ LinkGroup::LinkGroup()
 {
 
 }
+
+LinkToRequirement *LinkGroup::getLink(int i) const
+{
+    return dynamic_cast<LinkToRequirement*>(getChild(i));
+}

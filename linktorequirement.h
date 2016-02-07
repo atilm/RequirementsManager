@@ -9,13 +9,13 @@ class Requirement;
 class LinkToRequirement : public LinkNode
 {
 public:
-    LinkToRequirement(Requirement *link);
+    LinkToRequirement(unsigned int id);
     virtual ~LinkToRequirement();
 
-    virtual QString toString() const;
+    virtual unsigned int getID() const;
 
 private:
-    Requirement *linkedRequirement;
+    unsigned int linkedID;
 };
 
 #endif // LINKTOREQUIREMENT_H
