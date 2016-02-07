@@ -28,7 +28,7 @@ void PreventiveAction::setTestCase(const QString &testCase)
 
 void PreventiveAction::setTestName(const QString &testName)
 {
-    if(testName != testName){
+    if(testName != this->testName){
         this->testName = testName;
         fileState->setChanged(true);
     }

@@ -18,7 +18,8 @@ public:
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
-    virtual void add(const QModelIndex &beforeIndex);
+    virtual PreventiveAction* appendAction();
+    virtual void add(int beforeRowIndex);
     virtual void remove(const QModelIndex &index);
     virtual PreventiveAction* getAction(const QModelIndex &index);
 signals:

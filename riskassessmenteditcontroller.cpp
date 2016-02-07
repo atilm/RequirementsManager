@@ -101,15 +101,20 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
         connect(actionView, SIGNAL(clicked(QModelIndex)),
                 this, SLOT(actionClicked(QModelIndex)));
     }
-    catch(const InvalidIndexException &e){
-
+    catch(const runtime_error &e){
+        descriptionView->clear();
     }
 }
 
 void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    PreventiveAction *a = actionModel->getAction(current);
-    descriptionView->displayAction(a);
+    try{
+        PreventiveAction *a = actionModel->getAction(current);
+        descriptionView->displayAction(a);
+    }
+    catch(const runtime_error &e){
+        descriptionView->clear();
+    }
 }
 
 void RiskAssessmentEditController::insertBeforeCurrent()
@@ -119,7 +124,7 @@ void RiskAssessmentEditController::insertBeforeCurrent()
 
 //    QModelIndex newIndex = riskModel->add(riskView->currentIndex());
 //    dialog->exec(newIndex);
-    riskModel->add(riskView->currentIndex());
+    riskModel->add(riskView->currentIndex().row());
 }
 
 void RiskAssessmentEditController::removeCurrent()
@@ -133,7 +138,7 @@ void RiskAssessmentEditController::insertActionBeforeCurrent()
     if(!actionModel)
         return;
 
-    actionModel->add(actionView->currentIndex());
+    actionModel->add(actionView->currentIndex().row());
 }
 
 void RiskAssessmentEditController::removeCurrentAction()

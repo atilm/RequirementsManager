@@ -17,6 +17,7 @@ class RiskAssessmentDialog : public QDialog
 
 public:
     explicit RiskAssessmentDialog(QPlainTextEditAdapter *scenarioEdit,
+                                  QPlainTextEditAdapter *mitigationStrategyEdit,
                                   RiskAssessmentTable *initialRiskEdit,
                                   RiskAssessmentTable *finalRiskEdit,
                                   QWidget *parent = 0);
@@ -31,12 +32,14 @@ public slots:
 private:
     Ui::RiskAssessmentDialog *ui;
     QPlainTextEditAdapter *scenarioEdit;
+    QPlainTextEditAdapter *mitigationStrategyEdit;
     RiskAssessmentTable *initialRiskEdit;
     RiskAssessmentTable *finalRiskEdit;
     RiskAssessmentModel *model;
     RiskAssessment *currentRA;
 
     void injectWidgets(QPlainTextEditAdapter *scenarioEdit,
+                       QPlainTextEditAdapter *mitigationStrategyEdit,
                        RiskAssessmentTable *initialRiskEdit,
                        RiskAssessmentTable *finalRiskEdit);
 

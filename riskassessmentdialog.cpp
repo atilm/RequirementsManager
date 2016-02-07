@@ -2,6 +2,7 @@
 #include "ui_riskassessmentdialog.h"
 
 RiskAssessmentDialog::RiskAssessmentDialog(QPlainTextEditAdapter *scenarioEdit,
+                                           QPlainTextEditAdapter *mitigationStrategyEdit,
                                            RiskAssessmentTable *initialRiskEdit,
                                            RiskAssessmentTable *finalRiskEdit,
                                            QWidget *parent) :
@@ -12,7 +13,7 @@ RiskAssessmentDialog::RiskAssessmentDialog(QPlainTextEditAdapter *scenarioEdit,
     ui->setupUi(this);
     setWindowTitle(tr("Risk Assessment"));
 
-    injectWidgets(scenarioEdit, initialRiskEdit, finalRiskEdit);
+    injectWidgets(scenarioEdit, mitigationStrategyEdit, initialRiskEdit, finalRiskEdit);
 }
 
 RiskAssessmentDialog::~RiskAssessmentDialog()
@@ -34,10 +35,12 @@ int RiskAssessmentDialog::exec(const QModelIndex &index)
 void RiskAssessmentDialog::accept()
 {
     currentRA->setScenario(scenarioEdit->toPlainText());
+    currentRA->setMitigationStrategy(mitigationStrategyEdit->toPlainText());
     QDialog::accept();
 }
 
 void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
+                                         QPlainTextEditAdapter *mitigationStrategyEdit,
                                          RiskAssessmentTable *initialRiskEdit,
                                          RiskAssessmentTable *finalRiskEdit)
 {
@@ -49,6 +52,15 @@ void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
     delete ui->scenarioTextEdit;
     ui->scenarioTextEdit = scenarioEdit;
     ui->gridLayout->addWidget(scenarioEdit, row, col, rowSpan, colSpan);
+    ui->scenarioTextEdit->setMinimumWidth(400);
+    ui->scenarioTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+
+    this->mitigationStrategyEdit = mitigationStrategyEdit;
+    index = ui->gridLayout->indexOf(ui->mitigationStrategyTextEdit);
+    ui->gridLayout->getItemPosition(index, &row, &col, &rowSpan, &colSpan);
+    delete ui->mitigationStrategyTextEdit;
+    ui->mitigationStrategyTextEdit = mitigationStrategyEdit;
+    ui->gridLayout->addWidget(mitigationStrategyEdit, row, col, rowSpan, colSpan);
     ui->scenarioTextEdit->setMinimumWidth(400);
     ui->scenarioTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
@@ -76,6 +88,7 @@ void RiskAssessmentDialog::setCurrentIndex(const QModelIndex &index)
 
     currentRA = model->getRiskAssessment(index);
     scenarioEdit->setPlainText(currentRA->scenario());
+    mitigationStrategyEdit->setPlainText(currentRA->mitigationStrategy());
     initialRiskEdit->setModel(currentRA->initialRiskModel());
     finalRiskEdit->setModel(currentRA->finalRiskModel());
 }

@@ -19,6 +19,8 @@ public:
     virtual QString shortScenario() const;
     virtual QString scenario() const;
     virtual void setScenario(const QString &s);
+    virtual QString mitigationStrategy() const;
+    virtual void setMitigationStrategy(const QString &s);
     virtual QVariant initialRisk(int role) const;
     virtual QVariant finalRisk(int role) const;
     virtual RiskModel* initialRiskModel();
@@ -31,6 +33,7 @@ private:
     RiskModel *initial;
     RiskModel *final;
     QString scenarioText;
+    QString mitigationStrategyText;
     PreventiveActionModel *preventiveActions;
 };
 

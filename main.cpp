@@ -50,8 +50,9 @@ int main(int argc, char *argv[])
     RiskDescriptionView *riskDescriptionView = new RiskDescriptionView(displayHtml);
 
     RiskAssessmentDialog *raDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
-                                                                new RiskAssessmentTable(),
-                                                                new RiskAssessmentTable());
+                                                              new QPlainTextEditAdapter(),
+                                                              new RiskAssessmentTable(),
+                                                              new RiskAssessmentTable());
 
     PreventiveActionDialog *paDialog = new PreventiveActionDialog();
     paDialog->injectWidgets(new QLineEditAdapter(),

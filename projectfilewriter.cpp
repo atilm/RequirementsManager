@@ -169,6 +169,7 @@ void ProjectFileWriter::writeRiskAssessment(RiskAssessment *risk)
     xml->writeAttribute("finalDamage",
                         intToString(risk->finalRiskModel()->getCurrentRisk().row()));
     xml->writeTextElement("scenario", risk->scenario());
+    xml->writeTextElement("mitigationStrategy", risk->mitigationStrategy());
     writePreventiveActions(risk->getPreventiveActions());
 
     xml->writeEndElement();

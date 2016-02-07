@@ -32,7 +32,7 @@ void RiskTableView::insertBeforeCurrent()
     RiskAssessmentModel *ra = riskAssessmentModel();
 
     if(ra)
-        ra->add(selectionModel()->currentIndex());
+        ra->add(selectionModel()->currentIndex().row());
 }
 
 void RiskTableView::removeCurrent()

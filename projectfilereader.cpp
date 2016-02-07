@@ -147,8 +147,7 @@ void ProjectFileReader::parseRequirementsLink(QModelIndex itemIdx)
 void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
 {
     RiskAssessmentModel *riskModel = model->getRiskAssessment(itemIdx);
-    riskModel->add(riskModel->index(riskModel->rowCount(),0));
-    RiskAssessment *ra = riskModel->getRiskAssessment(riskModel->index(riskModel->rowCount()-1, 0));
+    RiskAssessment *ra = riskModel->appendAssessment();
 
     int initialProbability = getAttribute("initialProbability").toInt();
     int initialDamage = getAttribute("initialDamage").toInt();
@@ -166,6 +165,9 @@ void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
         if(xml->tokenType() == QXmlStreamReader::StartElement){
             if(xml->name() == "scenario"){
                 parseRiskScenario(ra);
+            }
+            if(xml->name() == "mitigationStrategy"){
+                parseMitigationStrategy(ra);
             }
             else if(xml->name() == "Action"){
                 parsePreventiveAction(ra);
@@ -185,12 +187,19 @@ void ProjectFileReader::parseRiskScenario(RiskAssessment *ra)
     }
 }
 
+void ProjectFileReader::parseMitigationStrategy(RiskAssessment *ra)
+{
+    xml->readNext();
+    if(xml->isCharacters()){
+        QString characters = xml->text().toString();
+        ra->setMitigationStrategy(characters);
+    }
+}
+
 void ProjectFileReader::parsePreventiveAction(RiskAssessment *ra)
 {
     PreventiveActionModel *actionModel = ra->getPreventiveActions();
-    actionModel->add(actionModel->index(actionModel->rowCount(), 0));
-    PreventiveAction *action = actionModel->getAction(
-                actionModel->index(actionModel->rowCount()-1, 0));
+    PreventiveAction *action = actionModel->appendAction();
 
     action->setTestCase(getAttribute("case"));
     action->setTestName(getAttribute("name"));

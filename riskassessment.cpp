@@ -42,6 +42,19 @@ void RiskAssessment::setScenario(const QString &s)
     }
 }
 
+QString RiskAssessment::mitigationStrategy() const
+{
+    return mitigationStrategyText;
+}
+
+void RiskAssessment::setMitigationStrategy(const QString &s)
+{
+    if(s != mitigationStrategyText){
+        mitigationStrategyText = s;
+        fileState->setChanged(true);
+    }
+}
+
 QVariant RiskAssessment::initialRisk(int role) const
 {
     return initial->data(initial->getCurrentRisk(), role);

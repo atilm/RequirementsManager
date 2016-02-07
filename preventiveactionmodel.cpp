@@ -43,12 +43,18 @@ QVariant PreventiveActionModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-void PreventiveActionModel::add(const QModelIndex &beforeIndex)
+PreventiveAction *PreventiveActionModel::appendAction()
+{
+    add(rowCount());
+    return getAction(index(rowCount()-1,0));
+}
+
+void PreventiveActionModel::add(int beforeRowIndex)
 {
     int beforeRow = 0;
 
-    if(beforeIndex.isValid())
-        beforeRow = beforeIndex.row();
+    if(beforeRowIndex >= 0 && beforeRowIndex <= rowCount())
+        beforeRow = beforeRowIndex;
 
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
     actions.insert(beforeRow, new PreventiveAction(fileState));

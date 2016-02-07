@@ -58,12 +58,18 @@ QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-void RiskAssessmentModel::add(const QModelIndex &beforeIndex)
+RiskAssessment *RiskAssessmentModel::appendAssessment()
+{
+    add(rowCount());
+    return getRiskAssessment(index(rowCount()-1,0));
+}
+
+void RiskAssessmentModel::add(int beforeRowIndex)
 {
     int beforeRow = 0;
 
-    if(beforeIndex.isValid())
-        beforeRow = beforeIndex.row();
+    if(beforeRowIndex >= 0 && beforeRowIndex <= rowCount())
+        beforeRow = beforeRowIndex;
 
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
     assessments.insert(beforeRow, factory->newAssessment());

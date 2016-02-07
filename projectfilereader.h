@@ -35,6 +35,7 @@ private:
     void parseRequirementsLink(QModelIndex itemIdx);
     void parseRiskAssessment(QModelIndex itemIdx);
     void parseRiskScenario(RiskAssessment *ra);
+    void parseMitigationStrategy(RiskAssessment *ra);
     void parsePreventiveAction(RiskAssessment *ra);
     void storeAttributeValue(const QModelIndex &itemIdx,
                              int attributeIndex,
