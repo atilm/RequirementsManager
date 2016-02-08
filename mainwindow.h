@@ -18,6 +18,7 @@
 #include "riskassessmenteditcontroller.h"
 #include "linktypeeditor.h"
 #include "linkcontroller.h"
+#include "sourcecodecontroller.h"
 
 namespace Ui {
 class MainWindow;
@@ -38,6 +39,7 @@ public:
                         RiskAssessmentEditController *riskAssessmentEditController,
                         LinkTypeEditor *linkTypeEditor,
                         LinkController *linkController,
+                        SourceCodeController *sourceController,
                         QWidget *parent);
     ~MainWindow();
 
@@ -65,6 +67,7 @@ private:
     PreventiveActionTableView *preventiveActionTableView;
     LinkTypeEditor *linkTypeEditor;
     LinkController *linkController;
+    SourceCodeController *sourceController;
 
     void closeEvent(QCloseEvent *);
 

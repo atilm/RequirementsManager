@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>989</width>
-    <height>819</height>
+    <width>1090</width>
+    <height>784</height>
    </rect>
   </property>
   <property name="font">
@@ -40,6 +40,12 @@
            <weight>50</weight>
            <bold>false</bold>
           </font>
+         </property>
+         <property name="allColumnsShowFocus">
+          <bool>false</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>false</bool>
          </property>
         </widget>
         <widget class="QTextEdit" name="textEdit">
@@ -177,7 +183,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Risk / Action Description</string>
+             <string>Risk / Test Description</string>
             </property>
            </widget>
           </item>
@@ -203,15 +209,15 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
-       <widget class="QWidget" name="page">
+       <widget class="QWidget" name="linkPage">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>335</width>
-          <height>699</height>
+          <width>370</width>
+          <height>637</height>
          </rect>
         </property>
         <attribute name="label">
@@ -265,6 +271,43 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="codePage">
+        <attribute name="label">
+         <string>Source Code</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="classesLabel">
+           <property name="text">
+            <string>Classes</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="moduleListView"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Functions</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="functionListView"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Tests</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="testListView"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -275,7 +318,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>989</width>
+     <width>1090</width>
      <height>21</height>
     </rect>
    </property>

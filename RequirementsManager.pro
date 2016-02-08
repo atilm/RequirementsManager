@@ -56,7 +56,9 @@ SOURCES += main.cpp\
     linktorequirement.cpp \
     linkgroup.cpp \
     linkcontroller.cpp \
-    linknode.cpp
+    linknode.cpp \
+    isourcecodereader.cpp \
+    sourcecodecontroller.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -99,7 +101,9 @@ HEADERS  += mainwindow.h \
     linktorequirement.h \
     linkgroup.h \
     linkcontroller.h \
-    linknode.h
+    linknode.h \
+    isourcecodereader.h \
+    sourcecodecontroller.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

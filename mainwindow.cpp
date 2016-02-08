@@ -8,7 +8,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
-                       LinkTypeEditor *linkTypeEditor, LinkController *linkController,
+                       LinkTypeEditor *linkTypeEditor, LinkController *linkController, SourceCodeController *sourceController,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -31,6 +31,11 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     linkController->setLinkView(ui->linkView);
     linkController->setAddButton(ui->addLinksButton);
     linkController->setRemoveButton(ui->removeLinkButton);
+
+    this->sourceController = sourceController;
+    sourceController->injectViews(ui->moduleListView,
+                                  ui->functionListView,
+                                  ui->testListView);
 
     fileController->setModel(requirements);
 
@@ -62,6 +67,7 @@ MainWindow::~MainWindow()
     delete attributeDialog;
     delete riskAssessmentEditController;
     delete linkTypeEditor;
+    delete sourceController;
     delete ui;
 }
 
