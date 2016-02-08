@@ -15,17 +15,19 @@ LinkContainer::LinkContainer(LinkContext *context,
 
     initialize();
 
-    connect(context, SIGNAL(newLinkType(int)),
-            this, SLOT(handleLinkTypeInserted(int)));
-    connect(context, SIGNAL(linkTypeRemoved(int)),
-            this, SLOT(handleLinkTypeRemoved(int)));
-    connect(idManager, SIGNAL(idRemoved(unsigned int)),
-            this, SLOT(handleRequirementRemoved(unsigned int)));
+    connectSignals();
 }
 
 LinkContainer::~LinkContainer()
 {
-
+    if(context){
+        connect(context, SIGNAL(newLinkType(int)),
+                this, SLOT(handleLinkTypeInserted(int)));
+        connect(context, SIGNAL(linkTypeRemoved(int)),
+                this, SLOT(handleLinkTypeRemoved(int)));
+        connect(idManager, SIGNAL(idRemoved(unsigned int)),
+                this, SLOT(handleRequirementRemoved(unsigned int)));
+    }
 }
 
 void LinkContainer::setOwner(Requirement *r)
@@ -138,6 +140,11 @@ void LinkContainer::initialize()
 
     for(int i=0;i<context->rowCount();i++)
         root->insertChild(new LinkGroup(),i);
+}
+
+void LinkContainer::connectSignals()
+{
+
 }
 
 LinkNode *LinkContainer::getValidItem(const QModelIndex &index) const

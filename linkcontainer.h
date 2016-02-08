@@ -51,6 +51,7 @@ private:
 
     void initialize();
 
+    void connectSignals();
     LinkNode* getValidItem(const QModelIndex &index) const;
     LinkNode* asLinkNode(const QModelIndex &index) const;
     LinkGroup* asLinkGroup(const QModelIndex &index) const;

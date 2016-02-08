@@ -143,7 +143,7 @@ TEST_F(ProjectFileControllerTests, when_saveAs_is_called_the_file_state_is_set_t
 }
 
 TEST_F(ProjectFileControllerTests, when_file_is_savedAs_the_start_directory_is_set){
-    QString dirPath = "/home/directory";
+    QString dirPath = "C:/directory";
     QString fileName = "file.req";
     QString filePath = dirPath + "/" + fileName;
 
@@ -266,7 +266,7 @@ TEST_F(ProjectFileControllerTests, when_load_is_called_the_file_state_is_set_to_
 }
 
 TEST_F(ProjectFileControllerTests, when_file_is_loaded_the_start_directory_is_set){
-    QString dirPath = "/home/directory";
+    QString dirPath = "C:/directory";
     QString fileName = "file.req";
     QString filePath = dirPath + "/" + fileName;
 

@@ -6,3 +6,4 @@ debug/
 *.obj
 *.o
 ui_*
+*.exe

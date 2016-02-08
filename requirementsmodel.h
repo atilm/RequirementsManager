@@ -81,6 +81,7 @@ private:
     FileStateTracker *fileState;
     RequirementToModelMapper *dataMapper;
 
+    void connectSignals();
     Requirement *asRequirement(const QModelIndex &index) const;
     Requirement *getValidItem(const QModelIndex &index) const;
 

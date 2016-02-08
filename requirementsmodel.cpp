@@ -15,14 +15,7 @@ RequirementsModel::RequirementsModel(RequirementFactory *factory,
     this->linkContext = linkContext;
     this->dataMapper = dataMapper;
 
-    connect(attributeContext, SIGNAL(attributeAboutToBeInserted(int)),
-            this, SLOT(handleAttributeAboutToBeInserted(int)));
-    connect(attributeContext, SIGNAL(attributeInserted()),
-            this, SLOT(handleAttributeInserted()));
-    connect(attributeContext, SIGNAL(attributeAboutToBeRemoved(int)),
-            this, SLOT(handleAttributeAboutToBeRemoved(int)));
-    connect(attributeContext, SIGNAL(attributeRemoved()),
-            this, SLOT(handleAttributeRemoved()));
+    connectSignals();
 }
 
 RequirementsModel::~RequirementsModel()
@@ -362,6 +355,20 @@ void RequirementsModel::handleAttributeRemoved()
 {
     endRemoveColumns();
     emit columnsChanged();
+}
+
+void RequirementsModel::connectSignals()
+{
+    if(attributeContext){
+        connect(attributeContext, SIGNAL(attributeAboutToBeInserted(int)),
+                this, SLOT(handleAttributeAboutToBeInserted(int)));
+        connect(attributeContext, SIGNAL(attributeInserted()),
+                this, SLOT(handleAttributeInserted()));
+        connect(attributeContext, SIGNAL(attributeAboutToBeRemoved(int)),
+                this, SLOT(handleAttributeAboutToBeRemoved(int)));
+        connect(attributeContext, SIGNAL(attributeRemoved()),
+                this, SLOT(handleAttributeRemoved()));
+    }
 }
 
 Requirement *RequirementsModel::asRequirement(const QModelIndex &index) const
