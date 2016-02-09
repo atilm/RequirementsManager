@@ -9,7 +9,7 @@ public:
     virtual ~ISourceCodeReader() {}
 
     virtual QStringList availableLanguages() const = 0;
-    virtual CodeContainer* parseSourceCode() const = 0;
+    // virtual CodeContainer* parseSourceCode() const = 0;
 
 };
 

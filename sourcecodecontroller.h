@@ -4,6 +4,8 @@
 #include <QListView>
 #include <QObject>
 
+#include "sourcecodemodel.h"
+
 class SourceCodeController : public QObject
 {
     Q_OBJECT
@@ -23,6 +25,7 @@ private:
     QListView *moduleView;
     QListView *functionView;
     QListView *testView;
+    SourceCodeModel *model;
 };
 
 #endif // SOURCECODECONTROLLER_H

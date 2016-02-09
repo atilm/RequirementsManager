@@ -8,7 +8,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
-                       LinkTypeEditor *linkTypeEditor, LinkController *linkController, SourceCodeController *sourceController,
+                       LinkTypeEditor *linkTypeEditor, LinkController *linkController,
+                       SourceCodeController *sourceController,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -156,5 +157,6 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
 
     setWindowTitle(windowTitle);
 }
+
 
 

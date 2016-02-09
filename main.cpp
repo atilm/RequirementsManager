@@ -72,9 +72,12 @@ int main(int argc, char *argv[])
     LinkController *linkController = new LinkController();
     linkController->setRequirementsView(requirementsView);
 
+    SourceCodeController *sourceController = new SourceCodeController();
+
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
-                 linkTypeEditor, linkController, 0);
+                 linkTypeEditor, linkController,
+                 sourceController, 0);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

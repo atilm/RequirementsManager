@@ -19,3 +19,4 @@ void SourceCodeController::injectViews(QListView *moduleView,
     this->testView = testView;
 }
 
+
