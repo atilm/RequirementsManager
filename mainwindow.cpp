@@ -9,7 +9,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
                        LinkTypeEditor *linkTypeEditor, LinkController *linkController,
-                       SourceCodeController *sourceController,
+                       SourceCodeController *sourceController, SettingsDialog *settingsDialog,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,6 +28,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     this->riskAssessmentEditController = riskAssessmentEditController;
     this->linkTypeEditor = linkTypeEditor;
     this->linkController = linkController;
+    this->settingsDialog = settingsDialog;
 
     linkController->setLinkView(ui->linkView);
     linkController->setAddButton(ui->addLinksButton);
@@ -47,6 +48,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
 
+    connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));
     connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));

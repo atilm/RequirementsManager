@@ -74,10 +74,12 @@ int main(int argc, char *argv[])
 
     SourceCodeController *sourceController = new SourceCodeController();
 
+    SettingsDialog *settingsDialog = new SettingsDialog(fileController, 0);
+
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
                  linkTypeEditor, linkController,
-                 sourceController, 0);
+                 sourceController, settingsDialog, 0);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

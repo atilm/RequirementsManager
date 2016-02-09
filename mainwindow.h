@@ -19,6 +19,7 @@
 #include "linktypeeditor.h"
 #include "linkcontroller.h"
 #include "sourcecodecontroller.h"
+#include "settingsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,7 @@ public:
                         LinkTypeEditor *linkTypeEditor,
                         LinkController *linkController,
                         SourceCodeController *sourceController,
+                        SettingsDialog *settingsDialog,
                         QWidget *parent);
     ~MainWindow();
 
@@ -68,6 +70,7 @@ private:
     LinkTypeEditor *linkTypeEditor;
     LinkController *linkController;
     SourceCodeController *sourceController;
+    SettingsDialog *settingsDialog;
 
     void closeEvent(QCloseEvent *);
 

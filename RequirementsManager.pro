@@ -60,7 +60,8 @@ SOURCES += main.cpp\
     isourcecodereader.cpp \
     sourcecodecontroller.cpp \
     sourcecodemodel.cpp \
-    sourcenode.cpp
+    sourcenode.cpp \
+    settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -107,14 +108,16 @@ HEADERS  += mainwindow.h \
     isourcecodereader.h \
     sourcecodecontroller.h \
     sourcecodemodel.h \
-    sourcenode.h
+    sourcenode.h \
+    settingsdialog.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
     riskassessmenttable.ui \
     riskassessmentdialog.ui \
     preventiveactiondialog.ui \
-    linkeditor.ui
+    linkeditor.ui \
+    settingsdialog.ui
 
 RESOURCES += \
     resources.qrc
