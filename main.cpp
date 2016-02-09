@@ -72,9 +72,13 @@ int main(int argc, char *argv[])
     LinkController *linkController = new LinkController();
     linkController->setRequirementsView(requirementsView);
 
-    SourceCodeController *sourceController = new SourceCodeController();
+    SourceCodeReaderProvider *readerProvider = new SourceCodeReaderProvider();
 
-    SettingsDialog *settingsDialog = new SettingsDialog(fileController, 0);
+    SourceCodeController *sourceController = new SourceCodeController(readerProvider);
+
+    SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
+                                                        fileController,
+                                                        0);
 
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,

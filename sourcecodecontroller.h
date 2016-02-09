@@ -5,12 +5,14 @@
 #include <QObject>
 
 #include "sourcecodemodel.h"
+#include "sourcecodereaderprovider.h"
 
 class SourceCodeController : public QObject
 {
     Q_OBJECT
 public:
-    explicit SourceCodeController(QObject *parent = 0);
+    explicit SourceCodeController(SourceCodeReaderProvider *readerProvider,
+                                  QObject *parent = 0);
     virtual ~SourceCodeController();
 
     virtual void injectViews(QListView *moduleView,
@@ -26,6 +28,8 @@ private:
     QListView *functionView;
     QListView *testView;
     SourceCodeModel *model;
+    SourceCodeReaderProvider *readerProvider;
+
 };
 
 #endif // SOURCECODECONTROLLER_H

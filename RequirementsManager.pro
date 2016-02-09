@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     sourcecodecontroller.cpp \
     sourcecodemodel.cpp \
     sourcenode.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    sourcecodereaderprovider.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -109,7 +110,8 @@ HEADERS  += mainwindow.h \
     sourcecodecontroller.h \
     sourcecodemodel.h \
     sourcenode.h \
-    settingsdialog.h
+    settingsdialog.h \
+    sourcecodereaderprovider.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

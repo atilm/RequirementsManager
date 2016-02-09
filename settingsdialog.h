@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "projectfilecontroller.h"
+#include "sourcecodereaderprovider.h"
 
 namespace Ui {
 class SettingsDialog;
@@ -13,13 +14,17 @@ class SettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SettingsDialog(ProjectFileController *project,
+    explicit SettingsDialog(SourceCodeReaderProvider *readers,
+                            ProjectFileController *project,
                             QWidget *parent = 0);
-    ~SettingsDialog();
+    virtual ~SettingsDialog();
 
 private:
     Ui::SettingsDialog *ui;
     ProjectFileController *project;
+    SourceCodeReaderProvider *readers;
+
+    void initialize();
 };
 
 #endif // SETTINGSDIALOG_H

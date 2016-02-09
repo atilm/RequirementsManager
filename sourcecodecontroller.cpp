@@ -1,8 +1,10 @@
 #include "sourcecodecontroller.h"
 
-SourceCodeController::SourceCodeController(QObject *parent) : QObject(parent)
+SourceCodeController::SourceCodeController(SourceCodeReaderProvider *readerProvider,
+                                           QObject *parent)
+    : QObject(parent)
 {
-
+    this->readerProvider = readerProvider;
 }
 
 SourceCodeController::~SourceCodeController()
