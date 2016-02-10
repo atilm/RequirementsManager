@@ -11,6 +11,12 @@ SettingsDialog::SettingsDialog(SourceCodeReaderProvider *readers,
     this->project = project;
     this->readers = readers;
 
+    sourceDirectories = project->sourceDirModel();
+    testDirectories = project->testDirModel();
+
+    ui->sourceDirsListView->setModel(sourceDirectories);
+    ui->testDirsListView->setModel(testDirectories);
+
     initialize();
 }
 

@@ -71,12 +71,6 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="3">
-    <widget class="QListWidget" name="listWidget"/>
-   </item>
-   <item row="4" column="3" colspan="3">
-    <widget class="QListWidget" name="listWidget_2"/>
-   </item>
    <item row="5" column="0" colspan="6">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
@@ -112,6 +106,12 @@
       <string>Test Code Directories</string>
      </property>
     </widget>
+   </item>
+   <item row="4" column="0" colspan="3">
+    <widget class="QListView" name="sourceDirsListView"/>
+   </item>
+   <item row="4" column="3" colspan="3">
+    <widget class="QListView" name="testDirsListView"/>
    </item>
   </layout>
  </widget>

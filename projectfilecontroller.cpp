@@ -9,7 +9,9 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              AppSettings *settings,
                                              QMessageBoxProvider *messageBox) : QObject()
 {
-    model = NULL;
+    model = nullptr;
+    sourceDirectories = nullptr;
+    testDirectories = nullptr;
 
     this->dialogProvider = fileDialog;
     this->projectFile = file;
@@ -34,6 +36,16 @@ ProjectFileController::~ProjectFileController()
 void ProjectFileController::setModel(RequirementsModel *model)
 {
     this->model = model;
+}
+
+DirectoryListModel *ProjectFileController::sourceDirModel() const
+{
+    return sourceDirectories;
+}
+
+DirectoryListModel *ProjectFileController::testDirModel() const
+{
+    return testDirectories;
 }
 
 void ProjectFileController::save()

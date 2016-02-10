@@ -23,6 +23,8 @@ private:
     Ui::SettingsDialog *ui;
     ProjectFileController *project;
     SourceCodeReaderProvider *readers;
+    DirectoryListModel *sourceDirectories;
+    DirectoryListModel *testDirectories;
 
     void initialize();
 };

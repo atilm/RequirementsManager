@@ -9,6 +9,8 @@
 #include "filestatetracker.h"
 #include "appsettings.h"
 #include "qmessageboxprovider.h"
+#include "directorylistmodel.h"
+#include "directorylistmodel.h"
 
 //! Encapsulates all read/write operations to load and save the project
 /*!
@@ -30,6 +32,9 @@ public:
 
     virtual void setModel(RequirementsModel *model);
 
+    virtual DirectoryListModel* sourceDirModel() const;
+    virtual DirectoryListModel* testDirModel() const;
+
 public slots:
     virtual void save();
     virtual void saveAs();
@@ -39,6 +44,8 @@ public slots:
 
 private:
     RequirementsModel *model;
+    DirectoryListModel *sourceDirectories;
+    DirectoryListModel *testDirectories;
     QFileDialogAdapter *dialogProvider;
     QFileAdapter *projectFile;
     ProjectFileReader *reader;
