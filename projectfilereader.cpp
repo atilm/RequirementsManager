@@ -1,4 +1,5 @@
 #include "projectfilereader.h"
+#include "projectfilecontroller.h"
 #include <stdexcept>
 #include <iostream>
 using namespace std;
@@ -13,13 +14,14 @@ ProjectFileReader::~ProjectFileReader()
     delete xml;
 }
 
-void ProjectFileReader::load(RequirementsModel *model, QFileAdapter *file)
+void ProjectFileReader::load(ProjectFileController *fileController, QFileAdapter *file)
 {
     if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
         throw runtime_error(QObject::tr("Cannot open file.").toStdString());
 
     this->file = file;
-    this->model = model;
+    this->fileController = fileController;
+    this->model = fileController->getRequirementsModel();
     this->attributeContext = model->getAttributeContext();
     this->linkContext = model->getLinkContext();
 
@@ -38,7 +40,13 @@ void ProjectFileReader::readContents()
         QXmlStreamReader::TokenType token = xml->readNext();
 
         if(token == QXmlStreamReader::StartElement){
-            if(xml->name() == "AttributeDeclaration")
+            if(xml->name() == "Language")
+                parseProgrammingLanguage();
+            else if(xml->name() == "SourceDir")
+                parseSourceDirectory();
+            else if(xml->name() == "TestDir")
+                parseTestDirectory();
+            else if(xml->name() == "AttributeDeclaration")
                 parseAttributeDeclaration();
             else if(xml->name() == "LinkDeclaration")
                 parseLinkDeclaration();
@@ -53,6 +61,26 @@ void ProjectFileReader::readContents()
         throw runtime_error(xml->errorString().toStdString());
 
     xml->clear();
+}
+
+void ProjectFileReader::parseProgrammingLanguage()
+{
+    xml->readNext();
+    fileController->setProgrammingLanguage(xml->text().toString());
+}
+
+void ProjectFileReader::parseSourceDirectory()
+{
+    xml->readNext();
+    QString dir = xml->text().toString();
+    fileController->sourceDirModel()->add(dir);
+}
+
+void ProjectFileReader::parseTestDirectory()
+{
+    xml->readNext();
+    QString dir = xml->text().toString();
+    fileController->testDirModel()->add(dir);
 }
 
 void ProjectFileReader::parseAttributeDeclaration()

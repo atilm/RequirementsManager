@@ -31,9 +31,14 @@ public:
     virtual ~ProjectFileController();
 
     virtual void setModel(RequirementsModel *model);
+    virtual RequirementsModel* getRequirementsModel();
+    virtual void injectDirectoryModels(DirectoryListModel *sourceDirectories,
+                                       DirectoryListModel *testDirectories);
 
     virtual DirectoryListModel* sourceDirModel() const;
     virtual DirectoryListModel* testDirModel() const;
+    virtual void setProgrammingLanguage(const QString &value);
+    virtual QString getProgrammingLanguage() const;
 
 public slots:
     virtual void save();
@@ -44,6 +49,7 @@ public slots:
 
 private:
     RequirementsModel *model;
+    QString programmingLanguage;
     DirectoryListModel *sourceDirectories;
     DirectoryListModel *testDirectories;
     QFileDialogAdapter *dialogProvider;

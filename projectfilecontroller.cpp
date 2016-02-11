@@ -38,6 +38,18 @@ void ProjectFileController::setModel(RequirementsModel *model)
     this->model = model;
 }
 
+RequirementsModel *ProjectFileController::getRequirementsModel()
+{
+    return model;
+}
+
+void ProjectFileController::injectDirectoryModels(DirectoryListModel *sourceDirectories,
+                                                  DirectoryListModel *testDirectories)
+{
+    this->sourceDirectories = sourceDirectories;
+    this->testDirectories = testDirectories;
+}
+
 DirectoryListModel *ProjectFileController::sourceDirModel() const
 {
     return sourceDirectories;
@@ -48,6 +60,16 @@ DirectoryListModel *ProjectFileController::testDirModel() const
     return testDirectories;
 }
 
+void ProjectFileController::setProgrammingLanguage(const QString &value)
+{
+    programmingLanguage = value;
+}
+
+QString ProjectFileController::getProgrammingLanguage() const
+{
+    return programmingLanguage;
+}
+
 void ProjectFileController::save()
 {
     QString currentPath = stateTracker->filePath();
@@ -56,7 +78,7 @@ void ProjectFileController::save()
         saveAs();
     else{
         projectFile->setFileName(currentPath);
-        writer->save(model, projectFile);
+        writer->save(this, projectFile);
         stateTracker->setChanged(false);
     }
 }
@@ -70,7 +92,7 @@ void ProjectFileController::saveAs()
 
     if(!filePath.isEmpty()){
         projectFile->setFileName(filePath);
-        writer->save(model, projectFile);
+        writer->save(this, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
         saveAsStartDirectory(filePath);
@@ -87,9 +109,11 @@ void ProjectFileController::load()
                                                        startDir, filterString);
 
     if(!filePath.isEmpty()){
+        sourceDirModel()->clear();
+        testDirModel()->clear();
         model->clearModel();
         projectFile->setFileName(filePath);
-        reader->load(model, projectFile);
+        reader->load(this, projectFile);
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
         saveAsStartDirectory(filePath);

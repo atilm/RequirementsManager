@@ -8,21 +8,27 @@
 #include <QString>
 #include <QXmlStreamWriter>
 
+class ProjectFileController;
+
 class ProjectFileWriter
 {
 public:
     ProjectFileWriter(QXmlStreamWriter *xml);
     virtual ~ProjectFileWriter();
 
-    virtual void save(RequirementsModel *model, QFileAdapter *file);
+    virtual void save(ProjectFileController *fileController, QFileAdapter *file);
 
 private:
     QXmlStreamWriter *xml;
+    ProjectFileController *fileController;
     RequirementsModel *model;
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     QFileAdapter *file;
 
+    void writeProgrammingLanguage();
+    void writeSourceDirectories();
+    void writeTestDirectories();
     void writeAttributeContext();
     void writeAttributeDeclaration(int index);
     void writeLinkContext();

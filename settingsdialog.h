@@ -16,17 +16,27 @@ class SettingsDialog : public QDialog
 public:
     explicit SettingsDialog(SourceCodeReaderProvider *readers,
                             ProjectFileController *project,
+                            AppSettings *settings,
                             QWidget *parent = 0);
     virtual ~SettingsDialog();
+
+private slots:
+    void handleAddSourceDir();
+    void handleRemoveSourceDir();
+    void handleAddTestDir();
+    void handleRemoveTestDir();
+    void handleLanguageSelectionChanged(const QString &value);
 
 private:
     Ui::SettingsDialog *ui;
     ProjectFileController *project;
     SourceCodeReaderProvider *readers;
+    AppSettings *settings;
     DirectoryListModel *sourceDirectories;
     DirectoryListModel *testDirectories;
 
     void initialize();
+    QString getRelativeDirectoryPath();
 };
 
 #endif // SETTINGSDIALOG_H

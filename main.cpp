@@ -42,6 +42,9 @@ int main(int argc, char *argv[])
                                       fileState, appSettings,
                                       fileControllerMsg);
 
+    fileController->injectDirectoryModels(new DirectoryListModel(),
+                                          new DirectoryListModel());
+
     QMessageBoxProvider *msg = new QMessageBoxProvider();
 
     AttributeEditor *attributeEditor = new AttributeEditor(attributeContext);
@@ -78,6 +81,7 @@ int main(int argc, char *argv[])
 
     SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
                                                         fileController,
+                                                        appSettings,
                                                         0);
 
     MainWindow w(fileController, requirements, richText,

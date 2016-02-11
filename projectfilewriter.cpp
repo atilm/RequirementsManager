@@ -1,5 +1,6 @@
 #include "projectfilewriter.h"
 #include "requirementsmodel.h"
+#include "projectfilecontroller.h"
 #include <stdexcept>
 #include <QString>
 #include <QObject>
@@ -15,14 +16,15 @@ ProjectFileWriter::~ProjectFileWriter()
     delete xml;
 }
 
-void ProjectFileWriter::save(RequirementsModel *model,
+void ProjectFileWriter::save(ProjectFileController *fileController,
                              QFileAdapter *file)
 {
     if(!file->open(QIODevice::WriteOnly | QIODevice::Text))
         throw runtime_error(QObject::tr("Could not open file.").toStdString());
 
     this->file = file;
-    this->model = model;
+    this->fileController = fileController;
+    this->model = fileController->getRequirementsModel();
     this->attributeContext = model->getAttributeContext();
     this->linkContext = model->getLinkContext();
 
@@ -32,6 +34,9 @@ void ProjectFileWriter::save(RequirementsModel *model,
     xml->writeStartElement("RequirementSpecification");
     xml->writeAttribute("version", "1.0");
 
+    writeProgrammingLanguage();
+    writeSourceDirectories();
+    writeTestDirectories();
     writeAttributeContext();
     writeLinkContext();
     writeRequirementSpecification();
@@ -42,6 +47,35 @@ void ProjectFileWriter::save(RequirementsModel *model,
     this->file->close();
     this->model = NULL;
     this->file = NULL;
+}
+
+void ProjectFileWriter::writeProgrammingLanguage()
+{
+    xml->writeTextElement("Language",
+                          fileController
+                          ->getProgrammingLanguage());
+}
+
+void ProjectFileWriter::writeSourceDirectories()
+{
+    DirectoryListModel *model = fileController->sourceDirModel();
+
+    for(int i=0;i<model->rowCount();i++){
+        QString text = model->data(model->index(i),
+                                   Qt::DisplayRole).toString();
+        xml->writeTextElement("SourceDir", text);
+    }
+}
+
+void ProjectFileWriter::writeTestDirectories()
+{
+    DirectoryListModel *model = fileController->testDirModel();
+
+    for(int i=0;i<model->rowCount();i++){
+        QString text = model->data(model->index(i),
+                                   Qt::DisplayRole).toString();
+        xml->writeTextElement("TestDir", text);
+    }
 }
 
 void ProjectFileWriter::writeAttributeContext()
