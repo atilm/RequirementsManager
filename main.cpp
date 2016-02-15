@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "cppreader.h"
 
 int main(int argc, char *argv[])
 {
@@ -76,6 +77,7 @@ int main(int argc, char *argv[])
     linkController->setRequirementsView(requirementsView);
 
     SourceCodeReaderProvider *readerProvider = new SourceCodeReaderProvider();
+    readerProvider->addReader(new CppReader());
 
     SourceCodeController *sourceController = new SourceCodeController(readerProvider);
 
