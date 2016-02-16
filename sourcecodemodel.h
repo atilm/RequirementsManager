@@ -23,6 +23,8 @@ public:
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
+    virtual QModelIndex appendClass(SourceNode *node);
+
 private:
     SourceNode *root;
 

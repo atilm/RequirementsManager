@@ -2,7 +2,7 @@
 
 SourceCodeModel::SourceCodeModel()
 {
-    root = nullptr;
+    root = new SourceNode();
 }
 
 SourceCodeModel::~SourceCodeModel()
@@ -26,7 +26,7 @@ QVariant SourceCodeModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     if(role == Qt::DisplayRole)
-        return asSourceNode(index)->name();
+        return asSourceNode(index)->getName();
 }
 
 QModelIndex SourceCodeModel::index(int row, int column, const QModelIndex &parent) const
@@ -67,6 +67,17 @@ QVariant SourceCodeModel::headerData(int section, Qt::Orientation orientation, i
 Qt::ItemFlags SourceCodeModel::flags(const QModelIndex &index) const
 {
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
+QModelIndex SourceCodeModel::appendClass(SourceNode *node)
+{
+    int rowIdx = root->childCount();
+
+    beginInsertRows(QModelIndex(), rowIdx, rowIdx);
+    root->appendChild(node);
+    endInsertRows();
+
+    return index(rowIdx, 0);
 }
 
 SourceNode *SourceCodeModel::asSourceNode(const QModelIndex &index) const

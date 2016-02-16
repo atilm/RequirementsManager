@@ -6,12 +6,14 @@
 
 #include "sourcecodemodel.h"
 #include "sourcecodereaderprovider.h"
+#include "projectfilecontroller.h"
 
 class SourceCodeController : public QObject
 {
     Q_OBJECT
 public:
-    explicit SourceCodeController(SourceCodeReaderProvider *readerProvider,
+    explicit SourceCodeController(ProjectFileController *project,
+                                  SourceCodeReaderProvider *readerProvider,
                                   QObject *parent = 0);
     virtual ~SourceCodeController();
 
@@ -22,6 +24,7 @@ public:
 signals:
 
 public slots:
+    virtual void parseProjectCode();
 
 private:
     QListView *moduleView;
@@ -29,6 +32,7 @@ private:
     QListView *testView;
     SourceCodeModel *model;
     SourceCodeReaderProvider *readerProvider;
+    ProjectFileController *project;
 
 };
 

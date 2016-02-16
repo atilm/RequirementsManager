@@ -1,9 +1,11 @@
 #include "directorylistmodel.h"
+#include <QDir>
 
-DirectoryListModel::DirectoryListModel(QObject *parent) :
+DirectoryListModel::DirectoryListModel(FileStateTracker *fileState,
+                                       QObject *parent) :
     QAbstractListModel(parent)
 {
-
+    this->fileState = fileState;
 }
 
 DirectoryListModel::~DirectoryListModel()
@@ -37,6 +39,15 @@ QVariant DirectoryListModel::data(const QModelIndex &index, int role) const
     }
     else
         return QVariant();
+}
+
+QString DirectoryListModel::absolutePath(int idx) const
+{
+    QFileInfo fInfo(fileState->filePath());
+    QDir dir(fInfo.absoluteDir());
+
+    QString relativePath = data(index(idx), Qt::DisplayRole).toString();
+    return dir.absoluteFilePath(relativePath);
 }
 
 void DirectoryListModel::add(const QString &directoryPath)

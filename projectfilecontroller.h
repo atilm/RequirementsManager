@@ -37,8 +37,12 @@ public:
 
     virtual DirectoryListModel* sourceDirModel() const;
     virtual DirectoryListModel* testDirModel() const;
+
     virtual void setProgrammingLanguage(const QString &value);
     virtual QString getProgrammingLanguage() const;
+
+signals:
+    void fileLoaded();
 
 public slots:
     virtual void save();

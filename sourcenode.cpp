@@ -12,6 +12,11 @@ SourceNode::~SourceNode()
 
 }
 
+QString SourceNode::getName() const
+{
+    return QString();
+}
+
 int SourceNode::childCount() const
 {
     return children.count();

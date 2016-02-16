@@ -117,6 +117,7 @@ void ProjectFileController::load()
         stateTracker->setFilePath(filePath);
         stateTracker->setChanged(false);
         saveAsStartDirectory(filePath);
+        emit fileLoaded();
     }
 }
 

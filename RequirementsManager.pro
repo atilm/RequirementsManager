@@ -64,7 +64,8 @@ SOURCES += main.cpp\
     settingsdialog.cpp \
     sourcecodereaderprovider.cpp \
     directorylistmodel.cpp \
-    cppreader.cpp
+    cppreader.cpp \
+    classnode.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -115,7 +116,8 @@ HEADERS  += mainwindow.h \
     settingsdialog.h \
     sourcecodereaderprovider.h \
     directorylistmodel.h \
-    cppreader.h
+    cppreader.h \
+    classnode.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

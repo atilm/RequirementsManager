@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
                                       fileState, appSettings,
                                       fileControllerMsg);
 
-    fileController->injectDirectoryModels(new DirectoryListModel(),
-                                          new DirectoryListModel());
+    fileController->injectDirectoryModels(new DirectoryListModel(fileState),
+                                          new DirectoryListModel(fileState));
 
     QMessageBoxProvider *msg = new QMessageBoxProvider();
 
@@ -77,9 +77,12 @@ int main(int argc, char *argv[])
     linkController->setRequirementsView(requirementsView);
 
     SourceCodeReaderProvider *readerProvider = new SourceCodeReaderProvider();
-    readerProvider->addReader(new CppReader());
+    readerProvider->addReader(new CppReader(new QFileAdapter(),
+                                            new QTextStreamAdapter()));
 
-    SourceCodeController *sourceController = new SourceCodeController(readerProvider);
+    SourceCodeController *sourceController = new SourceCodeController(fileController,
+                                                                      readerProvider,
+                                                                      0);
 
     SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
                                                         fileController,

@@ -27,6 +27,9 @@ QStringList SourceCodeReaderProvider::availableLanguages() const
 
 ISourceCodeReader *SourceCodeReaderProvider::getReader(const QString &language) const
 {
+    if(!readers.contains(language))
+        throw std::runtime_error(QString("No reader for language %1").arg(language).toStdString());
+
     return readers[language];
 }
 

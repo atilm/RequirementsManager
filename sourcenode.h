@@ -9,7 +9,7 @@ public:
     SourceNode();
     virtual ~SourceNode();
 
-    virtual QString name() const = 0;
+    virtual QString getName() const;
 
     virtual int childCount() const;
     virtual SourceNode *getChild(int index) const;
