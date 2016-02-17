@@ -110,8 +110,6 @@ void CppReader::parseClass()
 
     QModelIndex classIdx = model->appendClass(classNode);
 
-    qDebug() << QString("Appended class %1").arg(classNode->getName());
-
     while(!inStream->atEnd()){
         currentLine = inStream->readLine().trimmed();
 

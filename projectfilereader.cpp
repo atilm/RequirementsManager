@@ -28,8 +28,8 @@ void ProjectFileReader::load(ProjectFileController *fileController, QFileAdapter
     readContents();
 
     this->file->close();
-    this->model = NULL;
-    this->file = NULL;
+    this->model = nullptr;
+    this->file = nullptr;
 }
 
 void ProjectFileReader::readContents()

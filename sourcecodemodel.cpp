@@ -27,6 +27,8 @@ QVariant SourceCodeModel::data(const QModelIndex &index, int role) const
 
     if(role == Qt::DisplayRole)
         return asSourceNode(index)->getName();
+    else
+        return QVariant();
 }
 
 QModelIndex SourceCodeModel::index(int row, int column, const QModelIndex &parent) const

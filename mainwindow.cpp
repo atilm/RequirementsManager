@@ -35,9 +35,9 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     linkController->setRemoveButton(ui->removeLinkButton);
 
     this->sourceController = sourceController;
-    sourceController->injectViews(ui->moduleListView,
-                                  ui->functionListView,
-                                  ui->testListView);
+    this->sourceController->injectViews(ui->moduleListView,
+                                        ui->functionListView,
+                                        ui->testListView);
 
     fileController->setModel(requirements);
 
@@ -160,6 +160,7 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
 
     setWindowTitle(windowTitle);
 }
+
 
 
 

@@ -32,9 +32,8 @@ void SourceCodeController::parseProjectCode()
                                         project->testDirModel());
 
         moduleView->setModel(model);
-        moduleView->setRootIndex(QModelIndex());
-        // functionView->setModel(model);
-        // testView->setModel(model);
+        functionView->setModel(nullptr);
+        testView->setModel(nullptr);
     }
     catch(const runtime_error &e){
         qDebug() << e.what();
