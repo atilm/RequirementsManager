@@ -24,6 +24,8 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
     virtual QModelIndex appendClass(SourceNode *node);
+    virtual QModelIndex appendFunction(const QModelIndex &classIndex,
+                                       SourceNode *functionNode);
 
 private:
     SourceNode *root;

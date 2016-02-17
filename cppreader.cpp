@@ -1,5 +1,6 @@
 #include "cppreader.h"
 #include "classnode.h"
+#include "functionnode.h"
 
 #include <QDebug>
 #include <QDir>
@@ -97,9 +98,20 @@ void CppReader::parseSourceLines()
     while(!inStream->atEnd()){
         currentLine = inStream->readLine().trimmed();
 
-        if(currentLine.startsWith("class") || currentLine.startsWith("struct"))
+        if(atClassBegin())
             parseClass();
     }
+}
+
+bool CppReader::atClassBegin()
+{
+    bool isCandidate = currentLine.startsWith("class") || currentLine.startsWith("struct");
+
+    // discard forward declarations of classes
+    if( isCandidate && !(currentLine.endsWith(";")))
+        return true;
+    else
+        return false;
 }
 
 void CppReader::parseClass()
@@ -132,9 +144,30 @@ QString CppReader::extractClassName()
     return name;
 }
 
-void CppReader::parseFunction(QModelIndex index)
+void CppReader::parseFunction(QModelIndex classIndex)
 {
+    FunctionNode *functionNode = new FunctionNode();
 
+    functionNode->setName(extractFunctionName());
+
+    model->appendFunction(classIndex, functionNode);
+}
+
+QString CppReader::extractFunctionName()
+{
+    int endName = currentLine.indexOf("(") - 1;
+
+    QString functionName;
+
+    if(endName != -1){
+        int startName = currentLine.lastIndexOf(" ", endName) + 1;
+        int count = endName - startName + 1;
+        functionName = currentLine.mid(startName, count);
+    }
+    else
+        functionName = currentLine.trimmed();
+
+    return functionName;
 }
 
 

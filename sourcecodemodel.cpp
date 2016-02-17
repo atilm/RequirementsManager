@@ -82,6 +82,12 @@ QModelIndex SourceCodeModel::appendClass(SourceNode *node)
     return index(rowIdx, 0);
 }
 
+QModelIndex SourceCodeModel::appendFunction(const QModelIndex &classIndex,
+                                            SourceNode *functionNode)
+{
+    asSourceNode(classIndex)->appendChild(functionNode);
+}
+
 SourceNode *SourceCodeModel::asSourceNode(const QModelIndex &index) const
 {
     return static_cast<SourceNode*>(index.internalPointer());

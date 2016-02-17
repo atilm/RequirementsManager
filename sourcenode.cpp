@@ -12,9 +12,14 @@ SourceNode::~SourceNode()
 
 }
 
+void SourceNode::setName(const QString &name)
+{
+    this->name = name;
+}
+
 QString SourceNode::getName() const
 {
-    return QString();
+    return name;
 }
 
 int SourceNode::childCount() const

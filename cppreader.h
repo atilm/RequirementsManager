@@ -30,9 +30,11 @@ private:
     void extractClassesFromFile(const QString &filePath);
     bool openStream(const QString &filePath);
     void parseSourceLines();
+    bool atClassBegin();
     void parseClass();
     QString extractClassName();
-    void parseFunction(QModelIndex index);
+    void parseFunction(QModelIndex classIndex);
+    QString extractFunctionName();
 };
 
 #endif // CPPREADER_H

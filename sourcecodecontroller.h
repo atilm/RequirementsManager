@@ -34,6 +34,9 @@ private:
     SourceCodeReaderProvider *readerProvider;
     ProjectFileController *project;
 
+private slots:
+    void handleClassSelectionChanged(const QModelIndex &current,
+                                     const QModelIndex &previous);
 };
 
 #endif // SOURCECODECONTROLLER_H
