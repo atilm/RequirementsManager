@@ -69,10 +69,6 @@ QStringList CppReader::listHeaderFiles(const QString &dirPath)
     return headerFiles;
 }
 
-void CppReader::readTestSpecification(DirectoryListModel *testDirs)
-{
-}
-
 void CppReader::extractClassesFromFile(const QString &filePath)
 {
     if(!openStream(filePath))
@@ -168,6 +164,72 @@ QString CppReader::extractFunctionName()
         functionName = currentLine.trimmed();
 
     return functionName;
+}
+
+void CppReader::readTestSpecification(DirectoryListModel *testDirs)
+{
+    for(int i=0;i<testDirs->rowCount();i++)
+        parseTestFilesInDirectory(testDirs->absolutePath(i));
+}
+
+void CppReader::parseTestFilesInDirectory(const QString &dirPath)
+{
+    QStringList testFiles = listCppFiles(dirPath);
+
+    foreach(QString filePath, testFiles)
+        extractTestsFromFile(filePath);
+}
+
+QStringList CppReader::listCppFiles(const QString &dirPath)
+{
+    QStringList cppFiles;
+
+    QStringList nameFilters;
+    nameFilters << "*.cpp";
+
+
+    QDir dir(dirPath);
+    QFileInfoList entries = dir.entryInfoList(nameFilters, QDir::Files);
+
+    for(int f=0;f<entries.count();f++){
+        QFileInfo entry = entries[f];
+        cppFiles << entry.absoluteFilePath();
+    }
+
+    return headerFiles;
+}
+
+void CppReader::extractTestsFromFile(const QString &dirPath)
+{
+    if(!openStream(dirPath))
+        return;
+
+    parseTestDefinitionFile();
+
+    file->close();
+}
+
+void CppReader::parseTestDefinitionFile()
+{
+    while(!inStream->atEnd()){
+        currentLine = inStream->readLine().trimmed();
+
+        if(atTestBegin())
+            parseTest();
+    }
+}
+
+bool CppReader::atTestBegin()
+{
+    if(currentLine.startsWith("TEST_F"))
+        return true;
+    else
+        return false;
+}
+
+void CppReader::parseTest()
+{
+
 }
 
 

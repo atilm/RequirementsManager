@@ -26,7 +26,6 @@ private:
     void readDesignSpecification(DirectoryListModel *sourceDirs);
     void parseSourceFilesInDirectory(const QString &dirPath);
     QStringList listHeaderFiles(const QString &dirPath);
-    void readTestSpecification(DirectoryListModel *testDirs);
     void extractClassesFromFile(const QString &filePath);
     bool openStream(const QString &filePath);
     void parseSourceLines();
@@ -35,6 +34,14 @@ private:
     QString extractClassName();
     void parseFunction(QModelIndex classIndex);
     QString extractFunctionName();
+
+    void readTestSpecification(DirectoryListModel *testDirs);
+    void parseTestFilesInDirectory(const QString &dirPath);
+    QStringList listCppFiles(const QString &dirPath);
+    void extractTestsFromFile(const QString &dirPath);
+    void parseTestDefinitionFile();
+    bool atTestBegin();
+    void parseTest();
 };
 
 #endif // CPPREADER_H

@@ -2,6 +2,7 @@
 <RequirementSpecification version="1.0">
     <Language>C++</Language>
     <SourceDir>.</SourceDir>
+    <TestDir>Tests</TestDir>
     <AttributeContext>
         <AttributeDeclaration index="0" name="Implemented" type="Boolean"/>
     </AttributeContext>

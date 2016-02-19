@@ -31,21 +31,57 @@ protected:
     }
 };
 
+/*! TEST_SPEC: FileStateTracker::setFilePath()
+ PREPARATION
+
+ ACTION
+
+ RESULT
+
+
+ */
 TEST_F(FileStateTrackerTests, when_file_path_changed_signal_is_emitted){
     tracker->setFilePath(newPath);
     EXPECT_TRUE(listener->filePathChanged_called);
 }
 
+/*! TEST_SPEC: FileStateTracker::setFilePath()
+ PREPARATION
+
+ ACTION
+
+ RESULT
+
+
+ */
 TEST_F(FileStateTrackerTests, when_file_path_did_not_change_no_signal_is_emitted){
     tracker->setFilePath(oldPath);
     EXPECT_FALSE(listener->filePathChanged_called);
 }
 
+/*! TEST_SPEC: FileStateTracker::setChanged()
+ PREPARATION
+
+ ACTION
+
+ RESULT
+
+
+ */
 TEST_F(FileStateTrackerTests, when_changedState_changed_signal_is_emitted){
     tracker->setChanged(false);
     EXPECT_TRUE(listener->changeStateChanged_called);
 }
 
+/*! TEST_SPEC: FileStateTracker::setChanged()
+ PREPARATION
+
+ ACTION
+
+ RESULT
+
+
+ */
 TEST_F(FileStateTrackerTests, when_changedState_did_not_change_no_signal_is_emitted){
     tracker->setChanged(true);
     EXPECT_FALSE(listener->changeStateChanged_called);
