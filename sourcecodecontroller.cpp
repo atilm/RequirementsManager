@@ -35,8 +35,10 @@ void SourceCodeController::parseProjectCode()
         functionView->setModel(nullptr);
         testView->setModel(nullptr);
 
-        connect(this->moduleView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-                this, SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
+        connect(this->moduleView->selectionModel(),
+                SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this,
+                SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
     }
     catch(const runtime_error &e){
         qDebug() << e.what();
@@ -46,10 +48,26 @@ void SourceCodeController::parseProjectCode()
 void SourceCodeController::handleClassSelectionChanged(const QModelIndex &current,
                                                        const QModelIndex &previous)
 {
-    if(functionView->model() == nullptr)
+    if(functionView->model() == nullptr){
         functionView->setModel(model);
+        connect(this->functionView->selectionModel(),
+                SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this,
+                SLOT(handleFunctionSelectionChanged(QModelIndex,QModelIndex)));
+    }
+
+    testView->setModel(nullptr);
 
     functionView->setRootIndex(current);
+}
+
+void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &current,
+                                                          const QModelIndex &previous)
+{
+    if(testView->model() == nullptr)
+        testView->setModel(model);
+
+    testView->setRootIndex(current);
 }
 
 

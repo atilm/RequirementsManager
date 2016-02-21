@@ -5,6 +5,7 @@
 #include "sourcecodemodel.h"
 #include "qfileadapter.h"
 #include "qtextstreamadapter.h"
+#include "testnode.h"
 
 class CppReader : public ISourceCodeReader
 {
@@ -22,6 +23,16 @@ private:
     QFileAdapter *file;
     QTextStreamAdapter *inStream;
     QString currentLine;
+
+    enum TestParsingMode {
+        ADDRESS,
+        PREPARATION,
+        ACTION,
+        RESULT,
+        CODE
+    };
+
+    TestParsingMode testParsingMode;
 
     void readDesignSpecification(DirectoryListModel *sourceDirs);
     void parseSourceFilesInDirectory(const QString &dirPath);
@@ -42,6 +53,14 @@ private:
     void parseTestDefinitionFile();
     bool atTestBegin();
     void parseTest();
+    void parseTestID(TestNode *test);
+    SourceAddress extractTestSourceAddress();
+    bool atTestEnd();
+    void parseTestLine(TestNode *test);
+
+    QString extractBetween(const QString &start,
+                           const QString &end,
+                           const QString &s);
 };
 
 #endif // CPPREADER_H

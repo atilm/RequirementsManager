@@ -1,6 +1,7 @@
 #include "cppreader.h"
 #include "classnode.h"
 #include "functionnode.h"
+#include "testnode.h"
 
 #include <QDebug>
 #include <QDir>
@@ -196,7 +197,7 @@ QStringList CppReader::listCppFiles(const QString &dirPath)
         cppFiles << entry.absoluteFilePath();
     }
 
-    return headerFiles;
+    return cppFiles;
 }
 
 void CppReader::extractTestsFromFile(const QString &dirPath)
@@ -212,7 +213,7 @@ void CppReader::extractTestsFromFile(const QString &dirPath)
 void CppReader::parseTestDefinitionFile()
 {
     while(!inStream->atEnd()){
-        currentLine = inStream->readLine().trimmed();
+        currentLine = inStream->readLine();
 
         if(atTestBegin())
             parseTest();
@@ -221,7 +222,7 @@ void CppReader::parseTestDefinitionFile()
 
 bool CppReader::atTestBegin()
 {
-    if(currentLine.startsWith("TEST_F"))
+    if(currentLine.contains("TEST_SPEC"))
         return true;
     else
         return false;
@@ -229,7 +230,80 @@ bool CppReader::atTestBegin()
 
 void CppReader::parseTest()
 {
+    TestNode *testNode = new TestNode();
 
+    SourceAddress address = extractTestSourceAddress();
+
+    testParsingMode = ADDRESS;
+
+    while(!atTestEnd()){
+        currentLine  = inStream->readLine();
+
+        if(currentLine.contains("PREPARATION"))
+            testParsingMode = PREPARATION;
+        else if(currentLine.contains("ACTION"))
+            testParsingMode = ACTION;
+        else if(currentLine.contains("RESULT"))
+            testParsingMode = RESULT;
+        else if(currentLine.contains("TEST_F")){
+            parseTestID(testNode);
+            testParsingMode = CODE;
+        }
+        else
+            parseTestLine(testNode);
+    }
+
+    model->appendTest(address, testNode);
+}
+
+void CppReader::parseTestID(TestNode *test)
+{
+    test->setTestCase(extractBetween("(", ",", currentLine));
+    test->setTestName(extractBetween(",", ")", currentLine));
+}
+
+SourceAddress CppReader::extractTestSourceAddress()
+{
+    SourceAddress a;
+    a.className = extractBetween("TEST_SPEC", "::", currentLine);
+    a.functionName = extractBetween("::", "(", currentLine);
+    return a;
+}
+
+bool CppReader::atTestEnd()
+{
+    if(currentLine.startsWith("}"))
+        return true;
+    else
+        return false;
+}
+
+void CppReader::parseTestLine(TestNode *test)
+{
+    switch(testParsingMode){
+    case PREPARATION:
+        test->appendToPreparation(currentLine.trimmed());
+        break;
+    case ACTION:
+        test->appendToAction(currentLine.trimmed());
+        break;
+    case RESULT:
+        test->appendToResult(currentLine.trimmed());
+        break;
+    default:
+        break;
+    }
+}
+
+QString CppReader::extractBetween(const QString &start,
+                                  const QString &end,
+                                  const QString &s)
+{
+    int startPos = s.indexOf(start) + start.length();
+    int endPos = s.indexOf(end);
+    int count = endPos - startPos;
+
+    return s.mid(startPos, count).trimmed();
 }
 
 

@@ -85,7 +85,57 @@ QModelIndex SourceCodeModel::appendClass(SourceNode *node)
 QModelIndex SourceCodeModel::appendFunction(const QModelIndex &classIndex,
                                             SourceNode *functionNode)
 {
-    asSourceNode(classIndex)->appendChild(functionNode);
+    SourceNode *classNode = asSourceNode(classIndex);
+    int rowIdx = classNode->childCount();
+
+    beginInsertRows(classIndex, rowIdx, rowIdx);
+    classNode->appendChild(functionNode);
+    endInsertRows();
+
+    return index(rowIdx, 0, classIndex);
+}
+
+void SourceCodeModel::appendTest(SourceAddress address, SourceNode *testNode)
+{   
+    for(int c=0;c < root->childCount(); c++){
+        SourceNode *classNode = root->getChild(c);
+
+        if(address.className == classNode->getName()){
+            insertTestIntoClass(index(c, 0), address, testNode);
+            return;
+        }
+    }
+
+    orphanTests.append(testNode);
+}
+
+void SourceCodeModel::insertTestIntoClass(const QModelIndex &classIndex,
+                                          SourceAddress address,
+                                          SourceNode *testNode)
+{
+    SourceNode *classNode = asSourceNode(classIndex);
+
+    for(int f=0;f < classNode->childCount(); f++){
+        SourceNode *functionNode = classNode->getChild(f);
+
+        if(address.functionName == functionNode->getName()){
+            insertTestIntoFunction(index(f, 0, classIndex), testNode);
+            return;
+        }
+    }
+
+    orphanTests.append(testNode);
+}
+
+void SourceCodeModel::insertTestIntoFunction(const QModelIndex &functionIndex,
+                                             SourceNode *testNode)
+{
+    SourceNode *functionNode = asSourceNode(functionIndex);
+    int rowIdx = functionNode->childCount();
+
+    beginInsertRows(functionIndex, rowIdx, rowIdx);
+    functionNode->appendChild(testNode);
+    endInsertRows();
 }
 
 SourceNode *SourceCodeModel::asSourceNode(const QModelIndex &index) const

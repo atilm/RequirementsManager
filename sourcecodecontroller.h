@@ -37,6 +37,8 @@ private:
 private slots:
     void handleClassSelectionChanged(const QModelIndex &current,
                                      const QModelIndex &previous);
+    void handleFunctionSelectionChanged(const QModelIndex &current,
+                                        const QModelIndex &previous);
 };
 
 #endif // SOURCECODECONTROLLER_H

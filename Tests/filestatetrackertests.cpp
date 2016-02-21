@@ -31,7 +31,7 @@ protected:
     }
 };
 
-/*! TEST_SPEC: FileStateTracker::setFilePath()
+/*! TEST_SPEC FileStateTracker::setFilePath()
  PREPARATION
 
  ACTION
@@ -45,7 +45,7 @@ TEST_F(FileStateTrackerTests, when_file_path_changed_signal_is_emitted){
     EXPECT_TRUE(listener->filePathChanged_called);
 }
 
-/*! TEST_SPEC: FileStateTracker::setFilePath()
+/*! TEST_SPEC FileStateTracker::setFilePath()
  PREPARATION
 
  ACTION
@@ -59,13 +59,12 @@ TEST_F(FileStateTrackerTests, when_file_path_did_not_change_no_signal_is_emitted
     EXPECT_FALSE(listener->filePathChanged_called);
 }
 
-/*! TEST_SPEC: FileStateTracker::setChanged()
+/*! TEST_SPEC FileStateTracker::setChanged()
  PREPARATION
 
  ACTION
 
  RESULT
-
 
  */
 TEST_F(FileStateTrackerTests, when_changedState_changed_signal_is_emitted){
@@ -73,7 +72,7 @@ TEST_F(FileStateTrackerTests, when_changedState_changed_signal_is_emitted){
     EXPECT_TRUE(listener->changeStateChanged_called);
 }
 
-/*! TEST_SPEC: FileStateTracker::setChanged()
+/*! TEST_SPEC FileStateTracker::setChanged()
  PREPARATION
 
  ACTION
