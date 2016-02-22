@@ -138,6 +138,14 @@ void SourceCodeModel::insertTestIntoFunction(const QModelIndex &functionIndex,
     endInsertRows();
 }
 
+QString SourceCodeModel::getDescription(const QModelIndex &index) const
+{
+    if(!index.isValid())
+        return QString();
+    else
+        return asSourceNode(index)->getDescription();
+}
+
 SourceNode *SourceCodeModel::asSourceNode(const QModelIndex &index) const
 {
     return static_cast<SourceNode*>(index.internalPointer());

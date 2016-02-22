@@ -24,6 +24,16 @@ void SourceCodeController::injectViews(QListView *moduleView,
     this->testView = testView;
 }
 
+void SourceCodeController::injectDescriptionView(DescriptionView *view)
+{
+    functionSpecView = view;
+}
+
+void SourceCodeController::injectRiskDescriptionView(RiskDescriptionView *view)
+{
+    testSpecView = view;
+}
+
 void SourceCodeController::parseProjectCode()
 {
     try{
@@ -58,6 +68,7 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
 
     testView->setModel(nullptr);
 
+    showDescription(current);
     functionView->setRootIndex(current);
 }
 
@@ -67,7 +78,15 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
     if(testView->model() == nullptr)
         testView->setModel(model);
 
+    showDescription(current);
     testView->setRootIndex(current);
+}
+
+void SourceCodeController::showDescription(const QModelIndex &index)
+{
+    document.setPlainText(model->getDescription(index));
+    functionSpecView->setDocument(&document);
+    functionSpecView->setEnabled(true);
 }
 
 

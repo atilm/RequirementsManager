@@ -3,10 +3,13 @@
 
 #include <QListView>
 #include <QObject>
+#include <QTextDocument>
 
 #include "sourcecodemodel.h"
 #include "sourcecodereaderprovider.h"
 #include "projectfilecontroller.h"
+#include "descriptionview.h"
+#include "riskdescriptionview.h"
 
 class SourceCodeController : public QObject
 {
@@ -20,6 +23,8 @@ public:
     virtual void injectViews(QListView *moduleView,
                              QListView *functionView,
                              QListView *testView);
+    virtual void injectDescriptionView(DescriptionView *view);
+    virtual void injectRiskDescriptionView(RiskDescriptionView *view);
 
 signals:
 
@@ -30,6 +35,9 @@ private:
     QListView *moduleView;
     QListView *functionView;
     QListView *testView;
+    DescriptionView *functionSpecView;
+    RiskDescriptionView *testSpecView;
+    QTextDocument document;
     SourceCodeModel *model;
     SourceCodeReaderProvider *readerProvider;
     ProjectFileController *project;
@@ -39,6 +47,7 @@ private slots:
                                      const QModelIndex &previous);
     void handleFunctionSelectionChanged(const QModelIndex &current,
                                         const QModelIndex &previous);
+    void showDescription(const QModelIndex &index);
 };
 
 #endif // SOURCECODECONTROLLER_H

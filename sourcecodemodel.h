@@ -41,6 +41,8 @@ public:
     virtual void insertTestIntoFunction(const QModelIndex &functionIndex,
                                         SourceNode *testNode);
 
+    virtual QString getDescription(const QModelIndex &index) const;
+
 private:
     SourceNode *root;
 

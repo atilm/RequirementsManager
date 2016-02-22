@@ -103,6 +103,8 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 
     linkController->setDescriptionView(descriptionView);
     linkController->setUpSelectionModeConnections();
+
+    sourceController->injectDescriptionView(descriptionView);
 }
 
 void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
@@ -138,6 +140,8 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
     riskAssessmentEditController->setActionView(preventiveActionTableView);
     riskAssessmentEditController->setAddActionButton(ui->addPreventiveActionButton);
     riskAssessmentEditController->setRemoveActionButton(ui->removePreventiveActionButton);
+
+    sourceController->injectRiskDescriptionView(riskDescriptionView);
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)

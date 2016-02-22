@@ -97,6 +97,8 @@ void CppReader::parseSourceLines()
 
         if(atClassBegin())
             parseClass();
+        else if(currentLine.startsWith("/*!"))
+            parseDesignSpecBlock();
     }
 }
 
@@ -116,17 +118,29 @@ void CppReader::parseClass()
     ClassNode *classNode = new ClassNode();
 
     classNode->setName(extractClassName());
+    classNode->setDescription(lineBuffer);
+    lineBuffer.clear();
 
     QModelIndex classIdx = model->appendClass(classNode);
 
-    while(!inStream->atEnd()){
+    while(!atClassEnd()){
         currentLine = inStream->readLine().trimmed();
 
         if(currentLine.startsWith("class") || currentLine.startsWith("struct"))
             parseClass();
         else if(currentLine.contains("("))
             parseFunction(classIdx);
+        else if(currentLine.startsWith("/*!"))
+            parseDesignSpecBlock();
     }
+}
+
+bool CppReader::atClassEnd()
+{
+    if(currentLine.startsWith("};"))
+        return true;
+    else
+        return false;
 }
 
 QString CppReader::extractClassName()
@@ -146,6 +160,8 @@ void CppReader::parseFunction(QModelIndex classIndex)
     FunctionNode *functionNode = new FunctionNode();
 
     functionNode->setName(extractFunctionName());
+    functionNode->setDescription(lineBuffer);
+    lineBuffer.clear();
 
     model->appendFunction(classIndex, functionNode);
 }
@@ -165,6 +181,14 @@ QString CppReader::extractFunctionName()
         functionName = currentLine.trimmed();
 
     return functionName;
+}
+
+void CppReader::parseDesignSpecBlock()
+{
+    do{
+        lineBuffer += currentLine.replace("/*!","").replace("*/","") + QString("\n");
+        currentLine = inStream->readLine();
+    } while(!currentLine.contains("*/"));
 }
 
 void CppReader::readTestSpecification(DirectoryListModel *testDirs)

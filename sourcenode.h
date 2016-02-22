@@ -12,6 +12,9 @@ public:
     virtual void setName(const QString &name);
     virtual QString getName() const;
 
+    virtual void setDescription(const QString &s);
+    virtual QString getDescription() const;
+
     virtual int childCount() const;
     virtual SourceNode *getChild(int index) const;
     virtual void appendChild(SourceNode *child);
@@ -24,6 +27,7 @@ private:
     SourceNode *parent;
     QVector<SourceNode*> children;
     QString name;
+    QString description;
 };
 
 #endif // SOURCENODE_H

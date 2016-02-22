@@ -23,6 +23,7 @@ private:
     QFileAdapter *file;
     QTextStreamAdapter *inStream;
     QString currentLine;
+    QString lineBuffer;
 
     enum TestParsingMode {
         ADDRESS,
@@ -42,9 +43,11 @@ private:
     void parseSourceLines();
     bool atClassBegin();
     void parseClass();
+    bool atClassEnd();
     QString extractClassName();
     void parseFunction(QModelIndex classIndex);
     QString extractFunctionName();
+    void parseDesignSpecBlock();
 
     void readTestSpecification(DirectoryListModel *testDirs);
     void parseTestFilesInDirectory(const QString &dirPath);

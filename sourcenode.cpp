@@ -2,6 +2,8 @@
 #include <stdexcept>
 using namespace std;
 
+#include <QDebug>
+
 SourceNode::SourceNode()
 {
     parent = nullptr;
@@ -20,6 +22,16 @@ void SourceNode::setName(const QString &name)
 QString SourceNode::getName() const
 {
     return name;
+}
+
+void SourceNode::setDescription(const QString &s)
+{
+    description = s;
+}
+
+QString SourceNode::getDescription() const
+{
+    return description;
 }
 
 int SourceNode::childCount() const
