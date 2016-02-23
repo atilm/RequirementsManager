@@ -67,7 +67,8 @@ SOURCES += main.cpp\
     cppreader.cpp \
     classnode.cpp \
     functionnode.cpp \
-    testnode.cpp
+    testnode.cpp \
+    designreference.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -121,7 +122,8 @@ HEADERS  += mainwindow.h \
     cppreader.h \
     classnode.h \
     functionnode.h \
-    testnode.h
+    testnode.h \
+    designreference.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

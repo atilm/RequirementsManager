@@ -52,6 +52,17 @@ public:
     virtual QModelIndex appendChild(const QModelIndex &index, const QString &name = "",
                                     Requirement::Type type = Requirement::UserRequirement,
                                     uint requestedID = 0);
+
+    /*!
+     * \brief insertChild
+     * \param newItem
+     * \param index
+     * \param beforeRow
+     *
+     * If beforeRow = -1, the item is appended to the end.
+     *
+     * \return
+     */
     virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);

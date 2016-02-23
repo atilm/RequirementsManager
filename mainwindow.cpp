@@ -105,6 +105,7 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
     linkController->setUpSelectionModeConnections();
 
     sourceController->injectDescriptionView(descriptionView);
+    sourceController->injectRequirementsView(requirementsView);
 }
 
 void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,

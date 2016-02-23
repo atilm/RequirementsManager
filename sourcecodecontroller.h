@@ -10,6 +10,8 @@
 #include "projectfilecontroller.h"
 #include "descriptionview.h"
 #include "riskdescriptionview.h"
+#include "requirementfactory.h"
+#include "requirementsview.h"
 
 class SourceCodeController : public QObject
 {
@@ -25,6 +27,10 @@ public:
                              QListView *testView);
     virtual void injectDescriptionView(DescriptionView *view);
     virtual void injectRiskDescriptionView(RiskDescriptionView *view);
+    virtual void injectRequirementsFactory(RequirementFactory *reqFactory);
+    virtual void injectRequirementsView(RequirementsView *reqView);
+
+    virtual QString getDescription(SourceAddress address);
 
 signals:
 
@@ -41,12 +47,15 @@ private:
     SourceCodeModel *model;
     SourceCodeReaderProvider *readerProvider;
     ProjectFileController *project;
+    RequirementFactory *reqFactory;
+    RequirementsView *reqView;
 
 private slots:
     void handleClassSelectionChanged(const QModelIndex &current,
                                      const QModelIndex &previous);
     void handleFunctionSelectionChanged(const QModelIndex &current,
                                         const QModelIndex &previous);
+    void handleClassOrFunctionDoubleClicked(const QModelIndex &index);
     void showDescription(const QModelIndex &index);
 };
 

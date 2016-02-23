@@ -17,13 +17,6 @@ int main(int argc, char *argv[])
     LinkContext *linkContext = new LinkContext();
     LinkContainerFactory *links = new LinkContainerFactory(linkContext, idManager);
 
-    RequirementFactory *factory = new RequirementFactory(fileState, idManager, attributes, links);
-    RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
-    RequirementsModel *requirements = new RequirementsModel(factory, fileState,
-                                                            attributeContext, linkContext,
-                                                            dataMapper);
-    requirements->init();
-
     RichTextController *richText = new RichTextController();
 
     QMenu *requirementsContextMenu = new QMenu();
@@ -80,14 +73,22 @@ int main(int argc, char *argv[])
     readerProvider->addReader(new CppReader(new QFileAdapter(),
                                             new QTextStreamAdapter()));
 
-    SourceCodeController *sourceController = new SourceCodeController(fileController,
-                                                                      readerProvider,
-                                                                      0);
-
     SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
                                                         fileController,
                                                         appSettings,
                                                         0);
+
+    SourceCodeController *sourceController = new SourceCodeController(fileController,
+                                                                      readerProvider,
+                                                                      0);
+    RequirementFactory *factory = new RequirementFactory(fileState, idManager,
+                                                         attributes, links,
+                                                         sourceController);
+    RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
+    RequirementsModel *requirements = new RequirementsModel(factory, fileState,
+                                                            attributeContext, linkContext,
+                                                            dataMapper);
+    requirements->init();
 
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,

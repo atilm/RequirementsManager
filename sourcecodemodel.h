@@ -42,6 +42,8 @@ public:
                                         SourceNode *testNode);
 
     virtual QString getDescription(const QModelIndex &index) const;
+    virtual QString getDescription(SourceAddress address) const;
+    virtual SourceAddress getAddress(const QModelIndex &index) const;
 
 private:
     SourceNode *root;
@@ -50,6 +52,9 @@ private:
 
     SourceNode *asSourceNode(const QModelIndex &index) const;
     SourceNode *getValidItem(const QModelIndex &index) const;
+    QModelIndex indexOf(SourceAddress address) const;
+    QModelIndex functionIndex(const QModelIndex &classIndex,
+                              SourceAddress address) const;
 };
 
 #endif // SOURCECODEMODEL_H

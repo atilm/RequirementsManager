@@ -1,4 +1,5 @@
 #include "sourcecodemodel.h"
+#include <QDebug>
 
 SourceCodeModel::SourceCodeModel()
 {
@@ -146,6 +147,42 @@ QString SourceCodeModel::getDescription(const QModelIndex &index) const
         return asSourceNode(index)->getDescription();
 }
 
+QString SourceCodeModel::getDescription(SourceAddress address) const
+{
+    QModelIndex index = indexOf(address);
+
+    if(index.isValid())
+        return getDescription(index);
+    else
+        return QString("Unresolved reference to source code element.");
+}
+
+SourceAddress SourceCodeModel::getAddress(const QModelIndex &index) const
+{
+    SourceNode *node = getValidItem(index);
+
+    QStringList fields;
+
+    while(node->getParent()){
+        fields.push_back(node->getName());
+        node = node->getParent();
+    }
+
+    SourceAddress address;
+
+    if(!fields.isEmpty()){
+        address.className = fields.last();
+        fields.pop_back();
+    }
+
+    if(!fields.isEmpty()){
+        address.functionName = fields.last();
+        fields.pop_back();
+    }
+
+    return address;
+}
+
 SourceNode *SourceCodeModel::asSourceNode(const QModelIndex &index) const
 {
     return static_cast<SourceNode*>(index.internalPointer());
@@ -157,5 +194,35 @@ SourceNode *SourceCodeModel::getValidItem(const QModelIndex &index) const
         return root;
     else
         return asSourceNode(index);
+}
+
+QModelIndex SourceCodeModel::indexOf(SourceAddress address) const
+{
+    for(int c=0;c < root->childCount(); c++){
+        SourceNode *classNode = root->getChild(c);
+
+        if(address.className == classNode->getName()){
+
+            if(address.functionName.isEmpty())
+                return index(c, 0);
+            else
+                return functionIndex(index(c,0), address);
+        }
+    }
+}
+
+QModelIndex SourceCodeModel::functionIndex(const QModelIndex &classIndex,
+                                           SourceAddress address) const
+{
+    SourceNode *classNode = asSourceNode(classIndex);
+
+    for(int f=0;f < classNode->childCount(); f++){
+        SourceNode *functionNode = classNode->getChild(f);
+
+        if(address.functionName == functionNode->getName())
+            return index(f, 0, classIndex);
+    }
+
+    return QModelIndex();
 }
 

@@ -220,6 +220,9 @@ QModelIndex RequirementsModel::insertChild(Requirement *newItem, const QModelInd
 {
     Requirement *item = getValidItem(index);
 
+    if(beforeRow == -1)
+        beforeRow = rowCount(index);
+
     beginInsertRows(index, beforeRow, beforeRow);
     item->insertChild(beforeRow, newItem);
     endInsertRows();

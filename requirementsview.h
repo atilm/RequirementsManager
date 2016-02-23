@@ -19,6 +19,7 @@ signals:
 public slots:
     virtual void insertSibling();
     virtual void appendChild();
+    virtual void appendChild(Requirement *item);
     virtual void removeCurrent();
     virtual void resizeColumns();
 

@@ -17,6 +17,13 @@ public:
     virtual ~LinkController();
 
     virtual void setLinkView(QTreeView *view);
+
+    /*!
+     * \brief setRequirementsView
+     * \param view
+     *
+     * \todo Is this function called from anywhere?
+     */
     virtual void setRequirementsView(RequirementsView *view);
     virtual void setDescriptionView(DescriptionView *view);
     virtual void setAddButton(QToolButton *button);

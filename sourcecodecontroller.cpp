@@ -34,6 +34,21 @@ void SourceCodeController::injectRiskDescriptionView(RiskDescriptionView *view)
     testSpecView = view;
 }
 
+void SourceCodeController::injectRequirementsFactory(RequirementFactory *reqFactory)
+{
+    this->reqFactory = reqFactory;
+}
+
+void SourceCodeController::injectRequirementsView(RequirementsView *reqView)
+{
+    this->reqView = reqView;
+}
+
+QString SourceCodeController::getDescription(SourceAddress address)
+{
+    return model->getDescription(address);
+}
+
 void SourceCodeController::parseProjectCode()
 {
     try{
@@ -45,10 +60,10 @@ void SourceCodeController::parseProjectCode()
         functionView->setModel(nullptr);
         testView->setModel(nullptr);
 
-        connect(this->moduleView->selectionModel(),
-                SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-                this,
-                SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
+        connect(moduleView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this, SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
+        connect(moduleView, SIGNAL(doubleClicked(QModelIndex)),
+                this, SLOT(handleClassOrFunctionDoubleClicked(QModelIndex)));
     }
     catch(const runtime_error &e){
         qDebug() << e.what();
@@ -60,10 +75,10 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
 {
     if(functionView->model() == nullptr){
         functionView->setModel(model);
-        connect(this->functionView->selectionModel(),
-                SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-                this,
-                SLOT(handleFunctionSelectionChanged(QModelIndex,QModelIndex)));
+        connect(this->functionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this, SLOT(handleFunctionSelectionChanged(QModelIndex,QModelIndex)));
+        connect(functionView, SIGNAL(doubleClicked(QModelIndex)),
+                this, SLOT(handleClassOrFunctionDoubleClicked(QModelIndex)));
     }
 
     testView->setModel(nullptr);
@@ -80,6 +95,12 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
 
     showDescription(current);
     testView->setRootIndex(current);
+}
+
+void SourceCodeController::handleClassOrFunctionDoubleClicked(const QModelIndex &index)
+{
+    SourceAddress address = model->getAddress(index);
+    reqView->appendChild(reqFactory->newDesignReference(address));
 }
 
 void SourceCodeController::showDescription(const QModelIndex &index)

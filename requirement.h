@@ -74,7 +74,8 @@ public:
 
     static QString typeToString(Type type);
     static Type stringToType(const QString &typeString);
-private:
+
+protected:
     const unsigned int id;
 
     Type type;
