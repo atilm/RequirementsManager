@@ -19,6 +19,12 @@ public:
     void appendToAction(const QString &s);
     void appendToResult(const QString &s);
 
+    QString getTestCase() const;
+    QString getTestName() const;
+    QString getPreparation() const;
+    QString getAction() const;
+    QString getExpectedResult() const;
+
 private:
     QString testCase;
     QString testName;

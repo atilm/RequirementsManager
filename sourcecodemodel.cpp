@@ -1,5 +1,8 @@
 #include "sourcecodemodel.h"
+#include "testnode.h"
 #include <QDebug>
+#include <stdexcept>
+using namespace std;
 
 SourceCodeModel::SourceCodeModel()
 {
@@ -155,6 +158,16 @@ QString SourceCodeModel::getDescription(SourceAddress address) const
         return getDescription(index);
     else
         return QString("Unresolved reference to source code element.");
+}
+
+TestNode *SourceCodeModel::getTestNode(SourceAddress address) const
+{
+    QModelIndex index = indexOf(address);
+
+    if(!index.isValid())
+        throw runtime_error("SourceCodeModel::getTestNode(): invalid index");
+    else
+        return static_cast<TestNode*>(asSourceNode(index));
 }
 
 SourceAddress SourceCodeModel::getAddress(const QModelIndex &index) const

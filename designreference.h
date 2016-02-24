@@ -1,7 +1,6 @@
 #ifndef DESIGNREFERENCE_H
 #define DESIGNREFERENCE_H
 
-// #include "sourcecodecontroller.h"
 #include "sourcecodemodel.h"
 #include "requirement.h"
 

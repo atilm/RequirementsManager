@@ -12,6 +12,7 @@
 #include "riskdescriptionview.h"
 #include "requirementfactory.h"
 #include "requirementsview.h"
+#include "testnode.h"
 
 class SourceCodeController : public QObject
 {
@@ -31,6 +32,7 @@ public:
     virtual void injectRequirementsView(RequirementsView *reqView);
 
     virtual QString getDescription(SourceAddress address);
+    virtual TestNode *getTestNode(SourceAddress address);
 
 signals:
 

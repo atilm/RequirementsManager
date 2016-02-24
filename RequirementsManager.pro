@@ -68,7 +68,8 @@ SOURCES += main.cpp\
     classnode.cpp \
     functionnode.cpp \
     testnode.cpp \
-    designreference.cpp
+    designreference.cpp \
+    automatedtestreference.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -123,7 +124,8 @@ HEADERS  += mainwindow.h \
     classnode.h \
     functionnode.h \
     testnode.h \
-    designreference.h
+    designreference.h \
+    automatedtestreference.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

@@ -49,6 +49,11 @@ QString SourceCodeController::getDescription(SourceAddress address)
     return model->getDescription(address);
 }
 
+TestNode *SourceCodeController::getTestNode(SourceAddress address)
+{
+    return model->getTestNode(address);
+}
+
 void SourceCodeController::parseProjectCode()
 {
     try{

@@ -40,3 +40,28 @@ void TestNode::appendToResult(const QString &s)
     expectedResult += s;
 }
 
+QString TestNode::getTestCase() const
+{
+    return testCase;
+}
+
+QString TestNode::getTestName() const
+{
+    return testName;
+}
+
+QString TestNode::getPreparation() const
+{
+    return preparation;
+}
+
+QString TestNode::getAction() const
+{
+    return action;
+}
+
+QString TestNode::getExpectedResult() const
+{
+    return expectedResult;
+}
+

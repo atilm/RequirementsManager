@@ -5,9 +5,13 @@
 
 #include "sourcenode.h"
 
+class TestNode;
+
 struct SourceAddress{
     QString className;
     QString functionName;
+    QString testCase;
+    QString testName;
 };
 
 class SourceCodeModel : public QAbstractItemModel
@@ -43,6 +47,7 @@ public:
 
     virtual QString getDescription(const QModelIndex &index) const;
     virtual QString getDescription(SourceAddress address) const;
+    virtual TestNode* getTestNode(SourceAddress address) const;
     virtual SourceAddress getAddress(const QModelIndex &index) const;
 
 private:
