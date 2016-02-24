@@ -47,6 +47,7 @@ public:
 
     virtual QString getDescription(const QModelIndex &index) const;
     virtual QString getDescription(SourceAddress address) const;
+    virtual TestNode* getTestNode(const QModelIndex &index) const;
     virtual TestNode* getTestNode(SourceAddress address) const;
     virtual SourceAddress getAddress(const QModelIndex &index) const;
 
@@ -60,6 +61,8 @@ private:
     QModelIndex indexOf(SourceAddress address) const;
     QModelIndex functionIndex(const QModelIndex &classIndex,
                               SourceAddress address) const;
+    QModelIndex testIndex(const QModelIndex &functionIndex,
+                          SourceAddress address) const;
 };
 
 #endif // SOURCECODEMODEL_H

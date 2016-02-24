@@ -12,6 +12,7 @@
 #include "riskdescriptionview.h"
 #include "requirementfactory.h"
 #include "requirementsview.h"
+#include "preventiveactiontableview.h"
 #include "testnode.h"
 
 class SourceCodeController : public QObject
@@ -30,6 +31,7 @@ public:
     virtual void injectRiskDescriptionView(RiskDescriptionView *view);
     virtual void injectRequirementsFactory(RequirementFactory *reqFactory);
     virtual void injectRequirementsView(RequirementsView *reqView);
+    virtual void injectTestView(PreventiveActionTableView *testView);
 
     virtual QString getDescription(SourceAddress address);
     virtual TestNode *getTestNode(SourceAddress address);
@@ -51,14 +53,21 @@ private:
     ProjectFileController *project;
     RequirementFactory *reqFactory;
     RequirementsView *reqView;
+    PreventiveActionTableView *testView;
 
 private slots:
     void handleClassSelectionChanged(const QModelIndex &current,
                                      const QModelIndex &previous);
     void handleFunctionSelectionChanged(const QModelIndex &current,
                                         const QModelIndex &previous);
+    void handleTestSelectionChanged(const QModelIndex &current,
+                                    const QModelIndex &previous);
     void handleClassOrFunctionDoubleClicked(const QModelIndex &index);
+    void handleTestDoubleClicked(const QModelIndex &index);
+
+private:
     void showDescription(const QModelIndex &index);
+    void showTestDescription(const QModelIndex &index);
 };
 
 #endif // SOURCECODECONTROLLER_H

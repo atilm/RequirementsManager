@@ -160,14 +160,19 @@ QString SourceCodeModel::getDescription(SourceAddress address) const
         return QString("Unresolved reference to source code element.");
 }
 
-TestNode *SourceCodeModel::getTestNode(SourceAddress address) const
+TestNode *SourceCodeModel::getTestNode(const QModelIndex &index) const
 {
-    QModelIndex index = indexOf(address);
-
     if(!index.isValid())
         throw runtime_error("SourceCodeModel::getTestNode(): invalid index");
     else
         return static_cast<TestNode*>(asSourceNode(index));
+}
+
+TestNode *SourceCodeModel::getTestNode(SourceAddress address) const
+{
+    QModelIndex index = indexOf(address);
+
+    return getTestNode(index);
 }
 
 SourceAddress SourceCodeModel::getAddress(const QModelIndex &index) const
@@ -222,6 +227,8 @@ QModelIndex SourceCodeModel::indexOf(SourceAddress address) const
                 return functionIndex(index(c,0), address);
         }
     }
+
+    return QModelIndex();
 }
 
 QModelIndex SourceCodeModel::functionIndex(const QModelIndex &classIndex,
@@ -232,8 +239,30 @@ QModelIndex SourceCodeModel::functionIndex(const QModelIndex &classIndex,
     for(int f=0;f < classNode->childCount(); f++){
         SourceNode *functionNode = classNode->getChild(f);
 
-        if(address.functionName == functionNode->getName())
-            return index(f, 0, classIndex);
+        if(address.functionName == functionNode->getName()){
+
+            if(address.testCase.isEmpty())
+                return index(f, 0, classIndex);
+            else
+                return testIndex(index(f, 0, classIndex), address);
+        }
+    }
+
+    return QModelIndex();
+}
+
+QModelIndex SourceCodeModel::testIndex(const QModelIndex &functionIndex,
+                                       SourceAddress address) const
+{
+    SourceNode *functionNode = asSourceNode(functionIndex);
+
+    for(int t=0;t < functionNode->childCount(); t++){
+        TestNode *testNode = static_cast<TestNode*>(functionNode->getChild(t));
+
+        QString name = QString("%1::%2").arg(address.testCase).arg(address.testName);
+
+        if(name == testNode->getName())
+            return index(t, 0, functionIndex);
     }
 
     return QModelIndex();
