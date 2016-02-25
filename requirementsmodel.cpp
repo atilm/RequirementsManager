@@ -216,7 +216,9 @@ QModelIndex RequirementsModel::appendChild(const QModelIndex &index, const QStri
     return this->index(item->childCount()-1, 0, index);
 }
 
-QModelIndex RequirementsModel::insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow)
+QModelIndex RequirementsModel::insertChild(Requirement *newItem,
+                                           const QModelIndex &index,
+                                           int beforeRow)
 {
     Requirement *item = getValidItem(index);
 
@@ -228,8 +230,10 @@ QModelIndex RequirementsModel::insertChild(Requirement *newItem, const QModelInd
     endInsertRows();
 
     fileState->setChanged(true);
-    connect(newItem->getDescription(), SIGNAL(contentsChanged()),
-            this, SLOT(handleDescriptionChanged()));
+    if(!newItem->isReference()){
+        connect(newItem->getDescription(), SIGNAL(contentsChanged()),
+                this, SLOT(handleDescriptionChanged()));
+    }
     return this->index(beforeRow-1, 0, index);
 }
 

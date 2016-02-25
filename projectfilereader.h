@@ -19,6 +19,7 @@ public:
     ProjectFileReader(QXmlStreamReader *xml);
     virtual ~ProjectFileReader();
 
+    virtual void injectRequirementFactory(RequirementFactory *factory);
     virtual void load(ProjectFileController *fileController, QFileAdapter *file);
 
 private:
@@ -28,6 +29,7 @@ private:
     RequirementsModel *model;
     AttributeContext *attributeContext;
     LinkContext *linkContext;
+    RequirementFactory *factory;
 
     void readContents();
     void parseProgrammingLanguage();
@@ -36,6 +38,8 @@ private:
     void parseAttributeDeclaration();
     void parseLinkDeclaration();
     void parseRequirement(QModelIndex parent);
+    void parseDesignReference(QModelIndex parent);
+    void parseRequirementContent(QModelIndex itemIdx, const QString &typeString);
     void parseDescription(QModelIndex itemIdx);
     void parseRequirementAttribute(QModelIndex itemIdx);
     void parseRequirementsLink(QModelIndex itemIdx);

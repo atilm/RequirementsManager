@@ -2,6 +2,7 @@
 #include "projectfilecontroller.h"
 #include <stdexcept>
 #include <iostream>
+#include <QDebug>
 using namespace std;
 
 ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml)
@@ -12,6 +13,11 @@ ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml)
 ProjectFileReader::~ProjectFileReader()
 {
     delete xml;
+}
+
+void ProjectFileReader::injectRequirementFactory(RequirementFactory *factory)
+{
+    this->factory = factory;
 }
 
 void ProjectFileReader::load(ProjectFileController *fileController, QFileAdapter *file)
@@ -52,6 +58,8 @@ void ProjectFileReader::readContents()
                 parseLinkDeclaration();
             else if(xml->name() == "Requirement")
                 parseRequirement(QModelIndex());
+            else if(xml->name() == "DesignReference")
+                parseDesignReference(QModelIndex());
             else
                 continue;
         }
@@ -119,14 +127,41 @@ void ProjectFileReader::parseRequirement(QModelIndex parent)
     int rowIdx = model->rowCount(parent) - 1;
     QModelIndex itemIdx = model->index(rowIdx, 0, parent);
 
+    parseRequirementContent(itemIdx, "Requirement");
+}
+
+void ProjectFileReader::parseDesignReference(QModelIndex parent)
+{
+    uint id = getAttribute("id").toUInt();
+    QString typeString = getAttribute("type");
+    Requirement::Type type = Requirement::stringToType(typeString);
+
+    SourceAddress address;
+    address.className = getAttribute("class");
+    address.functionName = getAttribute("func");
+
+    DesignReference *ref = factory->newDesignReference(address,id);
+    ref->setType(type);
+
+    QModelIndex itemIdx = model->insertChild(ref, parent, -1);
+
+    parseRequirementContent(itemIdx, "DesignReference");
+}
+
+void ProjectFileReader::parseRequirementContent(QModelIndex itemIdx,
+                                                const QString &typeString)
+{
     xml->readNext();
 
     while(!(xml->tokenType() == QXmlStreamReader::EndElement &&
-            xml->name() == "Requirement")){
+            xml->name() == typeString)){
 
         if(xml->tokenType() == QXmlStreamReader::StartElement){
             if(xml->name() == "Requirement"){
                 parseRequirement(itemIdx);
+            }
+            else if(xml->name() == "DesignReference"){
+                parseDesignReference(itemIdx);
             }
             else if(xml->name() == "description"){
                 parseDescription(itemIdx);

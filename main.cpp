@@ -85,6 +85,8 @@ int main(int argc, char *argv[])
     RequirementFactory *factory = new RequirementFactory(fileState, idManager,
                                                          attributes, links,
                                                          sourceController);
+    reader->injectRequirementFactory(factory);
+
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,
                                                             attributeContext, linkContext,

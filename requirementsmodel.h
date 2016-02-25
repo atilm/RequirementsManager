@@ -54,16 +54,18 @@ public:
                                     uint requestedID = 0);
 
     /*!
-     * \brief insertChild
-     * \param newItem
-     * \param index
-     * \param beforeRow
-     *
-     * If beforeRow = -1, the item is appended to the end.
-     *
-     * \return
+     \brief insertChild
+     \param newItem
+     \param index
+     \param beforeRow
+
+     If beforeRow = -1, the item is appended to the end.
+
+     \return
      */
-    virtual QModelIndex insertChild(Requirement *newItem, const QModelIndex &index, int beforeRow);
+    virtual QModelIndex insertChild(Requirement *newItem,
+                                    const QModelIndex &index,
+                                    int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
     virtual Requirement* getRequirement(const QModelIndex &index) const;
