@@ -22,6 +22,16 @@ AutomatedTestReference::~AutomatedTestReference()
 
 }
 
+bool AutomatedTestReference::isReference() const
+{
+    return true;
+}
+
+SourceAddress AutomatedTestReference::getAddress() const
+{
+    return address;
+}
+
 
 QString AutomatedTestReference::getTestCase()
 {

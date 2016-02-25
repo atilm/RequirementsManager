@@ -13,6 +13,11 @@ PreventiveAction::~PreventiveAction()
 
 }
 
+bool PreventiveAction::isReference() const
+{
+    return false;
+}
+
 QString PreventiveAction::getShortAction() const
 {
     return QString("%1::%2").arg(testCase).arg(testName);

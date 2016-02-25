@@ -18,6 +18,8 @@ public:
                     AttributeContainer *attributes, LinkContainer *links,
                     unsigned int proposedID);
 
+    virtual bool isReference();
+    virtual SourceAddress getAddress();
     virtual QTextDocument *getDescription();
 
 private:

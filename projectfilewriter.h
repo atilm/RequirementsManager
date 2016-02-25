@@ -35,13 +35,18 @@ private:
     void writeLinkGroupDeclaration(int index);
     void writeRequirementSpecification();
     void writeChildrenOf(QModelIndex parent);
-    void writeRequirement(int row, QModelIndex parent);
+    void writeRequirement(int row, QModelIndex &parent);
+    void writeReferenceContent(const QModelIndex &index, Requirement *requirement);
+    void writeRequirementContent(const QModelIndex &index, Requirement *requirement);
+    void write_ID_and_Type(const QModelIndex &itemIdx);
     void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
     void writeLinks(const QModelIndex &itemIdx);
     void writeRiskAssessmentModel(RiskAssessmentModel *risks);
     void writeRiskAssessment(RiskAssessment *risk);
     void writePreventiveActions(PreventiveActionModel *actions);
     void writePreventiveAction(PreventiveAction *action);
+    void writeTestReference(PreventiveAction *action);
+    void writePreventiveActionContent(PreventiveAction *action);
 
     QString getAttributeValue(const QModelIndex &parent, int row, int attributeIndex);
     QString checkStateToString(const QVariant &value);

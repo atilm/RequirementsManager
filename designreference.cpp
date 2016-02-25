@@ -23,6 +23,16 @@ DesignReference::DesignReference(SourceAddress address,
     initialize(address, controller);
 }
 
+bool DesignReference::isReference()
+{
+    return true;
+}
+
+SourceAddress DesignReference::getAddress()
+{
+    return address;
+}
+
 QTextDocument *DesignReference::getDescription()
 {
     description->setPlainText(controller->getDescription(address));

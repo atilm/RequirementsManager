@@ -10,6 +10,7 @@ public:
     PreventiveAction(FileStateTracker *fileState);
     virtual ~PreventiveAction();
 
+    virtual bool isReference() const;
     virtual QString getShortAction() const;
 
     virtual void setTestCase(const QString &testCase);

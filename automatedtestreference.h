@@ -15,6 +15,9 @@ public:
                            FileStateTracker *fileState);
     virtual ~AutomatedTestReference();
 
+    virtual bool isReference() const;
+    virtual SourceAddress getAddress() const;
+
     QString getTestCase();
     QString getTestName();
     QString getShortDescription();

@@ -54,6 +54,11 @@ uint Requirement::getID()
     return id;
 }
 
+bool Requirement::isReference()
+{
+    return false;
+}
+
 void Requirement::setType(Requirement::Type type)
 {
     this->type = type;

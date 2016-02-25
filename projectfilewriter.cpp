@@ -1,6 +1,7 @@
 #include "projectfilewriter.h"
 #include "requirementsmodel.h"
 #include "projectfilecontroller.h"
+#include "automatedtestreference.h"
 #include <stdexcept>
 #include <QString>
 #include <QObject>
@@ -130,23 +131,20 @@ void ProjectFileWriter::writeChildrenOf(QModelIndex parent)
     }
 }
 
-void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
+void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 {
-    xml->writeStartElement("Requirement");
-
     QModelIndex itemIdx = model->index(row, 0, parent);
-    QString title = model->getRequirement(itemIdx)->getTitle();
-    QString id = QString("%1").arg(model->getID(itemIdx));
-    QString type = Requirement::typeToString(model->getType(itemIdx));
-    QTextDocument *description = model->getDescription(itemIdx);
 
-    xml->writeAttribute("id", id);
-    xml->writeAttribute("type", type);
-    xml->writeAttribute("name", title);
+    Requirement *requirement = model->getRequirement(itemIdx);
 
-    xml->writeStartElement("description");
-    xml->writeCDATA(description->toHtml());
-    xml->writeEndElement(); // description
+    if(requirement->isReference()){
+        xml->writeStartElement("DesignReference");
+        writeReferenceContent(itemIdx, requirement);
+    }
+    else{
+        xml->writeStartElement("Requirement");
+        writeRequirementContent(itemIdx, requirement);
+    }
 
     for(int a=0;a < attributeContext->rowCount();a++)
         writeAttribute(parent, row, a);
@@ -158,6 +156,41 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex parent)
     writeChildrenOf(itemIdx);
 
     xml->writeEndElement(); // Requirement
+}
+
+void ProjectFileWriter::writeReferenceContent(const QModelIndex &index,
+                                              Requirement *requirement)
+{
+    write_ID_and_Type(index);
+
+    DesignReference *ref = static_cast<DesignReference*>(requirement);
+    SourceAddress address = ref->getAddress();
+
+    xml->writeAttribute("class", address.className);
+    xml->writeAttribute("func", address.functionName);
+}
+
+void ProjectFileWriter::writeRequirementContent(const QModelIndex &index,
+                                                Requirement *requirement)
+{
+    write_ID_and_Type(index);
+
+    QString title = requirement->getTitle();
+    QTextDocument *description = model->getDescription(index);
+
+    xml->writeAttribute("name", title);
+
+    xml->writeStartElement("description");
+    xml->writeCDATA(description->toHtml());
+    xml->writeEndElement(); // description
+}
+
+void ProjectFileWriter::write_ID_and_Type(const QModelIndex &itemIdx)
+{
+    QString id = QString("%1").arg(model->getID(itemIdx));
+    QString type = Requirement::typeToString(model->getType(itemIdx));
+    xml->writeAttribute("id", id);
+    xml->writeAttribute("type", type);
 }
 
 void ProjectFileWriter::writeAttribute(const QModelIndex &parent, int row, int attributeIndex)
@@ -216,6 +249,27 @@ void ProjectFileWriter::writePreventiveActions(PreventiveActionModel *actions)
 }
 
 void ProjectFileWriter::writePreventiveAction(PreventiveAction *action)
+{
+    if(action->isReference())
+        writeTestReference(action);
+    else
+        writePreventiveActionContent(action);
+}
+
+void ProjectFileWriter::writeTestReference(PreventiveAction *action)
+{
+    AutomatedTestReference *ref = static_cast<AutomatedTestReference*>(action);
+    SourceAddress address = ref->getAddress();
+
+    xml->writeStartElement("TestReference");
+    xml->writeAttribute("class", address.className);
+    xml->writeAttribute("func", address.functionName);
+    xml->writeAttribute("case", address.testCase);
+    xml->writeAttribute("name", address.testName);
+    xml->writeEndElement();
+}
+
+void ProjectFileWriter::writePreventiveActionContent(PreventiveAction *action)
 {
     xml->writeStartElement("Action");
     xml->writeAttribute("case", action->getTestCase());
