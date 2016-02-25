@@ -3,6 +3,7 @@
 
 #include "riskassessment.h"
 #include "preventiveaction.h"
+#include "testnode.h"
 #include "htmltemplatefactory.h"
 #include <QString>
 
@@ -20,6 +21,7 @@ public:
     void initTemplates(QString riskPath,
                        QString actionPath);
 
+    QString toHtml(const TestNode &test);
     QString toHtml(const PreventiveAction &s);
     QString toHtml(const RiskAssessment &risk);
     QString htmlReplacements(QString s);

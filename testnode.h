@@ -21,6 +21,7 @@ public:
 
     QString getTestCase() const;
     QString getTestName() const;
+    QString getShortDescription() const;
     QString getPreparation() const;
     QString getAction() const;
     QString getExpectedResult() const;

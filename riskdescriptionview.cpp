@@ -16,6 +16,11 @@ RiskDescriptionView::~RiskDescriptionView()
     delete html;
 }
 
+void RiskDescriptionView::displayTestReference(TestNode *test)
+{
+    document()->setHtml(html->toHtml(*test));
+}
+
 void RiskDescriptionView::displayAction(PreventiveAction *action)
 {
     document()->setHtml(html->toHtml(*action));

@@ -143,7 +143,7 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
     riskAssessmentEditController->setRemoveActionButton(ui->removePreventiveActionButton);
 
     sourceController->injectRiskDescriptionView(riskDescriptionView);
-    sourceController->injectTestView(preventiveActionTableView);
+    sourceController->injectPreventiveActionView(preventiveActionTableView);
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)

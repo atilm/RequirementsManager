@@ -6,6 +6,7 @@
 #include "preventiveaction.h"
 #include "riskassessment.h"
 #include "htmlgenerator.h"
+#include "testnode.h"
 
 class RiskDescriptionView : public QTextEdit
 {
@@ -15,6 +16,7 @@ public:
                                  QWidget *parent = 0);
     virtual ~RiskDescriptionView();
 
+    virtual void displayTestReference(TestNode *test);
     virtual void displayAction(PreventiveAction *action);
     virtual void displayRisk(RiskAssessment *risk);
     virtual void clearDisplay();

@@ -15,6 +15,7 @@
 #include "preventiveactiontableview.h"
 #include "testnode.h"
 
+
 class SourceCodeController : public QObject
 {
     Q_OBJECT
@@ -31,7 +32,7 @@ public:
     virtual void injectRiskDescriptionView(RiskDescriptionView *view);
     virtual void injectRequirementsFactory(RequirementFactory *reqFactory);
     virtual void injectRequirementsView(RequirementsView *reqView);
-    virtual void injectTestView(PreventiveActionTableView *testView);
+    virtual void injectPreventiveActionView(PreventiveActionTableView *actionView);
 
     virtual QString getDescription(SourceAddress address);
     virtual TestNode *getTestNode(SourceAddress address);
@@ -53,7 +54,7 @@ private:
     ProjectFileController *project;
     RequirementFactory *reqFactory;
     RequirementsView *reqView;
-    PreventiveActionTableView *testView;
+    PreventiveActionTableView *preventiveActionView;
 
 private slots:
     void handleClassSelectionChanged(const QModelIndex &current,

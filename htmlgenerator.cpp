@@ -25,6 +25,18 @@ void HtmlGenerator::initTemplates(QString riskPath, QString actionPath)
     riskAssessmentTemplate->initialize(riskPath);
 }
 
+QString HtmlGenerator::toHtml(const TestNode &test)
+{
+    actionTemplate->setField("CASE", test.getTestCase());
+    actionTemplate->setField("NAME", test.getTestName());
+    actionTemplate->setField("DESCRIPTION", test.getShortDescription());
+    actionTemplate->setField("PREPARATION", toHtml(test.getPreparation()));
+    actionTemplate->setField("ACTION", toHtml(test.getAction()));
+    actionTemplate->setField("RESULT", toHtml(test.getExpectedResult()));
+
+    return actionTemplate->getHtml();
+}
+
 QString HtmlGenerator::toHtml(const PreventiveAction &action)
 {
     actionTemplate->setField("CASE", action.getTestCase());

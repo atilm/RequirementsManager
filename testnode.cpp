@@ -50,6 +50,11 @@ QString TestNode::getTestName() const
     return testName;
 }
 
+QString TestNode::getShortDescription() const
+{
+    return "Short description not implemented yet.";
+}
+
 QString TestNode::getPreparation() const
 {
     return preparation;

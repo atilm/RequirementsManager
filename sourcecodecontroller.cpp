@@ -44,9 +44,9 @@ void SourceCodeController::injectRequirementsView(RequirementsView *reqView)
     this->reqView = reqView;
 }
 
-void SourceCodeController::injectTestView(PreventiveActionTableView *testView)
+void SourceCodeController::injectPreventiveActionView(PreventiveActionTableView *actionView)
 {
-    this->testView = testView;
+    this->preventiveActionView = actionView;
 }
 
 QString SourceCodeController::getDescription(SourceAddress address)
@@ -103,7 +103,7 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
     if(testView->model() == nullptr){
         testView->setModel(model);
         connect(testView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-                this, SLOT(handleTestSelectionChanged(QModelIndex,QModelIndex));
+                this, SLOT(handleTestSelectionChanged(QModelIndex,QModelIndex)));
         connect(testView, SIGNAL(doubleClicked(QModelIndex)),
                 this, SLOT(handleTestDoubleClicked(QModelIndex)));
     }
@@ -125,7 +125,6 @@ void SourceCodeController::handleClassOrFunctionDoubleClicked(const QModelIndex 
 
 void SourceCodeController::handleTestDoubleClicked(const QModelIndex &index)
 {
-
 }
 
 void SourceCodeController::showDescription(const QModelIndex &index)
@@ -137,7 +136,12 @@ void SourceCodeController::showDescription(const QModelIndex &index)
 
 void SourceCodeController::showTestDescription(const QModelIndex &index)
 {
-    model->getTestNode(index);
+    try{
+        testSpecView->displayTestReference(model->getTestNode(index));
+    }
+    catch(const runtime_error &e){
+
+    }
 }
 
 
