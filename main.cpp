@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
                                                         appSettings,
                                                         0);
 
-    SourceCodeController *sourceController = new SourceCodeController(fileController,
+    SourceCodeController *sourceController = new SourceCodeController(fileState,
+                                                                      fileController,
                                                                       readerProvider,
                                                                       0);
     RequirementFactory *factory = new RequirementFactory(fileState, idManager,

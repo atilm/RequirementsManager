@@ -14,13 +14,15 @@
 #include "requirementsview.h"
 #include "preventiveactiontableview.h"
 #include "testnode.h"
+#include "filestatetracker.h"
 
 
 class SourceCodeController : public QObject
 {
     Q_OBJECT
 public:
-    explicit SourceCodeController(ProjectFileController *project,
+    explicit SourceCodeController(FileStateTracker *stateTracker,
+                                  ProjectFileController *project,
                                   SourceCodeReaderProvider *readerProvider,
                                   QObject *parent = 0);
     virtual ~SourceCodeController();
@@ -43,6 +45,7 @@ public slots:
     virtual void parseProjectCode();
 
 private:
+    FileStateTracker *stateTracker;
     QListView *moduleView;
     QListView *functionView;
     QListView *testView;

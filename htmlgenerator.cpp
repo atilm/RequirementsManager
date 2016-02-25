@@ -37,7 +37,7 @@ QString HtmlGenerator::toHtml(const TestNode &test)
     return actionTemplate->getHtml();
 }
 
-QString HtmlGenerator::toHtml(const PreventiveAction &action)
+QString HtmlGenerator::toHtml(PreventiveAction &action)
 {
     actionTemplate->setField("CASE", action.getTestCase());
     actionTemplate->setField("NAME", action.getTestName());

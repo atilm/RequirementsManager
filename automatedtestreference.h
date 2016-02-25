@@ -15,8 +15,8 @@ public:
                            FileStateTracker *fileState);
     virtual ~AutomatedTestReference();
 
-    QString getTestCase() const;
-    QString getTestName() const;
+    QString getTestCase();
+    QString getTestName();
     QString getShortDescription();
     QString getPreparation();
     QString getAction();

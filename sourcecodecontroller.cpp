@@ -1,11 +1,14 @@
 #include "sourcecodecontroller.h"
+#include "automatedtestreference.h"
 #include <QDebug>
 
-SourceCodeController::SourceCodeController(ProjectFileController *project,
+SourceCodeController::SourceCodeController(FileStateTracker *stateTracker,
+                                           ProjectFileController *project,
                                            SourceCodeReaderProvider *readerProvider,
                                            QObject *parent)
     : QObject(parent)
 {
+    this->stateTracker = stateTracker;
     this->readerProvider = readerProvider;
     this->project = project;
 }
@@ -125,6 +128,10 @@ void SourceCodeController::handleClassOrFunctionDoubleClicked(const QModelIndex 
 
 void SourceCodeController::handleTestDoubleClicked(const QModelIndex &index)
 {
+    AutomatedTestReference *testRef = new AutomatedTestReference(model->getAddress(index),
+                                                                 this,
+                                                                 stateTracker);
+    preventiveActionView->appendTestReference(testRef);
 }
 
 void SourceCodeController::showDescription(const QModelIndex &index)

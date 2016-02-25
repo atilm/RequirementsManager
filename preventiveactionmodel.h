@@ -6,6 +6,8 @@
 #include "preventiveaction.h"
 #include "filestatetracker.h"
 
+class AutomatedTestReference;
+
 class PreventiveActionModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -19,6 +21,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const;
 
     virtual PreventiveAction* appendAction();
+    virtual void appendReference(AutomatedTestReference *ref);
     virtual void add(int beforeRowIndex);
     virtual void remove(const QModelIndex &index);
     virtual PreventiveAction* getAction(const QModelIndex &index);

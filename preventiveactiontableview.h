@@ -6,6 +6,7 @@
 #include "riskassessmentmodel.h"
 #include "risktableview.h"
 #include "preventiveactionmodel.h"
+#include "automatedtestreference.h"
 
 class PreventiveActionTableView : public QTableView
 {
@@ -14,6 +15,7 @@ public:
     explicit PreventiveActionTableView(QWidget *parent = 0);
     virtual ~PreventiveActionTableView();
 
+    virtual void appendTestReference(AutomatedTestReference *testRef);
 };
 
 #endif // PREVENTIVEACTIONTABLEVIEW_H

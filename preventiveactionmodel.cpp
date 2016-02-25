@@ -1,4 +1,5 @@
 #include "preventiveactionmodel.h"
+#include "automatedtestreference.h"
 #include <exception>
 using namespace std;
 
@@ -47,6 +48,16 @@ PreventiveAction *PreventiveActionModel::appendAction()
 {
     add(rowCount());
     return getAction(index(rowCount()-1,0));
+}
+
+void PreventiveActionModel::appendReference(AutomatedTestReference *ref)
+{
+    int row = rowCount();
+
+    beginInsertRows(QModelIndex(), row, row);
+    actions.append(ref);
+    endInsertRows();
+    fileState->setChanged(true);
 }
 
 void PreventiveActionModel::add(int beforeRowIndex)

@@ -15,6 +15,7 @@ public:
     void setTestCase(const QString &s);
     void setTestName(const QString &s);
 
+    void appendToShortDescription(const QString &s);
     void appendToPreparation(const QString &s);
     void appendToAction(const QString &s);
     void appendToResult(const QString &s);
@@ -30,6 +31,7 @@ private:
     QString testCase;
     QString testName;
 
+    QString shortDescription;
     QString preparation;
     QString action;
     QString expectedResult;

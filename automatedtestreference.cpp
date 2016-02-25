@@ -1,5 +1,6 @@
 #include "automatedtestreference.h"
 #include "sourcecodecontroller.h"
+#include <QDebug>
 
 AutomatedTestReference::AutomatedTestReference(SourceAddress address,
                                                SourceCodeController *controller,
@@ -8,6 +9,9 @@ AutomatedTestReference::AutomatedTestReference(SourceAddress address,
 {
     this->address = address;
     this->controller = controller;
+
+    testCase = address.testCase;
+    testName = address.testName;
 
     node = nullptr;
     unresolvedMessage = "Unresolved test reference";
@@ -18,12 +22,13 @@ AutomatedTestReference::~AutomatedTestReference()
 
 }
 
-QString AutomatedTestReference::getTestCase() const
+
+QString AutomatedTestReference::getTestCase()
 {
     return address.testCase;
 }
 
-QString AutomatedTestReference::getTestName() const
+QString AutomatedTestReference::getTestName()
 {
     return address.testName;
 }
@@ -68,6 +73,7 @@ bool AutomatedTestReference::assertNodeResolved()
         return true;
     }
     catch(const runtime_error &e){
+        qDebug() << "Could not resolve test address";
         return false;
     }
 }

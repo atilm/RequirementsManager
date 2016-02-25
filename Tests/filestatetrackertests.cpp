@@ -32,12 +32,17 @@ protected:
 };
 
 /*! TEST_SPEC FileStateTracker::setFilePath()
+ SHORT
+ When the file path is changed, the signal filePathChanged() is emitted.
+
  PREPARATION
+ Create an object of class FileStateTracker
 
  ACTION
+ Call FileStateTracker::setFilePath() with a new path.
 
  RESULT
-
+ The signal filePathChanged() is emitted.
 
  */
 TEST_F(FileStateTrackerTests, when_file_path_changed_signal_is_emitted){

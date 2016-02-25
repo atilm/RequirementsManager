@@ -25,6 +25,11 @@ void TestNode::setTestName(const QString &s)
     testName = s;
 }
 
+void TestNode::appendToShortDescription(const QString &s)
+{
+    shortDescription += s;
+}
+
 void TestNode::appendToPreparation(const QString &s)
 {
     preparation += s;
@@ -52,7 +57,7 @@ QString TestNode::getTestName() const
 
 QString TestNode::getShortDescription() const
 {
-    return "Short description not implemented yet.";
+    return shortDescription;
 }
 
 QString TestNode::getPreparation() const

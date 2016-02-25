@@ -263,7 +263,9 @@ void CppReader::parseTest()
     while(!atTestEnd()){
         currentLine  = inStream->readLine();
 
-        if(currentLine.contains("PREPARATION"))
+        if(currentLine.contains("SHORT"))
+            testParsingMode = SHORT;
+        else if(currentLine.contains("PREPARATION"))
             testParsingMode = PREPARATION;
         else if(currentLine.contains("ACTION"))
             testParsingMode = ACTION;
@@ -305,6 +307,9 @@ bool CppReader::atTestEnd()
 void CppReader::parseTestLine(TestNode *test)
 {
     switch(testParsingMode){
+    case SHORT:
+        test->appendToShortDescription(currentLine.trimmed());
+        break;
     case PREPARATION:
         test->appendToPreparation(currentLine.trimmed());
         break;
@@ -312,7 +317,7 @@ void CppReader::parseTestLine(TestNode *test)
         test->appendToAction(currentLine.trimmed());
         break;
     case RESULT:
-        test->appendToResult(currentLine.trimmed());
+        test->appendToResult(currentLine.replace("*/","").trimmed());
         break;
     default:
         break;

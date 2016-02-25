@@ -12,21 +12,25 @@ public:
 
     virtual QString getShortAction() const;
 
-    void setTestCase(const QString &testCase);
-    void setTestName(const QString &testName);
-    void setShortDescription(const QString &description);
-    void setPreparation(const QString &preparation);
-    void setAction(const QString &action);
-    void setExpectedResult(const QString &expectedResult);
+    virtual void setTestCase(const QString &testCase);
+    virtual void setTestName(const QString &testName);
+    virtual void setShortDescription(const QString &description);
+    virtual void setPreparation(const QString &preparation);
+    virtual void setAction(const QString &action);
+    virtual void setExpectedResult(const QString &expectedResult);
 
-    QString getTestCase() const;
-    QString getTestName() const;
-    QString getShortDescription() const;
-    QString getPreparation() const;
-    QString getAction() const;
-    QString getExpectedResult() const;
+    // The following functions are not const to make
+    // them match their counterparts in the derived
+    // class AutomatedTestReference which cannot be
+    // const:
+    virtual QString getTestCase();
+    virtual QString getTestName();
+    virtual QString getShortDescription();
+    virtual QString getPreparation();
+    virtual QString getAction();
+    virtual QString getExpectedResult();
 
-private:
+protected:
     FileStateTracker *fileState;
     QString testCase;
     QString testName;

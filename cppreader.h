@@ -27,6 +27,7 @@ private:
 
     enum TestParsingMode {
         ADDRESS,
+        SHORT,
         PREPARATION,
         ACTION,
         RESULT,

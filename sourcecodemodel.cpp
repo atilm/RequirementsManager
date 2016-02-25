@@ -198,6 +198,13 @@ SourceAddress SourceCodeModel::getAddress(const QModelIndex &index) const
         fields.pop_back();
     }
 
+    if(!fields.isEmpty()){
+        QStringList testID = fields.last().split("::");
+        address.testCase = testID.first();
+        address.testName = testID.last();
+        fields.pop_back();
+    }
+
     return address;
 }
 

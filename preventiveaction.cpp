@@ -66,32 +66,32 @@ void PreventiveAction::setExpectedResult(const QString &expectedResult)
     }
 }
 
-QString PreventiveAction::getTestCase() const
+QString PreventiveAction::getTestCase()
 {
     return testCase;
 }
 
-QString PreventiveAction::getTestName() const
+QString PreventiveAction::getTestName()
 {
     return testName;
 }
 
-QString PreventiveAction::getShortDescription() const
+QString PreventiveAction::getShortDescription()
 {
     return shortDescription;
 }
 
-QString PreventiveAction::getPreparation() const
+QString PreventiveAction::getPreparation()
 {
     return preparation;
 }
 
-QString PreventiveAction::getAction() const
+QString PreventiveAction::getAction()
 {
     return action;
 }
 
-QString PreventiveAction::getExpectedResult() const
+QString PreventiveAction::getExpectedResult()
 {
     return expectedResult;
 }

@@ -22,7 +22,10 @@ public:
                        QString actionPath);
 
     QString toHtml(const TestNode &test);
-    QString toHtml(const PreventiveAction &s);
+
+    // cannot make s const, because non-const functions
+    // are called in toHtml
+    QString toHtml(PreventiveAction &s);
     QString toHtml(const RiskAssessment &risk);
     QString htmlReplacements(QString s);
     QString toHtml(const QString &markupText, HeaderType headingType = NO_HEADER);
