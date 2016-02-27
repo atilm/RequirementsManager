@@ -69,6 +69,7 @@ void LinkController::handleCurrentRequirementChanged(const QModelIndex &current,
     try{
         currentLinks = model->getLinkContainer(current);
         linkView->setModel(currentLinks);
+        linkView->expandToDepth(1);
     }
     catch(const InvalidIndexException &e){
         linkView->setModel(nullptr);

@@ -4,6 +4,7 @@
 RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
     QTreeView(parent)
 {
+    setExpandsOnDoubleClick(false);
     setDragEnabled(true);
     setAcceptDrops(true);
     setDropIndicatorShown(true);
