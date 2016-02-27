@@ -64,7 +64,7 @@ public:
      \return
      */
     virtual QModelIndex insertChild(Requirement *newItem,
-                                    const QModelIndex &index,
+                                    const QModelIndex &parentIndex,
                                     int beforeRow);
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
