@@ -7,14 +7,16 @@
 #include <QObject>
 using namespace std;
 
-ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml)
+ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml, TextDocumentSerializer *serializer)
 {
     this->xml = xml;
+    this->serializer = serializer;
 }
 
 ProjectFileWriter::~ProjectFileWriter()
 {
     delete xml;
+    delete serializer;
 }
 
 void ProjectFileWriter::save(ProjectFileController *fileController,
@@ -181,6 +183,7 @@ void ProjectFileWriter::writeRequirementContent(const QModelIndex &index,
     xml->writeAttribute("name", title);
 
     xml->writeStartElement("description");
+    serializer->toSimpleHtml(description);
     xml->writeCDATA(description->toHtml());
     xml->writeEndElement(); // description
 }

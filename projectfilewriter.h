@@ -5,6 +5,7 @@
 #include "riskassessmentmodel.h"
 #include "preventiveactionmodel.h"
 #include "qfileadapter.h"
+#include "textdocumentserializer.h"
 #include <QString>
 #include <QXmlStreamWriter>
 
@@ -13,13 +14,15 @@ class ProjectFileController;
 class ProjectFileWriter
 {
 public:
-    ProjectFileWriter(QXmlStreamWriter *xml);
+    ProjectFileWriter(QXmlStreamWriter *xml,
+                      TextDocumentSerializer *serializer);
     virtual ~ProjectFileWriter();
 
     virtual void save(ProjectFileController *fileController, QFileAdapter *file);
 
 private:
     QXmlStreamWriter *xml;
+    TextDocumentSerializer *serializer;
     ProjectFileController *fileController;
     RequirementsModel *model;
     AttributeContext *attributeContext;

@@ -7,7 +7,8 @@
 #include <QDir>
 #include <QFileInfoList>
 
-CppReader::CppReader(QFileAdapter *file, QTextStreamAdapter *inStream)
+CppReader::CppReader(QFileAdapter *file,
+                     QTextStreamAdapter *inStream)
 {
     model = nullptr;
     this->file = file;

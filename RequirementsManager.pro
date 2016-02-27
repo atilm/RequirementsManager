@@ -70,7 +70,8 @@ SOURCES += main.cpp\
     testnode.cpp \
     designreference.cpp \
     automatedtestreference.cpp \
-    preventiveactionfactory.cpp
+    preventiveactionfactory.cpp \
+    textdocumentserializer.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -127,7 +128,8 @@ HEADERS  += mainwindow.h \
     testnode.h \
     designreference.h \
     automatedtestreference.h \
-    preventiveactionfactory.h
+    preventiveactionfactory.h \
+    textdocumentserializer.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
