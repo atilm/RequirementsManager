@@ -6,6 +6,7 @@
 #include <QXmlStreamReader>
 #include <stdexcept>
 
+class PreventiveActionFactory;
 class ProjectFileController;
 
 class ParsingError : public runtime_error{
@@ -20,6 +21,7 @@ public:
     virtual ~ProjectFileReader();
 
     virtual void injectRequirementFactory(RequirementFactory *factory);
+    virtual void injectPreventiveActionFacotry(PreventiveActionFactory *actionFactory);
     virtual void load(ProjectFileController *fileController, QFileAdapter *file);
 
 private:
@@ -30,6 +32,7 @@ private:
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     RequirementFactory *factory;
+    PreventiveActionFactory *actionFactory;
 
     void readContents();
     void parseProgrammingLanguage();
@@ -47,6 +50,7 @@ private:
     void parseRiskScenario(RiskAssessment *ra);
     void parseMitigationStrategy(RiskAssessment *ra);
     void parsePreventiveAction(RiskAssessment *ra);
+    void parseTestReference(RiskAssessment *ra);
     void storeAttributeValue(const QModelIndex &itemIdx,
                              int attributeIndex,
                              const QString &valueString);

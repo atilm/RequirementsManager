@@ -46,7 +46,7 @@ QString AutomatedTestReference::getTestName()
 QString AutomatedTestReference::getShortDescription()
 {
     if(assertNodeResolved())
-        return node->getPreparation();
+        return node->getShortDescription();
     else
         return unresolvedMessage;
 }

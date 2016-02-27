@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "cppreader.h"
+#include "preventiveactionfactory.h"
 
 int main(int argc, char *argv[])
 {
@@ -85,7 +86,11 @@ int main(int argc, char *argv[])
     RequirementFactory *factory = new RequirementFactory(fileState, idManager,
                                                          attributes, links,
                                                          sourceController);
+    PreventiveActionFactory *actionFactory = new PreventiveActionFactory(fileState,
+                                                                         sourceController);
+
     reader->injectRequirementFactory(factory);
+    reader->injectPreventiveActionFacotry(actionFactory);
 
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
     RequirementsModel *requirements = new RequirementsModel(factory, fileState,

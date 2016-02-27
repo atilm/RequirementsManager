@@ -1,5 +1,7 @@
 #include "projectfilereader.h"
 #include "projectfilecontroller.h"
+#include "automatedtestreference.h"
+#include "preventiveactionfactory.h"
 #include <stdexcept>
 #include <iostream>
 #include <QDebug>
@@ -18,6 +20,11 @@ ProjectFileReader::~ProjectFileReader()
 void ProjectFileReader::injectRequirementFactory(RequirementFactory *factory)
 {
     this->factory = factory;
+}
+
+void ProjectFileReader::injectPreventiveActionFacotry(PreventiveActionFactory *actionFactory)
+{
+    this->actionFactory = actionFactory;
 }
 
 void ProjectFileReader::load(ProjectFileController *fileController, QFileAdapter *file)
@@ -235,6 +242,9 @@ void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
             else if(xml->name() == "Action"){
                 parsePreventiveAction(ra);
             }
+            else if(xml->name() == "TestReference"){
+                parseTestReference(ra);
+            }
         }
 
         xml->readNext();
@@ -285,6 +295,21 @@ void ProjectFileReader::parsePreventiveAction(RiskAssessment *ra)
 
         xml->readNext();
     }
+}
+
+void ProjectFileReader::parseTestReference(RiskAssessment *ra)
+{
+    PreventiveActionModel *actionModel = ra->getPreventiveActions();
+
+    SourceAddress address;
+    address.className = getAttribute("class");
+    address.functionName = getAttribute("func");
+    address.testCase = getAttribute("case");
+    address.testName = getAttribute("name");
+
+    AutomatedTestReference *ref = actionFactory->newTestReference(address);
+
+    actionModel->appendReference(ref);
 }
 
 void ProjectFileReader::storeAttributeValue(const QModelIndex &itemIdx,
