@@ -104,7 +104,7 @@ void CppReader::parseSourceLines()
 
 bool CppReader::atClassBegin()
 {
-    bool isCandidate = currentLine.startsWith("class") || currentLine.startsWith("struct");
+    bool isCandidate = currentLine.startsWith("class");
 
     // discard forward declarations of classes
     if( isCandidate && !(currentLine.endsWith(";")))
@@ -115,6 +115,8 @@ bool CppReader::atClassBegin()
 
 void CppReader::parseClass()
 {
+    currentScope = PRIVATE; // default scope of class is private
+
     ClassNode *classNode = new ClassNode();
 
     classNode->setName(extractClassName());
@@ -126,12 +128,21 @@ void CppReader::parseClass()
     while(!atClassEnd()){
         currentLine = inStream->readLine().trimmed();
 
-        if(currentLine.startsWith("class") || currentLine.startsWith("struct"))
-            parseClass();
-        else if(currentLine.contains("("))
-            parseFunction(classIdx);
-        else if(currentLine.startsWith("/*!"))
-            parseDesignSpecBlock();
+        if(currentScope == PUBLIC){
+            if(atClassBegin())
+                parseClass();
+            else if(currentLine.contains("("))
+                parseFunction(classIdx);
+            else if(currentLine.startsWith("/*!"))
+                parseDesignSpecBlock();
+        }
+
+        if(currentLine.startsWith("public"))
+            currentScope = PUBLIC;
+        else if(currentLine.startsWith("private"))
+            currentScope = PRIVATE;
+        else if(currentLine.startsWith("protected"))
+            currentScope = PROTECTED;
     }
 }
 

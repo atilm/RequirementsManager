@@ -36,6 +36,14 @@ private:
 
     TestParsingMode testParsingMode;
 
+    enum Scope{
+        PUBLIC,
+        PRIVATE,
+        PROTECTED
+    };
+
+    Scope currentScope;
+
     void readDesignSpecification(DirectoryListModel *sourceDirs);
     void parseSourceFilesInDirectory(const QString &dirPath);
     QStringList listHeaderFiles(const QString &dirPath);

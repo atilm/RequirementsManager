@@ -7,7 +7,8 @@
 
 class TestNode;
 
-struct SourceAddress{
+struct SourceAddress
+{
     QString className;
     QString functionName;
     QString testCase;
