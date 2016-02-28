@@ -100,6 +100,8 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 
     connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
+    connect(fileController, SIGNAL(fileLoaded()),
+            requirementsView, SLOT(resizeColumns()));
 
     linkController->setDescriptionView(descriptionView);
     linkController->setUpSelectionModeConnections();
