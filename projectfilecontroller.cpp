@@ -1,5 +1,6 @@
 #include "projectfilecontroller.h"
 #include <QFileInfo>
+#include <QDebug>
 
 ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              QFileAdapter *file,
@@ -109,15 +110,20 @@ void ProjectFileController::load()
                                                        startDir, filterString);
 
     if(!filePath.isEmpty()){
-        sourceDirModel()->clear();
-        testDirModel()->clear();
-        model->clearModel();
-        projectFile->setFileName(filePath);
-        reader->load(this, projectFile);
-        stateTracker->setFilePath(filePath);
-        stateTracker->setChanged(false);
-        saveAsStartDirectory(filePath);
-        emit fileLoaded();
+        try{
+            sourceDirModel()->clear();
+            testDirModel()->clear();
+            model->clearModel();
+            projectFile->setFileName(filePath);
+            reader->load(this, projectFile);
+            stateTracker->setFilePath(filePath);
+            stateTracker->setChanged(false);
+            saveAsStartDirectory(filePath);
+            emit fileLoaded();
+        }
+        catch(...){
+            QMessageBox::information(0, tr("Error"), tr("The file could not be loaded."));
+        }
     }
 }
 
