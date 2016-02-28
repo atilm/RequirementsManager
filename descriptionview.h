@@ -21,6 +21,8 @@ public slots:
 private:
     QTextDocument *defaultDocument;
     RequirementsModel *data;
+
+    void initialize();
 };
 
 #endif // DESCRIPTIONVIEW_H

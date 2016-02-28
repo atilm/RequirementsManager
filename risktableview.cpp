@@ -4,6 +4,7 @@ RiskTableView::RiskTableView(QWidget *parent) :
     QTableView(parent)
 {
     requirements = nullptr;
+    setFont(QFont("Verdana", 11, QFont::Normal));
 }
 
 RiskTableView::~RiskTableView()

@@ -3,6 +3,7 @@
 PreventiveActionTableView::PreventiveActionTableView(QWidget *parent) :
     QTableView(parent)
 {
+    setFont(QFont("Verdana", 11, QFont::Normal));
 }
 
 PreventiveActionTableView::~PreventiveActionTableView()

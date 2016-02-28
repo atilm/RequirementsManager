@@ -12,6 +12,8 @@
   </property>
   <property name="font">
    <font>
+    <family>Verdana</family>
+    <pointsize>10</pointsize>
     <weight>50</weight>
     <bold>false</bold>
    </font>
@@ -272,6 +274,14 @@
         </layout>
        </widget>
        <widget class="QWidget" name="codePage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>370</width>
+          <height>629</height>
+         </rect>
+        </property>
         <attribute name="label">
          <string>Source Code</string>
         </attribute>
@@ -284,7 +294,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="moduleListView"/>
+          <widget class="QListView" name="moduleListView">
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
@@ -294,7 +311,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="functionListView"/>
+          <widget class="QListView" name="functionListView">
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_6">
@@ -304,7 +328,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="testListView"/>
+          <widget class="QListView" name="testListView">
+           <property name="font">
+            <font>
+             <family>Verdana</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -319,7 +350,7 @@
      <x>0</x>
      <y>0</y>
      <width>1090</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

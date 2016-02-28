@@ -3,10 +3,8 @@
 DescriptionView::DescriptionView(QWidget *parent) :
     QTextEdit(parent)
 {
-    setDisabled(true);
     defaultDocument = new QTextDocument();
-    defaultDocument->setPlainText(tr("Click on the \"plus\" buttons to add requirements."));
-    setDocument(defaultDocument);
+    initialize();
 }
 
 void DescriptionView::setModel(RequirementsModel *data)
@@ -25,5 +23,13 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
         setDocument(defaultDocument);
         setDisabled(true);
     }
+}
+
+void DescriptionView::initialize()
+{
+    setDisabled(true);
+
+    defaultDocument->setPlainText(tr("Click on the \"plus\" buttons to add requirements."));
+    setDocument(defaultDocument);
 }
 
