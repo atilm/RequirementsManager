@@ -17,9 +17,13 @@ public:
 
 private:
 
-    void processFrame(QTextFrame *frame);
-    void processBlock(QTextBlock block);
-    void processFragment(QTextFragment fragment);
+    QString processFrame(QTextFrame *frame);
+    QString processBlock(QTextBlock block,
+                         QTextFrame::iterator &it);
+    QString processList(QTextList *list,
+                        QTextFrame::iterator &it);
+    QString processBlockContent(QTextBlock block);
+    QString processFragment(QTextFragment fragment);
 };
 
 #endif // TEXTDOCUMENTSERIALIZER_H

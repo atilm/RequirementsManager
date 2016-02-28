@@ -183,8 +183,7 @@ void ProjectFileWriter::writeRequirementContent(const QModelIndex &index,
     xml->writeAttribute("name", title);
 
     xml->writeStartElement("description");
-    serializer->toSimpleHtml(description);
-    xml->writeCDATA(description->toHtml());
+    xml->writeCDATA(serializer->toSimpleHtml(description));
     xml->writeEndElement(); // description
 }
 
