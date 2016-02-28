@@ -92,6 +92,8 @@ protected:
     RiskAssessmentModel *riskAssessment;
 
     void assertValidIndex(int index);
+    void initialize(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                    AttributeContainer *attributes, LinkContainer *links);
 };
 
 #endif // REQUIREMENT_H

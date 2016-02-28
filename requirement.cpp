@@ -5,17 +5,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
                          AttributeContainer *attributes, LinkContainer *links) :
     id(idManager->newUniqueID())
 {
-    this->attributes = attributes;
-    this->links = links;
-    this->links->setOwner(this);
-    this->riskAssessment = riskAssessment;
-    this->idManager = idManager;
-    this->idManager->setRequirement(id, this);
-    parent = NULL;
-
-    type = UserRequirement;
-    title = "Requirement";
-    description = new QTextDocument();
+    initialize(idManager, riskAssessment, attributes, links);
 }
 
 Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
@@ -23,18 +13,7 @@ Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAs
                          unsigned int proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
-    this->attributes = attributes;
-    this->links = links;
-    this->links->setOwner(this);
-    this->riskAssessment = riskAssessment;
-    this->idManager = idManager;
-    this->idManager->setRequirement(id, this);
-    parent = NULL;
-
-    type = UserRequirement;
-    title = "Requirement";
-    description = new QTextDocument();
-    description->setDefaultFont(QFont("Verdana", 11, QFont::Normal));
+    initialize(idManager, riskAssessment, attributes, links);
 }
 
 Requirement::~Requirement()
@@ -232,4 +211,21 @@ void Requirement::assertValidIndex(int index)
     if(index < 0 || index > children.size()-1){
         throw InvalidIndexException();
     }
+}
+
+void Requirement::initialize(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                             AttributeContainer *attributes, LinkContainer *links)
+{
+    this->attributes = attributes;
+    this->links = links;
+    this->links->setOwner(this);
+    this->riskAssessment = riskAssessment;
+    this->idManager = idManager;
+    this->idManager->setRequirement(id, this);
+    parent = NULL;
+
+    type = UserRequirement;
+    title = "Requirement";
+    description = new QTextDocument();
+    description->setDefaultFont(QFont("Verdana", 11, QFont::Normal));
 }
