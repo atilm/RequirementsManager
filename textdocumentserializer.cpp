@@ -94,6 +94,9 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
 
     QString text = fragment.text();
 
+    if(format.isImageFormat())
+        text = QString("<img src=\"%1\">").arg(format.toImageFormat().name());
+
     if(format.fontWeight() == QFont::Bold)
         text = QString("<b>%1</b>").arg(text);
 

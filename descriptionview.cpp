@@ -67,8 +67,10 @@ void DescriptionView::insertImage()
 
     try{
         resourcesManager->setDocument(document());
-        QTextImageFormat imageFormat = resourcesManager->insertImage(file);
-        //textCursor().insertImage(imageFormat);
+        QUrl imageUri = resourcesManager->insertImage(file);
+        QTextImageFormat imageFormat;
+        imageFormat.setName(imageUri.toString());
+        textCursor().insertImage(imageFormat);
     }
     catch(...){
         QMessageBox::information(this, tr("Error"), tr("Could not open file."));

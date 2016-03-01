@@ -7,9 +7,10 @@
 #include <QDebug>
 using namespace std;
 
-ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml)
+ProjectFileReader::ProjectFileReader(QXmlStreamReader *xml, RichTextResourceManager *resources)
 {
     this->xml = xml;
+    this->resources = resources;
 }
 
 ProjectFileReader::~ProjectFileReader()
@@ -193,7 +194,12 @@ void ProjectFileReader::parseDescription(QModelIndex itemIdx)
     xml->readNext();
     if(xml->isCDATA()){
         QString characters = xml->text().toString();
-        model->getDescription(itemIdx)->setHtml(characters);
+
+        QTextDocument *document = model->getDescription(itemIdx);
+
+        resources->setDocument(document);
+        resources->loadResources(characters);
+        document->setHtml(characters);
     }
 }
 

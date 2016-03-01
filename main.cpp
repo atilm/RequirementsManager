@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 
     QFileDialogAdapter *fileDialog = new QFileDialogAdapter();
     QFileAdapter *file = new QFileAdapter();
-    ProjectFileReader *reader = new ProjectFileReader(new QXmlStreamReader());
+    ProjectFileReader *reader = new ProjectFileReader(new QXmlStreamReader(),
+                                                      docResourcesManager);
     ProjectFileWriter *writer = new ProjectFileWriter(new QXmlStreamWriter(),
                                                       new TextDocumentSerializer());
 

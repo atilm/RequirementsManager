@@ -3,6 +3,7 @@
 
 #include "requirementsmodel.h"
 #include "qfileadapter.h"
+#include "richtextresourcemanager.h"
 #include <QXmlStreamReader>
 #include <stdexcept>
 
@@ -17,7 +18,8 @@ public:
 class ProjectFileReader
 {
 public:
-    ProjectFileReader(QXmlStreamReader *xml);
+    ProjectFileReader(QXmlStreamReader *xml,
+                      RichTextResourceManager *resources);
     virtual ~ProjectFileReader();
 
     virtual void injectRequirementFactory(RequirementFactory *factory);
@@ -26,6 +28,7 @@ public:
 
 private:
     QXmlStreamReader *xml;
+    RichTextResourceManager *resources;
     QFileAdapter *file;
     ProjectFileController *fileController;
     RequirementsModel *model;
