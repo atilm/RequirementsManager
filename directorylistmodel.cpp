@@ -43,11 +43,9 @@ QVariant DirectoryListModel::data(const QModelIndex &index, int role) const
 
 QString DirectoryListModel::absolutePath(int idx) const
 {
-    QFileInfo fInfo(fileState->filePath());
-    QDir dir(fInfo.absoluteDir());
-
     QString relativePath = data(index(idx), Qt::DisplayRole).toString();
-    return dir.absoluteFilePath(relativePath);
+
+    return fileState->toAbsoluteFilePath(relativePath);
 }
 
 void DirectoryListModel::add(const QString &directoryPath)

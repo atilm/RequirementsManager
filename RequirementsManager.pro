@@ -71,7 +71,8 @@ SOURCES += main.cpp\
     designreference.cpp \
     automatedtestreference.cpp \
     preventiveactionfactory.cpp \
-    textdocumentserializer.cpp
+    textdocumentserializer.cpp \
+    richtextresourcemanager.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -129,7 +130,8 @@ HEADERS  += mainwindow.h \
     designreference.h \
     automatedtestreference.h \
     preventiveactionfactory.h \
-    textdocumentserializer.h
+    textdocumentserializer.h \
+    richtextresourcemanager.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

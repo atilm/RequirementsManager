@@ -43,10 +43,10 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
 
     this->richText = richText;
 
-    richText->setTextEdit(ui->textEdit);
     richText->setItalicAction(ui->actionItalic);
     richText->setBoldAction(ui->actionBold);
     richText->setBulletAction(ui->actionBulletList);
+    richText->setInsertImageAction(ui->actionInsertImage);
 
     connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));

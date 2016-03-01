@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QDir>
 
 /*! Store the state of the project file.
 
@@ -28,10 +29,24 @@ public:
      */
     virtual QString filePath() const;
 
+    virtual QDir dir() const;
+
     /*!
      Sets the project file path.
      */
     virtual void setFilePath(const QString &path);
+
+    /*!
+     Converts the path relative to the project file path
+     into an absolute path.
+     */
+    virtual QString toAbsoluteFilePath(const QString relativePath);
+
+    /*!
+     Converts an absolute path ionto a path relative to the project
+     file path.
+     */
+    virtual QString toRelativeFilePath(const QString absolutePath);
 
     /*!
      Returns the current "changed" state.

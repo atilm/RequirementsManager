@@ -1,4 +1,5 @@
 #include "richtextcontroller.h"
+#include <QDebug>
 #include <QTextList>
 #include <QTextCursor>
 
@@ -10,7 +11,7 @@ RichTextController::RichTextController()
     bulletAction = NULL;
 }
 
-void RichTextController::setTextEdit(QTextEdit *edit)
+void RichTextController::setTextEdit(DescriptionView *edit)
 {
     this->edit = edit;
     connect(edit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(handleFormatChanged(QTextCharFormat)));
@@ -38,6 +39,12 @@ void RichTextController::setBulletAction(QAction *bulletAction)
     this->bulletAction = bulletAction;
     bulletAction->setCheckable(true);
     connect(bulletAction, SIGNAL(toggled(bool)), this, SLOT(handleBulletToggled(bool)));
+}
+
+void RichTextController::setInsertImageAction(QAction *imageAction)
+{
+    this->imageAction = imageAction;
+    connect(imageAction, SIGNAL(triggered(bool)), this, SLOT(handleInsertImage()));
 }
 
 void RichTextController::handleBoldToggled(bool on)
@@ -87,5 +94,10 @@ void RichTextController::handleFormatChanged(QTextCharFormat format)
     }
     else
         bulletAction->setChecked(false);
+}
+
+void RichTextController::handleInsertImage()
+{
+    edit->insertImage();
 }
 

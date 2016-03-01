@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 
     AppSettings *appSettings = new AppSettings();
     FileStateTracker *fileState = new FileStateTracker();
+    RichTextResourceManager *docResourcesManager = new RichTextResourceManager(fileState);
 
     AttributeContext *attributeContext = new AttributeContext();
     AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 
     QMenu *requirementsContextMenu = new QMenu();
     RequirementsView *requirementsView = new RequirementsView(requirementsContextMenu);
-    DescriptionView *descriptionView = new DescriptionView();
+    DescriptionView *descriptionView = new DescriptionView(docResourcesManager, fileState);
 
     QFileDialogAdapter *fileDialog = new QFileDialogAdapter();
     QFileAdapter *file = new QFileAdapter();
