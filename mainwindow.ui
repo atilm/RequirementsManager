@@ -10,14 +10,6 @@
     <height>784</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Verdana</family>
-    <pointsize>10</pointsize>
-    <weight>50</weight>
-    <bold>false</bold>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -53,6 +45,8 @@
         <widget class="QTextEdit" name="textEdit">
          <property name="font">
           <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -193,6 +187,8 @@
            <widget class="QTextEdit" name="riskDescriptionView">
             <property name="font">
              <font>
+              <family>Segoe UI</family>
+              <pointsize>9</pointsize>
               <weight>50</weight>
               <bold>false</bold>
              </font>
@@ -218,8 +214,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>98</width>
-          <height>119</height>
+          <width>370</width>
+          <height>637</height>
          </rect>
         </property>
         <attribute name="label">
@@ -279,7 +275,7 @@
           <x>0</x>
           <y>0</y>
           <width>370</width>
-          <height>631</height>
+          <height>637</height>
          </rect>
         </property>
         <attribute name="label">
@@ -294,14 +290,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="moduleListView">
-           <property name="font">
-            <font>
-             <family>Verdana</family>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-          </widget>
+          <widget class="QListView" name="moduleListView"/>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
@@ -311,17 +300,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="functionListView">
-           <property name="font">
-            <font>
-             <family>Verdana</family>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-          </widget>
+          <widget class="QListView" name="functionListView"/>
          </item>
          <item>
           <widget class="QLabel" name="label_6">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Tests</string>
            </property>
@@ -331,8 +319,8 @@
           <widget class="QListView" name="testListView">
            <property name="font">
             <font>
-             <family>Verdana</family>
-             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </widget>
