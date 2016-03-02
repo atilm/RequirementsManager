@@ -37,6 +37,8 @@ QString TextDocumentSerializer::processFrame(QTextFrame *frame)
         ++it;
     }
 
+    text = removeTrailingLineBreaks(text);
+
     return text;
 }
 
@@ -79,9 +81,7 @@ QString TextDocumentSerializer::processBlockContent(QTextBlock block)
         ++it;
     }
 
-    if(text.trimmed().isEmpty())
-        return "<br>";
-    else if(block.textList())
+    if(block.textList())
         return QString("<li>%1</li>").arg(text);
     else
         return QString("%1<br>").arg(text);
@@ -103,8 +103,17 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
     if(format.fontItalic())
         text = QString("<i>%1</i>").arg(text);
 
-    //text = text.replace("\n", "<br>");
+    text = text.replace(QChar(0x2028), "<br>");
 
     return text;
+}
+
+QString TextDocumentSerializer::removeTrailingLineBreaks(QString s)
+{
+    while(s.endsWith("<br>")){
+        s.chop(4);
+    }
+
+    return s;
 }
 

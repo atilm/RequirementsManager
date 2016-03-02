@@ -72,7 +72,8 @@ SOURCES += main.cpp\
     automatedtestreference.cpp \
     preventiveactionfactory.cpp \
     textdocumentserializer.cpp \
-    richtextresourcemanager.cpp
+    richtextresourcemanager.cpp \
+    resizeimagedialog.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -131,7 +132,8 @@ HEADERS  += mainwindow.h \
     automatedtestreference.h \
     preventiveactionfactory.h \
     textdocumentserializer.h \
-    richtextresourcemanager.h
+    richtextresourcemanager.h \
+    resizeimagedialog.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
@@ -139,7 +141,8 @@ FORMS    += mainwindow.ui \
     riskassessmentdialog.ui \
     preventiveactiondialog.ui \
     linkeditor.ui \
-    settingsdialog.ui
+    settingsdialog.ui \
+    resizeimagedialog.ui
 
 RESOURCES += \
     resources.qrc

@@ -23,7 +23,9 @@ int main(int argc, char *argv[])
 
     QMenu *requirementsContextMenu = new QMenu();
     RequirementsView *requirementsView = new RequirementsView(requirementsContextMenu);
-    DescriptionView *descriptionView = new DescriptionView(docResourcesManager, fileState);
+    DescriptionView *descriptionView = new DescriptionView(docResourcesManager,
+                                                           fileState,
+                                                           new ResizeImageDialog());
 
     QFileDialogAdapter *fileDialog = new QFileDialogAdapter();
     QFileAdapter *file = new QFileAdapter();

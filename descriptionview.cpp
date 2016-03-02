@@ -5,15 +5,19 @@
 #include <QMimeData>
 #include <QImageReader>
 #include <QMessageBox>
+#include <QTextCursor>
 
 DescriptionView::DescriptionView(RichTextResourceManager *resourcesManager,
                                  FileStateTracker *fileState,
+                                 ResizeImageDialog *resizeDialog,
                                  QWidget *parent) :
     QTextEdit(parent)
 {
     defaultDocument = new QTextDocument();
     this->resourcesManager = resourcesManager;
     this->fileState = fileState;
+    this->resizeDialog = resizeDialog;
+
     initialize();
 }
 
@@ -88,6 +92,14 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
         setDocument(defaultDocument);
         setDisabled(true);
     }
+}
+
+void DescriptionView::mouseDoubleClickEvent(QMouseEvent *e)
+{
+    if(textCursor().charFormat().isImageFormat())
+        resizeDialog->exec();
+    else
+        QTextEdit::mouseDoubleClickEvent(e);
 }
 
 void DescriptionView::initialize()

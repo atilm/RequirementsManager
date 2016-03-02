@@ -5,6 +5,7 @@
 #include "requirementsmodel.h"
 #include "richtextresourcemanager.h"
 #include "filestatetracker.h"
+#include "resizeimagedialog.h"
 
 class DescriptionView : public QTextEdit
 {
@@ -12,6 +13,7 @@ class DescriptionView : public QTextEdit
 public:
     explicit DescriptionView(RichTextResourceManager *resourcesManager,
                              FileStateTracker *fileState,
+                             ResizeImageDialog *resizeDialog,
                              QWidget *parent = 0);
 
     void setModel(RequirementsModel *data);
@@ -25,11 +27,15 @@ public slots:
     void insertImage();
     void switchItem(const QModelIndex &current, const QModelIndex &previous);
 
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *e);
+
 private:
     RichTextResourceManager *resourcesManager;
     FileStateTracker *fileState;
     QTextDocument *defaultDocument;
     RequirementsModel *data;
+    ResizeImageDialog *resizeDialog;
 
     void initialize();
     void dropImage(const QUrl &url, const QImage &image);
