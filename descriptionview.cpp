@@ -63,16 +63,13 @@ void DescriptionView::insertImage()
     if(document() == defaultDocument)
         return;
 
-    QString file = QFileDialog::getOpenFileName(this, tr("Select an image"),
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select an image"),
                                                 fileState->toAbsoluteFilePath("."),
-                                                tr("Bitmap Files (*.bmp)\n"
-                                                   "JPEG (*.jpg *jpeg)\n"
-                                                   "GIF (*.gif)\n"
-                                                   "PNG (*.png)\n"));
+                                                tr("Image (*.jpg *.jpeg *.png)\n"));
 
     try{
         resourcesManager->setDocument(document());
-        QUrl imageUri = resourcesManager->insertImage(file);
+        QUrl imageUri = resourcesManager->insertImage(fileName);
         QTextImageFormat imageFormat;
         imageFormat.setName(imageUri.toString());
         textCursor().insertImage(imageFormat);

@@ -31,8 +31,10 @@ int main(int argc, char *argv[])
     QFileAdapter *file = new QFileAdapter();
     ProjectFileReader *reader = new ProjectFileReader(new QXmlStreamReader(),
                                                       docResourcesManager);
+
+    TextDocumentSerializer *serializer = new TextDocumentSerializer(docResourcesManager);
     ProjectFileWriter *writer = new ProjectFileWriter(new QXmlStreamWriter(),
-                                                      new TextDocumentSerializer());
+                                                      serializer);
 
     QMessageBoxProvider *fileControllerMsg = new QMessageBoxProvider();
 

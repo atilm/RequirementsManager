@@ -14,6 +14,7 @@ public:
     virtual void setDocument(QTextDocument *document);
     virtual QUrl insertImage(const QString &originalFilePath);
     virtual void loadResources(const QString &html);
+    virtual void saveImage(QString uri);
 
 private:
     FileStateTracker *fileState;
@@ -22,6 +23,8 @@ private:
     QString getUniqueName(const QString &path);
     QStringList extractFileNames(const QString &html);
     void loadResource(const QString &archiveFileName);
+    QUrl loadResource(const QString &sourceFileName,
+                      const QString &archiveFileName);
 };
 
 #endif // RICHTEXTRESOURCEMANAGER_H

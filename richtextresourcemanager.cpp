@@ -1,5 +1,6 @@
 #include "richtextresourcemanager.h"
 #include <QCryptographicHash>
+#include <QDebug>
 #include <QFile>
 #include <QImageReader>
 #include <QUrl>
@@ -27,20 +28,7 @@ QUrl RichTextResourceManager::insertImage(const QString &originalFilePath)
     QFileInfo fInfo(originalFilePath);
     QString uniqueFileName = getUniqueName(originalFilePath) + "." + fInfo.suffix();
 
-    QDir imgDir = QDir(fileState->dir().absolutePath() + "/ReqManImages");
-
-    if(!imgDir.exists())
-        QDir().mkdir(imgDir.absolutePath());
-
-    QString archivePath = imgDir.absolutePath() + "/" + uniqueFileName;
-
-    QFile::copy(originalFilePath, archivePath);
-
-    loadResource(uniqueFileName);
-
-    QUrl uri(QString("file://%1").arg(uniqueFileName));
-
-    return uri;
+    return loadResource(originalFilePath, uniqueFileName);
 }
 
 void RichTextResourceManager::loadResources(const QString &html)
@@ -49,6 +37,26 @@ void RichTextResourceManager::loadResources(const QString &html)
 
     foreach(QString name, fileList)
         loadResource(name);
+}
+
+void RichTextResourceManager::saveImage(QString uri)
+{
+    QDir imgDir = QDir(fileState->dir().absolutePath() + "/ReqManImages");
+
+    if(!imgDir.exists())
+        QDir().mkdir(imgDir.absolutePath());
+
+    QString uniqueFileName = uri;
+    uniqueFileName.replace("file://", "");
+
+    QString archivePath = imgDir.absolutePath() + "/" + uniqueFileName;
+
+    QFileInfo fInfo(archivePath);
+
+    if(!fInfo.exists()){
+        QImage image = document->resource(QTextDocument::ImageResource, uri).value<QImage>();
+        image.save(archivePath);
+    }
 }
 
 QString RichTextResourceManager::getUniqueName(const QString &path)
@@ -93,6 +101,14 @@ void RichTextResourceManager::loadResource(const QString &archiveFileName)
     QUrl uri(QString("file://%1").arg(archiveFileName));
     QImage image = QImageReader(archivePath).read();
     document->addResource(QTextDocument::ImageResource, uri, QVariant(image));
+}
+
+QUrl RichTextResourceManager::loadResource(const QString &sourceFileName, const QString &archiveFileName)
+{
+    QUrl uri(QString("file://%1").arg(archiveFileName));
+    QImage image = QImageReader(sourceFileName).read();
+    document->addResource(QTextDocument::ImageResource, uri, QVariant(image));
+    return uri;
 }
 
 

@@ -93,8 +93,8 @@ void ProjectFileController::saveAs()
 
     if(!filePath.isEmpty()){
         projectFile->setFileName(filePath);
-        writer->save(this, projectFile);
         stateTracker->setFilePath(filePath);
+        writer->save(this, projectFile);
         stateTracker->setChanged(false);
         saveAsStartDirectory(filePath);
     }

@@ -3,9 +3,9 @@
 #include <QTextFragment>
 #include <QTextList>
 
-TextDocumentSerializer::TextDocumentSerializer()
+TextDocumentSerializer::TextDocumentSerializer(RichTextResourceManager *resources)
 {
-
+    this->resources = resources;
 }
 
 TextDocumentSerializer::~TextDocumentSerializer()
@@ -15,6 +15,8 @@ TextDocumentSerializer::~TextDocumentSerializer()
 
 QString TextDocumentSerializer::toSimpleHtml(QTextDocument *document)
 {
+    this->document = document;
+
     QTextFrame *root = document->rootFrame();
     return processFrame(root);
 }
@@ -114,6 +116,9 @@ QString TextDocumentSerializer::getImageTag(QTextImageFormat format)
     int height = format.height();
 
     QString text;
+
+    resources->setDocument(document);
+    resources->saveImage(format.name());
 
     if(width == 0 || height == 0)
         text = QString("<img src=\"%1\">").arg(format.name());

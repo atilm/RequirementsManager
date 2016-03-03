@@ -6,16 +6,19 @@
 #include <QTextBlock>
 #include <QTextFrame>
 #include <QTextFragment>
+#include "richtextresourcemanager.h"
 
 class TextDocumentSerializer
 {
 public:
-    TextDocumentSerializer();
+    TextDocumentSerializer(RichTextResourceManager *resources);
     virtual ~TextDocumentSerializer();
 
     virtual QString toSimpleHtml(QTextDocument *document);
 
 private:
+    RichTextResourceManager *resources;
+    QTextDocument *document;
 
     QString processFrame(QTextFrame *frame);
     QString processBlock(QTextBlock block,
