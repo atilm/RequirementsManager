@@ -115,8 +115,13 @@ void ProjectFileController::load()
             testDirModel()->clear();
             model->clearModel();
             projectFile->setFileName(filePath);
-            reader->load(this, projectFile);
+
+            // stateTracker->setFilePath() must be called
+            // before parsing the project file, because
+            // the FileStateTracker is used to find the
+            // directory with stored images.
             stateTracker->setFilePath(filePath);
+            reader->load(this, projectFile);
             stateTracker->setChanged(false);
             saveAsStartDirectory(filePath);
             emit fileLoaded();
