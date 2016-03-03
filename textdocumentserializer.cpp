@@ -95,7 +95,7 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
     QString text = fragment.text();
 
     if(format.isImageFormat())
-        text = QString("<img src=\"%1\">").arg(format.toImageFormat().name());
+        text = getImageTag(format.toImageFormat());
 
     if(format.fontWeight() == QFont::Bold)
         text = QString("<b>%1</b>").arg(text);
@@ -104,6 +104,24 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
         text = QString("<i>%1</i>").arg(text);
 
     text = text.replace(QChar(0x2028), "<br>");
+
+    return text;
+}
+
+QString TextDocumentSerializer::getImageTag(QTextImageFormat format)
+{
+    int width = format.width();
+    int height = format.height();
+
+    QString text;
+
+    if(width == 0 || height == 0)
+        text = QString("<img src=\"%1\">").arg(format.name());
+    else
+        text = QString("<img src=\"%1\" width=\"%2\" height=\"%3\">")
+                .arg(format.name())
+                .arg(width)
+                .arg(height);
 
     return text;
 }

@@ -6,6 +6,7 @@
 #include <QImageReader>
 #include <QMessageBox>
 #include <QTextCursor>
+#include <QTextFragment>
 
 DescriptionView::DescriptionView(RichTextResourceManager *resourcesManager,
                                  FileStateTracker *fileState,
@@ -96,10 +97,30 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
 
 void DescriptionView::mouseDoubleClickEvent(QMouseEvent *e)
 {
-    if(textCursor().charFormat().isImageFormat())
-        resizeDialog->exec();
+    QTextCharFormat format = textCursor().charFormat();
+
+    if(format.isImageFormat())
+        resizeImage(format.toImageFormat());
     else
         QTextEdit::mouseDoubleClickEvent(e);
+
+}
+
+void DescriptionView::resizeImage(QTextImageFormat format)
+{
+    resizeDialog->setImageFormat(format, document());
+
+    if(resizeDialog->exec()){
+        format.setWidth(resizeDialog->getImageWidth());
+        format.setHeight(resizeDialog->getImageHeight());
+
+        QTextCursor cursor = textCursor();
+
+        cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+        cursor.setCharFormat(format);
+
+        setTextCursor(cursor);
+    }
 }
 
 void DescriptionView::initialize()

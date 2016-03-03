@@ -28,9 +28,6 @@ public slots:
     void switchItem(const QModelIndex &current, const QModelIndex &previous);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent *e);
-
-private:
     RichTextResourceManager *resourcesManager;
     FileStateTracker *fileState;
     QTextDocument *defaultDocument;
@@ -40,6 +37,9 @@ private:
     void initialize();
     void dropImage(const QUrl &url, const QImage &image);
     void dropTextFile(const QUrl &url);
+
+    void mouseDoubleClickEvent(QMouseEvent *e);
+    void resizeImage(QTextImageFormat format);
 };
 
 #endif // DESCRIPTIONVIEW_H
