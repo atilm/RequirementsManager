@@ -36,20 +36,14 @@ bool DescriptionView::canInsertFromMimeData(const QMimeData *source) const
 void DescriptionView::insertFromMimeData(const QMimeData *source)
 {
     if (source->hasImage())
-    {
-        static int i = 1;
-        QUrl url(QString("dropped_image_%1").arg(i++));
-        dropImage(url, qvariant_cast<QImage>(source->imageData()));
-    }
+        dropImage(qvariant_cast<QImage>(source->imageData()));
     else if (source->hasUrls())
     {
         foreach (QUrl url, source->urls())
         {
             QFileInfo info(url.toLocalFile());
             if (QImageReader::supportedImageFormats().contains(info.suffix().toLower().toLatin1()))
-                dropImage(url, QImage(info.filePath()));
-            else
-                dropTextFile(url);
+                dropImage(QImage(info.filePath()));
         }
     }
     else
@@ -128,18 +122,15 @@ void DescriptionView::initialize()
     setDocument(defaultDocument);
 }
 
-void DescriptionView::dropImage(const QUrl &url, const QImage &image)
+void DescriptionView::dropImage(const QImage &image)
 {
     if (!image.isNull()){
-        document()->addResource(QTextDocument::ImageResource, url, image);
-        textCursor().insertImage(url.toString());
+        resourcesManager->setDocument(document());
+        QUrl imageUri = resourcesManager->insertImage(image);
+        QTextImageFormat imageFormat;
+        imageFormat.setName(imageUri.toString());
+        textCursor().insertImage(imageFormat);
     }
 }
 
-void DescriptionView::dropTextFile(const QUrl &url)
-{
-    QFile file(url.toLocalFile());
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-        textCursor().insertText(file.readAll());
-}
 

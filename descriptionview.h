@@ -35,8 +35,7 @@ protected:
     ResizeImageDialog *resizeDialog;
 
     void initialize();
-    void dropImage(const QUrl &url, const QImage &image);
-    void dropTextFile(const QUrl &url);
+    void dropImage(const QImage &image);
 
     void mouseDoubleClickEvent(QMouseEvent *e);
     void resizeImage(QTextImageFormat format);

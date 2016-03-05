@@ -1,4 +1,5 @@
 #include "richtextresourcemanager.h"
+#include <QBuffer>
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QFile>
@@ -29,6 +30,15 @@ QUrl RichTextResourceManager::insertImage(const QString &originalFilePath)
     QString uniqueFileName = getUniqueName(originalFilePath) + "." + fInfo.suffix();
 
     return loadResource(originalFilePath, uniqueFileName);
+}
+
+QUrl RichTextResourceManager::insertImage(QImage image)
+{
+    QString uniqueFileName = getUniqueFileName(image);
+
+    QUrl uri(QString("file://%1").arg(uniqueFileName));
+    document->addResource(QTextDocument::ImageResource, uri, QVariant(image));
+    return uri;
 }
 
 void RichTextResourceManager::loadResources(const QString &html)
@@ -71,6 +81,18 @@ QString RichTextResourceManager::getUniqueName(const QString &path)
     QString uniqueName = QString(hash.result().toHex());
 
     return uniqueName;
+}
+
+QString RichTextResourceManager::getUniqueFileName(const QImage &image)
+{
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+
+    QCryptographicHash hash(QCryptographicHash::Sha1);
+    hash.addData(byteArray);
+    return QString("%1.png").arg(QString(hash.result().toHex()));
 }
 
 QStringList RichTextResourceManager::extractFileNames(const QString &html)

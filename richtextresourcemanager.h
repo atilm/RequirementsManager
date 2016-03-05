@@ -13,6 +13,7 @@ public:
 
     virtual void setDocument(QTextDocument *document);
     virtual QUrl insertImage(const QString &originalFilePath);
+    virtual QUrl insertImage(QImage image);
     virtual void loadResources(const QString &html);
     virtual void saveImage(QString uri);
 
@@ -21,6 +22,7 @@ private:
     QTextDocument *document;
 
     QString getUniqueName(const QString &path);
+    QString getUniqueFileName(const QImage &image);
     QStringList extractFileNames(const QString &html);
     void loadResource(const QString &archiveFileName);
     QUrl loadResource(const QString &sourceFileName,
