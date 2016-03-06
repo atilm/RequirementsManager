@@ -61,8 +61,8 @@ void RiskAssessmentDialog::injectWidgets(QPlainTextEditAdapter *scenarioEdit,
     delete ui->mitigationStrategyTextEdit;
     ui->mitigationStrategyTextEdit = mitigationStrategyEdit;
     ui->gridLayout->addWidget(mitigationStrategyEdit, row, col, rowSpan, colSpan);
-    ui->scenarioTextEdit->setMinimumWidth(400);
-    ui->scenarioTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    ui->mitigationStrategyTextEdit->setMinimumWidth(400);
+    ui->mitigationStrategyTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 
     this->initialRiskEdit = initialRiskEdit;
     index = ui->gridLayout->indexOf(ui->initialRiskTable);

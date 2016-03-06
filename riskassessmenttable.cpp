@@ -8,6 +8,9 @@ RiskAssessmentTable::RiskAssessmentTable(QWidget *parent) :
     ui->setupUi(this);
     setMinimumWidth(555);
     setMinimumHeight(190);
+    ui->riskView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->riskView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->riskView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 RiskAssessmentTable::~RiskAssessmentTable()
