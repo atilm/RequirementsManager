@@ -15,10 +15,7 @@ void RichTextController::setTextEdit(DescriptionView *edit)
 {
     this->edit = edit;
     connect(edit, SIGNAL(currentCharFormatChanged(QTextCharFormat)), this, SLOT(handleFormatChanged(QTextCharFormat)));
-
-    if(italicAction){
-        connect(italicAction, SIGNAL(toggled(bool)), edit, SLOT(setFontItalic(bool)));
-    }
+    connect(edit, SIGNAL(cursorPositionChanged()), this, SLOT(handleCursorPositionChanged()));
 }
 
 void RichTextController::setBoldAction(QAction *boldAction)
@@ -32,6 +29,7 @@ void RichTextController::setItalicAction(QAction *italicAction)
 {
     this->italicAction = italicAction;
     italicAction->setCheckable(true);
+    connect(italicAction, SIGNAL(toggled(bool)), this, SLOT(handleItalicToggled(bool)));
 }
 
 void RichTextController::setBulletAction(QAction *bulletAction)
@@ -49,10 +47,16 @@ void RichTextController::setInsertImageAction(QAction *imageAction)
 
 void RichTextController::handleBoldToggled(bool on)
 {
-    if(on)
-        edit->setFontWeight(QFont::Bold);
-    else
-        edit->setFontWeight(QFont::Normal);
+    QTextCharFormat fmt;
+    fmt.setFontWeight(on ? QFont::Bold : QFont::Normal);
+    mergeFormatOnWordOrSelection(fmt);
+}
+
+void RichTextController::handleItalicToggled(bool on)
+{
+    QTextCharFormat fmt;
+    fmt.setFontItalic(on);
+    mergeFormatOnWordOrSelection(fmt);
 }
 
 void RichTextController::handleBulletToggled(bool on)
@@ -79,25 +83,29 @@ void RichTextController::handleBulletToggled(bool on)
 
 void RichTextController::handleFormatChanged(QTextCharFormat format)
 {
-    if(format.fontWeight() == QFont::Normal)
-        boldAction->setChecked(false);
-    else
-        boldAction->setChecked(true);
-
+    boldAction->setChecked(format.fontWeight() > QFont::Normal);
     italicAction->setChecked(format.fontItalic());
+}
 
-    if(format.isListFormat()){
-        if( edit->textCursor().currentList()->formatIndex() == QTextListFormat::ListDisc )
-            bulletAction->setChecked(true);
-        else
-            bulletAction->setChecked(false);
-    }
-    else
-        bulletAction->setChecked(false);
+void RichTextController::handleCursorPositionChanged()
+{
+    QTextCursor cursor = edit->textCursor();
+    QTextBlockFormat blockFormat = cursor.blockFormat();
+
+    bulletAction->setChecked(blockFormat.isListFormat());
 }
 
 void RichTextController::handleInsertImage()
 {
     edit->insertImage();
+}
+
+void RichTextController::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
+{
+    QTextCursor cursor = edit->textCursor();
+    if (!cursor.hasSelection())
+        cursor.select(QTextCursor::WordUnderCursor);
+    cursor.mergeCharFormat(format);
+    edit->mergeCurrentCharFormat(format);
 }
 

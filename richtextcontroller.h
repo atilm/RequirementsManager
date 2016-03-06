@@ -17,6 +17,14 @@ public:
     virtual void setBulletAction(QAction *bulletAction);
     virtual void setInsertImageAction(QAction *imageAction);
 
+private slots:
+    void handleBoldToggled(bool on);
+    void handleItalicToggled(bool on);
+    void handleBulletToggled(bool on);
+    void handleFormatChanged(QTextCharFormat format); 
+    void handleCursorPositionChanged();
+    void handleInsertImage();
+
 private:
     DescriptionView *edit;
     QAction *boldAction;
@@ -24,11 +32,7 @@ private:
     QAction *bulletAction;
     QAction *imageAction;
 
-private slots:
-    void handleBoldToggled(bool on);
-    void handleBulletToggled(bool on);
-    void handleFormatChanged(QTextCharFormat format); 
-    void handleInsertImage();
+    void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
 };
 
 #endif // RICHTEXTCONTROLLER_H
