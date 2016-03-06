@@ -61,23 +61,33 @@ void RichTextController::handleItalicToggled(bool on)
 
 void RichTextController::handleBulletToggled(bool on)
 {
+    QTextCursor cursor = edit->textCursor();
+
     if(on){
-        QTextCursor cursor = edit->textCursor();
+        QTextListFormat::Style style = QTextListFormat::ListDisc;
+
+        cursor.beginEditBlock();
+        QTextBlockFormat blockFormat = cursor.blockFormat();
         QTextListFormat listFormat;
-        listFormat.setStyle(QTextListFormat::ListDisc);
+
+        if(cursor.currentList()){
+            listFormat = cursor.currentList()->format();
+        }
+        else{
+            listFormat.setIndent(blockFormat.indent() + 1);
+            blockFormat.setIndent(0);
+            cursor.setBlockFormat(blockFormat);
+        }
+
+        listFormat.setStyle(style);
         cursor.createList(listFormat);
+        cursor.endEditBlock();
     }
     else{
-        QTextCursor cursor = edit->textCursor();
-        QTextList *list = cursor.currentList();
-        if( list ) {
-            QTextListFormat listFormat;
-            listFormat.setIndent(0);
-            list->setFormat(listFormat);
-
-            for(int i = list->count() - 1; i >= 0; --i)
-                list->removeItem( i );
-        }
+        QTextBlockFormat blockFormat;
+        blockFormat.setObjectIndex(0);
+        cursor.mergeBlockFormat(blockFormat);
+        edit->setTextCursor(cursor);
     }
 }
 
@@ -90,9 +100,11 @@ void RichTextController::handleFormatChanged(QTextCharFormat format)
 void RichTextController::handleCursorPositionChanged()
 {
     QTextCursor cursor = edit->textCursor();
-    QTextBlockFormat blockFormat = cursor.blockFormat();
 
-    bulletAction->setChecked(blockFormat.isListFormat());
+    if(cursor.currentList())
+        bulletAction->setChecked(true);
+    else
+        bulletAction->setChecked(false);
 }
 
 void RichTextController::handleInsertImage()
@@ -103,8 +115,6 @@ void RichTextController::handleInsertImage()
 void RichTextController::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
     QTextCursor cursor = edit->textCursor();
-    if (!cursor.hasSelection())
-        cursor.select(QTextCursor::WordUnderCursor);
     cursor.mergeCharFormat(format);
     edit->mergeCurrentCharFormat(format);
 }
