@@ -85,9 +85,11 @@ void RichTextController::handleBulletToggled(bool on)
     }
     else{
         QTextBlockFormat blockFormat;
-        blockFormat.setObjectIndex(0);
-        cursor.mergeBlockFormat(blockFormat);
-        edit->setTextCursor(cursor);
+        if(cursor.currentList()){
+            blockFormat.setObjectIndex(0);
+            cursor.mergeBlockFormat(blockFormat);
+            edit->setTextCursor(cursor);
+        }
     }
 }
 
