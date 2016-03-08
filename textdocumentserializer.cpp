@@ -33,6 +33,9 @@ QString TextDocumentSerializer::processFrame(QTextFrame *frame)
         if(childFrame)
             text += processFrame(childFrame);
         else if(childBlock.isValid()){
+            if(childBlock.textList())
+                text = removeTrailingLineBreaks(text);
+
             text += processBlock(childBlock, it);
         }
 
@@ -90,7 +93,6 @@ QString TextDocumentSerializer::processBlockContent(QTextBlock block)
         return QString("<li>%1</li>").arg(text);
     else
         return QString("%1<br>").arg(text);
-
 }
 
 QString TextDocumentSerializer::processFragment(QTextFragment fragment)
