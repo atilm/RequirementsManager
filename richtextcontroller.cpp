@@ -64,31 +64,21 @@ void RichTextController::handleBulletToggled(bool on)
     QTextCursor cursor = edit->textCursor();
 
     if(on){
-        QTextListFormat::Style style = QTextListFormat::ListDisc;
-
-        cursor.beginEditBlock();
-        QTextBlockFormat blockFormat = cursor.blockFormat();
+        QTextCursor cursor = edit->textCursor();
         QTextListFormat listFormat;
-
-        if(cursor.currentList()){
-            listFormat = cursor.currentList()->format();
-        }
-        else{
-            listFormat.setIndent(blockFormat.indent() + 1);
-            blockFormat.setIndent(0);
-            cursor.setBlockFormat(blockFormat);
-        }
-
-        listFormat.setStyle(style);
+        listFormat.setStyle(QTextListFormat::ListDisc);
         cursor.createList(listFormat);
-        cursor.endEditBlock();
     }
     else{
-        QTextBlockFormat blockFormat;
-        if(cursor.currentList()){
-            blockFormat.setObjectIndex(0);
-            cursor.mergeBlockFormat(blockFormat);
-            edit->setTextCursor(cursor);
+        QTextCursor cursor = edit->textCursor();
+        QTextList *list = cursor.currentList();
+        if( list ) {
+            QTextListFormat listFormat;
+            listFormat.setIndent(0);
+            list->setFormat(listFormat);
+
+            for(int i = list->count() - 1; i >= 0; --i)
+                list->removeItem( i );
         }
     }
 }

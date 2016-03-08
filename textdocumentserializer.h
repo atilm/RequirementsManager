@@ -23,8 +23,7 @@ private:
     QString processFrame(QTextFrame *frame);
     QString processBlock(QTextBlock block,
                          QTextFrame::iterator &it);
-    QString processList(QTextList *list,
-                        QTextFrame::iterator &it);
+    QString processList(QTextFrame::iterator &it);
     QString processBlockContent(QTextBlock block);
     QString processFragment(QTextFragment fragment);
     QString getImageTag(QTextImageFormat format);

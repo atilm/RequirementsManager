@@ -47,23 +47,26 @@ QString TextDocumentSerializer::processFrame(QTextFrame *frame)
 QString TextDocumentSerializer::processBlock(QTextBlock block,
                                              QTextFrame::iterator &it)
 {
-    QTextList *list = block.textList();
-
-    if(list)
-        return processList(list, it);
+    if(block.textList())
+        return processList(it);
     else
         return processBlockContent(block);
 }
 
-QString TextDocumentSerializer::processList(QTextList *list,
-                                            QTextFrame::iterator &it)
+QString TextDocumentSerializer::processList(QTextFrame::iterator &it)
 {
     QString text;
 
-    for(int i=0; i < list->count(); i++){
-        text += processBlockContent(list->item(i));
+    QTextBlock block = it.currentBlock();
+
+    while(block.textList()){
+        text += processBlockContent(block);
+
         ++it;
+        block = it.currentBlock();
     }
+
+    --it;
 
     return QString("<ul>%1</ul>").arg(text);
 }
