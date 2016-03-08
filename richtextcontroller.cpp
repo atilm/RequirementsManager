@@ -32,6 +32,13 @@ void RichTextController::setItalicAction(QAction *italicAction)
     connect(italicAction, SIGNAL(toggled(bool)), this, SLOT(handleItalicToggled(bool)));
 }
 
+void RichTextController::setCodeAction(QAction *codeAction)
+{
+    this->codeAction = codeAction;
+    codeAction->setCheckable(true);
+    connect(codeAction, SIGNAL(toggled(bool)), this, SLOT(handleCodeToggled(bool)));
+}
+
 void RichTextController::setBulletAction(QAction *bulletAction)
 {
     this->bulletAction = bulletAction;
@@ -56,6 +63,17 @@ void RichTextController::handleItalicToggled(bool on)
 {
     QTextCharFormat fmt;
     fmt.setFontItalic(on);
+    mergeFormatOnWordOrSelection(fmt);
+}
+
+void RichTextController::handleCodeToggled(bool on)
+{
+    QTextCharFormat fmt;
+    if(on)
+        fmt.setFont(QFont("Courier New", 10));
+    else
+        fmt.setFont(edit->document()->defaultFont());
+
     mergeFormatOnWordOrSelection(fmt);
 }
 
@@ -87,6 +105,7 @@ void RichTextController::handleFormatChanged(QTextCharFormat format)
 {
     boldAction->setChecked(format.fontWeight() > QFont::Normal);
     italicAction->setChecked(format.fontItalic());
+    codeAction->setChecked(edit->fontFamily() == "Courier New");
 }
 
 void RichTextController::handleCursorPositionChanged()

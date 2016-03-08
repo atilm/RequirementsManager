@@ -35,7 +35,6 @@ QString TextDocumentSerializer::processFrame(QTextFrame *frame)
         else if(childBlock.isValid()){
             if(childBlock.textList())
                 text = removeTrailingLineBreaks(text);
-
             text += processBlock(childBlock, it);
         }
 

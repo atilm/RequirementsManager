@@ -45,6 +45,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
 
     richText->setItalicAction(ui->actionItalic);
     richText->setBoldAction(ui->actionBold);
+    richText->setCodeAction(ui->actionCode);
     richText->setBulletAction(ui->actionBulletList);
     richText->setInsertImageAction(ui->actionInsertImage);
 

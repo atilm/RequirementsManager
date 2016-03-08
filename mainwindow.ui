@@ -214,8 +214,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>370</width>
-          <height>637</height>
+          <width>98</width>
+          <height>119</height>
          </rect>
         </property>
         <attribute name="label">
@@ -378,6 +378,7 @@
    <addaction name="actionRemoveRequirement"/>
    <addaction name="actionBold"/>
    <addaction name="actionItalic"/>
+   <addaction name="actionCode"/>
    <addaction name="actionBulletList"/>
    <addaction name="actionInsertImage"/>
   </widget>
@@ -549,6 +550,21 @@
    </property>
    <property name="toolTip">
     <string>Insert Image</string>
+   </property>
+  </action>
+  <action name="actionCode">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/edit-rename.ico</normaloff>:/icons/Resources/edit-rename.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Code</string>
+   </property>
+   <property name="toolTip">
+    <string>Source Code</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
    </property>
   </action>
  </widget>
