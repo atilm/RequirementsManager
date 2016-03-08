@@ -103,6 +103,9 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
     if(format.isImageFormat())
         text = getImageTag(format.toImageFormat());
 
+    if(format.fontFamily().contains("Courier"))
+        text = QString("<code>%1</code>").arg(text);
+
     if(format.fontWeight() == QFont::Bold)
         text = QString("<b>%1</b>").arg(text);
 

@@ -69,8 +69,9 @@ void RichTextController::handleItalicToggled(bool on)
 void RichTextController::handleCodeToggled(bool on)
 {
     QTextCharFormat fmt;
+
     if(on)
-        fmt.setFont(QFont("Courier New", 10));
+        fmt.setFontFamily("Courier New");
     else
         fmt.setFont(edit->document()->defaultFont());
 
@@ -105,7 +106,7 @@ void RichTextController::handleFormatChanged(QTextCharFormat format)
 {
     boldAction->setChecked(format.fontWeight() > QFont::Normal);
     italicAction->setChecked(format.fontItalic());
-    codeAction->setChecked(edit->fontFamily() == "Courier New");
+    codeAction->setChecked(format.fontFamily().contains("Courier"));
 }
 
 void RichTextController::handleCursorPositionChanged()
