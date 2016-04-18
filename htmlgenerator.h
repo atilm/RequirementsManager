@@ -23,7 +23,7 @@ public:
 
     QString toHtml(const TestNode &test);
 
-    // cannot make s const, because non-const functions
+    // cannot make argument const, because non-const functions
     // are called in toHtml
     QString toHtml(PreventiveAction &s);
     QString toHtml(const RiskAssessment &risk);

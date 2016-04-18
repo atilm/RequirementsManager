@@ -105,10 +105,14 @@ int main(int argc, char *argv[])
                                                             dataMapper);
     requirements->init();
 
+    ReportController *reportController = new ReportController(new ReportGeneratorFactory(),
+                                                              fileState);
+
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
                  linkTypeEditor, linkController,
-                 sourceController, settingsDialog, 0);
+                 sourceController, settingsDialog,
+                 reportController, 0);
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();

@@ -73,7 +73,11 @@ SOURCES += main.cpp\
     preventiveactionfactory.cpp \
     textdocumentserializer.cpp \
     richtextresourcemanager.cpp \
-    resizeimagedialog.cpp
+    resizeimagedialog.cpp \
+    reportgenerator.cpp \
+    reportcontroller.cpp \
+    htmlreportgenerator.cpp \
+    reportgeneratorfactory.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -133,7 +137,11 @@ HEADERS  += mainwindow.h \
     preventiveactionfactory.h \
     textdocumentserializer.h \
     richtextresourcemanager.h \
-    resizeimagedialog.h
+    resizeimagedialog.h \
+    reportgenerator.h \
+    reportcontroller.h \
+    htmlreportgenerator.h \
+    reportgeneratorfactory.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

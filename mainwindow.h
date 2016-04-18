@@ -20,6 +20,7 @@
 #include "linkcontroller.h"
 #include "sourcecodecontroller.h"
 #include "settingsdialog.h"
+#include "reportcontroller.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +43,7 @@ public:
                         LinkController *linkController,
                         SourceCodeController *sourceController,
                         SettingsDialog *settingsDialog,
+                        ReportController *reportController,
                         QWidget *parent);
     ~MainWindow();
 
@@ -71,6 +73,7 @@ private:
     LinkController *linkController;
     SourceCodeController *sourceController;
     SettingsDialog *settingsDialog;
+    ReportController *reportController;
 
     void closeEvent(QCloseEvent *);
 

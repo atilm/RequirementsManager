@@ -214,8 +214,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>98</width>
-          <height>119</height>
+          <width>370</width>
+          <height>637</height>
          </rect>
         </property>
         <attribute name="label">
@@ -381,6 +381,7 @@
    <addaction name="actionCode"/>
    <addaction name="actionBulletList"/>
    <addaction name="actionInsertImage"/>
+   <addaction name="actionReport"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
@@ -565,6 +566,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionReport">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/report.ico</normaloff>:/icons/Resources/report.ico</iconset>
+   </property>
+   <property name="text">
+    <string>report</string>
+   </property>
+   <property name="toolTip">
+    <string>Generate Report</string>
    </property>
   </action>
  </widget>

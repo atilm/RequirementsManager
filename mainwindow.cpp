@@ -10,6 +10,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
                        RiskAssessmentEditController *riskAssessmentEditController,
                        LinkTypeEditor *linkTypeEditor, LinkController *linkController,
                        SourceCodeController *sourceController, SettingsDialog *settingsDialog,
+                       ReportController *reportController,
                        QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -49,12 +50,15 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setBulletAction(ui->actionBulletList);
     richText->setInsertImageAction(ui->actionInsertImage);
 
+    this->reportController = reportController;
+
     connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));
     connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
+    connect(ui->actionReport, SIGNAL(triggered()), reportController, SLOT(generateReport()));
     connect(fileState, SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
     connect(fileState, SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
     connect(fileController, SIGNAL(fileLoaded()), sourceController, SLOT(parseProjectCode()));
@@ -73,6 +77,7 @@ MainWindow::~MainWindow()
     delete riskAssessmentEditController;
     delete linkTypeEditor;
     delete sourceController;
+    delete reportController;
     delete ui;
 }
 
