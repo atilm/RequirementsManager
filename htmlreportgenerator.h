@@ -5,12 +5,14 @@
 #include "htmltemplate.h"
 #include "reportgenerator.h"
 #include "requirementsmodel.h"
+#include "textdocumentserializer.h"
 #include <QTextStream>
 
 class HtmlReportGenerator : public ReportGenerator
 {
 public:
-    HtmlReportGenerator(HtmlTemplateFactory *templateFactory);
+    HtmlReportGenerator(HtmlTemplateFactory *templateFactory,
+                        TextDocumentSerializer *documentSerializer);
     virtual ~HtmlReportGenerator();
 
     virtual void setModel(RequirementsModel *model);
@@ -20,6 +22,7 @@ private:
     QFile file;
     QTextStream out;
     RequirementsModel *model;
+    TextDocumentSerializer *documentSerializer;
 
     HtmlTemplateFactory *templateFactory;
     HtmlTemplate *documentTemplate;

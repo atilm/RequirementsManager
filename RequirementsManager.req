@@ -9,7 +9,7 @@
     <LinkContext/>
     <RequirementSpecification>
         <Requirement id="3" type="UserRequirement" name="Hierarchical structure">
-            <description><![CDATA[Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible  <br><ul><li>adding and removing requirements</li><li>moving requirements</li><li>copying requirements</li></ul>]]></description>
+            <description><![CDATA[Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible <ul><li>adding and removing requirements</li><li>moving requirements</li><li>copying requirements</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="4" type="FunctionalRequirement" name="Display to user">
                 <description><![CDATA[<ul><li>Requirements are displayed in tree form similar to the display of a file system tree.</li><li>It is possible to "collapse nodes" to make their sub-requirements invisible</li></ul>]]></description>
@@ -21,42 +21,42 @@
             </Requirement>
         </Requirement>
         <Requirement id="6" type="UserRequirement" name="The structure is editable">
-            <description><![CDATA[The requirement tree structure can be edited by the user.  <br>]]></description>
+            <description><![CDATA[The requirement tree structure can be edited by the user. ]]></description>
             <Attribute index="0" value="no"/>
             <Requirement id="7" type="FunctionalRequirement" name="Edit titles">
-                <description><![CDATA[The requirements' titles can be edited by double-clicking on a requirement or by selecting the requirement and pressing F2.  <br>]]></description>
+                <description><![CDATA[The requirements' titles can be edited by double-clicking on a requirement or by selecting the requirement and pressing F2. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="8" type="FunctionalRequirement" name="Adding as child">
-                <description><![CDATA[A requirement can be added as child of another requirement. Triggers are  <br><ul><li>a tool button</li><li>the keyboard shortcut ctrl-shift-r</li></ul>]]></description>
+                <description><![CDATA[A requirement can be added as child of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-shift-r</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="9" type="FunctionalRequirement" name="Adding as sibling">
-                <description><![CDATA[A requirement can be added as a sibling of another requirement. Triggers are  <br><ul><li>a tool button</li><li>the keyboard shortcut ctrl-r</li></ul>]]></description>
+                <description><![CDATA[A requirement can be added as a sibling of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-r</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="10" type="FunctionalRequirement" name="Removing">
-                <description><![CDATA[The currently selected requirement can be removed. Triggers are  <br><ul><li>a tool button</li><li>the keyboard shortcut delete</li></ul>]]></description>
+                <description><![CDATA[The currently selected requirement can be removed. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut delete</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
                 <Requirement id="11" type="FunctionalRequirement" name="Saveguard question">
-                    <description><![CDATA[The user is asked if he 'really wants to delete the requirement and all its children'.  <br>]]></description>
+                    <description><![CDATA[The user is asked if he 'really wants to delete the requirement and all its children'. ]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
             </Requirement>
             <Requirement id="12" type="FunctionalRequirement" name="Moving">
-                <description><![CDATA[Requirements can be moved by drag and drop within the tree view.  <br>]]></description>
+                <description><![CDATA[Requirements can be moved by drag and drop within the tree view. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="13" type="FunctionalRequirement" name="Copying">
-                <description><![CDATA[Requirements can be copied within the tree view by drag and drop with the keyboard modifier 'ctrl'.  <br>]]></description>
+                <description><![CDATA[Requirements can be copied within the tree view by drag and drop with the keyboard modifier 'ctrl'. ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
         </Requirement>
         <Requirement id="14" type="UserRequirement" name="Requirement types">
-            <description><![CDATA[One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth:  <br><ul><li>User Requirements</li><li>Functional Requirements</li><li>Design Requirements</li></ul>]]></description>
+            <description><![CDATA[One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth: <ul><li>User Requirements</li><li>Functional Requirements</li><li>Design Requirements</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="15" type="FunctionalRequirement" name="Display">
-                <description><![CDATA[The requirement types are displayed color-coded in the requirements tree view: Each requirement's title is displayed in a font color corresponding to its type:  <br><ul><li>User Requirement: black</li><li>Functional Requirement: blue</li><li>Design Requirement: magenta</li></ul>]]></description>
+                <description><![CDATA[The requirement types are displayed color-coded in the requirements tree view: Each requirement's title is displayed in a font color corresponding to its type: <ul><li>User Requirement: black</li><li>Functional Requirement: blue</li><li>Design Requirement: magenta</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
                 <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
                     <scenario>new risk assessment</scenario>
@@ -70,7 +70,7 @@
                 </RiskAssessment>
             </Requirement>
             <Requirement id="16" type="FunctionalRequirement" name="Editing">
-                <description><![CDATA[The requirement type can be selected in a context menu of the requirements tree view. A right click on a requirement opens a context menu which lets the user choose one of the three types.  <br>]]></description>
+                <description><![CDATA[The requirement type can be selected in a context menu of the requirements tree view. A right click on a requirement opens a context menu which lets the user choose one of the three types. ]]></description>
                 <Attribute index="0" value="yes"/>
                 <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
                     <scenario>new risk assessment</scenario>
@@ -85,118 +85,118 @@
             </Requirement>
         </Requirement>
         <Requirement id="17" type="UserRequirement" name="Rich text descriptions">
-            <description><![CDATA[For each requirement a rich text description can be edited to specify its details.  <br>]]></description>
+            <description><![CDATA[For each requirement a rich text description can be edited to specify its details. ]]></description>
             <Attribute index="0" value="no"/>
             <Requirement id="18" type="FunctionalRequirement" name="Bold Text">
-                <description><![CDATA[Text can be formatted bold. Triggers are  <br><ul><li>A tool button</li><li>The keyboard shortcut ctrl-b</li></ul>]]></description>
+                <description><![CDATA[Text can be formatted bold. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-b</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="19" type="FunctionalRequirement" name="Lists">
-                <description><![CDATA[Text can be formatted in lists. Triggers are  <br><ul><li>A tool button</li><li>The keyboard shortcut ctrl-l</li></ul>]]></description>
+                <description><![CDATA[Text can be formatted in lists. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-l</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="20" type="FunctionalRequirement" name="Italic Text">
-                <description><![CDATA[Text can be formatted italic. Triggers are  <br><ul><li>A tool button</li><li>The keyboard shortcut ctrl-i</li></ul>]]></description>
+                <description><![CDATA[Text can be formatted italic. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-i</li></ul>]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="21" type="FunctionalRequirement" name="Code">
-                <description><![CDATA[Text can be formatted in code form. Triggers are  <br><ul><li>A tool button</li><li>A the keyboard </li><li>ctrl-d</li></ul>]]></description>
+                <description><![CDATA[Text can be formatted in code form. Triggers are <ul><li>A tool button</li><li>A the keyboard </li><li>ctrl-d</li></ul>]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="22" type="FunctionalRequirement" name="Images">
-                <description><![CDATA[Images can be inserted into the rich text description.  <br>]]></description>
+                <description><![CDATA[Images can be inserted into the rich text description. ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
         </Requirement>
         <Requirement id="23" type="UserRequirement" name="Saving and Loading of Projects">
-            <description><![CDATA[All information edited in the software can be saved to file and loaded again.  <br>]]></description>
+            <description><![CDATA[All information edited in the software can be saved to file and loaded again. ]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="24" type="FunctionalRequirement" name="Display of unsaved changes">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="25" type="FunctionalRequirement" name="Load">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="26" type="FunctionalRequirement" name="Save">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="27" type="FunctionalRequirement" name="Save As">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="28" type="FunctionalRequirement" name="Storage format">
-                <description><![CDATA[The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file.  <br>]]></description>
+                <description><![CDATA[The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file. ]]></description>
                 <Attribute index="0" value="no"/>
                 <Requirement id="29" type="DesignRequirement" name="Requirement storage">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="30" type="DesignRequirement" name="Attribute storage">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="31" type="DesignRequirement" name="Rich Text storage">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="32" type="DesignRequirement" name="Image storage">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
             </Requirement>
         </Requirement>
         <Requirement id="33" type="UserRequirement" name="Exporting Reports">
-            <description><![CDATA[The information stored in a project file can be exported to reports. Possible formats are  <br><ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul>]]></description>
+            <description><![CDATA[The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul>]]></description>
             <Attribute index="0" value="no"/>
         </Requirement>
         <Requirement id="34" type="UserRequirement" name="Digital Signatures">
-            <description><![CDATA[Project files and/or exported reports can be digitally signed and signatures can be veryfied using the Requirements Manager or an additional tool.  <br>]]></description>
+            <description><![CDATA[Project files and/or exported reports can be digitally signed and signatures can be veryfied using the Requirements Manager or an additional tool. ]]></description>
             <Attribute index="0" value="no"/>
         </Requirement>
         <Requirement id="35" type="UserRequirement" name="Attributes">
-            <description><![CDATA[For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties  <br><ul><li>name</li><li>data type</li><li>value</li></ul><ul><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul>]]></description>
+            <description><![CDATA[For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties <ul><li>name</li><li>data type</li><li>value</li><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="54" type="DesignRequirement" name="Attribute Context">
-                <description><![CDATA[There's one shared instance of class AttributeContext. It store's which attributes exist and passes information about changes to all requirements. The AttributContext can be edited in a dedicated dialog.  <br>]]></description>
+                <description><![CDATA[There's one shared instance of class AttributeContext. It store's which attributes exist and passes information about changes to all requirements. The AttributContext can be edited in a dedicated dialog. ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="55" type="DesignRequirement" name="Attribute Container">
-                <description><![CDATA[Every requirement contains an object of class AttributeContainer. AttributeContainer stores a pointer to the AttributContext instance and a list of concrete attributes for the parent requirement.  <br>]]></description>
+                <description><![CDATA[Every requirement contains an object of class AttributeContainer. AttributeContainer stores a pointer to the AttributContext instance and a list of concrete attributes for the parent requirement. ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="56" type="DesignRequirement" name="RequirementToModelMapper">
-                <description><![CDATA[The class RequirmentToModelMapper returns attributes for the DisplayRole of Columns greater 0.  <br>]]></description>
+                <description><![CDATA[The class RequirmentToModelMapper returns attributes for the DisplayRole of Columns greater 0. ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="36" type="FunctionalRequirement" name="Attribute Context Editor">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="37" type="FunctionalRequirement" name="Display of Attributes">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="38" type="FunctionalRequirement" name="Editing Attributes">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
                 <Requirement id="59" type="DesignRequirement" name="class AttributeEditor">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
             </Requirement>
         </Requirement>
         <Requirement id="39" type="UserRequirement" name="Links">
-            <description><![CDATA[For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..."  <br>]]></description>
+            <description><![CDATA[For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..." ]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="57" type="DesignRequirement" name="class LinkContext">
-                <description><![CDATA[There's one shared instance of class LinkContext. It store's which links exist and passes information about changes to all LinkContainers (one in each requirement). Link Context inherites from QAbstractTableModel. The AttributContext can be edited in a dedicated dialog.  <br>]]></description>
+                <description><![CDATA[There's one shared instance of class LinkContext. It store's which links exist and passes information about changes to all LinkContainers (one in each requirement). Link Context inherites from QAbstractTableModel. The AttributContext can be edited in a dedicated dialog. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="58" type="DesignRequirement" name="class LinkContainer">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="49" type="FunctionalRequirement" name="Configuration Dialog">
@@ -208,51 +208,51 @@
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="50" type="FunctionalRequirement" name="Adding Links">
-                <description><![CDATA[To add links, the user switches the application into <i>linking mode </i>by activating a toggle button. In linking mode, double click on a requirement entry adds the requirement to the currently selected link type.  <br>]]></description>
+                <description><![CDATA[To add links, the user switches the application into <i>linking mode </i>by activating a toggle button. In linking mode, double click on a requirement entry adds the requirement to the currently selected link type. ]]></description>
                 <Attribute index="0" value="yes"/>
                 <Requirement id="52" type="DesignRequirement" name="Checkable Tool Button">
-                    <description><![CDATA[<i>Linking mode</i> is visualised by using a <i>checkable QToolButton</i> with a plus sign. As long as the tool button is checked, linking mode is active.  <br>]]></description>
+                    <description><![CDATA[<i>Linking mode</i> is visualised by using a <i>checkable QToolButton</i> with a plus sign. As long as the tool button is checked, linking mode is active. ]]></description>
                     <Attribute index="0" value="yes"/>
                 </Requirement>
             </Requirement>
             <Requirement id="51" type="FunctionalRequirement" name="Removing links">
-                <description><![CDATA[Links can be removed by selecting them and either clicking a remove button (minus sign) or pressing <i>delete</i>.  <br>]]></description>
+                <description><![CDATA[Links can be removed by selecting them and either clicking a remove button (minus sign) or pressing <i>delete</i>. ]]></description>
                 <Attribute index="0" value="yes"/>
                 <Requirement id="53" type="DesignRequirement" name="Tool Button">
-                    <description><![CDATA[When a tool button is clicked, the currently selected link is deleted.  <br>]]></description>
+                    <description><![CDATA[When a tool button is clicked, the currently selected link is deleted. ]]></description>
                     <Attribute index="0" value="yes"/>
                 </Requirement>
             </Requirement>
             <Requirement id="60" type="FunctionalRequirement" name="Saving Links">
-                <description><![CDATA[The information about links is saved into the project file.  <br>]]></description>
+                <description><![CDATA[The information about links is saved into the project file. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="61" type="FunctionalRequirement" name="Loading Links">
-                <description><![CDATA[The information about links can be loaded to the project file.  <br>]]></description>
+                <description><![CDATA[The information about links can be loaded to the project file. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
         </Requirement>
         <Requirement id="40" type="UserRequirement" name="Risk Assessment">
-            <description><![CDATA[For each requirement an assessment of their risks can be edited:  <br><ul><li>Several "risk scenarios" can be added to each requirement</li></ul><ul><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul>]]></description>
+            <description><![CDATA[For each requirement an assessment of their risks can be edited: <ul><li>Several "risk scenarios" can be added to each requirement</li><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
             <Requirement id="41" type="FunctionalRequirement" name="Display">
-                <description><![CDATA[When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view.  <br>]]></description>
+                <description><![CDATA[When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view. ]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="42" type="FunctionalRequirement" name="Adding risks">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="43" type="FunctionalRequirement" name="Assessing risks">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="44" type="FunctionalRequirement" name="Adding preventive actions">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
             <Requirement id="45" type="FunctionalRequirement" name="Assessing preventive actions">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="yes"/>
             </Requirement>
         </Requirement>
@@ -260,40 +260,40 @@
             <description><![CDATA[<ul><li>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.</li><li>Classes and functions can be added as Source Code Documentation to the Design Requirements</li><li>Automated tests can be added to risk assessments</li></ul>]]></description>
             <Attribute index="0" value="no"/>
             <Requirement id="64" type="FunctionalRequirement" name="Extract information from code">
-                <description><![CDATA[<b>Information about structure and function of the code is extracted from the source code files</b>  <br>]]></description>
+                <description><![CDATA[<b>Information about structure and function of the code is extracted from the source code files</b> ]]></description>
                 <Attribute index="0" value="no"/>
                 <Requirement id="69" type="DesignRequirement" name="class SourceCodeController">
-                    <description><![CDATA[Die Klasse <b>SourceCodeController</b> ist in MainWindow enthalten. Sie enthält die Klassen <b>SourceCodeModel : public QAbstractItemModel</b> Speichert den eingelesenen Quellcode in einer Baumstruktur mit 3 Hierarchieebenen: 1. Ebene: Klassen (bzw. Dateien bei nicht objektorientierten Sprachen) 2. Ebene: Funktionen 3. Ebene: Tests <b>SourceCodeReaderProvider</b> Verwaltet die zur Verfügung stehenden <b>ISourceCodeReader</b> Und hält Referenzen auf drei <b>QListViews</b> für die drei Hierarchieebenen. Die Klasse <b>SourceCodeController</b> koordiniert das Zusammenspiel der Source Code List Views, des SourceCode-Models und des Requirements-Models.  <br>]]></description>
+                    <description><![CDATA[Die Klasse <b>SourceCodeController</b> ist in MainWindow enthalten. Sie enthält die Klassen <b>SourceCodeModel : public QAbstractItemModel</b> Speichert den eingelesenen Quellcode in einer Baumstruktur mit 3 Hierarchieebenen: 1. Ebene: Klassen (bzw. Dateien bei nicht objektorientierten Sprachen) 2. Ebene: Funktionen 3. Ebene: Tests <b>SourceCodeReaderProvider</b> Verwaltet die zur Verfügung stehenden <b>ISourceCodeReader</b> Und hält Referenzen auf drei <b>QListViews</b> für die drei Hierarchieebenen. Die Klasse <b>SourceCodeController</b> koordiniert das Zusammenspiel der Source Code List Views, des SourceCode-Models und des Requirements-Models. ]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="65" type="FunctionalRequirement" name="Extraction of classes">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="66" type="FunctionalRequirement" name="Extraction of functions">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
                 <Requirement id="67" type="FunctionalRequirement" name="Extraction of tests">
-                    <description><![CDATA[<br>]]></description>
+                    <description><![CDATA[]]></description>
                     <Attribute index="0" value="no"/>
                 </Requirement>
             </Requirement>
             <Requirement id="62" type="FunctionalRequirement" name="Multiple programming languages">
-                <description><![CDATA[<b>Documentation can be extracted from various programming languages</b>  <br>]]></description>
+                <description><![CDATA[<b>Documentation can be extracted from various programming languages</b> ]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="63" type="FunctionalRequirement" name="Display of structure">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
             <Requirement id="68" type="FunctionalRequirement" name="Assignement to requirements">
-                <description><![CDATA[<br>]]></description>
+                <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
         </Requirement>
         <Requirement id="47" type="UserRequirement" name="Full-Text Search">
-            <description><![CDATA[The user can perform a full text search in the requirements docuement.  <br>]]></description>
+            <description><![CDATA[The user can perform a full text search in the requirements document. ]]></description>
             <Attribute index="0" value="no"/>
         </Requirement>
     </RequirementSpecification>

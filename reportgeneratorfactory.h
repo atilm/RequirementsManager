@@ -6,12 +6,13 @@
 class ReportGeneratorFactory
 {
 public:
-    ReportGeneratorFactory();
+    ReportGeneratorFactory(FileStateTracker *fileState);
     virtual ~ReportGeneratorFactory();
 
     virtual ReportGenerator *newGenerator(const QString &type);
 
 private:
+    FileStateTracker *fileState;
     ReportGenerator *newHtmlReportGenerator();
 };
 

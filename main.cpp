@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
                                                             dataMapper);
     requirements->init();
 
-    ReportController *reportController = new ReportController(new ReportGeneratorFactory(),
+    ReportController *reportController = new ReportController(new ReportGeneratorFactory(fileState),
                                                               fileState);
 
     MainWindow w(fileController, requirements, richText,

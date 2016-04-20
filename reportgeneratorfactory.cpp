@@ -1,9 +1,9 @@
 #include "reportgeneratorfactory.h"
 #include "htmlreportgenerator.h"
 
-ReportGeneratorFactory::ReportGeneratorFactory()
+ReportGeneratorFactory::ReportGeneratorFactory(FileStateTracker *fileState)
 {
-
+    this->fileState = fileState;
 }
 
 ReportGeneratorFactory::~ReportGeneratorFactory()
@@ -21,6 +21,7 @@ ReportGenerator *ReportGeneratorFactory::newGenerator(const QString &type)
 
 ReportGenerator *ReportGeneratorFactory::newHtmlReportGenerator()
 {
-    return new HtmlReportGenerator(new HtmlTemplateFactory());
+    return new HtmlReportGenerator(new HtmlTemplateFactory(),
+                                   new TextDocumentSerializer(new RichTextResourceManager(fileState)));
 }
 

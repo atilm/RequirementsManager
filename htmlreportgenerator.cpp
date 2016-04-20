@@ -1,9 +1,11 @@
 #include "htmlreportgenerator.h"
 
-HtmlReportGenerator::HtmlReportGenerator(HtmlTemplateFactory *templateFactory)
+HtmlReportGenerator::HtmlReportGenerator(HtmlTemplateFactory *templateFactory,
+                                         TextDocumentSerializer *documentSerializer)
 {
     model = nullptr;
     this->templateFactory = templateFactory;
+    this->documentSerializer = documentSerializer;
 
     initializeTemplates();
 }
@@ -11,6 +13,7 @@ HtmlReportGenerator::HtmlReportGenerator(HtmlTemplateFactory *templateFactory)
 HtmlReportGenerator::~HtmlReportGenerator()
 {
     delete templateFactory;
+    delete documentSerializer;
 }
 
 void HtmlReportGenerator::setModel(RequirementsModel *model)
@@ -57,7 +60,8 @@ QString HtmlReportGenerator::generateSRS()
         srsTemplate->setField("NUMBER", req->number());
         srsTemplate->setField("HREF", req->number().replace(".","_"));
         srsTemplate->setField("NAME", req->getTitle());
-        srsTemplate->setField("DESC", req->getDescription()->toPlainText());
+        QString description = documentSerializer->toSimpleHtml(req->getDescription());
+        srsTemplate->setField("DESC", description);
 
         lines.append(srsTemplate->getHtml());
     }
