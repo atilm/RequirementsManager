@@ -9,6 +9,7 @@ ReportController::ReportController(ReportGeneratorFactory *generatorFactory,
 {
     this->generatorFactory = generatorFactory;
     this->fileState = fileState;
+    this->model = nullptr;
 }
 
 ReportController::~ReportController()
@@ -16,10 +17,19 @@ ReportController::~ReportController()
     delete generatorFactory;
 }
 
+void ReportController::setModel(RequirementsModel *model)
+{
+    this->model = model;
+}
+
 void ReportController::generateReport()
 {
+    if(!model)
+        throw runtime_error("ReportController: model has not been set.");
+
     if(!fileState->filePath().isEmpty()){
         ReportGenerator *generator = generatorFactory->newGenerator("html");
+        generator->setModel(model);
         generator->generate(swapFileExtension(fileState->filePath(), ".html"));
         delete generator;
     }

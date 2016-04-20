@@ -4,6 +4,7 @@
 #include <QObject>
 #include "filestatetracker.h"
 #include "reportgeneratorfactory.h"
+#include "requirementsmodel.h"
 
 class ReportController : public QObject
 {
@@ -14,12 +15,15 @@ public:
                      QObject *parent = 0);
     virtual ~ReportController();
 
+    virtual void setModel(RequirementsModel *model);
+
 public slots:
     virtual void generateReport();
 
 private:
     FileStateTracker *fileState;
     ReportGeneratorFactory *generatorFactory;
+    RequirementsModel *model;
 
     QString swapFileExtension(const QString &filePath, const QString &newExtension);
 };

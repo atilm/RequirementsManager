@@ -51,6 +51,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     richText->setInsertImageAction(ui->actionInsertImage);
 
     this->reportController = reportController;
+    reportController->setModel(requirements );
 
     connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));

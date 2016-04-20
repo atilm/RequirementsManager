@@ -21,6 +21,6 @@ ReportGenerator *ReportGeneratorFactory::newGenerator(const QString &type)
 
 ReportGenerator *ReportGeneratorFactory::newHtmlReportGenerator()
 {
-    return new HtmlReportGenerator();
+    return new HtmlReportGenerator(new HtmlTemplateFactory());
 }
 

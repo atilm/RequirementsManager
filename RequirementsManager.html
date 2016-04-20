@@ -1,0 +1,182 @@
+<html>
+<head>
+<style>
+table, th, td {
+    border-style: solid;
+    border-color: #b0b0b0; 
+    border-collapse: collapse;
+    font-family: "Arial";
+    text-align: left;
+}
+td {
+    padding: 5px;
+}
+th {
+    padding: 5px;
+    background-color: #d0d0d0;
+    color: black;
+    font-weight: bold;
+}
+table{
+    width: 100%;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>Validation Documents</h1>
+
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#SRS">Software Requirements Specification (SRS)</a></li>
+<li><a href="#FRS">Functional Requirements Specification (FRS)</a></li>
+<li><a href="#DS">Design Specification (DS)</a></li>
+<li><a href="#RA">Risk Assessment (RA)</a></li>
+<li><a href="#TP">Test Plan (TP)</a></li>
+</ul>
+
+<h2 id="SRS">Software Requirements Specification (SRS)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">No.:</th>
+<th>Requirement:</th>
+<th>Description:</th>
+<th style="width: 5%;">regulatory</th>
+<th style="width: 5%;">functional</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a 1>Hierarchical structure</a></td>
+<td>Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible 
+
+adding and removing requirements
+moving requirements
+copying requirements</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a 2>The structure is editable</a></td>
+<td>The requirement tree structure can be edited by the user. 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a 3>Requirement types</a></td>
+<td>One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth: 
+
+User Requirements
+Functional Requirements
+Design Requirements</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a 4>Rich text descriptions</a></td>
+<td>For each requirement a rich text description can be edited to specify its details. 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a 5>Saving and Loading of Projects</a></td>
+<td>All information edited in the software can be saved to file and loaded again. 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a 6>Exporting Reports</a></td>
+<td>The information stored in a project file can be exported to reports. Possible formats are 
+
+HTML
+PDF
+OpenDocument</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a 7>Digital Signatures</a></td>
+<td>Project files and/or exported reports can be digitally signed and signatures can be veryfied using the Requirements Manager or an additional tool. 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a 8>Attributes</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties 
+
+name
+data type
+value
+boolean
+text
+ranking (1 to 5)
+integer</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a 9>Links</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..." 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a 10>Risk Assessment</a></td>
+<td>For each requirement an assessment of their risks can be edited: 
+
+Several "risk scenarios" can be added to each requirement
+Several "preventive actions" can be assigned to each risk scenario
+Each risk risk scenario has a final risk resulting from the sum of preventive actions</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a 11>Source Code Extraction</a></td>
+<td>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.
+Classes and functions can be added as Source Code Documentation to the Design Requirements
+Automated tests can be added to risk assessments</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+<tr>
+<td>12</td>
+<td><a 12>Full-Text Search</a></td>
+<td>The user can perform a full text search in the requirements docuement. 
+</td>
+<td><input type="checkbox"></td>
+<td><input type="checkbox"></td>
+</tr>
+
+</table>
+
+<h2 id="FRS">Functional Requirements Specification (FRS)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">No.:</th>
+<th>SRS.FRS:</th>
+<th>Description:</th>
+</tr>
+
+</table>
+
+</body>
+</html>
