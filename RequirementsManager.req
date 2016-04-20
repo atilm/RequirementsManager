@@ -61,12 +61,6 @@
                 <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
                     <scenario>new risk assessment</scenario>
                     <mitigationStrategy></mitigationStrategy>
-                    <Action case="TestCase" name="TestName">
-                        <short></short>
-                        <preparation></preparation>
-                        <action></action>
-                        <result></result>
-                    </Action>
                 </RiskAssessment>
             </Requirement>
             <Requirement id="16" type="FunctionalRequirement" name="Editing">

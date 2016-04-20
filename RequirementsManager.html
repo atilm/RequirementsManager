@@ -128,7 +128,7 @@ table{
 <tr>
 <td>12</td>
 <td><a 12>Full-Text Search</a></td>
-<td>The user can perform a full text search in the requirements docuement. </td>
+<td>The user can perform a full text search in the requirements document. </td>
 <td><input type="checkbox"></td>
 <td><input type="checkbox"></td>
 </tr>
@@ -142,6 +142,276 @@ table{
 <th style="width: 5%;">No.:</th>
 <th>SRS.FRS:</th>
 <th>Description:</th>
+</tr>
+<tr>
+<td id="1">1</td>
+<td><a 1>Hierarchical structure</a></td>
+<td>Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible <ul><li>adding and removing requirements</li><li>moving requirements</li><li>copying requirements</li></ul></td>
+</tr>
+<tr>
+<td id="1_1">1.1</td>
+<td><a 1_1>Display to user</a></td>
+<td><ul><li>Requirements are displayed in tree form similar to the display of a file system tree.</li><li>It is possible to "collapse nodes" to make their sub-requirements invisible</li></ul></td>
+</tr>
+<tr>
+<td id="2">2</td>
+<td><a 2>The structure is editable</a></td>
+<td>The requirement tree structure can be edited by the user. </td>
+</tr>
+<tr>
+<td id="2_1">2.1</td>
+<td><a 2_1>Edit titles</a></td>
+<td>The requirements' titles can be edited by double-clicking on a requirement or by selecting the requirement and pressing F2. </td>
+</tr>
+<tr>
+<td id="2_2">2.2</td>
+<td><a 2_2>Adding as child</a></td>
+<td>A requirement can be added as child of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-shift-r</li></ul></td>
+</tr>
+<tr>
+<td id="2_3">2.3</td>
+<td><a 2_3>Adding as sibling</a></td>
+<td>A requirement can be added as a sibling of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-r</li></ul></td>
+</tr>
+<tr>
+<td id="2_4">2.4</td>
+<td><a 2_4>Removing</a></td>
+<td>The currently selected requirement can be removed. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut delete</li></ul></td>
+</tr>
+<tr>
+<td id="2_5">2.5</td>
+<td><a 2_5>Moving</a></td>
+<td>Requirements can be moved by drag and drop within the tree view. </td>
+</tr>
+<tr>
+<td id="2_6">2.6</td>
+<td><a 2_6>Copying</a></td>
+<td>Requirements can be copied within the tree view by drag and drop with the keyboard modifier 'ctrl'. </td>
+</tr>
+<tr>
+<td id="3">3</td>
+<td><a 3>Requirement types</a></td>
+<td>One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth: <ul><li>User Requirements</li><li>Functional Requirements</li><li>Design Requirements</li></ul></td>
+</tr>
+<tr>
+<td id="3_1">3.1</td>
+<td><a 3_1>Display</a></td>
+<td>The requirement types are displayed color-coded in the requirements tree view: Each requirement's title is displayed in a font color corresponding to its type: <ul><li>User Requirement: black</li><li>Functional Requirement: blue</li><li>Design Requirement: magenta</li></ul></td>
+</tr>
+<tr>
+<td id="3_2">3.2</td>
+<td><a 3_2>Editing</a></td>
+<td>The requirement type can be selected in a context menu of the requirements tree view. A right click on a requirement opens a context menu which lets the user choose one of the three types. </td>
+</tr>
+<tr>
+<td id="4">4</td>
+<td><a 4>Rich text descriptions</a></td>
+<td>For each requirement a rich text description can be edited to specify its details. </td>
+</tr>
+<tr>
+<td id="4_1">4.1</td>
+<td><a 4_1>Bold Text</a></td>
+<td>Text can be formatted bold. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-b</li></ul></td>
+</tr>
+<tr>
+<td id="4_2">4.2</td>
+<td><a 4_2>Lists</a></td>
+<td>Text can be formatted in lists. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-l</li></ul></td>
+</tr>
+<tr>
+<td id="4_3">4.3</td>
+<td><a 4_3>Italic Text</a></td>
+<td>Text can be formatted italic. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-i</li></ul></td>
+</tr>
+<tr>
+<td id="4_4">4.4</td>
+<td><a 4_4>Code</a></td>
+<td>Text can be formatted in code form. Triggers are <ul><li>A tool button</li><li>A the keyboard </li><li>ctrl-d</li></ul></td>
+</tr>
+<tr>
+<td id="4_5">4.5</td>
+<td><a 4_5>Images</a></td>
+<td>Images can be inserted into the rich text description. </td>
+</tr>
+<tr>
+<td id="5">5</td>
+<td><a 5>Saving and Loading of Projects</a></td>
+<td>All information edited in the software can be saved to file and loaded again. </td>
+</tr>
+<tr>
+<td id="5_1">5.1</td>
+<td><a 5_1>Display of unsaved changes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="5_2">5.2</td>
+<td><a 5_2>Load</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="5_3">5.3</td>
+<td><a 5_3>Save</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="5_4">5.4</td>
+<td><a 5_4>Save As</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="5_5">5.5</td>
+<td><a 5_5>Storage format</a></td>
+<td>The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file. </td>
+</tr>
+<tr>
+<td id="6">6</td>
+<td><a 6>Exporting Reports</a></td>
+<td>The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul></td>
+</tr>
+<tr>
+<td id="7">7</td>
+<td><a 7>Digital Signatures</a></td>
+<td>Project files and/or exported reports can be digitally signed and signatures can be veryfied using the Requirements Manager or an additional tool. </td>
+</tr>
+<tr>
+<td id="8">8</td>
+<td><a 8>Attributes</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties <ul><li>name</li><li>data type</li><li>value</li><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul></td>
+</tr>
+<tr>
+<td id="8_1">8.1</td>
+<td><a 8_1>Attribute Context</a></td>
+<td>There's one shared instance of class AttributeContext. It store's which attributes exist and passes information about changes to all requirements. The AttributContext can be edited in a dedicated dialog. </td>
+</tr>
+<tr>
+<td id="8_2">8.2</td>
+<td><a 8_2>Attribute Container</a></td>
+<td>Every requirement contains an object of class AttributeContainer. AttributeContainer stores a pointer to the AttributContext instance and a list of concrete attributes for the parent requirement. </td>
+</tr>
+<tr>
+<td id="8_3">8.3</td>
+<td><a 8_3>RequirementToModelMapper</a></td>
+<td>The class RequirmentToModelMapper returns attributes for the DisplayRole of Columns greater 0. </td>
+</tr>
+<tr>
+<td id="8_4">8.4</td>
+<td><a 8_4>Attribute Context Editor</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="8_5">8.5</td>
+<td><a 8_5>Display of Attributes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="8_6">8.6</td>
+<td><a 8_6>Editing Attributes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="9">9</td>
+<td><a 9>Links</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..." </td>
+</tr>
+<tr>
+<td id="9_1">9.1</td>
+<td><a 9_1>class LinkContext</a></td>
+<td>There's one shared instance of class LinkContext. It store's which links exist and passes information about changes to all LinkContainers (one in each requirement). Link Context inherites from QAbstractTableModel. The AttributContext can be edited in a dedicated dialog. </td>
+</tr>
+<tr>
+<td id="9_2">9.2</td>
+<td><a 9_2>class LinkContainer</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="9_3">9.3</td>
+<td><a 9_3>Configuration Dialog</a></td>
+<td><ul><li>Via the menu bar entry "Edit" a configuration dialog for the available links can be opened.</li><li>The dialog shows the list of defined link types (e.g. "affects", "contradicts", etc).</li><li>Link types can be added, renamed and deleted.</li></ul></td>
+</tr>
+<tr>
+<td id="9_4">9.4</td>
+<td><a 9_4>Display</a></td>
+<td><ul><li>The links for the selected requirement are shown in a tree view at the right border of the main window.</li><li>The uppermost level of the tree structure contains the link types. The link types' children are the actual links of the selected requirment.</li></ul></td>
+</tr>
+<tr>
+<td id="9_5">9.5</td>
+<td><a 9_5>Adding Links</a></td>
+<td>To add links, the user switches the application into <i>linking mode </i>by activating a toggle button. In linking mode, double click on a requirement entry adds the requirement to the currently selected link type. </td>
+</tr>
+<tr>
+<td id="9_6">9.6</td>
+<td><a 9_6>Removing links</a></td>
+<td>Links can be removed by selecting them and either clicking a remove button (minus sign) or pressing <i>delete</i>. </td>
+</tr>
+<tr>
+<td id="9_7">9.7</td>
+<td><a 9_7>Saving Links</a></td>
+<td>The information about links is saved into the project file. </td>
+</tr>
+<tr>
+<td id="9_8">9.8</td>
+<td><a 9_8>Loading Links</a></td>
+<td>The information about links can be loaded to the project file. </td>
+</tr>
+<tr>
+<td id="10">10</td>
+<td><a 10>Risk Assessment</a></td>
+<td>For each requirement an assessment of their risks can be edited: <ul><li>Several "risk scenarios" can be added to each requirement</li><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul></td>
+</tr>
+<tr>
+<td id="10_1">10.1</td>
+<td><a 10_1>Display</a></td>
+<td>When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view. </td>
+</tr>
+<tr>
+<td id="10_2">10.2</td>
+<td><a 10_2>Adding risks</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="10_3">10.3</td>
+<td><a 10_3>Assessing risks</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="10_4">10.4</td>
+<td><a 10_4>Adding preventive actions</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="10_5">10.5</td>
+<td><a 10_5>Assessing preventive actions</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="11">11</td>
+<td><a 11>Source Code Extraction</a></td>
+<td><ul><li>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.</li><li>Classes and functions can be added as Source Code Documentation to the Design Requirements</li><li>Automated tests can be added to risk assessments</li></ul></td>
+</tr>
+<tr>
+<td id="11_1">11.1</td>
+<td><a 11_1>Extract information from code</a></td>
+<td><b>Information about structure and function of the code is extracted from the source code files</b> </td>
+</tr>
+<tr>
+<td id="11_2">11.2</td>
+<td><a 11_2>Multiple programming languages</a></td>
+<td><b>Documentation can be extracted from various programming languages</b> </td>
+</tr>
+<tr>
+<td id="11_3">11.3</td>
+<td><a 11_3>Display of structure</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="11_4">11.4</td>
+<td><a 11_4>Assignement to requirements</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="12">12</td>
+<td><a 12>Full-Text Search</a></td>
+<td>The user can perform a full text search in the requirements document. </td>
 </tr>
 
 </table>

@@ -33,6 +33,10 @@ private:
     QString generateHtml();
     QString generateSRS();
     QString generateFRS();
+    QString buildSRSString(const QModelIndex &index);
+    QString buildFRSString(const QModelIndex &index);
+    QString idString(const QString &s);
+    QString refString(QString s);
 };
 
 #endif // HTMLREPORTGENERATOR_H
