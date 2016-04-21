@@ -17,6 +17,8 @@ public:
     virtual void loadResources(const QString &html);
     virtual void saveImage(QString uri);
 
+    virtual QString imageFolderName() const;
+
 private:
     FileStateTracker *fileState;
     QTextDocument *document;

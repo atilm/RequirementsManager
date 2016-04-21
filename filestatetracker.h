@@ -29,6 +29,11 @@ public:
      */
     virtual QString filePath() const;
 
+    /*!
+     Returns the project file name without extension.
+     */
+    virtual QString fileBaseName() const;
+
     virtual QDir dir() const;
 
     /*!

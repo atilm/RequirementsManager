@@ -128,13 +128,20 @@ QString TextDocumentSerializer::getImageTag(QTextImageFormat format)
     resources->saveImage(format.name());
 
     if(width == 0 || height == 0)
-        text = QString("<img src=\"%1\">").arg(format.name());
+        text = QString("<img src=\"%1\">").arg(relativeImagePath(format));
     else
         text = QString("<img src=\"%1\" width=\"%2\" height=\"%3\">")
-                .arg(format.name())
+                .arg(relativeImagePath(format))
                 .arg(width)
                 .arg(height);
 
+    return text;
+}
+
+QString TextDocumentSerializer::relativeImagePath(QTextImageFormat format)
+{
+    QString text = format.name();
+    text.replace("file://", QString("./%1/").arg(resources->imageFolderName()));
     return text;
 }
 

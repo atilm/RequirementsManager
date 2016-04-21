@@ -27,6 +27,7 @@ private:
     QString processBlockContent(QTextBlock block);
     QString processFragment(QTextFragment fragment);
     QString getImageTag(QTextImageFormat format);
+    QString relativeImagePath(QTextImageFormat format);
     QString removeTrailingLineBreaks(QString s);
 };
 

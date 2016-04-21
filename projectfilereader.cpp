@@ -199,6 +199,10 @@ void ProjectFileReader::parseDescription(QModelIndex itemIdx)
 
         resources->setDocument(document);
         resources->loadResources(characters);
+
+        QString imgFolder = QString("src=\"./%1/").arg(resources->imageFolderName());
+        characters.replace(imgFolder, "src=\"file://");
+
         document->setHtml(characters);
     }
 }

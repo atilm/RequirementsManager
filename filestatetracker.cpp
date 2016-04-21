@@ -18,6 +18,12 @@ QString FileStateTracker::filePath() const
     return _filePath;
 }
 
+QString FileStateTracker::fileBaseName() const
+{
+    QFileInfo fInfo(_filePath);
+    return fInfo.baseName();
+}
+
 QDir FileStateTracker::dir() const
 {
     QFileInfo fInfo(_filePath);

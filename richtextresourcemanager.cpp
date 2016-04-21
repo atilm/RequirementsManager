@@ -51,7 +51,7 @@ void RichTextResourceManager::loadResources(const QString &html)
 
 void RichTextResourceManager::saveImage(QString uri)
 {
-    QDir imgDir = QDir(fileState->dir().absolutePath() + "/ReqManImages");
+    QDir imgDir = QDir(fileState->dir().absolutePath() + "/" + imageFolderName());
 
     if(!imgDir.exists())
         QDir().mkdir(imgDir.absolutePath());
@@ -67,6 +67,11 @@ void RichTextResourceManager::saveImage(QString uri)
         QImage image = document->resource(QTextDocument::ImageResource, uri).value<QImage>();
         image.save(archivePath);
     }
+}
+
+QString RichTextResourceManager::imageFolderName() const
+{
+    return fileState->fileBaseName() + "Images";
 }
 
 QString RichTextResourceManager::getUniqueName(const QString &path)
@@ -100,7 +105,10 @@ QStringList RichTextResourceManager::extractFileNames(const QString &html)
     int start = 0;
     int stop = 0;
 
-    QString marker("file://");
+    QString marker = QString("./%1/").arg(imageFolderName());
+
+    qDebug() << "Looking for: " << marker;
+
     QStringList fileList;
 
     while(true){
@@ -119,7 +127,9 @@ QStringList RichTextResourceManager::extractFileNames(const QString &html)
 
 void RichTextResourceManager::loadResource(const QString &archiveFileName)
 {
-    QString archivePath = fileState->dir().absolutePath() + "/ReqManImages/" + archiveFileName;
+    QString archivePath = QString("%1/%2/%3").arg(fileState->dir().absolutePath())
+                                             .arg(imageFolderName())
+                                             .arg(archiveFileName);
     QUrl uri(QString("file://%1").arg(archiveFileName));
     QImage image = QImageReader(archivePath).read();
     document->addResource(QTextDocument::ImageResource, uri, QVariant(image));
