@@ -29,12 +29,6 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <widget class="QTreeView" name="treeView">
-         <property name="font">
-          <font>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
          <property name="allColumnsShowFocus">
           <bool>false</bool>
          </property>
@@ -42,16 +36,7 @@
           <bool>false</bool>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-        </widget>
+        <widget class="QTextEdit" name="textEdit"/>
        </widget>
        <widget class="QSplitter" name="riskLayoutHSplitter">
         <property name="orientation">
@@ -103,14 +88,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QTableView" name="riskView">
-             <property name="font">
-              <font>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-            </widget>
+            <widget class="QTableView" name="riskView"/>
            </item>
           </layout>
          </widget>
@@ -156,14 +134,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QTableView" name="preventiveActionView">
-             <property name="font">
-              <font>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-            </widget>
+            <widget class="QTableView" name="preventiveActionView"/>
            </item>
           </layout>
          </widget>
@@ -184,28 +155,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="riskDescriptionView">
-            <property name="font">
-             <font>
-              <family>Segoe UI</family>
-              <pointsize>9</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-           </widget>
+           <widget class="QTextEdit" name="riskDescriptionView"/>
           </item>
          </layout>
         </widget>
        </widget>
       </widget>
       <widget class="QToolBox" name="linkViewContainer">
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="currentIndex">
         <number>1</number>
        </property>
@@ -284,6 +240,12 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QLabel" name="classesLabel">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Classes</string>
            </property>
@@ -294,6 +256,12 @@
          </item>
          <item>
           <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Functions</string>
            </property>
@@ -316,14 +284,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="testListView">
-           <property name="font">
-            <font>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-          </widget>
+          <widget class="QListView" name="testListView"/>
          </item>
         </layout>
        </widget>

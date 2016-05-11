@@ -9,7 +9,6 @@ RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
     setAcceptDrops(true);
     setDropIndicatorShown(true);
     setDragDropMode(QAbstractItemView::InternalMove);
-    setFont(QFont("Verdana", 11, QFont::Normal));
 
     setUpContextMenu(contextMenu);
 }

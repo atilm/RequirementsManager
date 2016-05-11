@@ -24,6 +24,10 @@ public:
     UniqueIDManager(QObject *parent = 0);
     virtual ~UniqueIDManager();
 
+    /*! Check if an id exists
+     Returns true, if the given id exists.
+     Returns false otherwise.
+     */
     virtual bool hasID(unsigned int id) const;
     virtual void removeID(unsigned int id);
     virtual unsigned int newUniqueID();

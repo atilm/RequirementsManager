@@ -227,5 +227,4 @@ void Requirement::initialize(UniqueIDManager *idManager, RiskAssessmentModel *ri
     type = UserRequirement;
     title = "Requirement";
     description = new QTextDocument();
-    description->setDefaultFont(QFont("Verdana", 11, QFont::Normal));
 }

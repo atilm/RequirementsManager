@@ -9,7 +9,6 @@ RiskDescriptionView::RiskDescriptionView(HtmlGenerator *html,
     this->html = html;
     html->initTemplates(QString("./Templates/riskAssessmentDisplay.html"),
                         QString("./Templates/preventiveActionDisplay.html"));
-    setFont(QFont("Verdana", 11, QFont::Normal));
 }
 
 RiskDescriptionView::~RiskDescriptionView()
