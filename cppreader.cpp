@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfoList>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 CppReader::CppReader(QFileAdapter *file,
                      QTextStreamAdapter *inStream)
@@ -157,14 +159,12 @@ bool CppReader::atClassEnd()
 
 QString CppReader::extractClassName()
 {
-    QStringList fields = currentLine.split(QRegExp("\\s"));
+    // Match a word followed by ":", "{" or a "end of string":
+    QRegularExpression re("\\s(\\w+)\\s*(?:{|:|$)");
+    QRegularExpressionMatch match = re.match(currentLine);
 
-    QString name;
-
-    if(fields.count() >= 2)
-        name = fields[1].trimmed();
-
-    return name;
+    if(match.hasMatch())
+        return match.captured(1);
 }
 
 void CppReader::parseFunction(QModelIndex classIndex)
