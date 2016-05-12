@@ -5,12 +5,14 @@
 SourceCodeController::SourceCodeController(FileStateTracker *stateTracker,
                                            ProjectFileController *project,
                                            SourceCodeReaderProvider *readerProvider,
+                                           HtmlGenerator *htmlGenerator,
                                            QObject *parent)
     : QObject(parent)
 {
     this->stateTracker = stateTracker;
     this->readerProvider = readerProvider;
     this->project = project;
+    this->htmlGenerator = htmlGenerator;
 }
 
 SourceCodeController::~SourceCodeController()
@@ -52,9 +54,12 @@ void SourceCodeController::injectPreventiveActionView(PreventiveActionTableView 
     this->preventiveActionView = actionView;
 }
 
-QString SourceCodeController::getDescription(SourceAddress address)
+QTextDocument* SourceCodeController::getDescription(SourceAddress address)
 {
-    return model->getDescription(address);
+    QString html = htmlGenerator->toHtml(model->getDescription(address),
+                                         HtmlGenerator::FIRST_LINE);
+    description.setHtml(html);
+    return &description;
 }
 
 TestNode *SourceCodeController::getTestNode(SourceAddress address)
@@ -136,8 +141,8 @@ void SourceCodeController::handleTestDoubleClicked(const QModelIndex &index)
 
 void SourceCodeController::showDescription(const QModelIndex &index)
 {
-    document.setPlainText(model->getDescription(index));
-    functionSpecView->setDocument(&document);
+    SourceAddress address = model->getAddress(index);
+    functionSpecView->setDocument(getDescription(address));
     functionSpecView->setEnabled(true);
 }
 

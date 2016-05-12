@@ -15,7 +15,7 @@ public:
         FIRST_LINE
     };
 
-    HtmlGenerator(HtmlTemplateFactory *_templateFactory);
+    HtmlGenerator(HtmlTemplateFactory *_templateFactory = nullptr);
     virtual ~HtmlGenerator();
 
     void initTemplates(QString riskPath,

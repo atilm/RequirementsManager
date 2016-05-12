@@ -89,6 +89,7 @@ int main(int argc, char *argv[])
     SourceCodeController *sourceController = new SourceCodeController(fileState,
                                                                       fileController,
                                                                       readerProvider,
+                                                                      new HtmlGenerator(),
                                                                       0);
     RequirementFactory *factory = new RequirementFactory(fileState, idManager,
                                                          attributes, links,

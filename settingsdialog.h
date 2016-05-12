@@ -26,6 +26,7 @@ private slots:
     void handleAddTestDir();
     void handleRemoveTestDir();
     void handleLanguageSelectionChanged(const QString &value);
+    void handleProjectsLanguageChanged(const QString &value);
 
 private:
     Ui::SettingsDialog *ui;

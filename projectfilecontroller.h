@@ -43,6 +43,7 @@ public:
 
 signals:
     void fileLoaded();
+    void programmingLanguageChanged(const QString &name);
 
 public slots:
     virtual void save();

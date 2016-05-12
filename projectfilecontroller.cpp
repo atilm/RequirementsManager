@@ -64,6 +64,7 @@ DirectoryListModel *ProjectFileController::testDirModel() const
 void ProjectFileController::setProgrammingLanguage(const QString &value)
 {
     programmingLanguage = value;
+    emit programmingLanguageChanged(value);
 }
 
 QString ProjectFileController::getProgrammingLanguage() const

@@ -35,8 +35,7 @@ SourceAddress DesignReference::getAddress()
 
 QTextDocument *DesignReference::getDescription()
 {
-    description->setPlainText(controller->getDescription(address));
-    return description;
+    return controller->getDescription(address);
 }
 
 void DesignReference::initialize(SourceAddress address,

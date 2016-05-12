@@ -14,7 +14,6 @@ DescriptionView::DescriptionView(RichTextResourceManager *resourcesManager,
                                  QWidget *parent) :
     QTextEdit(parent)
 {
-    defaultDocument = new QTextDocument();
     this->resourcesManager = resourcesManager;
     this->fileState = fileState;
     this->resizeDialog = resizeDialog;
@@ -118,6 +117,7 @@ void DescriptionView::initialize()
 {
     setDisabled(true);
 
+    defaultDocument = new QTextDocument();
     defaultDocument->setPlainText(tr("Click on the \"plus\" buttons to add requirements."));
     setDocument(defaultDocument);
 }

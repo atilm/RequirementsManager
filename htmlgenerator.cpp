@@ -18,6 +18,9 @@ HtmlGenerator::~HtmlGenerator()
 
 void HtmlGenerator::initTemplates(QString riskPath, QString actionPath)
 {
+    if(!templateFactory)
+        return;
+
     actionTemplate = templateFactory->newTemplate();
     riskAssessmentTemplate = templateFactory->newTemplate();
 
@@ -27,6 +30,9 @@ void HtmlGenerator::initTemplates(QString riskPath, QString actionPath)
 
 QString HtmlGenerator::toHtml(const TestNode &test)
 {
+    if(!actionTemplate)
+        return QString();
+
     actionTemplate->setField("CASE", test.getTestCase());
     actionTemplate->setField("NAME", test.getTestName());
     actionTemplate->setField("DESCRIPTION", test.getShortDescription());
@@ -39,6 +45,9 @@ QString HtmlGenerator::toHtml(const TestNode &test)
 
 QString HtmlGenerator::toHtml(PreventiveAction &action)
 {
+    if(!actionTemplate)
+        return QString();
+
     actionTemplate->setField("CASE", action.getTestCase());
     actionTemplate->setField("NAME", action.getTestName());
     actionTemplate->setField("DESCRIPTION", action.getShortDescription());
@@ -51,6 +60,9 @@ QString HtmlGenerator::toHtml(PreventiveAction &action)
 
 QString HtmlGenerator::toHtml(const RiskAssessment &risk)
 {
+    if(!riskAssessmentTemplate)
+        return QString();
+
     riskAssessmentTemplate->setField("SCENARIO", toHtml(risk.scenario()));
     riskAssessmentTemplate->setField("MITIGATION_STRATEGY", toHtml(risk.mitigationStrategy()));
 
@@ -71,7 +83,7 @@ QString HtmlGenerator::toHtml(const QString &markupText, HeaderType headingType)
     QStringList nLines;
     bool inList = false;
 
-    if(headingType == FIRST_LINE && lines.count() > 1 && lines.at(1).isEmpty())
+    if(headingType == FIRST_LINE && lines.count() > 0)
         lines[0] = QString("<b>%1</b>").arg(lines[0]);
 
     foreach(QString line, lines){
@@ -115,9 +127,10 @@ QString HtmlGenerator::toHtml(const QString &markupText, HeaderType headingType)
         line = line.replace("\\todo", "<b>To Do: </b>");
         line = line.replace("\\note", "<b>Note: </b>");
 
-        line.append("<br>");
-        nLines.append(line);
+        if(!inList)
+            line.append("<br>");
 
+        nLines.append(line);
     }
 
     return nLines.join("\r\n");

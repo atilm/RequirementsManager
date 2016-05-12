@@ -2,6 +2,7 @@
 #define DESCRIPTIONVIEW_H
 
 #include <QTextEdit>
+#include "htmlgenerator.h"
 #include "requirementsmodel.h"
 #include "richtextresourcemanager.h"
 #include "filestatetracker.h"

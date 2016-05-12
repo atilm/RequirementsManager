@@ -62,6 +62,20 @@ void SettingsDialog::handleLanguageSelectionChanged(const QString &value)
     project->setProgrammingLanguage(value);
 }
 
+void SettingsDialog::handleProjectsLanguageChanged(const QString &value)
+{
+    int lastIndex = ui->languageComboBox->count() - 1;
+
+    for(int i=0; i < lastIndex; i++){
+        if(ui->languageComboBox->itemText(i) == value){
+            ui->languageComboBox->setCurrentIndex(i);
+            return;
+        }
+    }
+
+    ui->languageComboBox->setCurrentIndex(lastIndex);
+}
+
 void SettingsDialog::initialize()
 {
     ui->languageComboBox->clear();
@@ -69,9 +83,13 @@ void SettingsDialog::initialize()
     foreach (QString name, readers->availableLanguages()) {
         ui->languageComboBox->addItem(name);
     }
+    ui->languageComboBox->addItem("None");
+    project->setProgrammingLanguage("None");
 
     ui->languageComboBox->setCurrentText(project->getProgrammingLanguage());
 
+    connect(project, SIGNAL(programmingLanguageChanged(QString)),
+            this, SLOT(handleProjectsLanguageChanged(QString)));
     connect(ui->addSourceDirButton, SIGNAL(clicked(bool)),
             this, SLOT(handleAddSourceDir()));
     connect(ui->removeSourceDirButton, SIGNAL(clicked(bool)),
