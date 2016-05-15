@@ -1,5 +1,6 @@
 #include "requirementsview.h"
 #include <QAction>
+#include <QDebug>
 
 RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
     QTreeView(parent)

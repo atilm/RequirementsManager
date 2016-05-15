@@ -78,6 +78,8 @@ void SourceCodeController::parseProjectCode()
         functionView->setModel(nullptr);
         testView->setModel(nullptr);
 
+        disconnectAllViewSlots();
+
         connect(moduleView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
                 this, SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
         connect(moduleView, SIGNAL(doubleClicked(QModelIndex)),
@@ -93,7 +95,7 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
 {
     if(functionView->model() == nullptr){
         functionView->setModel(model);
-        connect(this->functionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+        connect(functionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
                 this, SLOT(handleFunctionSelectionChanged(QModelIndex,QModelIndex)));
         connect(functionView, SIGNAL(doubleClicked(QModelIndex)),
                 this, SLOT(handleClassOrFunctionDoubleClicked(QModelIndex)));
@@ -154,6 +156,16 @@ void SourceCodeController::showTestDescription(const QModelIndex &index)
     catch(const runtime_error &e){
 
     }
+}
+
+void SourceCodeController::disconnectAllViewSlots()
+{
+    moduleView->disconnect();
+    moduleView->selectionModel()->disconnect();
+    functionView->disconnect();
+    functionView->selectionModel()->disconnect();
+    testView->disconnect();
+    testView->selectionModel()->disconnect();
 }
 
 

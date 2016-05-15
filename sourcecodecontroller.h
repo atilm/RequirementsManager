@@ -75,6 +75,7 @@ private slots:
 private:
     void showDescription(const QModelIndex &index);
     void showTestDescription(const QModelIndex &index);
+    void disconnectAllViewSlots();
 };
 
 #endif // SOURCECODECONTROLLER_H
