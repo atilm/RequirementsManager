@@ -19,7 +19,7 @@ class InvalidIndexException : public exception{
 /*!
   This class implements a tree of requirements.
   Each tree node represents one requirement with a
-  titel and a rich-text description.
+  title and a rich-text description.
  */
 class Requirement
 {
@@ -72,6 +72,7 @@ public:
     virtual Requirement* popChild(int index);
 
     virtual int indexOf(const Requirement *item) const;
+    virtual int displayIndexOf(const Requirement *item) const;
 
     static QString typeToString(Type type);
     static Type stringToType(const QString &typeString);
@@ -94,6 +95,7 @@ protected:
     void assertValidIndex(int index);
     void initialize(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
                     AttributeContainer *attributes, LinkContainer *links);
+    bool sameTypeGroup(Type a, Type b) const;
 };
 
 #endif // REQUIREMENT_H

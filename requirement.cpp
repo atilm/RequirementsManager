@@ -111,15 +111,22 @@ QString Requirement::number() const
     if(!parent)
         return "";
 
-    int myNumber = parent->indexOf(this) + 1;
+    int myNumber = parent->displayIndexOf(this);
     QString parentNumber = parent->number();
 
+    QString numberString;
+
     if(parentNumber.isEmpty())
-        return QString("%1").arg(myNumber);
+        numberString = QString("%1").arg(myNumber);
     else
-        return QString("%1.%2")
+        numberString = QString("%1.%2")
                 .arg(parentNumber)
                 .arg(myNumber);
+
+    if(type == DesignRequirement)
+        numberString = QString("DS.") + numberString;
+
+    return numberString;
 }
 
 int Requirement::getRow() const
@@ -182,6 +189,22 @@ int Requirement::indexOf(const Requirement *item) const
     return -1;
 }
 
+int Requirement::displayIndexOf(const Requirement *item) const
+{
+    Type type = item->getType();
+
+    int currentIndex = 0;
+
+    foreach(Requirement *child, children){
+        if(sameTypeGroup(child->getType(), type))
+            currentIndex++;
+        if(child == item)
+            return currentIndex;
+    }
+
+    return -1;
+}
+
 QString Requirement::typeToString(Requirement::Type type)
 {
     switch(type){
@@ -227,4 +250,14 @@ void Requirement::initialize(UniqueIDManager *idManager, RiskAssessmentModel *ri
     type = UserRequirement;
     title = "Requirement";
     description = new QTextDocument();
+}
+
+bool Requirement::sameTypeGroup(Requirement::Type a, Requirement::Type b) const
+{
+    if(a == DesignRequirement && b == DesignRequirement)
+        return true;
+    else if(a != DesignRequirement && b != DesignRequirement)
+        return true;
+    else
+        return false;
 }
