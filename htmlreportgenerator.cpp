@@ -97,7 +97,7 @@ QString HtmlReportGenerator::buildSRSString(const QModelIndex &index)
     Requirement *req = model->getRequirement(index);
 
     srsTemplate->setField("NUMBER", req->number());
-    srsTemplate->setField("HREF", refString(req->number()));
+    srsTemplate->setField("HREF", refString(req->number(), "FRS"));
     srsTemplate->setField("NAME", req->getTitle());
     QString description = documentSerializer->toSimpleHtml(req->getDescription());
     srsTemplate->setField("DESC", description);
@@ -109,9 +109,9 @@ QString HtmlReportGenerator::buildFRSString(const QModelIndex &index)
 {
     Requirement *req = model->getRequirement(index);
 
-    frsTemplate->setField("REF_ID", idString(req->number()));
+    frsTemplate->setField("REF_ID", idString(req->number(), "FRS"));
     frsTemplate->setField("NUMBER", req->number());
-    frsTemplate->setField("HREF", refString(req->number()));
+    frsTemplate->setField("HREF", refString(req->number(), "DRS"));
     frsTemplate->setField("NAME", req->getTitle());
     QString description = documentSerializer->toSimpleHtml(req->getDescription());
     frsTemplate->setField("DESC", description);
@@ -123,9 +123,9 @@ QString HtmlReportGenerator::buildDSString(const QModelIndex &index)
 {
     Requirement *req = model->getRequirement(index);
 
-    dsTemplate->setField("REF_ID", idString(req->number()));
+    dsTemplate->setField("REF_ID", idString(req->number(), "DRS"));
     dsTemplate->setField("NUMBER", req->number());
-    dsTemplate->setField("HREF", refString(req->number()));
+    dsTemplate->setField("HREF", refString(req->number(), "RA"));
     dsTemplate->setField("NAME", req->getTitle());
 
     QString description;
@@ -139,12 +139,17 @@ QString HtmlReportGenerator::buildDSString(const QModelIndex &index)
     return dsTemplate->getHtml();
 }
 
-QString HtmlReportGenerator::idString(const QString &s)
+QString HtmlReportGenerator::idString(const QString &s, const QString &section)
 {
-    return QString("id=\"%1\"").arg(refString(s));
+    return QString("id=\"%1_%2\"").arg(section).arg(underscored(s));
 }
 
-QString HtmlReportGenerator::refString(QString s)
+QString HtmlReportGenerator::refString(const QString &s, const QString &section)
+{
+    return QString("href=\"#%1_%2\"").arg(section).arg(underscored(s));
+}
+
+QString HtmlReportGenerator::underscored(QString s)
 {
     return s.replace(".", "_");
 }
