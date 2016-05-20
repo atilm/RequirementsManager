@@ -31,12 +31,14 @@ private:
 
     void initializeTemplates();
     QString generateHtml();
-    QString generateSRS();
-    QString generateFRS();
+    QString generateSRS(const QModelIndex &index);
+    QString generateFRS(const QModelIndex &index);
     QString buildSRSString(const QModelIndex &index);
     QString buildFRSString(const QModelIndex &index);
     QString idString(const QString &s);
     QString refString(QString s);
+    bool isUserRequirement(const QModelIndex &index);
+    bool isUserOrFunctionalRequirement(const QModelIndex &index);
 };
 
 #endif // HTMLREPORTGENERATOR_H

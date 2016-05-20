@@ -45,35 +45,33 @@ void HtmlReportGenerator::initializeTemplates()
 
 QString HtmlReportGenerator::generateHtml()
 {
-    documentTemplate->setField("SRS", generateSRS());
-    documentTemplate->setField("FRS", generateFRS());
+    documentTemplate->setField("SRS", generateSRS(QModelIndex()));
+    documentTemplate->setField("FRS", generateFRS(QModelIndex()));
     return documentTemplate->getHtml();
 }
 
-QString HtmlReportGenerator::generateSRS()
+QString HtmlReportGenerator::generateSRS(const QModelIndex &index)
 {
     QString lines;
 
-    for(int i=0;i < model->rowCount();i++)
-        lines.append(buildSRSString(model->index(i,0)));
+    if(isUserRequirement(index))
+        lines.append(buildSRSString(index));
+
+    for(int i=0;i < model->rowCount(index);i++)
+        lines.append(generateSRS(model->index(i,0,index)));
 
     return lines;
 }
 
-QString HtmlReportGenerator::generateFRS()
+QString HtmlReportGenerator::generateFRS(const QModelIndex &index)
 {
     QString lines;
 
-    for(int i=0;i < model->rowCount();i++){
-        QModelIndex srsIdx = model->index(i,0);
+    if(isUserOrFunctionalRequirement(index))
+        lines.append(buildFRSString(index));
 
-        lines.append(buildFRSString(srsIdx));
-
-        for(int j=0;j < model->rowCount(srsIdx);j++){
-            QModelIndex frsIdx = model->index(j, 0, srsIdx);
-            lines.append(buildFRSString(frsIdx));
-        }
-    }
+    for(int i=0;i < model->rowCount(index);i++)
+        lines.append(generateFRS(model->index(i,0,index)));
 
     return lines;
 }
@@ -113,5 +111,21 @@ QString HtmlReportGenerator::idString(const QString &s)
 QString HtmlReportGenerator::refString(QString s)
 {
     return s.replace(".", "_");
+}
+
+bool HtmlReportGenerator::isUserRequirement(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return false;
+    else
+        return model->getType(index) == Requirement::UserRequirement;
+}
+
+bool HtmlReportGenerator::isUserOrFunctionalRequirement(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return false;
+    else
+        return model->getType(index) != Requirement::DesignRequirement;
 }
 
