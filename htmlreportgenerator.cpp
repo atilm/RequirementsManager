@@ -37,16 +37,19 @@ void HtmlReportGenerator::initializeTemplates()
     documentTemplate = templateFactory->newTemplate();
     srsTemplate = templateFactory->newTemplate();
     frsTemplate = templateFactory->newTemplate();
+    dsTemplate = templateFactory->newTemplate();
 
     documentTemplate->initialize("./Templates/ValidationDocumentTemplate.html");
     srsTemplate->initialize("./Templates/srsLineTemplate.html");
     frsTemplate->initialize("./Templates/frsLineTemplate.html");
+    dsTemplate->initialize("./Templates/dsLineTemplate.html");
 }
 
 QString HtmlReportGenerator::generateHtml()
 {
     documentTemplate->setField("SRS", generateSRS(QModelIndex()));
     documentTemplate->setField("FRS", generateFRS(QModelIndex()));
+    documentTemplate->setField("DS", generateDS(QModelIndex()));
     return documentTemplate->getHtml();
 }
 
@@ -72,6 +75,19 @@ QString HtmlReportGenerator::generateFRS(const QModelIndex &index)
 
     for(int i=0;i < model->rowCount(index);i++)
         lines.append(generateFRS(model->index(i,0,index)));
+
+    return lines;
+}
+
+QString HtmlReportGenerator::generateDS(const QModelIndex &index)
+{
+    QString lines;
+
+    if(index.isValid())
+        lines.append(buildDSString(index));
+
+    for(int i=0;i < model->rowCount(index);i++)
+        lines.append(generateDS(model->index(i,0,index)));
 
     return lines;
 }
@@ -103,6 +119,26 @@ QString HtmlReportGenerator::buildFRSString(const QModelIndex &index)
     return frsTemplate->getHtml();
 }
 
+QString HtmlReportGenerator::buildDSString(const QModelIndex &index)
+{
+    Requirement *req = model->getRequirement(index);
+
+    dsTemplate->setField("REF_ID", idString(req->number()));
+    dsTemplate->setField("NUMBER", req->number());
+    dsTemplate->setField("HREF", refString(req->number()));
+    dsTemplate->setField("NAME", req->getTitle());
+
+    QString description;
+    if(isDesignSpecification(index))
+        description = documentSerializer->toSimpleHtml(req->getDescription());
+    else
+        description = "see above";
+
+    dsTemplate->setField("DESC", description);
+
+    return dsTemplate->getHtml();
+}
+
 QString HtmlReportGenerator::idString(const QString &s)
 {
     return QString("id=\"%1\"").arg(refString(s));
@@ -121,11 +157,19 @@ bool HtmlReportGenerator::isUserRequirement(const QModelIndex &index)
         return model->getType(index) == Requirement::UserRequirement;
 }
 
+bool HtmlReportGenerator::isDesignSpecification(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return false;
+    else
+        return model->getType(index) == Requirement::DesignRequirement;
+}
+
 bool HtmlReportGenerator::isUserOrFunctionalRequirement(const QModelIndex &index)
 {
     if(!index.isValid())
         return false;
     else
-        return model->getType(index) != Requirement::DesignRequirement;
+        return !isDesignSpecification(index);
 }
 

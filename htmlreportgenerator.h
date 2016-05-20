@@ -28,16 +28,20 @@ private:
     HtmlTemplate *documentTemplate;
     HtmlTemplate *srsTemplate;
     HtmlTemplate *frsTemplate;
+    HtmlTemplate *dsTemplate;
 
     void initializeTemplates();
     QString generateHtml();
     QString generateSRS(const QModelIndex &index);
     QString generateFRS(const QModelIndex &index);
+    QString generateDS(const QModelIndex &index);
     QString buildSRSString(const QModelIndex &index);
     QString buildFRSString(const QModelIndex &index);
+    QString buildDSString(const QModelIndex &index);
     QString idString(const QString &s);
     QString refString(QString s);
     bool isUserRequirement(const QModelIndex &index);
+    bool isDesignSpecification(const QModelIndex &index);
     bool isUserOrFunctionalRequirement(const QModelIndex &index);
 };
 
