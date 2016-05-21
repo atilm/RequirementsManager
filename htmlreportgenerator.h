@@ -1,6 +1,7 @@
 #ifndef HTMLREPORTGENERATOR_H
 #define HTMLREPORTGENERATOR_H
 
+#include "htmlgenerator.h"
 #include "htmltemplatefactory.h"
 #include "htmltemplate.h"
 #include "reportgenerator.h"
@@ -12,7 +13,8 @@ class HtmlReportGenerator : public ReportGenerator
 {
 public:
     HtmlReportGenerator(HtmlTemplateFactory *templateFactory,
-                        TextDocumentSerializer *documentSerializer);
+                        TextDocumentSerializer *documentSerializer,
+                        HtmlGenerator *html);
     virtual ~HtmlReportGenerator();
 
     virtual void setModel(RequirementsModel *model);
@@ -23,6 +25,7 @@ private:
     QTextStream out;
     RequirementsModel *model;
     TextDocumentSerializer *documentSerializer;
+    HtmlGenerator *html;
 
     HtmlTemplateFactory *templateFactory;
     HtmlTemplate *documentTemplate;

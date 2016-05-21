@@ -1,11 +1,12 @@
 #include "htmlreportgenerator.h"
 
 HtmlReportGenerator::HtmlReportGenerator(HtmlTemplateFactory *templateFactory,
-                                         TextDocumentSerializer *documentSerializer)
+                                         TextDocumentSerializer *documentSerializer, HtmlGenerator *html)
 {
     model = nullptr;
     this->templateFactory = templateFactory;
     this->documentSerializer = documentSerializer;
+    this->html = html;
 
     initializeTemplates();
 }
@@ -14,6 +15,7 @@ HtmlReportGenerator::~HtmlReportGenerator()
 {
     delete templateFactory;
     delete documentSerializer;
+    delete html;
 }
 
 void HtmlReportGenerator::setModel(RequirementsModel *model)
@@ -196,9 +198,9 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
         QString raNumber = constructRANumber(req->number(), r);
 
         raTemplate->setField("NUMBER", raNumber);
-        raTemplate->setField("SCENARIO", ra->scenario());
+        raTemplate->setField("SCENARIO", html->toHtml(ra->scenario()));
         raTemplate->setField("INITIAL_RISK", ra->initialRisk(Qt::DisplayRole).toString());
-        raTemplate->setField("ACTION", ra->mitigationStrategy());
+        raTemplate->setField("ACTION", html->toHtml(ra->mitigationStrategy()));
         raTemplate->setField("FINAL_RISK", ra->finalRisk(Qt::DisplayRole).toString());
         raTemplate->setField("REF_ID", idString(raNumber, "RA"));
         raTemplate->setField("HREF", refString(req->number(), "TP"));
@@ -248,13 +250,13 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
         QString testNumber = constructTestNumber(raNumber, r);
 
         tpTemplate->setField("NUMBER", testNumber);
-        tpTemplate->setField("IDENTIFIER", QString("%1::%2")
+        tpTemplate->setField("IDENTIFIER", QString("<b>%1::%2</b>")
                              .arg(action->getTestCase())
                              .arg(action->getTestName()));
         tpTemplate->setField("SHORT_DESCRIPTION", action->getShortDescription());
-        tpTemplate->setField("PREPARATION", action->getPreparation());
-        tpTemplate->setField("ACTION", action->getAction());
-        tpTemplate->setField("RESULT", action->getExpectedResult());
+        tpTemplate->setField("PREPARATION", html->toHtml(action->getPreparation()));
+        tpTemplate->setField("ACTION", html->toHtml(action->getAction()));
+        tpTemplate->setField("RESULT", html->toHtml(action->getExpectedResult()));
         tpTemplate->setField("BACK_REF", refString("raNumber", "RA"));
 
         lines.append(tpTemplate->getHtml());

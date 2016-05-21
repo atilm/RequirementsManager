@@ -1,4 +1,5 @@
 #include "reportcontroller.h"
+#include <QDesktopServices>
 #include <QFileInfo>
 #include <QMessageBox>
 
@@ -28,10 +29,15 @@ void ReportController::generateReport()
         throw runtime_error("ReportController: model has not been set.");
 
     if(!fileState->filePath().isEmpty()){
+        QString targetFile = swapFileExtension(fileState->filePath(), ".html");
+
         ReportGenerator *generator = generatorFactory->newGenerator("html");
         generator->setModel(model);
-        generator->generate(swapFileExtension(fileState->filePath(), ".html"));
+        generator->generate(targetFile);
         delete generator;
+
+        QDesktopServices::openUrl(QString("file:///%1")
+                                  .arg(targetFile));
     }
     else{
         QMessageBox::information(0,

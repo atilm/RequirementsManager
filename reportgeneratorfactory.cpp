@@ -22,6 +22,7 @@ ReportGenerator *ReportGeneratorFactory::newGenerator(const QString &type)
 ReportGenerator *ReportGeneratorFactory::newHtmlReportGenerator()
 {
     return new HtmlReportGenerator(new HtmlTemplateFactory(),
-                                   new TextDocumentSerializer(new RichTextResourceManager(fileState)));
+                                   new TextDocumentSerializer(new RichTextResourceManager(fileState)),
+                                   new HtmlGenerator());
 }
 
