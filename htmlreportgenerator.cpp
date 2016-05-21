@@ -40,7 +40,7 @@ void HtmlReportGenerator::initializeTemplates()
     srsTemplate = templateFactory->newTemplate();
     frsTemplate = templateFactory->newTemplate();
     dsTemplate = templateFactory->newTemplate();
-    requirementTemplate = templateFactory->newTemplate();
+    sectionHeaderTemplate = templateFactory->newTemplate();
     raTemplate = templateFactory->newTemplate();
     tpTemplate = templateFactory->newTemplate();
 
@@ -48,7 +48,7 @@ void HtmlReportGenerator::initializeTemplates()
     srsTemplate->initialize("./Templates/srsLineTemplate.html");
     frsTemplate->initialize("./Templates/frsLineTemplate.html");
     dsTemplate->initialize("./Templates/dsLineTemplate.html");
-    requirementTemplate->initialize("./Templates/requirementLineTemplate.html");
+    sectionHeaderTemplate->initialize("./Templates/sectionHeaderTemplate.html");
     raTemplate->initialize("./Templates/raLineTemplate.html");
     tpTemplate->initialize("./Templates/tpLineTemplate.html");
 }
@@ -181,7 +181,11 @@ QString HtmlReportGenerator::buildRASection(const QModelIndex &index)
 
     Requirement *req = model->getRequirement(index);
 
-    lines.append(getRepeatedRequirementRow(req, "RA", 4));
+    int riskCount = req->getRiskAssessment()->rowCount();
+    QString message = riskCount != 0 ? "Risks:" : "N/A";
+    lines.append(sectionHeader(req->number(), "RA",
+                               riskCount + 1, 5,
+                               message));
     lines.append(getRARows(req));
 
     return lines;
@@ -204,7 +208,6 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
         raTemplate->setField("FINAL_RISK", ra->finalRisk(Qt::DisplayRole).toString());
         raTemplate->setField("REF_ID", idString(raNumber, "RA"));
         raTemplate->setField("HREF", refString(req->number(), "TP"));
-        raTemplate->setField("BACK_REF", refString(req->number(), "DRS"));
 
         lines.append(raTemplate->getHtml());
     }
@@ -218,7 +221,6 @@ QString HtmlReportGenerator::buildTPSection(const QModelIndex &index)
 
     Requirement *req = model->getRequirement(index);
 
-    lines.append(getRepeatedRequirementRow(req, "TP", 4));
     lines.append(getTPRows(req));
 
     return lines;
@@ -233,6 +235,11 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
     for(int r=0; r < ram->rowCount(); r++){
         RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
         QString raNumber = constructRANumber(req->number(), r);
+        int testCount = ra->getPreventiveActions()->rowCount();
+        QString message = testCount != 0 ? "Tests:" : "N/A";
+        lines.append(sectionHeader(raNumber, "TP",
+                                   testCount * 2 + 1, 3,
+                                   message));
         lines.append(getTestPlan(ra, raNumber));
     }
 
@@ -250,14 +257,13 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
         QString testNumber = constructTestNumber(raNumber, r);
 
         tpTemplate->setField("NUMBER", testNumber);
-        tpTemplate->setField("IDENTIFIER", QString("<b>%1::%2</b>")
+        tpTemplate->setField("IDENTIFIER", QString("%1::%2")
                              .arg(action->getTestCase())
                              .arg(action->getTestName()));
         tpTemplate->setField("SHORT_DESCRIPTION", action->getShortDescription());
         tpTemplate->setField("PREPARATION", html->toHtml(action->getPreparation()));
         tpTemplate->setField("ACTION", html->toHtml(action->getAction()));
         tpTemplate->setField("RESULT", html->toHtml(action->getExpectedResult()));
-        tpTemplate->setField("BACK_REF", refString("raNumber", "RA"));
 
         lines.append(tpTemplate->getHtml());
     }
@@ -265,17 +271,18 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
     return lines;
 }
 
-QString HtmlReportGenerator::getRepeatedRequirementRow(Requirement *req,
-                                                       const QString &section,
-                                                       int colSpan)
+QString HtmlReportGenerator::sectionHeader(const QString &number, const QString &section,
+                                           int rowSpan, int colSpan,
+                                           const QString &content)
 {
-    requirementTemplate->setField("REF_ID", idString(req->number(), section));
-    requirementTemplate->setField("BACK_REF", refString(req->number(), "DRS"));
-    requirementTemplate->setField("NUMBER", req->number());
-    requirementTemplate->setField("NAME", req->getTitle());
-    requirementTemplate->setField("COL_SPAN", colSpan);
+    sectionHeaderTemplate->setField("REF_ID", idString(number, section));
+    sectionHeaderTemplate->setField("BACK_REF", refString(number, "DRS"));
+    sectionHeaderTemplate->setField("NUMBER",number);
+    sectionHeaderTemplate->setField("ROW_SPAN", rowSpan);
+    sectionHeaderTemplate->setField("COL_SPAN", colSpan);
+    sectionHeaderTemplate->setField("CONTENT", content);
 
-    return requirementTemplate->getHtml();
+    return sectionHeaderTemplate->getHtml();
 }
 
 QString HtmlReportGenerator::idString(const QString &s, const QString &section)

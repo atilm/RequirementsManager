@@ -32,7 +32,7 @@ private:
     HtmlTemplate *srsTemplate;
     HtmlTemplate *frsTemplate;
     HtmlTemplate *dsTemplate;
-    HtmlTemplate *requirementTemplate;
+    HtmlTemplate *sectionHeaderTemplate;
     HtmlTemplate *raTemplate;
     HtmlTemplate *tpTemplate;
 
@@ -53,7 +53,7 @@ private:
     QString getTPRows(Requirement *req);
     QString getTestPlan(RiskAssessment *ra, const QString &raNumber);
 
-    QString getRepeatedRequirementRow(Requirement *req, const QString &section, int colSpan);
+    QString sectionHeader(const QString &number, const QString &section, int rowSpan, int colSpan, const QString &content);
     QString idString(const QString &s, const QString &section);
     QString refString(const QString &s, const QString &section);
     QString underscored(QString s);
