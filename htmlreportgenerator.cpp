@@ -56,6 +56,8 @@ QString HtmlReportGenerator::generateHtml()
     documentTemplate->setField("SRS", generateSRS(QModelIndex()));
     documentTemplate->setField("FRS", generateFRS(QModelIndex()));
     documentTemplate->setField("DS", generateDS(QModelIndex()));
+    documentTemplate->setField("RA", generateRA(QModelIndex()));
+    documentTemplate->setField("TP", generateTP(QModelIndex()));
     return documentTemplate->getHtml();
 }
 
@@ -177,7 +179,7 @@ QString HtmlReportGenerator::buildRASection(const QModelIndex &index)
 
     Requirement *req = model->getRequirement(index);
 
-    lines.append(getRepeatedRequirementRow(req, "RA", 1));
+    lines.append(getRepeatedRequirementRow(req, "RA", 4));
     lines.append(getRARows(req));
 
     return lines;
@@ -189,7 +191,7 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
 
     RiskAssessmentModel *ram = req->getRiskAssessment();
 
-    for(int r=0; ram->rowCount(); r++){
+    for(int r=0; r < ram->rowCount(); r++){
         RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
         QString raNumber = constructRANumber(req->number(), r);
 
@@ -214,7 +216,7 @@ QString HtmlReportGenerator::buildTPSection(const QModelIndex &index)
 
     Requirement *req = model->getRequirement(index);
 
-    lines.append(getRepeatedRequirementRow(req, "TP", 1));
+    lines.append(getRepeatedRequirementRow(req, "TP", 4));
     lines.append(getTPRows(req));
 
     return lines;
@@ -226,7 +228,7 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
 
     RiskAssessmentModel *ram = req->getRiskAssessment();
 
-    for(int r=0; ram->rowCount(); r++){
+    for(int r=0; r < ram->rowCount(); r++){
         RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
         QString raNumber = constructRANumber(req->number(), r);
         lines.append(getTestPlan(ra, raNumber));
@@ -241,7 +243,7 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
 
     PreventiveActionModel *actions = ra->getPreventiveActions();
 
-    for(int r=0; actions->rowCount(); r++){
+    for(int r=0; r < actions->rowCount(); r++){
         PreventiveAction *action = actions->getAction(actions->index(r, 0));
         QString testNumber = constructTestNumber(raNumber, r);
 
@@ -249,6 +251,7 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
         tpTemplate->setField("IDENTIFIER", QString("%1::%2")
                              .arg(action->getTestCase())
                              .arg(action->getTestName()));
+        tpTemplate->setField("SHORT_DESCRIPTION", action->getShortDescription());
         tpTemplate->setField("PREPARATION", action->getPreparation());
         tpTemplate->setField("ACTION", action->getAction());
         tpTemplate->setField("RESULT", action->getExpectedResult());
