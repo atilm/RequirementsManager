@@ -29,18 +29,33 @@ private:
     HtmlTemplate *srsTemplate;
     HtmlTemplate *frsTemplate;
     HtmlTemplate *dsTemplate;
+    HtmlTemplate *requirementTemplate;
+    HtmlTemplate *raTemplate;
+    HtmlTemplate *tpTemplate;
 
     void initializeTemplates();
     QString generateHtml();
     QString generateSRS(const QModelIndex &index);
     QString generateFRS(const QModelIndex &index);
     QString generateDS(const QModelIndex &index);
+    QString generateRA(const QModelIndex &index);
+    QString generateTP(const QModelIndex &index);
+
     QString buildSRSString(const QModelIndex &index);
     QString buildFRSString(const QModelIndex &index);
     QString buildDSString(const QModelIndex &index);
+    QString buildRASection(const QModelIndex &index);
+    QString getRARows(Requirement* req);
+    QString buildTPSection(const QModelIndex &index);
+    QString getTPRows(Requirement *req);
+    QString getTestPlan(RiskAssessment *ra, const QString &raNumber);
+
+    QString getRepeatedRequirementRow(Requirement *req, const QString &section, int colSpan);
     QString idString(const QString &s, const QString &section);
     QString refString(const QString &s, const QString &section);
     QString underscored(QString s);
+    QString constructRANumber(const QString &reqNumber, int raModelIndex);
+    QString constructTestNumber(const QString &raNumber, int testModelIndex);
     bool isUserRequirement(const QModelIndex &index);
     bool isDesignSpecification(const QModelIndex &index);
     bool isUserOrFunctionalRequirement(const QModelIndex &index);
