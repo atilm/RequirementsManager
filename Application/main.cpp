@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
     RichTextController *richText = new RichTextController();
 
     QMenu *requirementsContextMenu = new QMenu();
-    RequirementsView *requirementsView = new RequirementsView(requirementsContextMenu);
+    RequirementsView *requirementsView = new RequirementsView(new QMessageBoxProvider(),
+                                                              requirementsContextMenu);
     DescriptionView *descriptionView = new DescriptionView(docResourcesManager,
                                                            fileState,
                                                            new ResizeImageDialog());

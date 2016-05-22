@@ -9,17 +9,23 @@ QMessageBoxProvider::~QMessageBoxProvider()
 {
 }
 
-void QMessageBoxProvider::showInfoBox(QWidget *parent, QString &title, QString &text)
+void QMessageBoxProvider::showInfoBox(QWidget *parent,
+                                      const QString &title,
+                                      const QString &text)
 {
     QMessageBox::information(parent, title, text);
 }
 
-void QMessageBoxProvider::showWarning(QWidget *parent, QString &title, QString &text)
+void QMessageBoxProvider::showWarning(QWidget *parent,
+                                      const QString &title,
+                                      const QString &text)
 {
     QMessageBox::warning(parent, title, text);
 }
 
-QMessageBox::StandardButton QMessageBoxProvider::showQuestion(QWidget *parent, QString &title, QString &text)
+QMessageBox::StandardButton QMessageBoxProvider::showQuestion(QWidget *parent,
+                                                              const QString &title,
+                                                              const QString &text)
 {
     return QMessageBox::question(parent, title, text, QMessageBox::Yes|QMessageBox::No);
 }

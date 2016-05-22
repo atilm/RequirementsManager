@@ -4,13 +4,18 @@
 #include <QDropEvent>
 #include <QTreeView>
 #include <QMenu>
+
+#include "qmessageboxprovider.h"
 #include "requirementsmodel.h"
 
 class RequirementsView : public QTreeView
 {
     Q_OBJECT
 public:
-    explicit RequirementsView(QMenu *contextMenu, QWidget *parent = 0);
+    explicit RequirementsView(QMessageBoxProvider *msg,
+                              QMenu *contextMenu,
+                              QWidget *parent = 0);
+    virtual ~RequirementsView();
 
     virtual void setModel(RequirementsModel *model);
 
@@ -30,6 +35,7 @@ protected:
 private:
     QMenu *contextMenu;
     QModelIndex currentlyDragged;
+    QMessageBoxProvider *msg;
 
     RequirementsModel *requirementsModel();
     void setUpContextMenu(QMenu *contextMenu);

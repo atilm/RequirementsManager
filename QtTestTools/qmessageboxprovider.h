@@ -17,7 +17,9 @@ public:
     \param title The title of the message box.
     \param text The text in the message box.
     */
-    virtual void showInfoBox(QWidget *parent, QString &title, QString &text);
+    virtual void showInfoBox(QWidget *parent,
+                             const QString &title,
+                             const QString &text);
 
     //! Shows a QMessageBox with a warning icon.
     /*!
@@ -25,9 +27,19 @@ public:
     \param title The title of the message box.
     \param text The text in the message box.
     */
-    virtual void showWarning(QWidget *parent, QString &title, QString &text);
+    virtual void showWarning(QWidget *parent,
+                             const QString &title,
+                             const QString &text);
 
-    virtual QMessageBox::StandardButton showQuestion(QWidget *parent, QString &title, QString &text);
+    //! Shows a QMessageBox with a yes/no question.
+    /*!
+    \param parent The parent widget.
+    \param title The title of the message box.
+    \param text The text in the message box.
+    */
+    virtual QMessageBox::StandardButton showQuestion(QWidget *parent,
+                                                     const QString &title,
+                                                     const QString &text);
 
     //! Shows a DialogBox that requests the user to enter a double value.
     /*!

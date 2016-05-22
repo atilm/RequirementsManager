@@ -2,7 +2,7 @@
 #include <QAction>
 #include <QDebug>
 
-RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
+RequirementsView::RequirementsView(QMessageBoxProvider *msg, QMenu *contextMenu, QWidget *parent) :
     QTreeView(parent)
 {
     setExpandsOnDoubleClick(false);
@@ -12,6 +12,12 @@ RequirementsView::RequirementsView(QMenu *contextMenu, QWidget *parent) :
     setDragDropMode(QAbstractItemView::InternalMove);
 
     setUpContextMenu(contextMenu);
+    this->msg = msg;
+}
+
+RequirementsView::~RequirementsView()
+{
+    delete msg;
 }
 
 void RequirementsView::setModel(RequirementsModel *model)
@@ -49,7 +55,9 @@ void RequirementsView::appendChild(Requirement *item)
 void RequirementsView::removeCurrent()
 {
     if(selectionModel()->currentIndex().isValid()){
-        requirementsModel()->removeRequirement(selectionModel()->currentIndex());
+        QMessageBox::StandardButton answer = msg->showQuestion(this, tr("Delete requirement"), tr("Delete the current requirement?"));
+        if(answer == QMessageBox::Yes)
+            requirementsModel()->removeRequirement(selectionModel()->currentIndex());
     }
 }
 
