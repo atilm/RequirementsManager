@@ -20,71 +20,6 @@ SOURCES += main.cpp \
     appsettingstests.cpp \
     mockattributecontainerfactory.cpp
 
-INCLUDEPATH += $$PWD/../
-
-LIBS += $$PWD/../release/uniqueidmanager.o \
-        $$PWD/../release/moc_uniqueidmanager.o \
-        $$PWD/../release/requirement.o \
-        $$PWD/../release/requirementfactory.o \
-        $$PWD/../release/requirementsmodel.o \
-        $$PWD/../release/moc_requirementsmodel.o \
-        $$PWD/../release/projectfilecontroller.o \
-        $$PWD/../release/moc_projectfilecontroller.o \
-        $$PWD/../release/projectfilereader.o \
-        $$PWD/../release/projectfilewriter.o \
-        $$PWD/../release/appsettings.o \
-        $$PWD/../release/filestatetracker.o \
-        $$PWD/../release/moc_filestatetracker.o \
-        $$PWD/../release/attributecontainer.o \
-        $$PWD/../release/moc_attributecontainer.o \
-        $$PWD/../release/requirementtomodelmapper.o \
-        $$PWD/../release/attributecontainerfactory.o \
-        $$PWD/../release/riskassessmentmodel.o \
-        $$PWD/../release/moc_riskassessmentmodel.o \
-        $$PWD/../release/linkcontainer.o \
-        $$PWD/../release/moc_linkcontainer.o \
-        $$PWD/../release/riskassessmentfactory.o \
-        $$PWD/../release/linkcontainerfactory.o \
-        $$PWD/../release/preventiveaction.o \
-        $$PWD/../release/preventiveactionmodel.o \
-        $$PWD/../release/moc_preventiveactionmodel.o \
-        $$PWD/../release/linkgroup.o \
-        $$PWD/../release/linknode.o \
-        $$PWD/../release/linktorequirement.o \
-        $$PWD/../release/riskmodel.o \
-        $$PWD/../release/moc_riskmodel.o \
-        $$PWD/../release/riskassessment.o \
-
-unix:!macx: LIBS += -L$$PWD/../../../GMock/qt/ -lGMock
-
-unix:!macx: INCLUDEPATH += $$PWD/../../../GMock/include
-unix:!macx: DEPENDPATH += $$PWD/../../../GMock/include
-unix:!macx: INCLUDEPATH += $$PWD/../../../GMock/gtest/include
-unix:!macx: DEPENDPATH += $$PWD/../../../GMock/gtest/include
-
-unix:!macx: PRE_TARGETDEPS += $$PWD/../../../GMock/qt/libGMock.a
-
-
-win32: LIBS += -L$$PWD/../../GTest/QtMingw/release/ -lgmock
-
-INCLUDEPATH += $$PWD/../../GTest/googletest/include
-DEPENDPATH += $$PWD/../../GTest/googletest/include
-INCLUDEPATH += $$PWD/../../GTest/googlemock/include
-DEPENDPATH += $$PWD/../../GTest/googlemock/include
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../GTest/QtMingw/release/gmock.lib
-else:win32-g++: PRE_TARGETDEPS += $$PWD/../../GTest/QtMingw/release/libgmock.a
-
-
-win32: LIBS += -L$$PWD/../../QtTestTools/release/ -lQtTestTools
-
-INCLUDEPATH += $$PWD/../../QtTestTools
-DEPENDPATH += $$PWD/../../QtTestTools
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../QtTestTools/release/QtTestTools.lib
-else:win32-g++: PRE_TARGETDEPS += $$PWD/../../QtTestTools/release/libQtTestTools.a
-
-
 HEADERS += \
     projectfilereadermock.h \
     projectfilewritermock.h \
@@ -97,3 +32,58 @@ HEADERS += \
     mockattributecontainerfactory.h \
     riskassessmentmodelmock.h \
     linkcontainermock.h
+
+INCLUDEPATH += $$PWD/../Application/
+
+LIBS += $$PWD/../Application/release/uniqueidmanager.o \
+        $$PWD/../Application/release/moc_uniqueidmanager.o \
+        $$PWD/../Application/release/requirement.o \
+        $$PWD/../Application/release/requirementfactory.o \
+        $$PWD/../Application/release/requirementsmodel.o \
+        $$PWD/../Application/release/moc_requirementsmodel.o \
+        $$PWD/../Application/release/projectfilecontroller.o \
+        $$PWD/../Application/release/moc_projectfilecontroller.o \
+        $$PWD/../Application/release/projectfilereader.o \
+        $$PWD/../Application/release/projectfilewriter.o \
+        $$PWD/../Application/release/appsettings.o \
+        $$PWD/../Application/release/filestatetracker.o \
+        $$PWD/../Application/release/moc_filestatetracker.o \
+        $$PWD/../Application/release/attributecontainer.o \
+        $$PWD/../Application/release/moc_attributecontainer.o \
+        $$PWD/../Application/release/requirementtomodelmapper.o \
+        $$PWD/../Application/release/attributecontainerfactory.o \
+        $$PWD/../Application/release/riskassessmentmodel.o \
+        $$PWD/../Application/release/moc_riskassessmentmodel.o \
+        $$PWD/../Application/release/linkcontainer.o \
+        $$PWD/../Application/release/moc_linkcontainer.o \
+        $$PWD/../Application/release/riskassessmentfactory.o \
+        $$PWD/../Application/release/linkcontainerfactory.o \
+        $$PWD/../Application/release/preventiveaction.o \
+        $$PWD/../Application/release/preventiveactionmodel.o \
+        $$PWD/../Application/release/moc_preventiveactionmodel.o \
+        $$PWD/../Application/release/linkgroup.o \
+        $$PWD/../Application/release/linknode.o \
+        $$PWD/../Application/release/linktorequirement.o \
+        $$PWD/../Application/release/riskmodel.o \
+        $$PWD/../Application/release/moc_riskmodel.o \
+        $$PWD/../Application/release/riskassessment.o \
+        $$PWD/../Application/release/designreference.o
+
+win32: LIBS += -L$$PWD/../gtest/ -lgmock
+
+INCLUDEPATH += $$PWD/../gtest/include
+DEPENDPATH += $$PWD/../gtest/include
+INCLUDEPATH += $$PWD/../gtest/include
+DEPENDPATH += $$PWD/../gtest/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../gtest/gmock.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/../gtest/libgmock.a
+
+
+win32: LIBS += -L$$PWD/../QtTestTools/release/ -lQtTestTools
+
+INCLUDEPATH += $$PWD/../QtTestTools
+DEPENDPATH += $$PWD/../QtTestTools
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../QtTestTools/release/QtTestTools.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/../QtTestTools/release/libQtTestTools.a
