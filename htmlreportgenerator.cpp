@@ -183,7 +183,7 @@ QString HtmlReportGenerator::buildRASection(const QModelIndex &index)
 
     int riskCount = req->getRiskAssessment()->rowCount();
     QString message = riskCount != 0 ? "Risks:" : "N/A";
-    lines.append(sectionHeader(req->number(), "RA",
+    lines.append(sectionHeader(req->number(), "RA", "DRS",
                                riskCount + 1, 5,
                                message));
     lines.append(getRARows(req));
@@ -207,7 +207,7 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
         raTemplate->setField("ACTION", html->toHtml(ra->mitigationStrategy()));
         raTemplate->setField("FINAL_RISK", ra->finalRisk(Qt::DisplayRole).toString());
         raTemplate->setField("REF_ID", idString(raNumber, "RA"));
-        raTemplate->setField("HREF", refString(req->number(), "TP"));
+        raTemplate->setField("HREF", refString(raNumber, "TP"));
 
         lines.append(raTemplate->getHtml());
     }
@@ -237,7 +237,7 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
         QString raNumber = constructRANumber(req->number(), r);
         int testCount = ra->getPreventiveActions()->rowCount();
         QString message = testCount != 0 ? "Tests:" : "N/A";
-        lines.append(sectionHeader(raNumber, "TP",
+        lines.append(sectionHeader(raNumber, "TP", "RA",
                                    testCount * 2 + 1, 3,
                                    message));
         lines.append(getTestPlan(ra, raNumber));
@@ -271,12 +271,14 @@ QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNu
     return lines;
 }
 
-QString HtmlReportGenerator::sectionHeader(const QString &number, const QString &section,
+QString HtmlReportGenerator::sectionHeader(const QString &number,
+                                           const QString &section,
+                                           const QString &previousSection,
                                            int rowSpan, int colSpan,
                                            const QString &content)
 {
     sectionHeaderTemplate->setField("REF_ID", idString(number, section));
-    sectionHeaderTemplate->setField("BACK_REF", refString(number, "DRS"));
+    sectionHeaderTemplate->setField("BACK_REF", refString(number, previousSection));
     sectionHeaderTemplate->setField("NUMBER",number);
     sectionHeaderTemplate->setField("ROW_SPAN", rowSpan);
     sectionHeaderTemplate->setField("COL_SPAN", colSpan);

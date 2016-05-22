@@ -53,7 +53,7 @@ private:
     QString getTPRows(Requirement *req);
     QString getTestPlan(RiskAssessment *ra, const QString &raNumber);
 
-    QString sectionHeader(const QString &number, const QString &section, int rowSpan, int colSpan, const QString &content);
+    QString sectionHeader(const QString &number, const QString &section, const QString &previousSection, int rowSpan, int colSpan, const QString &content);
     QString idString(const QString &s, const QString &section);
     QString refString(const QString &s, const QString &section);
     QString underscored(QString s);
