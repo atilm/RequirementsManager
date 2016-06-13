@@ -12,7 +12,8 @@ PreventiveActionModel::PreventiveActionModel(FileStateTracker *fileState,
 
 PreventiveActionModel::~PreventiveActionModel()
 {
-
+    foreach(PreventiveAction *action, actions)
+        delete action;
 }
 
 QVariant PreventiveActionModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -79,6 +80,7 @@ void PreventiveActionModel::remove(const QModelIndex &index)
         return;
 
     beginRemoveRows(QModelIndex(), index.row(), index.row());
+    delete actions[index.row()];
     actions.remove(index.row());
     endRemoveRows();
     fileState->setChanged(true);

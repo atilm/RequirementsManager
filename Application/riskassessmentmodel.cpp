@@ -12,6 +12,9 @@ RiskAssessmentModel::RiskAssessmentModel(FileStateTracker *fileState,
 RiskAssessmentModel::~RiskAssessmentModel()
 {
     delete factory;
+
+    foreach(RiskAssessment *ra, assessments)
+        delete ra;
 }
 
 QVariant RiskAssessmentModel::headerData(int section, Qt::Orientation orientation, int role) const

@@ -20,7 +20,7 @@ LinkContainer::LinkContainer(LinkContext *context,
 
 LinkContainer::~LinkContainer()
 {
-
+    delete root;
 }
 
 void LinkContainer::setOwner(Requirement *r)

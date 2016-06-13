@@ -7,6 +7,7 @@ class LinkNode
 {
 public:
     LinkNode();
+    virtual ~LinkNode();
 
     virtual QString toString() const;
     virtual LinkNode* getChild(int index) const;

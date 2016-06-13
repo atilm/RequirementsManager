@@ -20,13 +20,13 @@ Requirement::~Requirement()
 {
     idManager->removeID(id);
 
+    delete description;
     delete riskAssessment;
     delete attributes;
     delete links;
 
-    for(int i=0;i<childCount();i++){
-        delete children[i];
-    }
+    foreach(Requirement *child, children)
+        delete child;
 }
 
 uint Requirement::getID()

@@ -8,6 +8,12 @@ LinkNode::LinkNode()
     this->parent = nullptr;
 }
 
+LinkNode::~LinkNode()
+{
+    foreach(LinkNode *child, children)
+        delete child;
+}
+
 QString LinkNode::toString() const
 {
     return QString();
