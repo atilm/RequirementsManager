@@ -20,6 +20,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     applicationName = "Requirements Manager";
     setWindowTitle(applicationName);
 
+    setSplitterBehaviour();
+
     this->settings = settings;
     this->messageBox = messageBox;
     this->fileState = fileState;
@@ -115,6 +117,8 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
 
     sourceController->injectDescriptionView(descriptionView);
     sourceController->injectRequirementsView(requirementsView);
+
+    setSplitterBehaviour();
 }
 
 void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
@@ -153,6 +157,8 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
 
     sourceController->injectRiskDescriptionView(riskDescriptionView);
     sourceController->injectPreventiveActionView(preventiveActionTableView);
+
+    setSplitterBehaviour();
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -174,6 +180,18 @@ void MainWindow::handleChangedStateChanged(bool unsavedChanges)
         windowTitle += "*";
 
     setWindowTitle(windowTitle);
+}
+
+void MainWindow::setSplitterBehaviour()
+{
+    ui->splitter->setStretchFactor(0,0);
+    ui->splitter->setStretchFactor(1,1);
+    ui->riskLayoutHSplitter->setStretchFactor(0,0);
+    ui->riskLayoutHSplitter->setStretchFactor(1,1);
+    ui->splitter_3->setStretchFactor(0,1);
+    ui->splitter_3->setStretchFactor(1,0);
+    ui->splitter_2->setStretchFactor(0,0);
+    ui->splitter_2->setStretchFactor(1,0);
 }
 
 
