@@ -32,17 +32,17 @@ void TestNode::appendToShortDescription(const QString &s)
 
 void TestNode::appendToPreparation(const QString &s)
 {
-    preparation += s;
+    preparation += s + "\n";
 }
 
 void TestNode::appendToAction(const QString &s)
 {
-    action += s;
+    action += s + "\n";
 }
 
 void TestNode::appendToResult(const QString &s)
 {
-    expectedResult += s;
+    expectedResult += s + "\n";
 }
 
 QString TestNode::getTestCase() const
