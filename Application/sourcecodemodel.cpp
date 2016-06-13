@@ -11,7 +11,7 @@ SourceCodeModel::SourceCodeModel()
 
 SourceCodeModel::~SourceCodeModel()
 {
-
+    delete root;
 }
 
 int SourceCodeModel::columnCount(const QModelIndex &parent) const

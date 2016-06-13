@@ -13,11 +13,12 @@ SourceCodeController::SourceCodeController(FileStateTracker *stateTracker,
     this->readerProvider = readerProvider;
     this->project = project;
     this->htmlGenerator = htmlGenerator;
+    model = nullptr;
 }
 
 SourceCodeController::~SourceCodeController()
 {
-
+    delete model;
 }
 
 void SourceCodeController::injectViews(QListView *moduleView,
@@ -69,8 +70,15 @@ TestNode *SourceCodeController::getTestNode(SourceAddress address)
 
 void SourceCodeController::parseProjectCode()
 {
+    delete model;
+    model = nullptr;
+
+    if(project->getProgrammingLanguage() == QString("None"))
+        return;
+
     try{
         ISourceCodeReader *reader = readerProvider->getReader(project->getProgrammingLanguage());
+
         model = reader->parseSourceCode(project->sourceDirModel(),
                                         project->testDirModel());
 

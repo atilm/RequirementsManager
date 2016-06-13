@@ -11,7 +11,8 @@ SourceNode::SourceNode()
 
 SourceNode::~SourceNode()
 {
-
+    foreach(SourceNode *child, children)
+        delete child;
 }
 
 void SourceNode::setName(const QString &name)
