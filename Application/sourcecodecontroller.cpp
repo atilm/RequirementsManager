@@ -92,6 +92,8 @@ void SourceCodeController::parseProjectCode()
                 this, SLOT(handleClassSelectionChanged(QModelIndex, QModelIndex)));
         connect(moduleView, SIGNAL(doubleClicked(QModelIndex)),
                 this, SLOT(handleClassOrFunctionDoubleClicked(QModelIndex)));
+        connect(moduleView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(handleClassClicked(QModelIndex)));
     }
     catch(const runtime_error &e){
         qDebug() << e.what();
@@ -107,6 +109,8 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
                 this, SLOT(handleFunctionSelectionChanged(QModelIndex,QModelIndex)));
         connect(functionView, SIGNAL(doubleClicked(QModelIndex)),
                 this, SLOT(handleClassOrFunctionDoubleClicked(QModelIndex)));
+        connect(functionView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(handleFunctionClicked(QModelIndex)));
     }
 
     testView->setModel(nullptr);
@@ -124,6 +128,8 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
                 this, SLOT(handleTestSelectionChanged(QModelIndex,QModelIndex)));
         connect(testView, SIGNAL(doubleClicked(QModelIndex)),
                 this, SLOT(handleTestDoubleClicked(QModelIndex)));
+        connect(testView, SIGNAL(clicked(QModelIndex)),
+                this, SLOT(handleTestClicked(QModelIndex)));
     }
 
     showDescription(current);
@@ -133,6 +139,24 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
 void SourceCodeController::handleTestSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     showTestDescription(current);
+}
+
+void SourceCodeController::handleClassClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+        handleClassSelectionChanged(index, QModelIndex());
+}
+
+void SourceCodeController::handleFunctionClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+        handleFunctionSelectionChanged(index, QModelIndex());
+}
+
+void SourceCodeController::handleTestClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+        handleTestSelectionChanged(index, QModelIndex());
 }
 
 void SourceCodeController::handleClassOrFunctionDoubleClicked(const QModelIndex &index)

@@ -69,8 +69,12 @@ private slots:
                                         const QModelIndex &previous);
     void handleTestSelectionChanged(const QModelIndex &current,
                                     const QModelIndex &previous);
+    void handleClassClicked(const QModelIndex &index);
+    void handleFunctionClicked(const QModelIndex &index);
+    void handleTestClicked(const QModelIndex &index);
     void handleClassOrFunctionDoubleClicked(const QModelIndex &index);
     void handleTestDoubleClicked(const QModelIndex &index);
+
 
 private:
     void showDescription(const QModelIndex &index);
