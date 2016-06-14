@@ -192,12 +192,12 @@ void SourceCodeController::showTestDescription(const QModelIndex &index)
 
 void SourceCodeController::disconnectAllViewSlots()
 {
-    moduleView->disconnect();
-    moduleView->selectionModel()->disconnect();
-    functionView->disconnect();
-    functionView->selectionModel()->disconnect();
-    testView->disconnect();
-    testView->selectionModel()->disconnect();
+    disconnect(moduleView->selectionModel(), 0, this, 0);
+    disconnect(moduleView, 0, this, 0);
+    disconnect(functionView->selectionModel(), 0, this, 0);
+    disconnect(functionView, 0, this, 0);
+    disconnect(testView->selectionModel(), 0, this, 0);
+    disconnect(testView, 0, this, 0);
 }
 
 
