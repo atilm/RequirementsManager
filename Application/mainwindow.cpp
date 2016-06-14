@@ -192,6 +192,10 @@ void MainWindow::setSplitterBehaviour()
     ui->splitter_3->setStretchFactor(1,0);
     ui->splitter_2->setStretchFactor(0,0);
     ui->splitter_2->setStretchFactor(1,0);
+
+    QList<int> sizes;
+    sizes << 500 << 200;
+    ui->splitter_2->setSizes(sizes);
 }
 
 
