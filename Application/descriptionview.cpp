@@ -88,6 +88,11 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
     }
 }
 
+void DescriptionView::showItem(const QModelIndex &index)
+{
+    switchItem(index, QModelIndex());
+}
+
 void DescriptionView::mouseDoubleClickEvent(QMouseEvent *e)
 {
     QTextCharFormat format = textCursor().charFormat();

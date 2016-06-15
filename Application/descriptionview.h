@@ -27,6 +27,7 @@ public slots:
 
     void insertImage();
     void switchItem(const QModelIndex &current, const QModelIndex &previous);
+    void showItem(const QModelIndex &index);
 
 protected:
     RichTextResourceManager *resourcesManager;
