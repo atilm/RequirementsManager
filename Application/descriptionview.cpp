@@ -80,6 +80,7 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
         setDocument(data->getDescription(current));
 
         setEnabled(true);
+        setReadOnly(false);
     }
     catch(...){
         setDocument(defaultDocument);

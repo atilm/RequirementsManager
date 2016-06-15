@@ -178,6 +178,7 @@ void SourceCodeController::showDescription(const QModelIndex &index)
     SourceAddress address = model->getAddress(index);
     functionSpecView->setDocument(getDescription(address));
     functionSpecView->setEnabled(true);
+    functionSpecView->setReadOnly(true);
 }
 
 void SourceCodeController::showTestDescription(const QModelIndex &index)
