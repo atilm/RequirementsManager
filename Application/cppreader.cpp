@@ -32,11 +32,18 @@ SourceCodeModel *CppReader::parseSourceCode(DirectoryListModel *sourceDirs,
                                             DirectoryListModel *testDirs)
 {
     model = new SourceCodeModel();
+    headerFiles.clear();
+    testFiles.clear();
 
     readDesignSpecification(sourceDirs);
     readTestSpecification(testDirs);
 
     return model;
+}
+
+QStringList CppReader::readFiles() const
+{
+    return headerFiles + testFiles;
 }
 
 void CppReader::nextLine()
@@ -52,7 +59,7 @@ void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)
 
 void CppReader::parseSourceFilesInDirectory(const QString &dirPath)
 {
-    QStringList headerFiles = listHeaderFiles(dirPath);
+    headerFiles = listHeaderFiles(dirPath);
 
     foreach(QString filePath, headerFiles)
         extractClassesFromFile(filePath);
@@ -221,7 +228,7 @@ void CppReader::readTestSpecification(DirectoryListModel *testDirs)
 
 void CppReader::parseTestFilesInDirectory(const QString &dirPath)
 {
-    QStringList testFiles = listCppFiles(dirPath);
+    testFiles = listCppFiles(dirPath);
 
     foreach(QString filePath, testFiles)
         extractTestsFromFile(filePath);

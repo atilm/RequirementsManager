@@ -1,19 +1,23 @@
 #include "sourcecodecontroller.h"
 #include "automatedtestreference.h"
 #include <QDebug>
+#include <QMessageBox>
 
-SourceCodeController::SourceCodeController(FileStateTracker *stateTracker,
+SourceCodeController::SourceCodeController(QFileSystemWatcher *fileWatcher,
+                                           FileStateTracker *stateTracker,
                                            ProjectFileController *project,
                                            SourceCodeReaderProvider *readerProvider,
                                            HtmlGenerator *htmlGenerator,
                                            QObject *parent)
     : QObject(parent)
 {
+    this->fileWatcher = fileWatcher;
     this->stateTracker = stateTracker;
     this->readerProvider = readerProvider;
     this->project = project;
     this->htmlGenerator = htmlGenerator;
     model = nullptr;
+    handlingFile = false;
 }
 
 SourceCodeController::~SourceCodeController()
@@ -79,8 +83,15 @@ void SourceCodeController::parseProjectCode()
     try{
         ISourceCodeReader *reader = readerProvider->getReader(project->getProgrammingLanguage());
 
+        disconnect(fileWatcher, 0, this, 0);
+        fileWatcher->removePaths(fileWatcher->files());
+
         model = reader->parseSourceCode(project->sourceDirModel(),
                                         project->testDirModel());
+
+        fileWatcher->addPaths(reader->readFiles());
+        connect(fileWatcher, SIGNAL(fileChanged(QString)),
+                this, SLOT(handleFileChanged()));
 
         moduleView->setModel(model);
         functionView->setModel(nullptr);
@@ -172,6 +183,25 @@ void SourceCodeController::handleTestDoubleClicked(const QModelIndex &index)
                                                                  this,
                                                                  stateTracker);
     preventiveActionView->appendTestReference(testRef);
+}
+
+void SourceCodeController::handleFileChanged()
+{
+    /* The QFileSystemWatcher emits several fileChanged signals
+     * when a file has been modified. The handling file variable
+     * is introduced to react only once to such a series of signals.
+     */
+    if(handlingFile)
+        return;
+
+    handlingFile = true;
+    QMessageBox::StandardButton answer = QMessageBox::question(0, tr("Source file changed"),
+                                                               tr("Reaload the source files now?"));
+
+    if(answer == QMessageBox::Yes){
+        parseProjectCode();
+    }
+    handlingFile = false;
 }
 
 void SourceCodeController::showDescription(const QModelIndex &index)

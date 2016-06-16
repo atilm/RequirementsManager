@@ -17,6 +17,7 @@ public:
     virtual QString language() const;
     virtual SourceCodeModel* parseSourceCode(DirectoryListModel *sourceDirs,
                                              DirectoryListModel *testDirs);
+    virtual QStringList readFiles() const;
 
 private:
     SourceCodeModel *model;
@@ -24,6 +25,8 @@ private:
     QTextStreamAdapter *inStream;
     QString currentLine;
     QString lineBuffer;
+    QStringList headerFiles;
+    QStringList testFiles;
 
     enum TestParsingMode {
         ADDRESS,

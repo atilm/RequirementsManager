@@ -1,6 +1,7 @@
 #ifndef SOURCECODECONTROLLER_H
 #define SOURCECODECONTROLLER_H
 
+#include <QFileSystemWatcher>
 #include <QListView>
 #include <QObject>
 #include <QTextDocument>
@@ -22,7 +23,8 @@ class SourceCodeController : public QObject
 {
     Q_OBJECT
 public:
-    explicit SourceCodeController(FileStateTracker *stateTracker,
+    explicit SourceCodeController(QFileSystemWatcher *fileWatcher,
+                                  FileStateTracker *stateTracker,
                                   ProjectFileController *project,
                                   SourceCodeReaderProvider *readerProvider,
                                   HtmlGenerator *htmlGenerator,
@@ -47,6 +49,8 @@ public slots:
     virtual void parseProjectCode();
 
 private:
+    QFileSystemWatcher *fileWatcher;
+    bool handlingFile;
     FileStateTracker *stateTracker;
     QListView *moduleView;
     QListView *functionView;
@@ -74,6 +78,7 @@ private slots:
     void handleTestClicked(const QModelIndex &index);
     void handleClassOrFunctionDoubleClicked(const QModelIndex &index);
     void handleTestDoubleClicked(const QModelIndex &index);
+    void handleFileChanged();
 
 
 private:

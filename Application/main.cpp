@@ -87,7 +87,8 @@ int main(int argc, char *argv[])
                                                         appSettings,
                                                         0);
 
-    SourceCodeController *sourceController = new SourceCodeController(fileState,
+    SourceCodeController *sourceController = new SourceCodeController(new QFileSystemWatcher(),
+                                                                      fileState,
                                                                       fileController,
                                                                       readerProvider,
                                                                       new HtmlGenerator(),
