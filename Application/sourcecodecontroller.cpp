@@ -114,6 +114,7 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
     }
 
     testView->setModel(nullptr);
+    disconnectTestView();
 
     showDescription(current);
     functionView->setRootIndex(current);
@@ -195,8 +196,18 @@ void SourceCodeController::disconnectAllViewSlots()
 {
     disconnect(moduleView->selectionModel(), 0, this, 0);
     disconnect(moduleView, 0, this, 0);
+    disconnectFunctionView();
+    disconnectTestView();
+}
+
+void SourceCodeController::disconnectFunctionView()
+{
     disconnect(functionView->selectionModel(), 0, this, 0);
     disconnect(functionView, 0, this, 0);
+}
+
+void SourceCodeController::disconnectTestView()
+{
     disconnect(testView->selectionModel(), 0, this, 0);
     disconnect(testView, 0, this, 0);
 }

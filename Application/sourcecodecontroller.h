@@ -80,6 +80,8 @@ private:
     void showDescription(const QModelIndex &index);
     void showTestDescription(const QModelIndex &index);
     void disconnectAllViewSlots();
+    void disconnectFunctionView();
+    void disconnectTestView();
 };
 
 #endif // SOURCECODECONTROLLER_H
