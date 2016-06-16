@@ -39,6 +39,11 @@ SourceCodeModel *CppReader::parseSourceCode(DirectoryListModel *sourceDirs,
     return model;
 }
 
+void CppReader::nextLine()
+{
+    currentLine = inStream->readLine().trimmed();
+}
+
 void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)
 {
     for(int i=0;i<sourceDirs->rowCount();i++)
@@ -96,7 +101,7 @@ bool CppReader::openStream(const QString &filePath)
 void CppReader::parseSourceLines()
 {
     while(!inStream->atEnd()){
-        currentLine = inStream->readLine().trimmed();
+        nextLine();
 
         if(atClassBegin())
             parseClass();
@@ -129,24 +134,29 @@ void CppReader::parseClass()
     QModelIndex classIdx = model->appendClass(classNode);
 
     while(!atClassEnd()){
-        currentLine = inStream->readLine().trimmed();
+        nextLine();
 
         if(currentScope == PUBLIC){
             if(atClassBegin())
                 parseClass();
+            else if(currentLine.startsWith("enum"))
+                skipDeclaration();
+            else if(currentLine.startsWith("struct"))
+                skipDeclaration();
             else if(currentLine.contains("("))
                 parseFunction(classIdx);
             else if(currentLine.startsWith("/*!"))
                 parseDesignSpecBlock();
         }
 
-        if(currentLine.startsWith("public"))
+        if(currentLine.startsWith("public:"))
             currentScope = PUBLIC;
-        else if(currentLine.startsWith("private"))
+        else if(currentLine.startsWith("private:"))
             currentScope = PRIVATE;
-        else if(currentLine.startsWith("protected"))
+        else if(currentLine.startsWith("protected:"))
             currentScope = PROTECTED;
     }
+    currentScope = PUBLIC;
 }
 
 bool CppReader::atClassEnd()
@@ -334,6 +344,14 @@ void CppReader::parseTestLine(TestNode *test)
     default:
         break;
     }
+}
+
+void CppReader::skipDeclaration()
+{
+    while(!currentLine.contains("};"))
+        nextLine();
+
+    nextLine();
 }
 
 QString CppReader::extractBetween(const QString &start,

@@ -44,6 +44,7 @@ private:
 
     Scope currentScope;
 
+    void nextLine();
     void readDesignSpecification(DirectoryListModel *sourceDirs);
     void parseSourceFilesInDirectory(const QString &dirPath);
     QStringList listHeaderFiles(const QString &dirPath);
@@ -69,6 +70,7 @@ private:
     SourceAddress extractTestSourceAddress();
     bool atTestEnd();
     void parseTestLine(TestNode *test);
+    void skipDeclaration();
 
     QString extractBetween(const QString &start,
                            const QString &end,
