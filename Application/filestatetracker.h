@@ -58,10 +58,11 @@ public:
      */
     virtual bool unsavedChanges() const;
 
+public slots:
     /*!
      Sets the current "changed" state.
      */
-    virtual void setChanged(bool state);
+    virtual void setChanged(bool state = true);
 
 signals:
     void filePathChanged(const QString &path);

@@ -20,6 +20,12 @@ public:
                             QWidget *parent = 0);
     virtual ~SettingsDialog();
 
+signals:
+    void settingsChanged();
+
+public slots:
+    int exec();
+
 private slots:
     void handleAddSourceDir();
     void handleRemoveSourceDir();
@@ -30,6 +36,7 @@ private slots:
 
 private:
     Ui::SettingsDialog *ui;
+    bool unsavedChanges;
     ProjectFileController *project;
     SourceCodeReaderProvider *readers;
     AppSettings *settings;
@@ -38,6 +45,9 @@ private:
 
     void initialize();
     QString getRelativeDirectoryPath();
+    void setUnchanged();
+    void setChanged();
+    void reject();
 };
 
 #endif // SETTINGSDIALOG_H

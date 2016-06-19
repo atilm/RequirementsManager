@@ -22,7 +22,7 @@ public:
     virtual QString absolutePath(int idx) const;
 
     virtual void add(const QString &directoryPath);
-    virtual void remove(const QModelIndex &index);
+    virtual bool remove(const QModelIndex &index);
 
 private:
     FileStateTracker *fileState;

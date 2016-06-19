@@ -65,6 +65,8 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     connect(fileState, SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
     connect(fileState, SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
     connect(fileController, SIGNAL(fileLoaded()), sourceController, SLOT(parseProjectCode()));
+    connect(settingsDialog, SIGNAL(settingsChanged()), sourceController, SLOT(parseProjectCode()));
+    connect(settingsDialog, SIGNAL(settingsChanged()), fileState, SLOT(setChanged()));
 }
 
 MainWindow::~MainWindow()

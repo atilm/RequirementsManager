@@ -28,38 +28,55 @@ SettingsDialog::~SettingsDialog()
     delete ui;
 }
 
+int SettingsDialog::exec()
+{
+    setUnchanged();
+
+    return QDialog::exec();
+}
+
 void SettingsDialog::handleAddSourceDir()
 {
     QString dir = getRelativeDirectoryPath();
 
     if(!dir.isEmpty()){
         sourceDirectories->add(dir);
+        setChanged();
     }
 }
 
 void SettingsDialog::handleRemoveSourceDir()
 {
-    sourceDirectories->remove(ui->sourceDirsListView
-                              ->selectionModel()->currentIndex());
+    bool success = sourceDirectories->remove(ui->sourceDirsListView
+                                             ->selectionModel()->currentIndex());
+
+    if(success)
+        setChanged();
 }
 
 void SettingsDialog::handleAddTestDir()
 {
     QString dir = getRelativeDirectoryPath();
 
-    if(!dir.isEmpty())
+    if(!dir.isEmpty()){
         testDirectories->add(dir);
+        setChanged();
+    }
 }
 
 void SettingsDialog::handleRemoveTestDir()
 {
-    testDirectories->remove(ui->testDirsListView
-                            ->selectionModel()->currentIndex());
+    bool success = testDirectories->remove(ui->testDirsListView
+                                           ->selectionModel()->currentIndex());
+
+    if(success)
+        setChanged();
 }
 
 void SettingsDialog::handleLanguageSelectionChanged(const QString &value)
 {
     project->setProgrammingLanguage(value);
+    setChanged();
 }
 
 void SettingsDialog::handleProjectsLanguageChanged(const QString &value)
@@ -100,6 +117,8 @@ void SettingsDialog::initialize()
             this, SLOT(handleRemoveTestDir()));
     connect(ui->languageComboBox, SIGNAL(currentTextChanged(QString)),
             this, SLOT(handleLanguageSelectionChanged(QString)));
+
+    setUnchanged();
 }
 
 QString SettingsDialog::getRelativeDirectoryPath()
@@ -113,4 +132,22 @@ QString SettingsDialog::getRelativeDirectoryPath()
     }
     else
         return QString();
+}
+
+void SettingsDialog::setUnchanged()
+{
+    unsavedChanges = false;
+}
+
+void SettingsDialog::setChanged()
+{
+    unsavedChanges = true;
+}
+
+void SettingsDialog::reject()
+{
+    if(unsavedChanges)
+        emit settingsChanged();
+
+    QDialog::reject();
 }

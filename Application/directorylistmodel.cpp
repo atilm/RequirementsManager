@@ -55,12 +55,15 @@ void DirectoryListModel::add(const QString &directoryPath)
     endInsertRows();
 }
 
-void DirectoryListModel::remove(const QModelIndex &index)
+bool DirectoryListModel::remove(const QModelIndex &index)
 {
     if(index.isValid()){
         beginRemoveRows(QModelIndex(), index.row(), index.row());
         directories.remove(index.row());
         endRemoveRows();
+        return true;
     }
+    else
+        return false;
 }
 
