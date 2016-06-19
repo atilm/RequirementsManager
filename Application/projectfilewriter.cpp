@@ -7,10 +7,13 @@
 #include <QObject>
 using namespace std;
 
-ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml, TextDocumentSerializer *serializer)
+ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml,
+                                     TextDocumentSerializer *serializer,
+                                     RichTextResourceManager *resourceManger)
 {
     this->xml = xml;
     this->serializer = serializer;
+    this->resourceManger = resourceManger;
 }
 
 ProjectFileWriter::~ProjectFileWriter()
@@ -120,9 +123,11 @@ void ProjectFileWriter::writeAttributeDeclaration(int index)
 
 void ProjectFileWriter::writeRequirementSpecification()
 {
+    resourceManger->beginSavingResources();
     xml->writeStartElement("RequirementSpecification");
     writeChildrenOf(QModelIndex());
     xml->writeEndElement();
+    resourceManger->endSavingResources();
 }
 
 void ProjectFileWriter::writeChildrenOf(QModelIndex parent)

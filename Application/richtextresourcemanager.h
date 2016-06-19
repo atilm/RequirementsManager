@@ -18,11 +18,15 @@ public:
     virtual void saveImage(QString uri);
 
     virtual QString imageFolderName() const;
+    virtual void beginSavingResources();
+    virtual void endSavingResources();
 
 private:
     FileStateTracker *fileState;
     QTextDocument *document;
+    QStringList presentFiles;
 
+    QDir getImageDirectory() const;
     QString getUniqueName(const QString &path);
     QString getUniqueFileName(const QImage &image);
     QStringList extractFileNames(const QString &html);

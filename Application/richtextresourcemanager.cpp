@@ -51,7 +51,7 @@ void RichTextResourceManager::loadResources(const QString &html)
 
 void RichTextResourceManager::saveImage(QString uri)
 {
-    QDir imgDir = QDir(fileState->dir().absolutePath() + "/" + imageFolderName());
+    QDir imgDir = getImageDirectory();
 
     if(!imgDir.exists())
         QDir().mkdir(imgDir.absolutePath());
@@ -67,11 +67,34 @@ void RichTextResourceManager::saveImage(QString uri)
         QImage image = document->resource(QTextDocument::ImageResource, uri).value<QImage>();
         image.save(archivePath);
     }
+
+    presentFiles.removeOne(uniqueFileName);
 }
 
 QString RichTextResourceManager::imageFolderName() const
 {
     return fileState->fileBaseName() + "Images";
+}
+
+void RichTextResourceManager::beginSavingResources()
+{
+    QDir imgDir = getImageDirectory();
+    imgDir.setFilter(QDir::Files);
+    presentFiles = imgDir.entryList();
+}
+
+void RichTextResourceManager::endSavingResources()
+{
+    QDir imgDir = getImageDirectory();
+    foreach(QString file, presentFiles)
+        imgDir.remove(file);
+
+    presentFiles.clear();
+}
+
+QDir RichTextResourceManager::getImageDirectory() const
+{
+    return QDir(fileState->dir().absolutePath() + "/" + imageFolderName());
 }
 
 QString RichTextResourceManager::getUniqueName(const QString &path)
@@ -106,8 +129,6 @@ QStringList RichTextResourceManager::extractFileNames(const QString &html)
     int stop = 0;
 
     QString marker = QString("./%1/").arg(imageFolderName());
-
-    qDebug() << "Looking for: " << marker;
 
     QStringList fileList;
 

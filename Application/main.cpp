@@ -35,7 +35,8 @@ int main(int argc, char *argv[])
 
     TextDocumentSerializer *serializer = new TextDocumentSerializer(docResourcesManager);
     ProjectFileWriter *writer = new ProjectFileWriter(new QXmlStreamWriter(),
-                                                      serializer);
+                                                      serializer,
+                                                      docResourcesManager);
 
     QMessageBoxProvider *fileControllerMsg = new QMessageBoxProvider();
 

@@ -6,6 +6,7 @@
 #include "preventiveactionmodel.h"
 #include "qfileadapter.h"
 #include "textdocumentserializer.h"
+#include "richtextresourcemanager.h"
 #include <QString>
 #include <QXmlStreamWriter>
 
@@ -15,7 +16,8 @@ class ProjectFileWriter
 {
 public:
     ProjectFileWriter(QXmlStreamWriter *xml,
-                      TextDocumentSerializer *serializer);
+                      TextDocumentSerializer *serializer,
+                      RichTextResourceManager *resourceManger);
     virtual ~ProjectFileWriter();
 
     virtual void save(ProjectFileController *fileController, QFileAdapter *file);
@@ -28,6 +30,7 @@ private:
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     QFileAdapter *file;
+    RichTextResourceManager *resourceManger;
 
     void writeProgrammingLanguage();
     void writeSourceDirectories();
