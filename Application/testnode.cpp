@@ -27,7 +27,7 @@ void TestNode::setTestName(const QString &s)
 
 void TestNode::appendToShortDescription(const QString &s)
 {
-    shortDescription += s;
+    shortDescription += QString(" %1").arg(s);
 }
 
 void TestNode::appendToPreparation(const QString &s)
