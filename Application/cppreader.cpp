@@ -41,7 +41,7 @@ SourceCodeModel *CppReader::parseSourceCode(DirectoryListModel *sourceDirs,
     return model;
 }
 
-QStringList CppReader::readFiles() const
+QStringList CppReader::getFilePaths() const
 {
     return headerFiles + testFiles;
 }
@@ -59,10 +59,12 @@ void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)
 
 void CppReader::parseSourceFilesInDirectory(const QString &dirPath)
 {
-    headerFiles = listHeaderFiles(dirPath);
+    QStringList filesInCurrentDir = listHeaderFiles(dirPath);
 
-    foreach(QString filePath, headerFiles)
+    foreach(QString filePath, filesInCurrentDir)
         extractClassesFromFile(filePath);
+
+    headerFiles += filesInCurrentDir;
 }
 
 QStringList CppReader::listHeaderFiles(const QString &dirPath)
@@ -228,10 +230,12 @@ void CppReader::readTestSpecification(DirectoryListModel *testDirs)
 
 void CppReader::parseTestFilesInDirectory(const QString &dirPath)
 {
-    testFiles = listCppFiles(dirPath);
+    QStringList fileInCurrentDir = listCppFiles(dirPath);
 
-    foreach(QString filePath, testFiles)
+    foreach(QString filePath, fileInCurrentDir)
         extractTestsFromFile(filePath);
+
+    testFiles += fileInCurrentDir;
 }
 
 QStringList CppReader::listCppFiles(const QString &dirPath)

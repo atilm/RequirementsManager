@@ -89,7 +89,7 @@ void SourceCodeController::parseProjectCode()
         model = reader->parseSourceCode(project->sourceDirModel(),
                                         project->testDirModel());
 
-        fileWatcher->addPaths(reader->readFiles());
+        fileWatcher->addPaths(reader->getFilePaths());
         connect(fileWatcher, SIGNAL(fileChanged(QString)),
                 this, SLOT(handleFileChanged()));
 

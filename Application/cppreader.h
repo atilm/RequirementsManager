@@ -17,7 +17,7 @@ public:
     virtual QString language() const;
     virtual SourceCodeModel* parseSourceCode(DirectoryListModel *sourceDirs,
                                              DirectoryListModel *testDirs);
-    virtual QStringList readFiles() const;
+    virtual QStringList getFilePaths() const;
 
 private:
     SourceCodeModel *model;

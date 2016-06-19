@@ -14,7 +14,7 @@ public:
     virtual QString language() const = 0;
     virtual SourceCodeModel* parseSourceCode(DirectoryListModel *sourceDirs,
                                              DirectoryListModel *testDirs) = 0;
-    virtual QStringList readFiles() const = 0;
+    virtual QStringList getFilePaths() const = 0;
 };
 
 #endif // ISOURCECODEREADER_H
