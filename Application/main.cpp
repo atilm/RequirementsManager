@@ -11,12 +11,12 @@ int main(int argc, char *argv[])
     FileStateTracker *fileState = new FileStateTracker();
     RichTextResourceManager *docResourcesManager = new RichTextResourceManager(fileState);
 
-    AttributeContext *attributeContext = new AttributeContext();
+    AttributeContext *attributeContext = new AttributeContext(fileState);
     AttributeContainerFactory *attributes = new AttributeContainerFactory(attributeContext);
 
     UniqueIDManager *idManager = new UniqueIDManager();
 
-    LinkContext *linkContext = new LinkContext();
+    LinkContext *linkContext = new LinkContext(fileState);
     LinkContainerFactory *links = new LinkContainerFactory(linkContext, idManager);
 
     RichTextController *richText = new RichTextController();

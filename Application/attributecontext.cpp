@@ -1,8 +1,9 @@
 #include "attributecontext.h"
 #include <QDebug>
 
-AttributeContext::AttributeContext()
+AttributeContext::AttributeContext(FileStateTracker *fileState)
 {
+    this->fileState = fileState;
     booleanTypeString = tr("Boolean");
     textTypeString = tr("Text");
 }
@@ -70,6 +71,7 @@ void AttributeContext::addAttribute(const QString &name, DataType type)
     attributes.append(a);
     endInsertRows();
 
+    fileState->setChanged(true);
     emit attributeAboutToBeInserted(attributes.size() - 1);
     emit newAttribute(attributes.size() - 1);
     emit attributeInserted();
@@ -91,6 +93,7 @@ void AttributeContext::removeAttribute(int row)
     attributes.remove(row);
     endRemoveRows();
 
+    fileState->setChanged(true);
     emit attributeAboutToBeRemoved(row);
     emit removedAttribute(row);
     emit attributeRemoved();

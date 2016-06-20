@@ -3,12 +3,13 @@
 
 #include <QAbstractListModel>
 #include <QVector>
+#include "filestatetracker.h"
 
 class LinkContext : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit LinkContext(QObject *parent = 0);
+    explicit LinkContext(FileStateTracker *fileState, QObject *parent = 0);
     virtual ~LinkContext();
 
     virtual void clear();
@@ -29,6 +30,7 @@ signals:
 public slots:
 
 private:
+    FileStateTracker *fileState;
     QVector<QString> linkTypes;
 
     bool isValidIndex(int index) const;

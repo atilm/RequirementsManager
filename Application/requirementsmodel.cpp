@@ -134,9 +134,11 @@ bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value,
 
     switch(role){
     case Qt::EditRole:
-        dataSet =  dataMapper->setEditRole(value, requirement, column);
+        dataSet = dataMapper->setEditRole(value, requirement, column);
+        break;
     case Qt::CheckStateRole:
-        dataSet =  dataMapper->setCheckStateRole(value, requirement, column);
+        dataSet = dataMapper->setCheckStateRole(value, requirement, column);
+        break;
     }
 
     if(dataSet){
@@ -153,6 +155,7 @@ void RequirementsModel::setType(const QModelIndex &index, Requirement::Type type
         return;
 
     asRequirement(index)->setType(type);
+    fileState->setChanged(true);
 }
 
 Requirement::Type RequirementsModel::getType(const QModelIndex &index) const

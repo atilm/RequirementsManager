@@ -3,6 +3,7 @@
 
 #include <QAbstractTableModel>
 #include <QVector>
+#include "filestatetracker.h"
 
 class AttributeContext : public QAbstractTableModel
 {
@@ -20,7 +21,7 @@ public:
         DataType type;
     };
 
-    AttributeContext();
+    AttributeContext(FileStateTracker *fileState);
     virtual ~AttributeContext();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -46,6 +47,7 @@ signals:
     void attributeRemoved();
 
 private:
+    FileStateTracker *fileState;
     QString booleanTypeString;
     QString textTypeString;
     QVector<Attribute> attributes;

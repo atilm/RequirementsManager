@@ -1,8 +1,9 @@
 #include "linkcontext.h"
 
-LinkContext::LinkContext(QObject *parent) :
+LinkContext::LinkContext(FileStateTracker *fileState, QObject *parent) :
     QAbstractListModel(parent)
 {
+    this->fileState = fileState;
 }
 
 LinkContext::~LinkContext()
@@ -49,6 +50,8 @@ void LinkContext::addLinkType(const QString &name)
     beginInsertRows(QModelIndex(), linkTypes.size(), linkTypes.size());
     linkTypes.append(name);
     endInsertRows();
+
+    fileState->setChanged(true);
     emit newLinkType(linkTypes.count()-1);
 }
 
@@ -60,6 +63,8 @@ void LinkContext::removeLinkType(const QModelIndex &index)
     beginRemoveRows(QModelIndex(), index.row(), index.row());
     linkTypes.remove(index.row());
     endRemoveRows();
+
+    fileState->setChanged(true);
     emit linkTypeRemoved(index.row());
 }
 
@@ -69,6 +74,8 @@ void LinkContext::renameLinkType(const QModelIndex &index, const QString &newNam
         return;
 
     linkTypes[index.row()] = newName;
+
+    fileState->setChanged(true);
     emit dataChanged(index, index);
 }
 
