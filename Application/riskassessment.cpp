@@ -79,3 +79,8 @@ PreventiveActionModel *RiskAssessment::getPreventiveActions()
 {
     return preventiveActions;
 }
+
+int RiskAssessment::preventiveActionCount() const
+{
+    return preventiveActions->rowCount();
+}

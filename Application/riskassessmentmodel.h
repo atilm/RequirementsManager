@@ -29,10 +29,14 @@ public:
 
     virtual PreventiveActionModel* getPreventiveActions(const QModelIndex &index);
 
+private slots:
+    void handleTestModelChanged();
+
 private:
     FileStateTracker *fileState;
     RiskAssessmentFactory *factory;
     QVector<RiskAssessment*> assessments;
+
 };
 
 #endif // RISKASSESSMENTMODEL_H

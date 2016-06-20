@@ -27,6 +27,7 @@ public:
     virtual RiskModel* finalRiskModel() const;
 
     virtual PreventiveActionModel* getPreventiveActions();
+    virtual int preventiveActionCount() const;
 
 private:
     FileStateTracker *fileState;

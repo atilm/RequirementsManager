@@ -1,4 +1,5 @@
 #include "riskassessmenteditcontroller.h"
+#include <QMessageBox>
 
 RiskAssessmentEditController::RiskAssessmentEditController(RiskAssessmentDialog *dialog, PreventiveActionDialog *actionDialog) :
     QObject(0)
@@ -167,8 +168,15 @@ void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index
     if(!actionModel)
         return;
 
-    actionDialog->exec(index);
-    descriptionView->displayAction(actionModel->getAction(actionView->currentIndex()));
+    PreventiveAction *action = actionModel->getAction(actionView->currentIndex());
+
+    if(action->isReference())
+        QMessageBox::information(0, tr("Edit preventive action"),
+                                 tr("References to automated tests are not editable."));
+    else{
+        actionDialog->exec(index);
+        descriptionView->displayAction(action);
+    }
 }
 
 void RiskAssessmentEditController::actionClicked(const QModelIndex &index)

@@ -26,6 +26,8 @@ QVariant RiskAssessmentModel::headerData(int section, Qt::Orientation orientatio
             return tr("Initial Risk");
         else if(section == 2)
             return tr("Final Risk");
+        else if(section == 3)
+            return tr("Tests");
     }
 
     return QVariant();
@@ -38,7 +40,7 @@ int RiskAssessmentModel::rowCount(const QModelIndex &parent) const
 
 int RiskAssessmentModel::columnCount(const QModelIndex &parent) const
 {
-    return 3;
+    return 4;
 }
 
 QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
@@ -55,6 +57,10 @@ QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
             return a->initialRisk(role);
         case 2:
             return a->finalRisk(role);
+        case 3:
+            if(role == Qt::DisplayRole)
+                return a->preventiveActionCount();
+            break;
         }
     }
 
@@ -74,8 +80,14 @@ void RiskAssessmentModel::add(int beforeRowIndex)
     if(beforeRowIndex >= 0 && beforeRowIndex <= rowCount())
         beforeRow = beforeRowIndex;
 
+    RiskAssessment *assessment = factory->newAssessment();
+    connect(assessment->getPreventiveActions(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+            this, SLOT(handleTestModelChanged()));
+    connect(assessment->getPreventiveActions(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
+            this, SLOT(handleTestModelChanged()));
+
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
-    assessments.insert(beforeRow, factory->newAssessment());
+    assessments.insert(beforeRow, assessment);
     endInsertRows();
     fileState->setChanged(true);
 }
@@ -86,6 +98,7 @@ void RiskAssessmentModel::remove(const QModelIndex &index)
         return;
 
     beginRemoveRows(QModelIndex(), index.row(), index.row());
+    delete assessments[index.row()];
     assessments.remove(index.row());
     endRemoveRows();
     fileState->setChanged(true);
@@ -105,5 +118,10 @@ PreventiveActionModel *RiskAssessmentModel::getPreventiveActions(const QModelInd
         throw runtime_error("Invalid risk assessment index");
 
     return assessments[index.row()]->getPreventiveActions();
+}
+
+void RiskAssessmentModel::handleTestModelChanged()
+{
+    emit dataChanged(index(0, 3), index(rowCount()-1, 3));
 }
 
