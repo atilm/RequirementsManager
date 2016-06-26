@@ -3,6 +3,7 @@
 #include "cppreader.h"
 #include "preventiveactionfactory.h"
 #include "riskscenariotextedit.h"
+#include "testnamelineedit.h"
 
 int main(int argc, char *argv[])
 {
@@ -63,8 +64,8 @@ int main(int argc, char *argv[])
                                                               new RiskAssessmentTable());
 
     PreventiveActionDialog *paDialog = new PreventiveActionDialog();
-    paDialog->injectWidgets(new QLineEditAdapter(),
-                            new QLineEditAdapter(),
+    paDialog->injectWidgets(new TestNameLineEdit(),
+                            new TestNameLineEdit(),
                             new QLineEditAdapter(),
                             new QPlainTextEditAdapter(),
                             new QPlainTextEditAdapter(),
