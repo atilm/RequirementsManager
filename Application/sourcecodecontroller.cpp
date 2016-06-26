@@ -196,7 +196,7 @@ void SourceCodeController::handleFileChanged()
 
     handlingFile = true;
     QMessageBox::StandardButton answer = QMessageBox::question(0, tr("Source file changed"),
-                                                               tr("Reaload the source files now?"));
+                                                               tr("Reload the source files now?"));
 
     if(answer == QMessageBox::Yes){
         parseProjectCode();
