@@ -61,6 +61,7 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
+    connect(ui->actionNewFile, SIGNAL(triggered()), fileController, SLOT(newFile()));
     connect(ui->actionReport, SIGNAL(triggered()), reportController, SLOT(generateReport()));
     connect(fileState, SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
     connect(fileState, SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));

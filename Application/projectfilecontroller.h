@@ -49,6 +49,7 @@ public slots:
     virtual void save();
     virtual void saveAs();
     virtual void load();
+    virtual void newFile();
 
     void askSaveUnsavedChanges();
 

@@ -15,5 +15,6 @@
         <file>Resources/system-settings.ico</file>
         <file>Resources/edit-rename.ico</file>
         <file>Resources/report.ico</file>
+        <file>Resources/filenew.png</file>
     </qresource>
 </RCC>

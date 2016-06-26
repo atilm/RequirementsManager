@@ -133,6 +133,18 @@ void ProjectFileController::load()
     }
 }
 
+void ProjectFileController::newFile()
+{
+    askSaveUnsavedChanges();
+    model->clearModel();
+    projectFile->setFileName(QString());
+    stateTracker->setFilePath(QString());
+    stateTracker->setChanged(false);
+    sourceDirModel()->clear();
+    testDirModel()->clear();
+    emit fileLoaded();
+}
+
 void ProjectFileController::askSaveUnsavedChanges()
 {
     if(stateTracker->unsavedChanges()){

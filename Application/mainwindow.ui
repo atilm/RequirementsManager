@@ -306,6 +306,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNewFile"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
@@ -539,6 +540,15 @@
    </property>
    <property name="toolTip">
     <string>Generate Report</string>
+   </property>
+  </action>
+  <action name="actionNewFile">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Resources/filenew.png</normaloff>:/icons/Resources/filenew.png</iconset>
+   </property>
+   <property name="text">
+    <string>New File</string>
    </property>
   </action>
  </widget>
