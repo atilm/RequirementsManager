@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "cppreader.h"
 #include "preventiveactionfactory.h"
+#include "riskscenariotextedit.h"
 
 int main(int argc, char *argv[])
 {
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
     HtmlGenerator *displayHtml = new HtmlGenerator(new HtmlTemplateFactory());
     RiskDescriptionView *riskDescriptionView = new RiskDescriptionView(displayHtml);
 
-    RiskAssessmentDialog *raDialog = new RiskAssessmentDialog(new QPlainTextEditAdapter(),
+    RiskAssessmentDialog *raDialog = new RiskAssessmentDialog(new RiskScenarioTextEdit(),
                                                               new QPlainTextEditAdapter(),
                                                               new RiskAssessmentTable(),
                                                               new RiskAssessmentTable());

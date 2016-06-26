@@ -79,7 +79,8 @@ SOURCES += main.cpp\
     reportgenerator.cpp \
     reportcontroller.cpp \
     htmlreportgenerator.cpp \
-    reportgeneratorfactory.cpp
+    reportgeneratorfactory.cpp \
+    riskscenariotextedit.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -143,7 +144,8 @@ HEADERS  += mainwindow.h \
     reportgenerator.h \
     reportcontroller.h \
     htmlreportgenerator.h \
-    reportgeneratorfactory.h
+    reportgeneratorfactory.h \
+    riskscenariotextedit.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
