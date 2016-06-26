@@ -48,8 +48,12 @@ void RequirementsView::appendChild(Requirement *item)
 {
     QModelIndex newIdx = requirementsModel()->insertChild(item, selectionModel()->currentIndex(), -1);
 
-    if(newIdx.isValid())
-        selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    if(newIdx.isValid()){
+        setExpanded(selectionModel()->currentIndex(), true);
+
+        if(!item->isReference())
+            selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    }
 }
 
 void RequirementsView::removeCurrent()
