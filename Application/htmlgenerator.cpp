@@ -122,7 +122,7 @@ QString HtmlGenerator::toHtml(const QString &markupText, HeaderType headingType)
             line = trimmed;
 
         line = line.replace("->", "&#8658;");
-        line = line.replace("\\returns", "<b>Returns: </b>");
+        line = line.replace("\\return", "<b>Returns: </b>");
         line = line.replace("\\throws", "<b>Throws: </b>");
         line = line.replace("\\todo", "<b>To Do: </b>");
         line = line.replace("\\note", "<b>Note: </b>");

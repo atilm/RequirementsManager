@@ -14,6 +14,10 @@ public:
               QTextStreamAdapter *inStream);
     virtual ~CppReader();
 
+    /*! Get the reader's programming language name
+
+     \return A QString, representing the programming language.
+     */
     virtual QString language() const;
     virtual SourceCodeModel* parseSourceCode(DirectoryListModel *sourceDirs,
                                              DirectoryListModel *testDirs);
