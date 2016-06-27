@@ -102,54 +102,6 @@
                 <Attribute index="0" value="no"/>
             </Requirement>
         </Requirement>
-        <Requirement id="23" type="UserRequirement" name="Saving and Loading of Projects">
-            <description><![CDATA[All information edited in the software can be saved to file and loaded again. ]]></description>
-            <Attribute index="0" value="yes"/>
-            <Requirement id="24" type="FunctionalRequirement" name="Display of unsaved changes">
-                <description><![CDATA[]]></description>
-                <Attribute index="0" value="no"/>
-            </Requirement>
-            <Requirement id="25" type="FunctionalRequirement" name="Load">
-                <description><![CDATA[]]></description>
-                <Attribute index="0" value="no"/>
-            </Requirement>
-            <Requirement id="26" type="FunctionalRequirement" name="Save">
-                <description><![CDATA[]]></description>
-                <Attribute index="0" value="no"/>
-            </Requirement>
-            <Requirement id="27" type="FunctionalRequirement" name="Save As">
-                <description><![CDATA[]]></description>
-                <Attribute index="0" value="no"/>
-            </Requirement>
-            <Requirement id="28" type="FunctionalRequirement" name="Storage format">
-                <description><![CDATA[The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file. ]]></description>
-                <Attribute index="0" value="no"/>
-                <Requirement id="29" type="DesignRequirement" name="Requirement storage">
-                    <description><![CDATA[]]></description>
-                    <Attribute index="0" value="no"/>
-                </Requirement>
-                <Requirement id="30" type="DesignRequirement" name="Attribute storage">
-                    <description><![CDATA[]]></description>
-                    <Attribute index="0" value="no"/>
-                </Requirement>
-                <Requirement id="31" type="DesignRequirement" name="Rich Text storage">
-                    <description><![CDATA[]]></description>
-                    <Attribute index="0" value="no"/>
-                </Requirement>
-                <Requirement id="32" type="DesignRequirement" name="Image storage">
-                    <description><![CDATA[]]></description>
-                    <Attribute index="0" value="no"/>
-                </Requirement>
-            </Requirement>
-        </Requirement>
-        <Requirement id="33" type="UserRequirement" name="Exporting Reports">
-            <description><![CDATA[The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul>]]></description>
-            <Attribute index="0" value="no"/>
-        </Requirement>
-        <Requirement id="34" type="UserRequirement" name="Digital Signatures">
-            <description><![CDATA[Project files and/or exported reports can be digitally signed and signatures can be veryfied using the Requirements Manager or an additional tool. ]]></description>
-            <Attribute index="0" value="no"/>
-        </Requirement>
         <Requirement id="35" type="UserRequirement" name="Attributes">
             <description><![CDATA[For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties <ul><li>name</li><li>data type</li><li>value</li><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
@@ -286,8 +238,48 @@
                 <Attribute index="0" value="no"/>
             </Requirement>
         </Requirement>
-        <Requirement id="47" type="UserRequirement" name="Full-Text Search">
-            <description><![CDATA[The user can perform a full text search in the requirements document. ]]></description>
+        <Requirement id="23" type="UserRequirement" name="Saving and Loading of Projects">
+            <description><![CDATA[All information edited in the software can be saved to file and loaded again. ]]></description>
+            <Attribute index="0" value="yes"/>
+            <Requirement id="24" type="FunctionalRequirement" name="Display of unsaved changes">
+                <description><![CDATA[]]></description>
+                <Attribute index="0" value="no"/>
+            </Requirement>
+            <Requirement id="25" type="FunctionalRequirement" name="Load">
+                <description><![CDATA[]]></description>
+                <Attribute index="0" value="no"/>
+            </Requirement>
+            <Requirement id="26" type="FunctionalRequirement" name="Save">
+                <description><![CDATA[]]></description>
+                <Attribute index="0" value="no"/>
+            </Requirement>
+            <Requirement id="27" type="FunctionalRequirement" name="Save As">
+                <description><![CDATA[]]></description>
+                <Attribute index="0" value="no"/>
+            </Requirement>
+            <Requirement id="28" type="FunctionalRequirement" name="Storage format">
+                <description><![CDATA[The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file. ]]></description>
+                <Attribute index="0" value="no"/>
+                <Requirement id="29" type="DesignRequirement" name="Requirement storage">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+                <Requirement id="30" type="DesignRequirement" name="Attribute storage">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+                <Requirement id="31" type="DesignRequirement" name="Rich Text storage">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+                <Requirement id="32" type="DesignRequirement" name="Image storage">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+            </Requirement>
+        </Requirement>
+        <Requirement id="33" type="UserRequirement" name="Exporting Reports">
+            <description><![CDATA[The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul>]]></description>
             <Attribute index="0" value="no"/>
         </Requirement>
     </RequirementSpecification>

@@ -109,8 +109,6 @@ void SourceCodeModel::appendTest(SourceAddress address, SourceNode *testNode)
             return;
         }
     }
-
-    orphanTests.append(testNode);
 }
 
 void SourceCodeModel::insertTestIntoClass(const QModelIndex &classIndex,
@@ -127,8 +125,6 @@ void SourceCodeModel::insertTestIntoClass(const QModelIndex &classIndex,
             return;
         }
     }
-
-    orphanTests.append(testNode);
 }
 
 void SourceCodeModel::insertTestIntoFunction(const QModelIndex &functionIndex,

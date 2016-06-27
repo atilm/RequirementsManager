@@ -77,20 +77,33 @@ void DescriptionView::insertImage()
 void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &previous)
 {
     try{
-        setDocument(data->getDescription(current));
+        Requirement *req = data->getRequirement(current);
+
+        setDocument(req->getDescription());
+
+        if(req->isReference())
+            setReadOnly(true);
+        else
+            setReadOnly(false);
 
         setEnabled(true);
-        setReadOnly(false);
     }
     catch(...){
         setDocument(defaultDocument);
         setDisabled(true);
+        emit readOnlyToggled(true);
     }
 }
 
 void DescriptionView::showItem(const QModelIndex &index)
 {
     switchItem(index, QModelIndex());
+}
+
+void DescriptionView::setReadOnly(bool on)
+{
+    QTextEdit::setReadOnly(on);
+    emit readOnlyToggled(on);
 }
 
 void DescriptionView::mouseDoubleClickEvent(QMouseEvent *e)

@@ -23,6 +23,7 @@ void RichTextController::setBoldAction(QAction *boldAction)
     this->boldAction = boldAction;
     boldAction->setCheckable(true);
     connect(boldAction, SIGNAL(toggled(bool)), this, SLOT(handleBoldToggled(bool)));
+    connect(edit, SIGNAL(readOnlyToggled(bool)), boldAction, SLOT(setDisabled(bool)));
 }
 
 void RichTextController::setItalicAction(QAction *italicAction)
@@ -30,6 +31,7 @@ void RichTextController::setItalicAction(QAction *italicAction)
     this->italicAction = italicAction;
     italicAction->setCheckable(true);
     connect(italicAction, SIGNAL(toggled(bool)), this, SLOT(handleItalicToggled(bool)));
+    connect(edit, SIGNAL(readOnlyToggled(bool)), italicAction, SLOT(setDisabled(bool)));
 }
 
 void RichTextController::setCodeAction(QAction *codeAction)
@@ -37,6 +39,7 @@ void RichTextController::setCodeAction(QAction *codeAction)
     this->codeAction = codeAction;
     codeAction->setCheckable(true);
     connect(codeAction, SIGNAL(toggled(bool)), this, SLOT(handleCodeToggled(bool)));
+    connect(edit, SIGNAL(readOnlyToggled(bool)), codeAction, SLOT(setDisabled(bool)));
 }
 
 void RichTextController::setBulletAction(QAction *bulletAction)
@@ -44,12 +47,14 @@ void RichTextController::setBulletAction(QAction *bulletAction)
     this->bulletAction = bulletAction;
     bulletAction->setCheckable(true);
     connect(bulletAction, SIGNAL(toggled(bool)), this, SLOT(handleBulletToggled(bool)));
+    connect(edit, SIGNAL(readOnlyToggled(bool)), bulletAction, SLOT(setDisabled(bool)));
 }
 
 void RichTextController::setInsertImageAction(QAction *imageAction)
 {
     this->imageAction = imageAction;
     connect(imageAction, SIGNAL(triggered(bool)), this, SLOT(handleInsertImage()));
+    connect(edit, SIGNAL(readOnlyToggled(bool)), imageAction, SLOT(setDisabled(bool)));
 }
 
 void RichTextController::handleBoldToggled(bool on)

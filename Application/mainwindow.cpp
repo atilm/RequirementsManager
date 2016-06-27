@@ -46,12 +46,6 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
 
     this->richText = richText;
 
-    richText->setItalicAction(ui->actionItalic);
-    richText->setBoldAction(ui->actionBold);
-    richText->setCodeAction(ui->actionCode);
-    richText->setBulletAction(ui->actionBulletList);
-    richText->setInsertImageAction(ui->actionInsertImage);
-
     this->reportController = reportController;
     reportController->setModel(requirements );
 
@@ -109,6 +103,12 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
     ui->splitter->insertWidget(1, descriptionView);
 
     richText->setTextEdit(descriptionView);
+    richText->setItalicAction(ui->actionItalic);
+    richText->setBoldAction(ui->actionBold);
+    richText->setCodeAction(ui->actionCode);
+    richText->setBulletAction(ui->actionBulletList);
+    richText->setInsertImageAction(ui->actionInsertImage);
+    descriptionView->setReadOnly(true);
 
     connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));

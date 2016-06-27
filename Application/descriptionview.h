@@ -22,12 +22,14 @@ public:
     void insertFromMimeData(const QMimeData* source);
 
 signals:
+    void readOnlyToggled(bool);
 
 public slots:
 
     void insertImage();
     void switchItem(const QModelIndex &current, const QModelIndex &previous);
     void showItem(const QModelIndex &index);
+    void setReadOnly(bool on);
 
 protected:
     RichTextResourceManager *resourcesManager;

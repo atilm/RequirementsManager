@@ -335,6 +335,7 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionSaveAs"/>
+   <addaction name="actionReport"/>
    <addaction name="actionAddSibling"/>
    <addaction name="actionAddChild"/>
    <addaction name="actionRemoveRequirement"/>
@@ -343,7 +344,6 @@
    <addaction name="actionCode"/>
    <addaction name="actionBulletList"/>
    <addaction name="actionInsertImage"/>
-   <addaction name="actionReport"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">

@@ -55,8 +55,6 @@ public:
 private:
     SourceNode *root;
 
-    QVector<SourceNode*> orphanTests;
-
     SourceNode *asSourceNode(const QModelIndex &index) const;
     SourceNode *getValidItem(const QModelIndex &index) const;
     QModelIndex indexOf(SourceAddress address) const;
