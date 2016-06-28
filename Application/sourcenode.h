@@ -17,6 +17,7 @@ public:
 
     virtual int childCount() const;
     virtual SourceNode *getChild(int index) const;
+    virtual void insertChild(uint index, SourceNode *child);
     virtual void appendChild(SourceNode *child);
     virtual void setParent(SourceNode *parent);
     virtual SourceNode *getParent() const;

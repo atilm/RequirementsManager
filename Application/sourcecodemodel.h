@@ -35,6 +35,9 @@ public:
                                 int role = Qt::DisplayRole) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
+    virtual QModelIndex insertClassAlphabetically(SourceNode *node);
+    virtual QModelIndex insertFunctionAlphabetically(const QModelIndex &classIndex,
+                                                     SourceNode *functionNode);
     virtual QModelIndex appendClass(SourceNode *node);
     virtual QModelIndex appendFunction(const QModelIndex &classIndex,
                                        SourceNode *functionNode);
@@ -62,6 +65,8 @@ private:
                               SourceAddress address) const;
     QModelIndex testIndex(const QModelIndex &functionIndex,
                           SourceAddress address) const;
+    int getAlphabeticalInsertionIndex(SourceNode *parent,
+                                      SourceNode *node);
 };
 
 #endif // SOURCECODEMODEL_H

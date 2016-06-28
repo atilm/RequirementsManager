@@ -75,6 +75,30 @@ Qt::ItemFlags SourceCodeModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
+QModelIndex SourceCodeModel::insertClassAlphabetically(SourceNode *node)
+{
+    int insertIndex = getAlphabeticalInsertionIndex(root, node);
+
+    beginInsertRows(QModelIndex(), insertIndex, insertIndex);
+    root->insertChild(insertIndex, node);
+    endInsertRows();
+
+    return index(insertIndex, 0);
+}
+
+QModelIndex SourceCodeModel::insertFunctionAlphabetically(const QModelIndex &classIndex,
+                                                          SourceNode *functionNode)
+{
+    SourceNode *classNode = asSourceNode(classIndex);
+    int insertIndex = getAlphabeticalInsertionIndex(classNode, functionNode);
+
+    beginInsertRows(classIndex, insertIndex, insertIndex);
+    classNode->insertChild(insertIndex, functionNode);
+    endInsertRows();
+
+    return index(insertIndex, 0, classIndex);
+}
+
 QModelIndex SourceCodeModel::appendClass(SourceNode *node)
 {
     int rowIdx = root->childCount();
@@ -269,5 +293,18 @@ QModelIndex SourceCodeModel::testIndex(const QModelIndex &functionIndex,
     }
 
     return QModelIndex();
+}
+
+int SourceCodeModel::getAlphabeticalInsertionIndex(SourceNode *parent,
+                                                    SourceNode *node)
+{
+    int c;
+
+    for(c=0;c<parent->childCount();c++){
+        if(node->getName() < parent->getChild(c)->getName())
+            break;
+    }
+
+    return c;
 }
 

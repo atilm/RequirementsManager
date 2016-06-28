@@ -48,6 +48,16 @@ SourceNode *SourceNode::getChild(int index) const
         throw runtime_error("Invalid SourceNode child index");
 }
 
+void SourceNode::insertChild(uint index, SourceNode *child)
+{
+    if(index >= 0 && index <= children.count()){
+        child->setParent(this);
+        children.insert(index, child);
+    }
+    else
+        throw runtime_error("Invalid SourceNode child insertion index");
+}
+
 void SourceNode::appendChild(SourceNode *child)
 {
     child->setParent(this);

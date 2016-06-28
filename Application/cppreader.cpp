@@ -140,7 +140,7 @@ void CppReader::parseClass()
     classNode->setDescription(lineBuffer);
     lineBuffer.clear();
 
-    QModelIndex classIdx = model->appendClass(classNode);
+    QModelIndex classIdx = model->insertClassAlphabetically(classNode);
 
     while(!atClassEnd()){
         nextLine();
@@ -194,7 +194,7 @@ void CppReader::parseFunction(QModelIndex classIndex)
     functionNode->setDescription(lineBuffer);
     lineBuffer.clear();
 
-    model->appendFunction(classIndex, functionNode);
+    model->insertFunctionAlphabetically(classIndex, functionNode);
 }
 
 QString CppReader::extractFunctionName()
