@@ -77,7 +77,7 @@ Qt::ItemFlags SourceCodeModel::flags(const QModelIndex &index) const
 
 QModelIndex SourceCodeModel::insertClassAlphabetically(SourceNode *node)
 {
-    int insertIndex = getAlphabeticalInsertionIndex(root, node);
+    uint insertIndex = getAlphabeticalInsertionIndex(root, node);
 
     beginInsertRows(QModelIndex(), insertIndex, insertIndex);
     root->insertChild(insertIndex, node);
@@ -295,14 +295,18 @@ QModelIndex SourceCodeModel::testIndex(const QModelIndex &functionIndex,
     return QModelIndex();
 }
 
-int SourceCodeModel::getAlphabeticalInsertionIndex(SourceNode *parent,
+uint SourceCodeModel::getAlphabeticalInsertionIndex(SourceNode *parent,
                                                     SourceNode *node)
 {
-    int c = 0;
+    uint c = 0;
 
-    for(c=0;c<parent->childCount();c++){
-        if(node->getName() <= parent->getChild(c)->getName())
+    while(c < parent->childCount()){
+        int result = QString::localeAwareCompare(node->getName(),
+                                                 parent->getChild(c)->getName());
+        if(result <= 0)
             break;
+        else
+            c++;
     }
 
     return c;

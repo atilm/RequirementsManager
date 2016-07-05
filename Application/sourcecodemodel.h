@@ -65,8 +65,8 @@ private:
                               SourceAddress address) const;
     QModelIndex testIndex(const QModelIndex &functionIndex,
                           SourceAddress address) const;
-    int getAlphabeticalInsertionIndex(SourceNode *parent,
-                                      SourceNode *node);
+    uint getAlphabeticalInsertionIndex(SourceNode *parent,
+                                       SourceNode *node);
 };
 
 #endif // SOURCECODEMODEL_H
