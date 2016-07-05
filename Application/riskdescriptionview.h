@@ -18,7 +18,7 @@ public:
 
     virtual void displayTestReference(TestNode *test);
     virtual void displayAction(PreventiveAction *action);
-    virtual void displayRisk(RiskAssessment *risk);
+    virtual void displayRisk(shared_ptr<RiskAssessment> risk);
     virtual void clearDisplay();
 
 signals:

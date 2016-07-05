@@ -39,7 +39,7 @@ private:
     RiskAssessmentTable *initialRiskEdit;
     RiskAssessmentTable *finalRiskEdit;
     shared_ptr<RiskAssessmentModel> model;
-    RiskAssessment *currentRA;
+    shared_ptr<RiskAssessment> currentRA;
 
     void injectWidgets(QPlainTextEditAdapter *scenarioEdit,
                        QPlainTextEditAdapter *mitigationStrategyEdit,

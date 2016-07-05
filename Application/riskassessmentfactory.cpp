@@ -10,10 +10,11 @@ RiskAssessmentFactory::~RiskAssessmentFactory()
 
 }
 
-RiskAssessment *RiskAssessmentFactory::newAssessment()
+shared_ptr<RiskAssessment> RiskAssessmentFactory::newAssessment()
 {
-    return new RiskAssessment(fileState,
-                              new RiskModel(fileState),
-                              new RiskModel(fileState),
-                              new PreventiveActionModel(fileState));
+    return shared_ptr<RiskAssessment>(
+                make_shared<RiskAssessment>(fileState,
+                                            new RiskModel(fileState),
+                                            new RiskModel(fileState),
+                                            new PreventiveActionModel(fileState)));
 }

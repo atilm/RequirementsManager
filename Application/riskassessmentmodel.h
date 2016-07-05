@@ -21,11 +21,11 @@ public:
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
-    virtual RiskAssessment* appendAssessment();
+    virtual shared_ptr<RiskAssessment> appendAssessment();
     virtual void add(int beforeRowIndex);
     virtual void remove(const QModelIndex &index);
 
-    virtual RiskAssessment* getRiskAssessment(const QModelIndex &index);
+    virtual shared_ptr<RiskAssessment>  getRiskAssessment(const QModelIndex &index);
 
     virtual PreventiveActionModel* getPreventiveActions(const QModelIndex &index);
 
@@ -35,7 +35,7 @@ private slots:
 private:
     shared_ptr<FileStateTracker> fileState;
     RiskAssessmentFactory *factory;
-    QVector<RiskAssessment*> assessments;
+    QVector<shared_ptr<RiskAssessment> > assessments;
 
 };
 

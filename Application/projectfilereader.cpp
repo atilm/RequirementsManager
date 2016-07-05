@@ -227,7 +227,7 @@ void ProjectFileReader::parseRequirementsLink(QModelIndex itemIdx)
 void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
 {
     shared_ptr<RiskAssessmentModel> riskModel = model->getRiskAssessment(itemIdx);
-    RiskAssessment *ra = riskModel->appendAssessment();
+    shared_ptr<RiskAssessment> ra = riskModel->appendAssessment();
 
     int initialProbability = getAttribute("initialProbability").toInt();
     int initialDamage = getAttribute("initialDamage").toInt();
@@ -261,7 +261,7 @@ void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
     }
 }
 
-void ProjectFileReader::parseRiskScenario(RiskAssessment *ra)
+void ProjectFileReader::parseRiskScenario(shared_ptr<RiskAssessment> ra)
 {
     xml->readNext();
     if(xml->isCharacters()){
@@ -270,7 +270,7 @@ void ProjectFileReader::parseRiskScenario(RiskAssessment *ra)
     }
 }
 
-void ProjectFileReader::parseMitigationStrategy(RiskAssessment *ra)
+void ProjectFileReader::parseMitigationStrategy(shared_ptr<RiskAssessment> ra)
 {
     xml->readNext();
     if(xml->isCharacters()){
@@ -279,7 +279,7 @@ void ProjectFileReader::parseMitigationStrategy(RiskAssessment *ra)
     }
 }
 
-void ProjectFileReader::parsePreventiveAction(RiskAssessment *ra)
+void ProjectFileReader::parsePreventiveAction(shared_ptr<RiskAssessment> ra)
 {
     PreventiveActionModel *actionModel = ra->getPreventiveActions();
     PreventiveAction *action = actionModel->appendAction();
@@ -307,7 +307,7 @@ void ProjectFileReader::parsePreventiveAction(RiskAssessment *ra)
     }
 }
 
-void ProjectFileReader::parseTestReference(RiskAssessment *ra)
+void ProjectFileReader::parseTestReference(shared_ptr<RiskAssessment> ra)
 {
     PreventiveActionModel *actionModel = ra->getPreventiveActions();
 

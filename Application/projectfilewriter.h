@@ -51,7 +51,7 @@ private:
     void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
     void writeLinks(const QModelIndex &itemIdx);
     void writeRiskAssessmentModel(shared_ptr<RiskAssessmentModel> risks);
-    void writeRiskAssessment(RiskAssessment *risk);
+    void writeRiskAssessment(shared_ptr<RiskAssessment> risk);
     void writePreventiveActions(PreventiveActionModel *actions);
     void writePreventiveAction(PreventiveAction *action);
     void writeTestReference(PreventiveAction *action);

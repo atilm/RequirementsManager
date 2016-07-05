@@ -12,9 +12,6 @@ RiskAssessmentModel::RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
 RiskAssessmentModel::~RiskAssessmentModel()
 {
     delete factory;
-
-    foreach(RiskAssessment *ra, assessments)
-        delete ra;
 }
 
 QVariant RiskAssessmentModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -46,7 +43,7 @@ int RiskAssessmentModel::columnCount(const QModelIndex &parent) const
 QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
 {
     if(index.isValid()){
-        RiskAssessment *a = assessments[index.row()];
+        shared_ptr<RiskAssessment> a = assessments[index.row()];
 
         switch(index.column()){
         case 0:
@@ -67,7 +64,7 @@ QVariant RiskAssessmentModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-RiskAssessment *RiskAssessmentModel::appendAssessment()
+shared_ptr<RiskAssessment> RiskAssessmentModel::appendAssessment()
 {
     add(rowCount());
     return getRiskAssessment(index(rowCount()-1,0));
@@ -80,7 +77,7 @@ void RiskAssessmentModel::add(int beforeRowIndex)
     if(beforeRowIndex >= 0 && beforeRowIndex <= rowCount())
         beforeRow = beforeRowIndex;
 
-    RiskAssessment *assessment = factory->newAssessment();
+    shared_ptr<RiskAssessment> assessment = factory->newAssessment();
     connect(assessment->getPreventiveActions(), SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(handleTestModelChanged()));
     connect(assessment->getPreventiveActions(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
@@ -98,13 +95,12 @@ void RiskAssessmentModel::remove(const QModelIndex &index)
         return;
 
     beginRemoveRows(QModelIndex(), index.row(), index.row());
-    delete assessments[index.row()];
     assessments.remove(index.row());
     endRemoveRows();
     fileState->setChanged(true);
 }
 
-RiskAssessment *RiskAssessmentModel::getRiskAssessment(const QModelIndex &index)
+shared_ptr<RiskAssessment> RiskAssessmentModel::getRiskAssessment(const QModelIndex &index)
 {
     if(!index.isValid())
         throw runtime_error("Invalid risk assessment index");

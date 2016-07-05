@@ -231,7 +231,7 @@ void ProjectFileWriter::writeRiskAssessmentModel(shared_ptr<RiskAssessmentModel>
         writeRiskAssessment(risks->getRiskAssessment(risks->index(r,0)));
 }
 
-void ProjectFileWriter::writeRiskAssessment(RiskAssessment *risk)
+void ProjectFileWriter::writeRiskAssessment(shared_ptr<RiskAssessment> risk)
 {
     xml->writeStartElement("RiskAssessment");
     xml->writeAttribute("initialProbability",

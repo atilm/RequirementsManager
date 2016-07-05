@@ -51,7 +51,7 @@ private:
     QString getRARows(Requirement* req);
     QString buildTPSection(const QModelIndex &index);
     QString getTPRows(Requirement *req);
-    QString getTestPlan(RiskAssessment *ra, const QString &raNumber);
+    QString getTestPlan(shared_ptr<RiskAssessment> ra, const QString &raNumber);
 
     QString sectionHeader(const QString &number, const QString &section, const QString &previousSection, int rowSpan, int colSpan, const QString &content);
     QString idString(const QString &s, const QString &section);

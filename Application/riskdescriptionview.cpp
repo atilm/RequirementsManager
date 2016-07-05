@@ -26,7 +26,7 @@ void RiskDescriptionView::displayAction(PreventiveAction *action)
     document()->setHtml(html->toHtml(*action));
 }
 
-void RiskDescriptionView::displayRisk(RiskAssessment *risk)
+void RiskDescriptionView::displayRisk(shared_ptr<RiskAssessment> risk)
 {
     document()->setHtml(html->toHtml(*risk));
 }

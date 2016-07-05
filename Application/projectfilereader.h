@@ -52,10 +52,10 @@ private:
     void parseRequirementAttribute(QModelIndex itemIdx);
     void parseRequirementsLink(QModelIndex itemIdx);
     void parseRiskAssessment(QModelIndex itemIdx);
-    void parseRiskScenario(RiskAssessment *ra);
-    void parseMitigationStrategy(RiskAssessment *ra);
-    void parsePreventiveAction(RiskAssessment *ra);
-    void parseTestReference(RiskAssessment *ra);
+    void parseRiskScenario(shared_ptr<RiskAssessment> ra);
+    void parseMitigationStrategy(shared_ptr<RiskAssessment> ra);
+    void parsePreventiveAction(shared_ptr<RiskAssessment> ra);
+    void parseTestReference(shared_ptr<RiskAssessment> ra);
     void storeAttributeValue(const QModelIndex &itemIdx,
                              int attributeIndex,
                              const QString &valueString);

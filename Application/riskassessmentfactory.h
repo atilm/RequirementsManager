@@ -13,7 +13,7 @@ public:
     RiskAssessmentFactory(shared_ptr<FileStateTracker> fileState);
     virtual ~RiskAssessmentFactory();
 
-    RiskAssessment* newAssessment();
+    shared_ptr<RiskAssessment>  newAssessment();
 
 private:
     shared_ptr<FileStateTracker> fileState;

@@ -198,7 +198,7 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
     shared_ptr<RiskAssessmentModel> ram = req->getRiskAssessment();
 
     for(int r=0; r < ram->rowCount(); r++){
-        RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
+        shared_ptr<RiskAssessment> ra = ram->getRiskAssessment(ram->index(r, 0));
         QString raNumber = constructRANumber(req->number(), r);
 
         raTemplate->setField("NUMBER", raNumber);
@@ -233,7 +233,7 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
     shared_ptr<RiskAssessmentModel> ram = req->getRiskAssessment();
 
     for(int r=0; r < ram->rowCount(); r++){
-        RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
+        shared_ptr<RiskAssessment> ra = ram->getRiskAssessment(ram->index(r, 0));
         QString raNumber = constructRANumber(req->number(), r);
         int testCount = ra->getPreventiveActions()->rowCount();
         QString message = testCount != 0 ? "Tests:" : "N/A";
@@ -246,7 +246,7 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
     return lines;
 }
 
-QString HtmlReportGenerator::getTestPlan(RiskAssessment *ra, const QString &raNumber)
+QString HtmlReportGenerator::getTestPlan(shared_ptr<RiskAssessment> ra, const QString &raNumber)
 {
     QString lines;
 
