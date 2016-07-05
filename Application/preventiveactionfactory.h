@@ -7,7 +7,7 @@
 class PreventiveActionFactory
 {
 public:
-    PreventiveActionFactory(FileStateTracker *stateTracker,
+    PreventiveActionFactory(shared_ptr<FileStateTracker> stateTracker,
                             SourceCodeController *controller);
     virtual ~PreventiveActionFactory();
 
@@ -15,7 +15,7 @@ public:
     virtual AutomatedTestReference* newTestReference(SourceAddress address);
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     SourceCodeController *controller;
 };
 

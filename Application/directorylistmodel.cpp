@@ -1,7 +1,7 @@
 #include "directorylistmodel.h"
 #include <QDir>
 
-DirectoryListModel::DirectoryListModel(FileStateTracker *fileState,
+DirectoryListModel::DirectoryListModel(shared_ptr<FileStateTracker> fileState,
                                        QObject *parent) :
     QAbstractListModel(parent)
 {

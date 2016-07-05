@@ -10,7 +10,7 @@ class RiskAssessment
 {
 public:
 
-    RiskAssessment(FileStateTracker *fileState,
+    RiskAssessment(shared_ptr<FileStateTracker> fileState,
                    RiskModel *initialRisk,
                    RiskModel *finalRisk,
                    PreventiveActionModel *preventiveActions);
@@ -30,7 +30,7 @@ public:
     virtual int preventiveActionCount() const;
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     RiskModel *initial;
     RiskModel *final;
     QString scenarioText;

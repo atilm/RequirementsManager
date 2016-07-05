@@ -3,7 +3,7 @@
 #include <exception>
 using namespace std;
 
-PreventiveActionModel::PreventiveActionModel(FileStateTracker *fileState,
+PreventiveActionModel::PreventiveActionModel(shared_ptr<FileStateTracker> fileState,
                                              QObject *parent) :
     QAbstractTableModel(parent)
 {

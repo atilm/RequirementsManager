@@ -16,7 +16,7 @@ class DescriptionView : public QTextEdit
     Q_OBJECT
 public:
     explicit DescriptionView(RichTextResourceManager *resourcesManager,
-                             FileStateTracker *fileState,
+                             shared_ptr<FileStateTracker> fileState,
                              ResizeImageDialog *resizeDialog,
                              QWidget *parent = 0);
 
@@ -36,7 +36,7 @@ public slots:
 
 protected:
     RichTextResourceManager *resourcesManager;
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QTextDocument *defaultDocument;
     shared_ptr<RequirementsModel> data;
     ResizeImageDialog *resizeDialog;

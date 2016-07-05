@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <QDir>
+#include <memory>
+using namespace std;
 
 /*! Store the state of the project file.
 

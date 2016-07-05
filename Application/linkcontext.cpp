@@ -1,6 +1,6 @@
 #include "linkcontext.h"
 
-LinkContext::LinkContext(FileStateTracker *fileState, QObject *parent) :
+LinkContext::LinkContext(shared_ptr<FileStateTracker> fileState, QObject *parent) :
     QAbstractListModel(parent)
 {
     this->fileState = fileState;

@@ -9,7 +9,7 @@
 #include <QTextFragment>
 
 DescriptionView::DescriptionView(RichTextResourceManager *resourcesManager,
-                                 FileStateTracker *fileState,
+                                 shared_ptr<FileStateTracker> fileState,
                                  ResizeImageDialog *resizeDialog,
                                  QWidget *parent) :
     QTextEdit(parent)

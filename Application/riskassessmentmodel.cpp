@@ -2,7 +2,7 @@
 #include <stdexcept>
 using namespace std;
 
-RiskAssessmentModel::RiskAssessmentModel(FileStateTracker *fileState,
+RiskAssessmentModel::RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
                                          RiskAssessmentFactory *factory)
 {
     this->fileState = fileState;

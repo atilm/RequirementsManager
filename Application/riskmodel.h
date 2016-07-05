@@ -9,7 +9,7 @@ class RiskModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit RiskModel(FileStateTracker *fileState, QObject *parent = 0);
+    explicit RiskModel(shared_ptr<FileStateTracker> fileState, QObject *parent = 0);
     virtual ~RiskModel();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -26,7 +26,7 @@ signals:
 public slots:
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QModelIndex currentRisk;
     QStringList probabilities;
     QStringList damageExtents;

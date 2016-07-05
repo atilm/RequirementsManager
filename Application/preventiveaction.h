@@ -4,10 +4,13 @@
 #include <QString>
 #include "filestatetracker.h"
 
+#include <memory>
+using namespace std;
+
 class PreventiveAction
 {
 public:
-    PreventiveAction(FileStateTracker *fileState);
+    PreventiveAction(shared_ptr<FileStateTracker> fileState);
     virtual ~PreventiveAction();
 
     virtual bool isReference() const;
@@ -32,7 +35,7 @@ public:
     virtual QString getExpectedResult();
 
 protected:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QString testCase;
     QString testName;
     QString shortDescription;

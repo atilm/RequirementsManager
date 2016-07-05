@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     AppSettings *appSettings = new AppSettings();
-    FileStateTracker *fileState = new FileStateTracker();
+    shared_ptr<FileStateTracker> fileState(make_shared<FileStateTracker>());
     RichTextResourceManager *docResourcesManager = new RichTextResourceManager(fileState);
 
     AttributeContext *attributeContext = new AttributeContext(fileState);

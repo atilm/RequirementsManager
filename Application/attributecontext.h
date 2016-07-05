@@ -21,7 +21,7 @@ public:
         DataType type;
     };
 
-    AttributeContext(FileStateTracker *fileState);
+    AttributeContext(shared_ptr<FileStateTracker> fileState);
     virtual ~AttributeContext();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -47,7 +47,7 @@ signals:
     void attributeRemoved();
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QString booleanTypeString;
     QString textTypeString;
     QVector<Attribute> attributes;

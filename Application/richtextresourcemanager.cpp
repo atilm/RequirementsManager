@@ -9,7 +9,7 @@
 #include <stdexcept>
 using namespace std;
 
-RichTextResourceManager::RichTextResourceManager(FileStateTracker *fileState)
+RichTextResourceManager::RichTextResourceManager(shared_ptr<FileStateTracker> fileState)
 {
     this->fileState = fileState;
 }

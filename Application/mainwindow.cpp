@@ -5,7 +5,7 @@
 
 MainWindow::MainWindow(ProjectFileController *fileController,
                        shared_ptr<RequirementsModel> requirements,
-                       RichTextController *richText, FileStateTracker *fileState,
+                       RichTextController *richText, shared_ptr<FileStateTracker> fileState,
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
@@ -58,11 +58,11 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
     connect(ui->actionNewFile, SIGNAL(triggered()), fileController, SLOT(newFile()));
     connect(ui->actionReport, SIGNAL(triggered()), reportController, SLOT(generateReport()));
-    connect(fileState, SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
-    connect(fileState, SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
+    connect(fileState.get(), SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
+    connect(fileState.get(), SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
     connect(fileController, SIGNAL(fileLoaded()), sourceController, SLOT(parseProjectCode()));
     connect(settingsDialog, SIGNAL(settingsChanged()), sourceController, SLOT(parseProjectCode()));
-    connect(settingsDialog, SIGNAL(settingsChanged()), fileState, SLOT(setChanged()));
+    connect(settingsDialog, SIGNAL(settingsChanged()), fileState.get(), SLOT(setChanged()));
 }
 
 MainWindow::~MainWindow()

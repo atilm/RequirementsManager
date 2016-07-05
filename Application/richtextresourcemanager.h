@@ -8,7 +8,7 @@
 class RichTextResourceManager
 {
 public:
-    RichTextResourceManager(FileStateTracker *fileState);
+    RichTextResourceManager(shared_ptr<FileStateTracker> fileState);
     virtual ~RichTextResourceManager();
 
     virtual void setDocument(QTextDocument *document);
@@ -22,7 +22,7 @@ public:
     virtual void endSavingResources();
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QTextDocument *document;
     QStringList presentFiles;
 

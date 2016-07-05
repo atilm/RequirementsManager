@@ -24,7 +24,7 @@ class SourceCodeController : public QObject
     Q_OBJECT
 public:
     explicit SourceCodeController(QFileSystemWatcher *fileWatcher,
-                                  FileStateTracker *stateTracker,
+                                  shared_ptr<FileStateTracker> stateTracker,
                                   ProjectFileController *project,
                                   SourceCodeReaderProvider *readerProvider,
                                   HtmlGenerator *htmlGenerator,
@@ -51,7 +51,7 @@ public slots:
 private:
     QFileSystemWatcher *fileWatcher;
     bool handlingFile;
-    FileStateTracker *stateTracker;
+    shared_ptr<FileStateTracker> stateTracker;
     QListView *moduleView;
     QListView *functionView;
     QListView *testView;

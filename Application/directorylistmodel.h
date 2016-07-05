@@ -9,7 +9,7 @@ class DirectoryListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit DirectoryListModel(FileStateTracker *fileState,
+    explicit DirectoryListModel(shared_ptr<FileStateTracker> fileState,
                                 QObject *parent = 0);
     virtual ~DirectoryListModel();
 
@@ -25,7 +25,7 @@ public:
     virtual bool remove(const QModelIndex &index);
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QVector<QString> directories;
 };
 

@@ -1,6 +1,6 @@
 #include "riskassessmentfactory.h"
 
-RiskAssessmentFactory::RiskAssessmentFactory(FileStateTracker *fileState)
+RiskAssessmentFactory::RiskAssessmentFactory(shared_ptr<FileStateTracker> fileState)
 {
     this->fileState = fileState;
 }

@@ -4,7 +4,7 @@
 using namespace std;
 
 RequirementsModel::RequirementsModel(RequirementFactory *factory,
-                                     FileStateTracker *fileState, AttributeContext *attributeContext, LinkContext *linkContext,
+                                     shared_ptr<FileStateTracker> fileState, AttributeContext *attributeContext, LinkContext *linkContext,
                                      RequirementToModelMapper *dataMapper,
                                      QObject *parent) :
     QAbstractItemModel(parent)

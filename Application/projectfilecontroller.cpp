@@ -6,7 +6,7 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              QFileAdapter *file,
                                              ProjectFileReader *reader,
                                              ProjectFileWriter *writer,
-                                             FileStateTracker *stateTracker,
+                                             shared_ptr<FileStateTracker> stateTracker,
                                              AppSettings *settings,
                                              QMessageBoxProvider *messageBox) : QObject()
 {

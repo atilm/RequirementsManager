@@ -12,7 +12,7 @@ class RiskAssessmentModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    RiskAssessmentModel(FileStateTracker *fileState,
+    RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
                         RiskAssessmentFactory *factory);
     virtual ~RiskAssessmentModel();
 
@@ -33,7 +33,7 @@ private slots:
     void handleTestModelChanged();
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     RiskAssessmentFactory *factory;
     QVector<RiskAssessment*> assessments;
 

@@ -14,7 +14,7 @@ class SourceCodeController;
 class RequirementFactory
 {
 public:
-    RequirementFactory(FileStateTracker *fileState,
+    RequirementFactory(shared_ptr<FileStateTracker> fileState,
                        UniqueIDManager *idManager,
                        AttributeContainerFactory *attrContainerFactory,
                        LinkContainerFactory *linkContainerFactory,
@@ -29,7 +29,7 @@ public:
                                         Requirement *parent = 0);
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     AttributeContainerFactory *attrContainerFactory;
     LinkContainerFactory *linkContainerFactory;
     UniqueIDManager *idManager;

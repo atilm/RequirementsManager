@@ -3,29 +3,11 @@
 RiskTableView::RiskTableView(QWidget *parent) :
     QTableView(parent)
 {
-//    requirements = nullptr;
 }
 
 RiskTableView::~RiskTableView()
 {
 }
-
-//void RiskTableView::setRequirementsModel(RequirementsModel *requirements)
-//{
-//    this->requirements = requirements;
-//}
-
-//void RiskTableView::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
-//{
-//    if(requirements){
-//        try{
-//            setModel(requirements->getRiskAssessment(current).get());
-//        }
-//        catch(...){
-
-//        }
-//    }
-//}
 
 void RiskTableView::insertBeforeCurrent()
 {

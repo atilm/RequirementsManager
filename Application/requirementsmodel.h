@@ -18,7 +18,7 @@ class RequirementsModel : public QAbstractItemModel
     Q_OBJECT
 public:
     explicit RequirementsModel(RequirementFactory *factory,
-                               FileStateTracker *fileState,
+                               shared_ptr<FileStateTracker> fileState,
                                AttributeContext *attributeContext,
                                LinkContext *linkContext,
                                RequirementToModelMapper *dataMapper,
@@ -91,7 +91,7 @@ private:
     Requirement *root;
     AttributeContext *attributeContext;
     LinkContext *linkContext;
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     RequirementToModelMapper *dataMapper;
 
     void connectSignals();

@@ -4,7 +4,7 @@
 
 AutomatedTestReference::AutomatedTestReference(SourceAddress address,
                                                SourceCodeController *controller,
-                                               FileStateTracker *fileState)
+                                               shared_ptr<FileStateTracker> fileState)
     : PreventiveAction(fileState)
 {
     this->address = address;

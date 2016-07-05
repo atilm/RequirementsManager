@@ -1,6 +1,6 @@
 #include "preventiveactionfactory.h"
 
-PreventiveActionFactory::PreventiveActionFactory(FileStateTracker *stateTracker,
+PreventiveActionFactory::PreventiveActionFactory(shared_ptr<FileStateTracker> stateTracker,
                                                  SourceCodeController *controller)
 {
     this->fileState = stateTracker;

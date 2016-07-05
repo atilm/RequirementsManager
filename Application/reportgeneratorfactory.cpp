@@ -1,7 +1,7 @@
 #include "reportgeneratorfactory.h"
 #include "htmlreportgenerator.h"
 
-ReportGeneratorFactory::ReportGeneratorFactory(FileStateTracker *fileState)
+ReportGeneratorFactory::ReportGeneratorFactory(shared_ptr<FileStateTracker> fileState)
 {
     this->fileState = fileState;
 }

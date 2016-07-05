@@ -38,7 +38,7 @@ public:
     explicit MainWindow(ProjectFileController *fileController,
                         shared_ptr<RequirementsModel> requirements,
                         RichTextController *richText,
-                        FileStateTracker *fileState,
+                        shared_ptr<FileStateTracker> fileState,
                         QMessageBoxProvider *messageBox,
                         AppSettings *settings,
                         AttributeEditor *attributeDialog,
@@ -65,7 +65,7 @@ private:
     ProjectFileController *fileController;
     RequirementsView *requirementsView;
     DescriptionView *descriptionView;
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     QMessageBoxProvider *messageBox;
     AppSettings *settings;
     AttributeEditor *attributeDialog;

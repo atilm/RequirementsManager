@@ -12,7 +12,7 @@ class AutomatedTestReference : public PreventiveAction
 public:
     AutomatedTestReference(SourceAddress address,
                            SourceCodeController *controller,
-                           FileStateTracker *fileState);
+                           shared_ptr<FileStateTracker> fileState);
     virtual ~AutomatedTestReference();
 
     virtual bool isReference() const;

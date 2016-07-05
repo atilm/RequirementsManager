@@ -29,7 +29,7 @@ class ProjectFileController : public QObject
 public:
     ProjectFileController(QFileDialogAdapter *fileDialog, QFileAdapter *file,
                           ProjectFileReader *reader, ProjectFileWriter *writer,
-                          FileStateTracker *stateTracker, AppSettings *settings,
+                          shared_ptr<FileStateTracker> stateTracker, AppSettings *settings,
                           QMessageBoxProvider *messageBox);
     virtual ~ProjectFileController();
 
@@ -65,7 +65,7 @@ private:
     QFileAdapter *projectFile;
     ProjectFileReader *reader;
     ProjectFileWriter *writer;
-    FileStateTracker *stateTracker;
+    shared_ptr<FileStateTracker> stateTracker;
     AppSettings *settings;
     QMessageBoxProvider *messageBox;
 

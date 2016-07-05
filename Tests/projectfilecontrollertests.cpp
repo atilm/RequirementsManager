@@ -21,7 +21,7 @@ protected:
     QFileAdapterMock *fileMock;
     ProjectFileReaderMock *readerMock;
     ProjectFileWriterMock *writerMock;
-    FileStateTrackerMock *stateMock;
+    shared_ptr<FileStateTrackerMock> stateMock;
     AppSettingsMock *settingsMock;
     shared_ptr<RequirementsModelMock> modelMock;
     QMessageBoxProviderMock *msgMock;
@@ -34,7 +34,7 @@ protected:
         fileMock = new QFileAdapterMock();
         readerMock = new ProjectFileReaderMock();
         writerMock = new ProjectFileWriterMock();
-        stateMock = new FileStateTrackerMock();
+        stateMock = shared_ptr<FileStateTrackerMock>(new FileStateTrackerMock());
         settingsMock = new AppSettingsMock();
         modelMock = shared_ptr<RequirementsModelMock>(new RequirementsModelMock());
         msgMock = new QMessageBoxProviderMock();
@@ -50,7 +50,6 @@ protected:
 
     virtual ~ProjectFileControllerTests(){
         delete controller;
-        delete stateMock;
         delete settingsMock;
     }
 

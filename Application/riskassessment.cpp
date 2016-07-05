@@ -1,6 +1,6 @@
 #include "riskassessment.h"
 
-RiskAssessment::RiskAssessment(FileStateTracker *fileState,
+RiskAssessment::RiskAssessment(shared_ptr<FileStateTracker> fileState,
                                RiskModel *initialRisk,
                                RiskModel *finalRisk,
                                PreventiveActionModel *preventiveActions)

@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 SourceCodeController::SourceCodeController(QFileSystemWatcher *fileWatcher,
-                                           FileStateTracker *stateTracker,
+                                           shared_ptr<FileStateTracker> stateTracker,
                                            ProjectFileController *project,
                                            SourceCodeReaderProvider *readerProvider,
                                            HtmlGenerator *htmlGenerator,

@@ -1,7 +1,7 @@
 #include "riskmodel.h"
 #include <QColor>
 
-RiskModel::RiskModel(FileStateTracker *fileState, QObject *parent) :
+RiskModel::RiskModel(shared_ptr<FileStateTracker> fileState, QObject *parent) :
     QAbstractTableModel(parent)
 {
     initTable();

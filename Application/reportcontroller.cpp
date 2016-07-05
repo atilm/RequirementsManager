@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 ReportController::ReportController(ReportGeneratorFactory *generatorFactory,
-                                   FileStateTracker *fileState,
+                                   shared_ptr<FileStateTracker> fileState,
                                    QObject *parent)
     : QObject(parent)
 {

@@ -1,7 +1,7 @@
 #include "attributecontext.h"
 #include <QDebug>
 
-AttributeContext::AttributeContext(FileStateTracker *fileState)
+AttributeContext::AttributeContext(shared_ptr<FileStateTracker> fileState)
 {
     this->fileState = fileState;
     booleanTypeString = tr("Boolean");

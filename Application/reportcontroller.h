@@ -14,7 +14,7 @@ class ReportController : public QObject
     Q_OBJECT
 public:
     ReportController(ReportGeneratorFactory *generatorFactory,
-                     FileStateTracker *fileState,
+                     shared_ptr<FileStateTracker> fileState,
                      QObject *parent = 0);
     virtual ~ReportController();
 
@@ -24,7 +24,7 @@ public slots:
     virtual void generateReport();
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
     ReportGeneratorFactory *generatorFactory;
     shared_ptr<RequirementsModel> model;
 

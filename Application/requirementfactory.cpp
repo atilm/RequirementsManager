@@ -1,7 +1,7 @@
 #include "requirementfactory.h"
 #include "sourcecodecontroller.h"
 
-RequirementFactory::RequirementFactory(FileStateTracker *fileState,
+RequirementFactory::RequirementFactory(shared_ptr<FileStateTracker> fileState,
                                        UniqueIDManager *idManager,
                                        AttributeContainerFactory *attrContainerFactory,
                                        LinkContainerFactory *linkContainerFactory,

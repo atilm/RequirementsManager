@@ -4,16 +4,19 @@
 #include "riskassessment.h"
 #include "riskmodel.h"
 
+#include <memory>
+using namespace std;
+
 class RiskAssessmentFactory
 {
 public:
-    RiskAssessmentFactory(FileStateTracker *fileState);
+    RiskAssessmentFactory(shared_ptr<FileStateTracker> fileState);
     virtual ~RiskAssessmentFactory();
 
     RiskAssessment* newAssessment();
 
 private:
-    FileStateTracker *fileState;
+    shared_ptr<FileStateTracker> fileState;
 };
 
 #endif // RISKASSESSMENTFACTORY_H

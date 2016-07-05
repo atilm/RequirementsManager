@@ -1,7 +1,7 @@
 #include "preventiveaction.h"
 #include <QObject>
 
-PreventiveAction::PreventiveAction(FileStateTracker *fileState)
+PreventiveAction::PreventiveAction(shared_ptr<FileStateTracker> fileState)
 {
     this->fileState = fileState;
     testCase = "TestCase";

@@ -79,7 +79,7 @@
             </Requirement>
         </Requirement>
         <Requirement id="17" type="UserRequirement" name="Rich text descriptions">
-            <description><![CDATA[For each requirement a rich text description can be edited to specify its details. ]]></description>
+            <description><![CDATA[For each requirement a rich text description can be edited to specify its details.]]></description>
             <Attribute index="0" value="no"/>
             <Requirement id="18" type="FunctionalRequirement" name="Bold Text">
                 <description><![CDATA[Text can be formatted bold. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-b</li></ul>]]></description>
