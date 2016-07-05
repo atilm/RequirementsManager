@@ -226,7 +226,7 @@ void ProjectFileReader::parseRequirementsLink(QModelIndex itemIdx)
 
 void ProjectFileReader::parseRiskAssessment(QModelIndex itemIdx)
 {
-    RiskAssessmentModel *riskModel = model->getRiskAssessment(itemIdx);
+    shared_ptr<RiskAssessmentModel> riskModel = model->getRiskAssessment(itemIdx);
     RiskAssessment *ra = riskModel->appendAssessment();
 
     int initialProbability = getAttribute("initialProbability").toInt();

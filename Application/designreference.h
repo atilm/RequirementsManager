@@ -10,11 +10,11 @@ class DesignReference : public Requirement
 {
 public:
     DesignReference(SourceAddress address, SourceCodeController *controller,
-                    UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                    UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                     AttributeContainer *attributes, LinkContainer *links);
 
     DesignReference(SourceAddress address, SourceCodeController *controller,
-                    UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+                    UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                     AttributeContainer *attributes, LinkContainer *links,
                     unsigned int proposedID);
 

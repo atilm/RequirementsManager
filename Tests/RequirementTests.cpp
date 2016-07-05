@@ -13,14 +13,14 @@ protected:
     std::random_device rd;
     std::mt19937 rng;
     UniqueIDManager *idManager;
-    RiskAssessmentModelMock *riskAssessmentModelMock;
+    shared_ptr<RiskAssessmentModelMock> riskAssessmentModelMock;
     AttributeContainerMock *attributesMock;
     LinkContainerMock *linksMock;
 
     RequirementTests(){
         rng = std::mt19937(rd());
         idManager = new UniqueIDManager();
-        riskAssessmentModelMock = new RiskAssessmentModelMock();
+        riskAssessmentModelMock = shared_ptr<RiskAssessmentModelMock>(new RiskAssessmentModelMock());
         attributesMock = new AttributeContainerMock();
         linksMock = new LinkContainerMock();
     }
@@ -61,7 +61,7 @@ TEST_F(RequirementTests, when_deleted_a_requirement_unregisters_its_id){
 TEST_F(RequirementTests, when_inserting_a_child_an_item_sets_itself_as_parent){
     Requirement *parent = newRequirement();
     Requirement *child = new Requirement(idManager,
-                                         new RiskAssessmentModelMock(),
+                                         shared_ptr<RiskAssessmentModelMock>(new RiskAssessmentModelMock()),
                                          new AttributeContainerMock(),
                                          new LinkContainerMock());
 

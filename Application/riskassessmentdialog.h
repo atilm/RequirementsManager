@@ -7,6 +7,9 @@
 #include "qplaintexteditadapter.h"
 #include "riskassessmentmodel.h"
 
+#include <memory>
+using namespace std;
+
 namespace Ui {
 class RiskAssessmentDialog;
 }
@@ -23,7 +26,7 @@ public:
                                   QWidget *parent = 0);
     ~RiskAssessmentDialog();
 
-    void setModel(RiskAssessmentModel *model);
+    void setModel(shared_ptr<RiskAssessmentModel> model);
 
 public slots:
     virtual int exec(const QModelIndex &index);
@@ -35,7 +38,7 @@ private:
     QPlainTextEditAdapter *mitigationStrategyEdit;
     RiskAssessmentTable *initialRiskEdit;
     RiskAssessmentTable *finalRiskEdit;
-    RiskAssessmentModel *model;
+    shared_ptr<RiskAssessmentModel> model;
     RiskAssessment *currentRA;
 
     void injectWidgets(QPlainTextEditAdapter *scenarioEdit,

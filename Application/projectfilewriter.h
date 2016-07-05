@@ -50,7 +50,7 @@ private:
     void write_ID_and_Type(const QModelIndex &itemIdx);
     void writeAttribute(const QModelIndex &parent, int row, int attributeIndex);
     void writeLinks(const QModelIndex &itemIdx);
-    void writeRiskAssessmentModel(RiskAssessmentModel *risks);
+    void writeRiskAssessmentModel(shared_ptr<RiskAssessmentModel> risks);
     void writeRiskAssessment(RiskAssessment *risk);
     void writePreventiveActions(PreventiveActionModel *actions);
     void writePreventiveAction(PreventiveAction *action);

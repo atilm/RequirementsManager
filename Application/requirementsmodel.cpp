@@ -320,7 +320,7 @@ QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
     return item->getDescription();
 }
 
-RiskAssessmentModel* RequirementsModel::getRiskAssessment(const QModelIndex &index)
+shared_ptr<RiskAssessmentModel> RequirementsModel::getRiskAssessment(const QModelIndex &index)
 {
     if(!index.isValid())
         throw InvalidIndexException();

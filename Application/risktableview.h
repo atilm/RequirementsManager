@@ -2,7 +2,6 @@
 #define RISKTABLEVIEW_H
 
 #include <QTableView>
-#include "requirementsmodel.h"
 #include "riskassessmentmodel.h"
 
 
@@ -13,17 +12,17 @@ public:
     explicit RiskTableView(QWidget *parent = 0);
     virtual ~RiskTableView();
 
-    virtual void setRequirementsModel(RequirementsModel *requirements);
+    //virtual void setRequirementsModel(RequirementsModel *requirements);
 
 signals:
 
 public slots:
-    virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous);
+    //virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous);
     virtual void insertBeforeCurrent();
     virtual void removeCurrent();
 
 private:
-    RequirementsModel *requirements;
+    //RequirementsModel *requirements;
 
     RiskAssessmentModel* riskAssessmentModel();
 };

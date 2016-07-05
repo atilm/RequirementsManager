@@ -1,14 +1,14 @@
 #include "requirement.h"
 #include <QDebug>
 
-Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                          AttributeContainer *attributes, LinkContainer *links) :
     id(idManager->newUniqueID())
 {
     initialize(idManager, riskAssessment, attributes, links);
 }
 
-Requirement::Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                          AttributeContainer *attributes, LinkContainer *links,
                          unsigned int proposedID) :
     id(idManager->newUniqueID(proposedID))
@@ -21,7 +21,6 @@ Requirement::~Requirement()
     idManager->removeID(id);
 
     delete description;
-    delete riskAssessment;
     delete attributes;
     delete links;
 
@@ -81,7 +80,7 @@ QTextDocument *Requirement::getDescription()
     return description;
 }
 
-RiskAssessmentModel *Requirement::getRiskAssessment()
+shared_ptr<RiskAssessmentModel> Requirement::getRiskAssessment()
 {
     return riskAssessment;
 }
@@ -236,7 +235,7 @@ void Requirement::assertValidIndex(int index)
     }
 }
 
-void Requirement::initialize(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+void Requirement::initialize(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                              AttributeContainer *attributes, LinkContainer *links)
 {
     this->attributes = attributes;

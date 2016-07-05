@@ -22,7 +22,7 @@ RequirementFactory::~RequirementFactory()
 
 Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
@@ -34,7 +34,7 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
 
 Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
@@ -48,7 +48,7 @@ Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Require
 DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
                                                         Requirement *parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
 
     DesignReference *item = new DesignReference(address, sourceController,
                                                 idManager, raModel,
@@ -60,7 +60,7 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
 
 DesignReference *RequirementFactory::newDesignReference(SourceAddress address, unsigned int proposedID, Requirement *parent)
 {
-    RiskAssessmentModel *raModel = new RiskAssessmentModel(fileState, new RiskAssessmentFactory(fileState));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
 
     DesignReference *item = new DesignReference(address, sourceController,
                                                 idManager, raModel,

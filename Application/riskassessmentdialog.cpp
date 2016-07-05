@@ -21,7 +21,7 @@ RiskAssessmentDialog::~RiskAssessmentDialog()
     delete ui;
 }
 
-void RiskAssessmentDialog::setModel(RiskAssessmentModel *model)
+void RiskAssessmentDialog::setModel(shared_ptr<RiskAssessmentModel> model)
 {
     this->model = model;
 }

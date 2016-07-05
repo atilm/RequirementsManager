@@ -195,7 +195,7 @@ QString HtmlReportGenerator::getRARows(Requirement *req)
 {
     QString lines;
 
-    RiskAssessmentModel *ram = req->getRiskAssessment();
+    shared_ptr<RiskAssessmentModel> ram = req->getRiskAssessment();
 
     for(int r=0; r < ram->rowCount(); r++){
         RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));
@@ -230,7 +230,7 @@ QString HtmlReportGenerator::getTPRows(Requirement *req)
 {
     QString lines;
 
-    RiskAssessmentModel *ram = req->getRiskAssessment();
+    shared_ptr<RiskAssessmentModel> ram = req->getRiskAssessment();
 
     for(int r=0; r < ram->rowCount(); r++){
         RiskAssessment *ra = ram->getRiskAssessment(ram->index(r, 0));

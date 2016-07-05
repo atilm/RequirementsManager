@@ -9,6 +9,7 @@
 #include <QTextDocument>
 #include <QVector>
 #include <exception>
+#include <memory>
 using namespace std;
 
 class InvalidIndexException : public exception{
@@ -31,9 +32,9 @@ public:
         DesignRequirement
     };
 
-    Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+    Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links);
-    Requirement(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+    Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links,
                 unsigned int proposedID);
     virtual ~Requirement();
@@ -55,7 +56,7 @@ public:
     virtual void setAttribute(int index, const QVariant &value);
 
     virtual QTextDocument *getDescription();
-    virtual RiskAssessmentModel* getRiskAssessment();
+    virtual shared_ptr<RiskAssessmentModel> getRiskAssessment();
 
     virtual LinkContainer* getLinkContainer();
     virtual void addRequirementLink(int groupIdx, uint reqID);
@@ -90,10 +91,10 @@ protected:
     AttributeContainer *attributes;
     LinkContainer *links;
 
-    RiskAssessmentModel *riskAssessment;
+    shared_ptr<RiskAssessmentModel> riskAssessment;
 
     void assertValidIndex(int index);
-    void initialize(UniqueIDManager *idManager, RiskAssessmentModel *riskAssessment,
+    void initialize(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                     AttributeContainer *attributes, LinkContainer *links);
     bool sameTypeGroup(Type a, Type b) const;
 };

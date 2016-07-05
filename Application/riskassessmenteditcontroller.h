@@ -26,7 +26,7 @@ public:
 
     virtual void setRequirementsModel(shared_ptr<RequirementsModel> requirements);
     virtual void setRequirementsView(RequirementsView *reqView);
-    virtual void setRiskModel(RiskAssessmentModel *riskModel);
+    virtual void setRiskModel(shared_ptr<RiskAssessmentModel> riskModel);
     virtual void setRiskView(RiskTableView *riskView);
     virtual void setAddRiskButton(QToolButton *addRiskButton);
     virtual void setRemoveRiskButton(QToolButton *removeRiskButton);
@@ -51,7 +51,7 @@ public slots:
 private:
     shared_ptr<RequirementsModel> reqModel;
     RequirementsView *reqView;
-    RiskAssessmentModel *riskModel;
+    shared_ptr<RiskAssessmentModel> riskModel;
     RiskTableView *riskView;
     RiskAssessmentDialog *dialog;
     PreventiveActionDialog *actionDialog;

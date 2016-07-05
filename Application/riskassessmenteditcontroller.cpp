@@ -28,7 +28,7 @@ void RiskAssessmentEditController::setRequirementsView(RequirementsView *reqView
             this, SLOT(currentRequirementChanged(QModelIndex,QModelIndex)));
 }
 
-void RiskAssessmentEditController::setRiskModel(RiskAssessmentModel *model)
+void RiskAssessmentEditController::setRiskModel(shared_ptr<RiskAssessmentModel> model)
 {
     this->riskModel = model;
     dialog->setModel(model);
@@ -76,7 +76,7 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
 {
     try{
         riskModel = reqModel->getRiskAssessment(current);
-        riskView->setModel(riskModel);
+        riskView->setModel(riskModel.get());
         riskView->resizeColumnsToContents();
         dialog->setModel(riskModel);
         actionView->setModel(nullptr);

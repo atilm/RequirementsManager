@@ -3,7 +3,7 @@
 
 DesignReference::DesignReference(SourceAddress address, SourceCodeController *controller,
                                  UniqueIDManager *idManager,
-                                 RiskAssessmentModel *riskAssessment,
+                                 shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
                                  LinkContainer *links)
     : Requirement(idManager, riskAssessment, attributes, links)
@@ -14,7 +14,7 @@ DesignReference::DesignReference(SourceAddress address, SourceCodeController *co
 DesignReference::DesignReference(SourceAddress address,
                                  SourceCodeController *controller,
                                  UniqueIDManager *idManager,
-                                 RiskAssessmentModel *riskAssessment,
+                                 shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
                                  LinkContainer *links,
                                  unsigned int proposedID)

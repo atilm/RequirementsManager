@@ -225,7 +225,7 @@ void ProjectFileWriter::writeLinks(const QModelIndex &itemIdx)
     }
 }
 
-void ProjectFileWriter::writeRiskAssessmentModel(RiskAssessmentModel *risks)
+void ProjectFileWriter::writeRiskAssessmentModel(shared_ptr<RiskAssessmentModel> risks)
 {
     for(int r=0;r<risks->rowCount();r++)
         writeRiskAssessment(risks->getRiskAssessment(risks->index(r,0)));
