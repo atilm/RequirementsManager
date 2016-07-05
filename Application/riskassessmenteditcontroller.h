@@ -13,6 +13,9 @@
 #include "preventiveactiondialog.h"
 #include "riskdescriptionview.h"
 
+#include <memory>
+using namespace std;
+
 class RiskAssessmentEditController : public QObject
 {
     Q_OBJECT
@@ -21,7 +24,7 @@ public:
                                  PreventiveActionDialog *actionDialog);
     virtual ~RiskAssessmentEditController();
 
-    virtual void setRequirementsModel(RequirementsModel *requirements);
+    virtual void setRequirementsModel(shared_ptr<RequirementsModel> requirements);
     virtual void setRequirementsView(RequirementsView *reqView);
     virtual void setRiskModel(RiskAssessmentModel *riskModel);
     virtual void setRiskView(RiskTableView *riskView);
@@ -46,7 +49,7 @@ public slots:
     virtual void riskClicked(const QModelIndex &index);
 
 private:
-    RequirementsModel *reqModel;
+    shared_ptr<RequirementsModel> reqModel;
     RequirementsView *reqView;
     RiskAssessmentModel *riskModel;
     RiskTableView *riskView;

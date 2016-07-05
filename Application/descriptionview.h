@@ -8,6 +8,9 @@
 #include "filestatetracker.h"
 #include "resizeimagedialog.h"
 
+#include <memory>
+using namespace std;
+
 class DescriptionView : public QTextEdit
 {
     Q_OBJECT
@@ -17,7 +20,7 @@ public:
                              ResizeImageDialog *resizeDialog,
                              QWidget *parent = 0);
 
-    void setModel(RequirementsModel *data);
+    void setModel(shared_ptr<RequirementsModel> data);
     bool canInsertFromMimeData(const QMimeData *source) const;
     void insertFromMimeData(const QMimeData* source);
 
@@ -35,7 +38,7 @@ protected:
     RichTextResourceManager *resourcesManager;
     FileStateTracker *fileState;
     QTextDocument *defaultDocument;
-    RequirementsModel *data;
+    shared_ptr<RequirementsModel> data;
     ResizeImageDialog *resizeDialog;
 
     void initialize();

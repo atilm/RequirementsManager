@@ -18,7 +18,7 @@ HtmlReportGenerator::~HtmlReportGenerator()
     delete html;
 }
 
-void HtmlReportGenerator::setModel(RequirementsModel *model)
+void HtmlReportGenerator::setModel(shared_ptr<RequirementsModel> model)
 {
     this->model = model;
 }

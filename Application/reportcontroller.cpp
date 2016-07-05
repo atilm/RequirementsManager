@@ -10,7 +10,6 @@ ReportController::ReportController(ReportGeneratorFactory *generatorFactory,
 {
     this->generatorFactory = generatorFactory;
     this->fileState = fileState;
-    this->model = nullptr;
 }
 
 ReportController::~ReportController()
@@ -18,7 +17,7 @@ ReportController::~ReportController()
     delete generatorFactory;
 }
 
-void ReportController::setModel(RequirementsModel *model)
+void ReportController::setModel(shared_ptr<RequirementsModel> model)
 {
     this->model = model;
 }

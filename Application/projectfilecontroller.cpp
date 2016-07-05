@@ -10,7 +10,6 @@ ProjectFileController::ProjectFileController(QFileDialogAdapter *fileDialog,
                                              AppSettings *settings,
                                              QMessageBoxProvider *messageBox) : QObject()
 {
-    model = nullptr;
     sourceDirectories = nullptr;
     testDirectories = nullptr;
 
@@ -34,12 +33,12 @@ ProjectFileController::~ProjectFileController()
     delete messageBox;
 }
 
-void ProjectFileController::setModel(RequirementsModel *model)
+void ProjectFileController::setModel(shared_ptr<RequirementsModel> model)
 {
     this->model = model;
 }
 
-RequirementsModel *ProjectFileController::getRequirementsModel()
+shared_ptr<RequirementsModel> ProjectFileController::getRequirementsModel()
 {
     return model;
 }

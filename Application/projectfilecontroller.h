@@ -12,6 +12,9 @@
 #include "directorylistmodel.h"
 #include "directorylistmodel.h"
 
+#include <memory>
+using namespace std;
+
 //! Encapsulates all read/write operations to load and save the project
 /*!
   The class takes a pointer to a RequirementsModel.
@@ -30,8 +33,8 @@ public:
                           QMessageBoxProvider *messageBox);
     virtual ~ProjectFileController();
 
-    virtual void setModel(RequirementsModel *model);
-    virtual RequirementsModel* getRequirementsModel();
+    virtual void setModel(shared_ptr<RequirementsModel> model);
+    virtual shared_ptr<RequirementsModel> getRequirementsModel();
     virtual void injectDirectoryModels(DirectoryListModel *sourceDirectories,
                                        DirectoryListModel *testDirectories);
 
@@ -54,7 +57,7 @@ public slots:
     void askSaveUnsavedChanges();
 
 private:
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
     QString programmingLanguage;
     DirectoryListModel *sourceDirectories;
     DirectoryListModel *testDirectories;

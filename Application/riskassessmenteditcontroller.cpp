@@ -16,7 +16,7 @@ RiskAssessmentEditController::~RiskAssessmentEditController()
     delete actionDialog;
 }
 
-void RiskAssessmentEditController::setRequirementsModel(RequirementsModel *requirements)
+void RiskAssessmentEditController::setRequirementsModel(shared_ptr<RequirementsModel> requirements)
 {
     this->reqModel = requirements;
 }

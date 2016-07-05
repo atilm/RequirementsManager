@@ -4,13 +4,16 @@
 #include "requirementsmodel.h"
 #include <QString>
 
+#include <memory>
+using namespace std;
+
 class ReportGenerator
 {
 public:
     ReportGenerator();
     virtual ~ReportGenerator();
 
-    virtual void setModel(RequirementsModel *model) = 0;
+    virtual void setModel(shared_ptr<RequirementsModel> model) = 0;
     virtual void generate(const QString &filePath) = 0;
 };
 

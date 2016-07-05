@@ -20,11 +20,11 @@ RequirementsView::~RequirementsView()
     delete msg;
 }
 
-void RequirementsView::setModel(RequirementsModel *model)
+void RequirementsView::setModel(shared_ptr<RequirementsModel> model)
 {
-    QTreeView::setModel(model);
+    QTreeView::setModel(model.get());
 
-    connect(model, SIGNAL(columnsChanged()), this, SLOT(resizeColumns()));
+    connect(model.get(), SIGNAL(columnsChanged()), this, SLOT(resizeColumns()));
 }
 
 

@@ -21,7 +21,7 @@ DescriptionView::DescriptionView(RichTextResourceManager *resourcesManager,
     initialize();
 }
 
-void DescriptionView::setModel(RequirementsModel *data)
+void DescriptionView::setModel(shared_ptr<RequirementsModel> data)
 {
     this->data = data;
 }

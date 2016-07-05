@@ -8,6 +8,9 @@
 #include "qmessageboxprovider.h"
 #include "requirementsmodel.h"
 
+#include <memory>
+using namespace std;
+
 class RequirementsView : public QTreeView
 {
     Q_OBJECT
@@ -17,7 +20,7 @@ public:
                               QWidget *parent = 0);
     virtual ~RequirementsView();
 
-    virtual void setModel(RequirementsModel *model);
+    virtual void setModel(shared_ptr<RequirementsModel> model);
 
 signals:
 

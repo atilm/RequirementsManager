@@ -6,6 +6,8 @@
 #include "richtextresourcemanager.h"
 #include <QXmlStreamReader>
 #include <stdexcept>
+#include <memory>
+using namespace std;
 
 class PreventiveActionFactory;
 class ProjectFileController;
@@ -31,7 +33,7 @@ private:
     RichTextResourceManager *resources;
     QFileAdapter *file;
     ProjectFileController *fileController;
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     RequirementFactory *factory;

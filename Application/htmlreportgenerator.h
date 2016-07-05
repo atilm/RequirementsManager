@@ -17,13 +17,13 @@ public:
                         HtmlGenerator *html);
     virtual ~HtmlReportGenerator();
 
-    virtual void setModel(RequirementsModel *model);
+    virtual void setModel(shared_ptr<RequirementsModel> model);
     virtual void generate(const QString &filePath);
 
 private:
     QFile file;
     QTextStream out;
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
     TextDocumentSerializer *documentSerializer;
     HtmlGenerator *html;
 

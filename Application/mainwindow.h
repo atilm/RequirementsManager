@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "richtextcontroller.h"
 #include "requirementsview.h"
 #include "descriptionview.h"
@@ -22,6 +21,11 @@
 #include "settingsdialog.h"
 #include "reportcontroller.h"
 
+#include <QMainWindow>
+
+#include <memory>
+using namespace std;
+
 namespace Ui {
 class MainWindow;
 }
@@ -32,7 +36,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(ProjectFileController *fileController,
-                        RequirementsModel *requirements,
+                        shared_ptr<RequirementsModel> requirements,
                         RichTextController *richText,
                         FileStateTracker *fileState,
                         QMessageBoxProvider *messageBox,
@@ -56,7 +60,7 @@ public:
 private:
     QString applicationName;
     Ui::MainWindow *ui;
-    RequirementsModel *requirements;
+    shared_ptr<RequirementsModel> requirements;
     RichTextController *richText;
     ProjectFileController *fileController;
     RequirementsView *requirementsView;

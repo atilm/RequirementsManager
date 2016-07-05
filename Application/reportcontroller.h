@@ -6,6 +6,9 @@
 #include "reportgeneratorfactory.h"
 #include "requirementsmodel.h"
 
+#include <memory>
+using namespace std;
+
 class ReportController : public QObject
 {
     Q_OBJECT
@@ -15,7 +18,7 @@ public:
                      QObject *parent = 0);
     virtual ~ReportController();
 
-    virtual void setModel(RequirementsModel *model);
+    virtual void setModel(shared_ptr<RequirementsModel> model);
 
 public slots:
     virtual void generateReport();
@@ -23,7 +26,7 @@ public slots:
 private:
     FileStateTracker *fileState;
     ReportGeneratorFactory *generatorFactory;
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
 
     QString swapFileExtension(const QString &filePath, const QString &newExtension);
 };

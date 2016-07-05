@@ -10,6 +10,9 @@
 #include <QString>
 #include <QXmlStreamWriter>
 
+#include <memory>
+using namespace std;
+
 class ProjectFileController;
 
 class ProjectFileWriter
@@ -26,7 +29,7 @@ private:
     QXmlStreamWriter *xml;
     TextDocumentSerializer *serializer;
     ProjectFileController *fileController;
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     QFileAdapter *file;

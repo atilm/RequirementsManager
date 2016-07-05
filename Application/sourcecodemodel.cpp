@@ -298,10 +298,10 @@ QModelIndex SourceCodeModel::testIndex(const QModelIndex &functionIndex,
 int SourceCodeModel::getAlphabeticalInsertionIndex(SourceNode *parent,
                                                     SourceNode *node)
 {
-    int c;
+    int c = 0;
 
     for(c=0;c<parent->childCount();c++){
-        if(node->getName() < parent->getChild(c)->getName())
+        if(node->getName() <= parent->getChild(c)->getName())
             break;
     }
 

@@ -106,9 +106,11 @@ int main(int argc, char *argv[])
     reader->injectPreventiveActionFacotry(actionFactory);
 
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
-    RequirementsModel *requirements = new RequirementsModel(factory, fileState,
-                                                            attributeContext, linkContext,
-                                                            dataMapper);
+    shared_ptr<RequirementsModel> requirements(new RequirementsModel(factory,
+                                                                     fileState,
+                                                                     attributeContext,
+                                                                     linkContext,
+                                                                     dataMapper));
     requirements->init();
 
     ReportController *reportController = new ReportController(new ReportGeneratorFactory(fileState),

@@ -3,7 +3,8 @@
 #include "requirementsview.h"
 #include <QCloseEvent>
 
-MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel *requirements,
+MainWindow::MainWindow(ProjectFileController *fileController,
+                       shared_ptr<RequirementsModel> requirements,
                        RichTextController *richText, FileStateTracker *fileState,
                        QMessageBoxProvider *messageBox, AppSettings *settings,
                        AttributeEditor *attributeDialog,
@@ -67,7 +68,6 @@ MainWindow::MainWindow(ProjectFileController *fileController, RequirementsModel 
 MainWindow::~MainWindow()
 {
     delete fileController;
-    delete requirements;
     delete richText;
     delete descriptionView;
     delete requirementsView;
