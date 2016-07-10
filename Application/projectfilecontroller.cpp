@@ -111,6 +111,7 @@ void ProjectFileController::load()
 
     if(!filePath.isEmpty()){
         try{
+            emit beginLoadFile();
             sourceDirModel()->clear();
             testDirModel()->clear();
             model->clearModel();

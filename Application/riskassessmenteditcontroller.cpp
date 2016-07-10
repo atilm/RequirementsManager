@@ -190,3 +190,10 @@ void RiskAssessmentEditController::riskClicked(const QModelIndex &index)
     if(index.isValid())
         descriptionView->displayRisk(riskModel->getRiskAssessment(index));
 }
+
+void RiskAssessmentEditController::handleFileLoad()
+{
+    descriptionView->clear();
+    riskView->setModel(nullptr);
+    actionView->setModel(nullptr);
+}

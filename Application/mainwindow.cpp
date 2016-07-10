@@ -60,6 +60,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     connect(ui->actionReport, SIGNAL(triggered()), reportController, SLOT(generateReport()));
     connect(fileState.get(), SIGNAL(filePathChanged(QString)), this, SLOT(handleFilePathChanged(QString)));
     connect(fileState.get(), SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged(bool)));
+    connect(fileController, SIGNAL(beginLoadFile()), riskAssessmentEditController, SLOT(handleFileLoad()));
     connect(fileController, SIGNAL(fileLoaded()), sourceController, SLOT(parseProjectCode()));
     connect(settingsDialog, SIGNAL(settingsChanged()), sourceController, SLOT(parseProjectCode()));
     connect(settingsDialog, SIGNAL(settingsChanged()), fileState.get(), SLOT(setChanged()));

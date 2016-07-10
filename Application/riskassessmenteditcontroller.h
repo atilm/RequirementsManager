@@ -47,6 +47,7 @@ public slots:
     virtual void editPreventiveAction(const QModelIndex &index);
     virtual void actionClicked(const QModelIndex &index);
     virtual void riskClicked(const QModelIndex &index);
+    virtual void handleFileLoad();
 
 private:
     shared_ptr<RequirementsModel> reqModel;

@@ -45,6 +45,7 @@ public:
     virtual QString getProgrammingLanguage() const;
 
 signals:
+    void beginLoadFile();
     void fileLoaded();
     void programmingLanguageChanged(const QString &name);
 
