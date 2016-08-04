@@ -57,7 +57,10 @@ void RiskAssessmentEditController::setRemoveRiskButton(QToolButton *removeRiskBu
 void RiskAssessmentEditController::setActionView(PreventiveActionTableView *actionView)
 {
     this->actionView = actionView;
-    connect(actionView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editPreventiveAction(QModelIndex)));
+    connect(actionView, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(actionClicked(QModelIndex)));
+    connect(actionView, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(editPreventiveAction(QModelIndex)));
 }
 
 void RiskAssessmentEditController::setAddActionButton(QToolButton *addActionButton)
@@ -103,8 +106,6 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
         descriptionView->displayRisk(riskModel->getRiskAssessment(current));
         connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
                 this, SLOT(currentActionChanged(QModelIndex, QModelIndex)));
-        connect(actionView, SIGNAL(clicked(QModelIndex)),
-                this, SLOT(actionClicked(QModelIndex)));
     }
     catch(const runtime_error &){
         descriptionView->clear();
@@ -124,11 +125,10 @@ void RiskAssessmentEditController::currentActionChanged(const QModelIndex &curre
 
 void RiskAssessmentEditController::insertBeforeCurrent()
 {
-    if(!riskModel)
-        return;
-
-    riskModel->add(riskView->currentIndex().row());
-    riskView->resizeColumnsToContents();
+    if(riskModel){
+        riskModel->add(riskView->currentIndex().row());
+        riskView->resizeColumnsToContents();
+    }
 }
 
 void RiskAssessmentEditController::removeCurrent()
@@ -141,11 +141,10 @@ void RiskAssessmentEditController::removeCurrent()
 
 void RiskAssessmentEditController::insertActionBeforeCurrent()
 {
-    if(!actionModel)
-        return;
-
-    actionModel->add(actionView->currentIndex().row());
-    actionView->resizeColumnsToContents();
+    if(actionModel){
+        actionModel->add(actionView->currentIndex().row());
+        actionView->resizeColumnsToContents();
+    }
 }
 
 void RiskAssessmentEditController::removeCurrentAction()
@@ -158,11 +157,10 @@ void RiskAssessmentEditController::removeCurrentAction()
 
 void RiskAssessmentEditController::editRiskAssessment(const QModelIndex &index)
 {
-    if(!riskModel)
-        return;
-
-    dialog->exec(index);
-    descriptionView->displayRisk(riskModel->getRiskAssessment(riskView->currentIndex()));
+    if(riskModel){
+        dialog->exec(index);
+        descriptionView->displayRisk(riskModel->getRiskAssessment(riskView->currentIndex()));
+    }
 }
 
 void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index)
@@ -172,9 +170,10 @@ void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index
 
     PreventiveAction *action = actionModel->getAction(actionView->currentIndex());
 
-    if(action->isReference())
+    if(action->isReference()){
         QMessageBox::information(0, tr("Edit preventive action"),
                                  tr("References to automated tests are not editable."));
+    }
     else{
         actionDialog->exec(index);
         descriptionView->displayAction(action);
