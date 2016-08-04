@@ -6,7 +6,9 @@
     <AttributeContext>
         <AttributeDeclaration index="0" name="Implemented" type="Boolean"/>
     </AttributeContext>
-    <LinkContext/>
+    <LinkContext>
+        <LinkDeclaration index="0" name="Affects"/>
+    </LinkContext>
     <RequirementSpecification>
         <Requirement id="3" type="UserRequirement" name="Hierarchical structure">
             <description><![CDATA[Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible <ul><li>adding and removing requirements</li><li>moving requirements</li><li>copying requirements</li></ul>]]></description>
@@ -181,6 +183,25 @@
         <Requirement id="40" type="UserRequirement" name="Risk Assessment">
             <description><![CDATA[For each requirement an assessment of their risks can be edited: <ul><li>Several "risk scenarios" can be added to each requirement</li><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul>]]></description>
             <Attribute index="0" value="yes"/>
+            <Link group="0" id="35"/>
+            <Link group="0" id="17"/>
+            <Link group="0" id="14"/>
+            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
+                <scenario>new risk assessment</scenario>
+                <mitigationStrategy></mitigationStrategy>
+            </RiskAssessment>
+            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
+                <scenario>new risk assessment</scenario>
+                <mitigationStrategy></mitigationStrategy>
+            </RiskAssessment>
+            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
+                <scenario>new risk assessment</scenario>
+                <mitigationStrategy></mitigationStrategy>
+            </RiskAssessment>
+            <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="2" finalDamage="3">
+                <scenario>Entered data is adulterated</scenario>
+                <mitigationStrategy>Unit Tests</mitigationStrategy>
+            </RiskAssessment>
             <Requirement id="41" type="FunctionalRequirement" name="Display">
                 <description><![CDATA[When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view. ]]></description>
                 <Attribute index="0" value="yes"/>
@@ -205,6 +226,12 @@
         <Requirement id="46" type="UserRequirement" name="Source Code Extraction">
             <description><![CDATA[<ul><li>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.</li><li>Classes and functions can be added as Source Code Documentation to the Design Requirements</li><li>Automated tests can be added to risk assessments</li></ul>]]></description>
             <Attribute index="0" value="no"/>
+            <RiskAssessment initialProbability="2" initialDamage="1" finalProbability="0" finalDamage="1">
+                <scenario>A function is omitted
+-&gt; Probably detectable during documentation
+-&gt; But makes work impossible</scenario>
+                <mitigationStrategy>Acceptance Tests</mitigationStrategy>
+            </RiskAssessment>
             <Requirement id="64" type="FunctionalRequirement" name="Extract information from code">
                 <description><![CDATA[<b>Information about structure and function of the code is extracted from the source code files</b> ]]></description>
                 <Attribute index="0" value="no"/>

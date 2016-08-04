@@ -36,9 +36,9 @@ public:
     virtual void setDescriptionView(RiskDescriptionView *descriptionView);
 
 public slots:
-    virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous);
-    virtual void currentRiskChanged(const QModelIndex &current, const QModelIndex &previous);
-    virtual void currentActionChanged(const QModelIndex &current, const QModelIndex &previous);
+    virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &);
+    virtual void currentRiskChanged(const QModelIndex &current, const QModelIndex &);
+    virtual void currentActionChanged(const QModelIndex &current, const QModelIndex &);
     virtual void insertBeforeCurrent();
     virtual void removeCurrent();
     virtual void insertActionBeforeCurrent();
@@ -59,7 +59,6 @@ private:
     PreventiveActionModel *actionModel;
     PreventiveActionTableView *actionView;
     RiskDescriptionView *descriptionView;
-
 };
 
 #endif // RISKASSESSMENTEDITCONTROLLER_H

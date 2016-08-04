@@ -1,4 +1,5 @@
 #include "riskassessmenteditcontroller.h"
+#include <QDebug>
 #include <QMessageBox>
 
 RiskAssessmentEditController::RiskAssessmentEditController(RiskAssessmentDialog *dialog, PreventiveActionDialog *actionDialog) :
@@ -37,7 +38,10 @@ void RiskAssessmentEditController::setRiskModel(shared_ptr<RiskAssessmentModel> 
 void RiskAssessmentEditController::setRiskView(RiskTableView *view)
 {
     this->riskView = view;
-    connect(view, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editRiskAssessment(QModelIndex)));
+    connect(riskView, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(riskClicked(QModelIndex)));
+    connect(view, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(editRiskAssessment(QModelIndex)));
 }
 
 void RiskAssessmentEditController::setAddRiskButton(QToolButton *addRiskButton)
@@ -72,7 +76,7 @@ void RiskAssessmentEditController::setDescriptionView(RiskDescriptionView *descr
     descriptionView->setReadOnly(true);
 }
 
-void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &previous)
+void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &current, const QModelIndex &)
 {
     try{
         riskModel = reqModel->getRiskAssessment(current);
@@ -83,15 +87,13 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
         descriptionView->clearDisplay();
         connect(riskView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
                 this, SLOT(currentRiskChanged(QModelIndex,QModelIndex)));
-        connect(riskView, SIGNAL(clicked(QModelIndex)),
-                this, SLOT(riskClicked(QModelIndex)));
     }
-    catch(const InvalidIndexException &e){
+    catch(const InvalidIndexException &){
 
     }
 }
 
-void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current, const QModelIndex &previous)
+void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current, const QModelIndex &)
 {
     try{
         actionModel = riskModel->getPreventiveActions(current);
@@ -104,12 +106,12 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
         connect(actionView, SIGNAL(clicked(QModelIndex)),
                 this, SLOT(actionClicked(QModelIndex)));
     }
-    catch(const runtime_error &e){
+    catch(const runtime_error &){
         descriptionView->clear();
     }
 }
 
-void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &previous)
+void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &)
 {
     try{
         PreventiveAction *a = actionModel->getAction(current);
