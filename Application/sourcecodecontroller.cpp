@@ -17,6 +17,7 @@ SourceCodeController::SourceCodeController(QFileSystemWatcher *fileWatcher,
     this->project = project;
     this->htmlGenerator = htmlGenerator;
     model = nullptr;
+    parentWindow = nullptr;
     handlingFile = false;
 }
 
@@ -32,6 +33,11 @@ void SourceCodeController::injectViews(QListView *moduleView,
     this->moduleView = moduleView;
     this->functionView = functionView;
     this->testView = testView;
+}
+
+void SourceCodeController::injectMainWindow(QWidget *parentWindow)
+{
+    this->parentWindow = parentWindow;
 }
 
 void SourceCodeController::injectDescriptionView(DescriptionView *view)
@@ -195,7 +201,8 @@ void SourceCodeController::handleFileChanged()
         return;
 
     handlingFile = true;
-    QMessageBox::StandardButton answer = QMessageBox::question(0, tr("Source file changed"),
+    QMessageBox::StandardButton answer = QMessageBox::question(parentWindow,
+                                                               tr("Source file changed"),
                                                                tr("Reload the source files now?"));
 
     if(answer == QMessageBox::Yes){

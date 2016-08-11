@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RequirementSpecification version="1.0">
     <Language>C++</Language>
-    <SourceDir>Application</SourceDir>
-    <TestDir>Tests</TestDir>
+    <SourceDir>../Application</SourceDir>
+    <TestDir>../Tests</TestDir>
     <AttributeContext>
         <AttributeDeclaration index="0" name="Implemented" type="Boolean"/>
     </AttributeContext>

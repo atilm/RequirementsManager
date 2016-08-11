@@ -43,6 +43,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     this->sourceController->injectViews(ui->moduleListView,
                                         ui->functionListView,
                                         ui->testListView);
+    this->sourceController->injectMainWindow(this);
 
     fileController->setModel(requirements);
 

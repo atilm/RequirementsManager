@@ -5,6 +5,7 @@
 #include <QListView>
 #include <QObject>
 #include <QTextDocument>
+#include <QWidget>
 
 #include "htmlgenerator.h"
 #include "sourcecodemodel.h"
@@ -34,6 +35,7 @@ public:
     virtual void injectViews(QListView *moduleView,
                              QListView *functionView,
                              QListView *testView);
+    virtual void injectMainWindow(QWidget *parentWindow);
     virtual void injectDescriptionView(DescriptionView *view);
     virtual void injectRiskDescriptionView(RiskDescriptionView *view);
     virtual void injectRequirementsFactory(RequirementFactory *reqFactory);
@@ -51,6 +53,7 @@ public slots:
 private:
     QFileSystemWatcher *fileWatcher;
     bool handlingFile;
+    QWidget *parentWindow;
     shared_ptr<FileStateTracker> stateTracker;
     QListView *moduleView;
     QListView *functionView;
