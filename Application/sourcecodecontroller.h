@@ -70,10 +70,8 @@ private:
     QTextDocument description;
 
 private slots:
-    void handleClassSelectionChanged(const QModelIndex &current,
-                                     const QModelIndex &previous);
-    void handleFunctionSelectionChanged(const QModelIndex &current,
-                                        const QModelIndex &previous);
+    void handleClassSelectionChanged(const QModelIndex &current, const QModelIndex &);
+    void handleFunctionSelectionChanged(const QModelIndex &current, const QModelIndex &);
     void handleTestSelectionChanged(const QModelIndex &current,
                                     const QModelIndex &previous);
     void handleClassClicked(const QModelIndex &index);

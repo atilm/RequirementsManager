@@ -101,7 +101,7 @@ void ProjectFileReader::parseTestDirectory()
 
 void ProjectFileReader::parseAttributeDeclaration()
 {
-    uint index = getAttribute("index").toUInt();
+    int index = getAttribute("index").toInt();
 
     if(index != attributeContext->rowCount())
         throw ParsingError(QObject::tr("Unexpected index in attribute declaration.").toStdString());
@@ -114,7 +114,7 @@ void ProjectFileReader::parseAttributeDeclaration()
 
 void ProjectFileReader::parseLinkDeclaration()
 {
-    uint index = getAttribute("index").toUInt();
+    int index = getAttribute("index").toInt();
 
     if(index != linkContext->rowCount())
         throw ParsingError(QObject::tr("Unexpected index in link declaration.").toStdString());
@@ -336,6 +336,9 @@ void ProjectFileReader::storeAttributeValue(const QModelIndex &itemIdx,
         break;
     case AttributeContext::TEXT:
         model->setData(attributeItemIndex, valueString, Qt::EditRole);
+        break;
+    case AttributeContext::INVALID:
+        break;
     }
 }
 

@@ -118,7 +118,7 @@ void SourceCodeController::parseProjectCode()
 }
 
 void SourceCodeController::handleClassSelectionChanged(const QModelIndex &current,
-                                                       const QModelIndex &previous)
+                                                       const QModelIndex &)
 {
     if(functionView->model() == nullptr){
         functionView->setModel(model);
@@ -138,7 +138,7 @@ void SourceCodeController::handleClassSelectionChanged(const QModelIndex &curren
 }
 
 void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &current,
-                                                          const QModelIndex &previous)
+                                                          const QModelIndex &)
 {
     if(testView->model() == nullptr){
         testView->setModel(model);
@@ -154,7 +154,8 @@ void SourceCodeController::handleFunctionSelectionChanged(const QModelIndex &cur
     testView->setRootIndex(current);
 }
 
-void SourceCodeController::handleTestSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
+void SourceCodeController::handleTestSelectionChanged(const QModelIndex &current,
+                                                      const QModelIndex &)
 {
     showTestDescription(current);
 }
