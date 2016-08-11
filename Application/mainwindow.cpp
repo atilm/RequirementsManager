@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "version.h"
 #include "ui_mainwindow.h"
 #include "requirementsview.h"
 #include <QCloseEvent>
@@ -19,6 +20,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     ui->setupUi(this);
 
     applicationName = "Requirements Manager";
+    about = new AboutBox(this);
 
     setSplitterBehaviour();
 
@@ -51,6 +53,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
 
     handleChangedStateChanged();
 
+    connect(ui->actionAbout, SIGNAL(triggered()), about, SLOT(show()));
     connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));
     connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
@@ -69,6 +72,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
 
 MainWindow::~MainWindow()
 {
+    delete about;
     delete fileController;
     delete richText;
     delete descriptionView;
@@ -182,14 +186,9 @@ void MainWindow::handleFilePathChanged(const QString &fPath)
 
 void MainWindow::handleChangedStateChanged()
 {
-    QString versionNumber = QString("%1.%2.%3")
-            .arg(VERSION_MAJOR)
-            .arg(VERSION_MINOR, 2, 10, QLatin1Char('0'))
-            .arg(VERSION_BUILD, 3, 10, QLatin1Char('0'));
-
     QString windowTitle = QString("%1 %2")
             .arg(applicationName)
-            .arg(versionNumber);
+            .arg(Version::versionNumberString());
 
     if(!fileState->filePath().isEmpty()){
         QString path = QString(" - %1").arg(fileState->filePath());

@@ -170,8 +170,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>370</width>
-          <height>637</height>
+          <width>89</width>
+          <height>119</height>
          </rect>
         </property>
         <attribute name="label">
@@ -322,8 +322,15 @@
     <addaction name="actionLinkTypes"/>
     <addaction name="actionProjectSettings"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -549,6 +556,11 @@
    </property>
    <property name="text">
     <string>New File</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

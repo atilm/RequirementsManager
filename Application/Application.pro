@@ -92,7 +92,9 @@ SOURCES += main.cpp\
     htmlreportgenerator.cpp \
     reportgeneratorfactory.cpp \
     riskscenariotextedit.cpp \
-    testnamelineedit.cpp
+    testnamelineedit.cpp \
+    aboutbox.cpp \
+    version.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -158,7 +160,9 @@ HEADERS  += mainwindow.h \
     htmlreportgenerator.h \
     reportgeneratorfactory.h \
     riskscenariotextedit.h \
-    testnamelineedit.h
+    testnamelineedit.h \
+    aboutbox.h \
+    version.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
@@ -167,7 +171,8 @@ FORMS    += mainwindow.ui \
     preventiveactiondialog.ui \
     linkeditor.ui \
     settingsdialog.ui \
-    resizeimagedialog.ui
+    resizeimagedialog.ui \
+    aboutbox.ui
 
 RESOURCES += \
     resources.qrc

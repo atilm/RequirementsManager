@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "aboutbox.h"
 #include "richtextcontroller.h"
 #include "requirementsview.h"
 #include "descriptionview.h"
@@ -58,6 +59,7 @@ public:
                          PreventiveActionTableView *preventiveActionTableView);
 
 private:
+    AboutBox *about;
     QString applicationName;
     Ui::MainWindow *ui;
     shared_ptr<RequirementsModel> requirements;
