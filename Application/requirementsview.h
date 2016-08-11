@@ -34,6 +34,8 @@ public slots:
 protected:
     virtual void startDrag(Qt::DropActions supportedActions);
     virtual void dropEvent(QDropEvent *event);
+    virtual bool edit(const QModelIndex &index,
+                      EditTrigger trigger, QEvent *event);
 
 private:
     QMenu *contextMenu;
