@@ -1,0 +1,1104 @@
+<html>
+<head>
+<style>
+table, th, td {
+    border-style: solid;
+    border-color: #b0b0b0; 
+    border-collapse: collapse;
+    font-family: "Arial";
+    text-align: left;
+}
+td {
+    padding: 5px;
+}
+th {
+    padding: 5px;
+    background-color: #d0d0d0;
+    color: black;
+    font-weight: bold;
+}
+table{
+    width: 100%;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>Validation Documents</h1>
+
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#SRS">Software Requirements Specification (SRS)</a></li>
+<li><a href="#FRS">Functional Requirements Specification (FRS)</a></li>
+<li><a href="#DS">Design Specification (DS)</a></li>
+<li><a href="#RA">Risk Assessment (RA)</a></li>
+<li><a href="#TP">Test Plan (TP)</a></li>
+</ul>
+
+<h2 id="SRS">Software Requirements Specification (SRS)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">No.:</th>
+<th>Requirement:</th>
+<th>Description:</th>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#FRS_1">Introduction</a></td>
+<td>The <b>Requirements Manager </b>is a desktop software which allows its user to<ul><li>Organize the requirements of (software) projects in a tree structure</li><li>Describe the requirements in rich text format</li><li>Document, which classes and functions implement a requirement</li><li>Assess the risk of requirements and of their implementation</li><li>Document, which tests are in place to mitigate a given risk and to verify that a given requirement is fullfilled</li></ul>Class and function declarations are extracted automatically from the source code along with their comments and can be mapped to the requirements they implement.<br><br>The software is written in C++ and based on the Qt library. Therefore it can easily be compiled for use on Linux, Windows and Mac. </td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#FRS_2">Multi Platform GUI program</a></td>
+<td>The software should run as a desktop application on Windows, Linux and Mac OS and provide a graphical user interface.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#FRS_3">Hierarchical structure</a></td>
+<td>Requirements are stored in a tree structure of arbitrary depth. Each tree node consists of a title and a description.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#FRS_4">The structure is editable</a></td>
+<td>The requirement tree structure can be edited by the user. </td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#FRS_5">Requirement types</a></td>
+<td>One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth: <ul><li>User Requirements</li><li>Functional Requirements</li><li>Design Requirements</li></ul></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#FRS_6">Rich text descriptions</a></td>
+<td>For each requirement a rich text description can be edited to specify its details.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#FRS_7">Attributes</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties <ul><li>name</li><li>data type</li><li>value</li><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#FRS_8">Links</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..." </td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#FRS_9">Risk Assessment</a></td>
+<td>For each requirement an assessment of their risks can be edited: <ul><li>Several "risk scenarios" can be added to each requirement</li><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#FRS_10">Source Code Extraction</a></td>
+<td><ul><li>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.</li><li>Classes and functions can be added as Source Code Documentation to the Design Requirements</li><li>Automated tests can be added to risk assessments</li></ul></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#FRS_11">Saving and Loading of Projects</a></td>
+<td>All information edited in the software can be saved to file and loaded again. </td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="#FRS_12">Exporting Reports</a></td>
+<td>The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul></td>
+</tr>
+
+</table>
+
+<h2 id="FRS">Functional Requirements Specification (FRS)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">No.:</th>
+<th>SRS.FRS:</th>
+<th>Description:</th>
+</tr>
+<tr>
+<td id="FRS_1">1</td>
+<td><a href="#DRS_1">Introduction</a></td>
+<td>The <b>Requirements Manager </b>is a desktop software which allows its user to<ul><li>Organize the requirements of (software) projects in a tree structure</li><li>Describe the requirements in rich text format</li><li>Document, which classes and functions implement a requirement</li><li>Assess the risk of requirements and of their implementation</li><li>Document, which tests are in place to mitigate a given risk and to verify that a given requirement is fullfilled</li></ul>Class and function declarations are extracted automatically from the source code along with their comments and can be mapped to the requirements they implement.<br><br>The software is written in C++ and based on the Qt library. Therefore it can easily be compiled for use on Linux, Windows and Mac. </td>
+</tr>
+<tr>
+<td id="FRS_2">2</td>
+<td><a href="#DRS_2">Multi Platform GUI program</a></td>
+<td>The software should run as a desktop application on Windows, Linux and Mac OS and provide a graphical user interface.</td>
+</tr>
+<tr>
+<td id="FRS_2_1">2.1</td>
+<td><a href="#DRS_2_1">C++ and Qt Library</a></td>
+<td>The software is implemented in the C++ programming language and makes use of the Qt framework.</td>
+</tr>
+<tr>
+<td id="FRS_3">3</td>
+<td><a href="#DRS_3">Hierarchical structure</a></td>
+<td>Requirements are stored in a tree structure of arbitrary depth. Each tree node consists of a title and a description.</td>
+</tr>
+<tr>
+<td id="FRS_3_1">3.1</td>
+<td><a href="#DRS_3_1">Display to user</a></td>
+<td><img src="./RequirementsManagerImages/c09c353381c38a2a803d22472f0b3ddd6e6e1735.png"><br>Requirements are displayed in tree form similar to the display of a file system tree.</td>
+</tr>
+<tr>
+<td id="FRS_4">4</td>
+<td><a href="#DRS_4">The structure is editable</a></td>
+<td>The requirement tree structure can be edited by the user. </td>
+</tr>
+<tr>
+<td id="FRS_4_1">4.1</td>
+<td><a href="#DRS_4_1">Edit titles</a></td>
+<td>The requirements' titles can be edited by double-clicking on a requirement or by selecting the requirement and pressing F2. </td>
+</tr>
+<tr>
+<td id="FRS_4_2">4.2</td>
+<td><a href="#DRS_4_2">Adding as child</a></td>
+<td>A requirement can be added as child of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-shift-r</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_4_3">4.3</td>
+<td><a href="#DRS_4_3">Adding as sibling</a></td>
+<td>A requirement can be added as a sibling of another requirement. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut ctrl-r</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_4_4">4.4</td>
+<td><a href="#DRS_4_4">Removing</a></td>
+<td>The currently selected requirement can be removed. Triggers are <ul><li>a tool button</li><li>the keyboard shortcut delete</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_4_4_1">4.4.1</td>
+<td><a href="#DRS_4_4_1">Saveguard question</a></td>
+<td>The user is asked if he 'really wants to delete the requirement and all its children'. </td>
+</tr>
+<tr>
+<td id="FRS_4_5">4.5</td>
+<td><a href="#DRS_4_5">Moving</a></td>
+<td>Requirements can be moved by drag and drop within the tree view. </td>
+</tr>
+<tr>
+<td id="FRS_4_6">4.6</td>
+<td><a href="#DRS_4_6">Copying</a></td>
+<td>Requirements can be copied within the tree view by drag and drop with the keyboard modifier 'ctrl'. </td>
+</tr>
+<tr>
+<td id="FRS_5">5</td>
+<td><a href="#DRS_5">Requirement types</a></td>
+<td>One of three different "types" can be assigned to each requirement. The type of each requirement is made visible in the requirement tree view. This provides the possibility to structure the requirements tree into three layers of depth: <ul><li>User Requirements</li><li>Functional Requirements</li><li>Design Requirements</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_5_1">5.1</td>
+<td><a href="#DRS_5_1">Display</a></td>
+<td>The requirement types are displayed color-coded in the requirements tree view: Each requirement's title is displayed in a font color corresponding to its type: <ul><li>User Requirement: black</li><li>Functional Requirement: blue</li><li>Design Requirement: magenta</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_5_2">5.2</td>
+<td><a href="#DRS_5_2">Editing</a></td>
+<td>The requirement type can be selected in a context menu of the requirements tree view. A right click on a requirement opens a context menu which lets the user choose one of the three types. </td>
+</tr>
+<tr>
+<td id="FRS_6">6</td>
+<td><a href="#DRS_6">Rich text descriptions</a></td>
+<td>For each requirement a rich text description can be edited to specify its details.</td>
+</tr>
+<tr>
+<td id="FRS_6_1">6.1</td>
+<td><a href="#DRS_6_1">Bold Text</a></td>
+<td>Text can be formatted bold. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-b</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_6_2">6.2</td>
+<td><a href="#DRS_6_2">Lists</a></td>
+<td>Text can be formatted in lists. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-l</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_6_3">6.3</td>
+<td><a href="#DRS_6_3">Italic Text</a></td>
+<td>Text can be formatted italic. Triggers are <ul><li>A tool button</li><li>The keyboard shortcut ctrl-i</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_6_4">6.4</td>
+<td><a href="#DRS_6_4">Code</a></td>
+<td>Text can be formatted in code form. Triggers are <ul><li>A tool button</li><li>A the keyboard </li><li>ctrl-d</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_6_5">6.5</td>
+<td><a href="#DRS_6_5">Images</a></td>
+<td>Images can be inserted into the rich text description. </td>
+</tr>
+<tr>
+<td id="FRS_7">7</td>
+<td><a href="#DRS_7">Attributes</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement attributes" can be used. Attributes store additional information about requirements e.g. their state, a time estimation, a comment ... Attributes have the following properties <ul><li>name</li><li>data type</li><li>value</li><li>boolean</li><li>text</li><li>ranking (1 to 5)</li><li>integer</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_7_1">7.1</td>
+<td><a href="#DRS_7_1">Attribute Context Editor</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_7_2">7.2</td>
+<td><a href="#DRS_7_2">Display of Attributes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_7_3">7.3</td>
+<td><a href="#DRS_7_3">Editing Attributes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_8">8</td>
+<td><a href="#DRS_8">Links</a></td>
+<td>For each project an arbitrary number of user-configurable "requirement links" can be used. Links can be used to specify relationships like "requirement A affects / contradicts / ... requirements B, C, D, ..." </td>
+</tr>
+<tr>
+<td id="FRS_8_1">8.1</td>
+<td><a href="#DRS_8_1">Configuration Dialog</a></td>
+<td><ul><li>Via the menu bar entry "Edit" a configuration dialog for the available links can be opened.</li><li>The dialog shows the list of defined link types (e.g. "affects", "contradicts", etc).</li><li>Link types can be added, renamed and deleted.</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_8_2">8.2</td>
+<td><a href="#DRS_8_2">Display</a></td>
+<td><ul><li>The links for the selected requirement are shown in a tree view at the right border of the main window.</li><li>The uppermost level of the tree structure contains the link types. The link types' children are the actual links of the selected requirment.</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_8_3">8.3</td>
+<td><a href="#DRS_8_3">Adding Links</a></td>
+<td>To add links, the user switches the application into <i>linking mode </i>by activating a toggle button. In linking mode, double click on a requirement entry adds the requirement to the currently selected link type. </td>
+</tr>
+<tr>
+<td id="FRS_8_4">8.4</td>
+<td><a href="#DRS_8_4">Removing links</a></td>
+<td>Links can be removed by selecting them and either clicking a remove button (minus sign) or pressing <i>delete</i>. </td>
+</tr>
+<tr>
+<td id="FRS_8_5">8.5</td>
+<td><a href="#DRS_8_5">Saving Links</a></td>
+<td>The information about links is saved into the project file. </td>
+</tr>
+<tr>
+<td id="FRS_8_6">8.6</td>
+<td><a href="#DRS_8_6">Loading Links</a></td>
+<td>The information about links can be loaded to the project file. </td>
+</tr>
+<tr>
+<td id="FRS_9">9</td>
+<td><a href="#DRS_9">Risk Assessment</a></td>
+<td>For each requirement an assessment of their risks can be edited: <ul><li>Several "risk scenarios" can be added to each requirement</li><li>Several "preventive actions" can be assigned to each risk scenario</li><li>Each risk risk scenario has a final risk resulting from the sum of preventive actions</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_9_1">9.1</td>
+<td><a href="#DRS_9_1">Display</a></td>
+<td>When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view. </td>
+</tr>
+<tr>
+<td id="FRS_9_2">9.2</td>
+<td><a href="#DRS_9_2">Adding risks</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_9_3">9.3</td>
+<td><a href="#DRS_9_3">Assessing risks</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_9_4">9.4</td>
+<td><a href="#DRS_9_4">Adding preventive actions</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_9_5">9.5</td>
+<td><a href="#DRS_9_5">Assessing preventive actions</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_10">10</td>
+<td><a href="#DRS_10">Source Code Extraction</a></td>
+<td><ul><li>When used with software projects the Requirements Manager can extract declarations of classes, functions and automated tests along with their comments from the project's source files.</li><li>Classes and functions can be added as Source Code Documentation to the Design Requirements</li><li>Automated tests can be added to risk assessments</li></ul></td>
+</tr>
+<tr>
+<td id="FRS_10_1">10.1</td>
+<td><a href="#DRS_10_1">Extract information from code</a></td>
+<td><b>Information about structure and function of the code is extracted from the source code files</b> </td>
+</tr>
+<tr>
+<td id="FRS_10_1_1">10.1.1</td>
+<td><a href="#DRS_10_1_1">Extraction of classes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_10_1_2">10.1.2</td>
+<td><a href="#DRS_10_1_2">Extraction of functions</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_10_1_3">10.1.3</td>
+<td><a href="#DRS_10_1_3">Extraction of tests</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_10_2">10.2</td>
+<td><a href="#DRS_10_2">Multiple programming languages</a></td>
+<td><b>Documentation can be extracted from various programming languages</b> </td>
+</tr>
+<tr>
+<td id="FRS_10_3">10.3</td>
+<td><a href="#DRS_10_3">Display of structure</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_10_4">10.4</td>
+<td><a href="#DRS_10_4">Assignement to requirements</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_11">11</td>
+<td><a href="#DRS_11">Saving and Loading of Projects</a></td>
+<td>All information edited in the software can be saved to file and loaded again. </td>
+</tr>
+<tr>
+<td id="FRS_11_1">11.1</td>
+<td><a href="#DRS_11_1">Display of unsaved changes</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_11_2">11.2</td>
+<td><a href="#DRS_11_2">Load</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_11_3">11.3</td>
+<td><a href="#DRS_11_3">Save</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_11_4">11.4</td>
+<td><a href="#DRS_11_4">Save As</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="FRS_11_5">11.5</td>
+<td><a href="#DRS_11_5">Storage format</a></td>
+<td>The main storage format for the project data is a single xml file. Data that cannot be stored in the xml file (e.g. images) are stored in a automatically created folder in the same directory as the xml file. </td>
+</tr>
+<tr>
+<td id="FRS_12">12</td>
+<td><a href="#DRS_12">Exporting Reports</a></td>
+<td>The information stored in a project file can be exported to reports. Possible formats are <ul><li>HTML</li><li>PDF</li><li>OpenDocument</li></ul></td>
+</tr>
+
+</table>
+
+<h2 id="DS">Design Specification (DS)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">No.:</th>
+<th>SRS.FRS.DS:</th>
+<th>Description:</th>
+</tr>
+<tr>
+<td id="DRS_1">1</td>
+<td><a href="#RA_1">Introduction</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_2">2</td>
+<td><a href="#RA_2">Multi Platform GUI program</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_2_1">2.1</td>
+<td><a href="#RA_2_1">C++ and Qt Library</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_2_1_1">DS.2.1.1</td>
+<td><a href="#RA_DS_2_1_1">Compiler MinGW 32 bit</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_DS_2_1_2">DS.2.1.2</td>
+<td><a href="#RA_DS_2_1_2">Qt 5.5.1</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_3">3</td>
+<td><a href="#RA_3">Hierarchical structure</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_3_1">3.1</td>
+<td><a href="#RA_3_1">Display to user</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_3_1_1">DS.3.1.1</td>
+<td><a href="#RA_DS_3_1_1">class RequirementsView</a></td>
+<td><ul><li>The class RequirementsView is derived from QTreeView and uses its default implementation for data display.</li><li>setModel() is overridden to connect the signal "columnsChanged" to the slot "resizeColumns()"</li></ul></td>
+</tr>
+<tr>
+<td id="DRS_4">4</td>
+<td><a href="#RA_4">The structure is editable</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_1">4.1</td>
+<td><a href="#RA_4_1">Edit titles</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_2">4.2</td>
+<td><a href="#RA_4_2">Adding as child</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_3">4.3</td>
+<td><a href="#RA_4_3">Adding as sibling</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_4">4.4</td>
+<td><a href="#RA_4_4">Removing</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_4_1">4.4.1</td>
+<td><a href="#RA_4_4_1">Saveguard question</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_5">4.5</td>
+<td><a href="#RA_4_5">Moving</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_4_6">4.6</td>
+<td><a href="#RA_4_6">Copying</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_5">5</td>
+<td><a href="#RA_5">Requirement types</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_5_1">5.1</td>
+<td><a href="#RA_5_1">Display</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_5_2">5.2</td>
+<td><a href="#RA_5_2">Editing</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6">6</td>
+<td><a href="#RA_6">Rich text descriptions</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6_1">6.1</td>
+<td><a href="#RA_6_1">Bold Text</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6_2">6.2</td>
+<td><a href="#RA_6_2">Lists</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6_3">6.3</td>
+<td><a href="#RA_6_3">Italic Text</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6_4">6.4</td>
+<td><a href="#RA_6_4">Code</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_6_5">6.5</td>
+<td><a href="#RA_6_5">Images</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_7">7</td>
+<td><a href="#RA_7">Attributes</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_7_1">DS.7.1</td>
+<td><a href="#RA_DS_7_1">Attribute Context</a></td>
+<td>There's one shared instance of class AttributeContext. It store's which attributes exist and passes information about changes to all requirements. The AttributContext can be edited in a dedicated dialog. </td>
+</tr>
+<tr>
+<td id="DRS_DS_7_2">DS.7.2</td>
+<td><a href="#RA_DS_7_2">Attribute Container</a></td>
+<td>Every requirement contains an object of class AttributeContainer. AttributeContainer stores a pointer to the AttributContext instance and a list of concrete attributes for the parent requirement. </td>
+</tr>
+<tr>
+<td id="DRS_DS_7_3">DS.7.3</td>
+<td><a href="#RA_DS_7_3">RequirementToModelMapper</a></td>
+<td>The class RequirmentToModelMapper returns attributes for the DisplayRole of Columns greater 0. </td>
+</tr>
+<tr>
+<td id="DRS_7_1">7.1</td>
+<td><a href="#RA_7_1">Attribute Context Editor</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_7_2">7.2</td>
+<td><a href="#RA_7_2">Display of Attributes</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_7_3">7.3</td>
+<td><a href="#RA_7_3">Editing Attributes</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_7_3_1">DS.7.3.1</td>
+<td><a href="#RA_DS_7_3_1">class AttributeEditor</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_8">8</td>
+<td><a href="#RA_8">Links</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_8_1">DS.8.1</td>
+<td><a href="#RA_DS_8_1">class LinkContext</a></td>
+<td>There's one shared instance of class LinkContext. It store's which links exist and passes information about changes to all LinkContainers (one in each requirement). Link Context inherites from QAbstractTableModel. The AttributContext can be edited in a dedicated dialog. </td>
+</tr>
+<tr>
+<td id="DRS_DS_8_2">DS.8.2</td>
+<td><a href="#RA_DS_8_2">class LinkContainer</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_8_1">8.1</td>
+<td><a href="#RA_8_1">Configuration Dialog</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_8_2">8.2</td>
+<td><a href="#RA_8_2">Display</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_8_3">8.3</td>
+<td><a href="#RA_8_3">Adding Links</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_8_3_1">DS.8.3.1</td>
+<td><a href="#RA_DS_8_3_1">Checkable Tool Button</a></td>
+<td><i>Linking mode</i> is visualised by using a <i>checkable QToolButton</i> with a plus sign. As long as the tool button is checked, linking mode is active. </td>
+</tr>
+<tr>
+<td id="DRS_8_4">8.4</td>
+<td><a href="#RA_8_4">Removing links</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_8_4_1">DS.8.4.1</td>
+<td><a href="#RA_DS_8_4_1">Tool Button</a></td>
+<td>When a tool button is clicked, the currently selected link is deleted. </td>
+</tr>
+<tr>
+<td id="DRS_8_5">8.5</td>
+<td><a href="#RA_8_5">Saving Links</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_8_6">8.6</td>
+<td><a href="#RA_8_6">Loading Links</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9">9</td>
+<td><a href="#RA_9">Risk Assessment</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9_1">9.1</td>
+<td><a href="#RA_9_1">Display</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9_2">9.2</td>
+<td><a href="#RA_9_2">Adding risks</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9_3">9.3</td>
+<td><a href="#RA_9_3">Assessing risks</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9_4">9.4</td>
+<td><a href="#RA_9_4">Adding preventive actions</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_9_5">9.5</td>
+<td><a href="#RA_9_5">Assessing preventive actions</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10">10</td>
+<td><a href="#RA_10">Source Code Extraction</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_1">10.1</td>
+<td><a href="#RA_10_1">Extract information from code</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_10_1_1">DS.10.1.1</td>
+<td><a href="#RA_DS_10_1_1">class SourceCodeController</a></td>
+<td>Die Klasse <b>SourceCodeController</b> ist in MainWindow enthalten. Sie enthält die Klassen <b>SourceCodeModel : public QAbstractItemModel</b> Speichert den eingelesenen Quellcode in einer Baumstruktur mit 3 Hierarchieebenen: 1. Ebene: Klassen (bzw. Dateien bei nicht objektorientierten Sprachen) 2. Ebene: Funktionen 3. Ebene: Tests <b>SourceCodeReaderProvider</b> Verwaltet die zur Verfügung stehenden <b>ISourceCodeReader</b> Und hält Referenzen auf drei <b>QListViews</b> für die drei Hierarchieebenen. Die Klasse <b>SourceCodeController</b> koordiniert das Zusammenspiel der Source Code List Views, des SourceCode-Models und des Requirements-Models. </td>
+</tr>
+<tr>
+<td id="DRS_10_1_1">10.1.1</td>
+<td><a href="#RA_10_1_1">Extraction of classes</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_1_2">10.1.2</td>
+<td><a href="#RA_10_1_2">Extraction of functions</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_1_3">10.1.3</td>
+<td><a href="#RA_10_1_3">Extraction of tests</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_2">10.2</td>
+<td><a href="#RA_10_2">Multiple programming languages</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_3">10.3</td>
+<td><a href="#RA_10_3">Display of structure</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_10_4">10.4</td>
+<td><a href="#RA_10_4">Assignement to requirements</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11">11</td>
+<td><a href="#RA_11">Saving and Loading of Projects</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11_1">11.1</td>
+<td><a href="#RA_11_1">Display of unsaved changes</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11_2">11.2</td>
+<td><a href="#RA_11_2">Load</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11_3">11.3</td>
+<td><a href="#RA_11_3">Save</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11_4">11.4</td>
+<td><a href="#RA_11_4">Save As</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_11_5">11.5</td>
+<td><a href="#RA_11_5">Storage format</a></td>
+<td>see above</td>
+</tr>
+<tr>
+<td id="DRS_DS_11_5_1">DS.11.5.1</td>
+<td><a href="#RA_DS_11_5_1">Requirement storage</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_DS_11_5_2">DS.11.5.2</td>
+<td><a href="#RA_DS_11_5_2">Attribute storage</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_DS_11_5_3">DS.11.5.3</td>
+<td><a href="#RA_DS_11_5_3">Rich Text storage</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_DS_11_5_4">DS.11.5.4</td>
+<td><a href="#RA_DS_11_5_4">Image storage</a></td>
+<td></td>
+</tr>
+<tr>
+<td id="DRS_12">12</td>
+<td><a href="#RA_12">Exporting Reports</a></td>
+<td>see above</td>
+</tr>
+
+</table>
+
+<h2 id="RA">Risk Assessment (RA)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">SRS.FRS</th>
+<th>RA</th>
+<th>Scenario</th>
+<th>Initial Risk</th>
+<th>Mitigating Action</th>
+<th>Final Risk</th>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_1"><a href="#DRS_1">1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_2"><a href="#DRS_2">2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_2_1"><a href="#DRS_2_1">2.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_2_1_1"><a href="#DRS_DS_2_1_1">DS.2.1.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_2_1_2"><a href="#DRS_DS_2_1_2">DS.2.1.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_3"><a href="#DRS_3">3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_3_1"><a href="#DRS_3_1">3.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_3_1_1"><a href="#DRS_DS_3_1_1">DS.3.1.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4"><a href="#DRS_4">4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_1"><a href="#DRS_4_1">4.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_2"><a href="#DRS_4_2">4.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_3"><a href="#DRS_4_3">4.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_4"><a href="#DRS_4_4">4.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_4_1"><a href="#DRS_4_4_1">4.4.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_5"><a href="#DRS_4_5">4.5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_4_6"><a href="#DRS_4_6">4.6</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_5"><a href="#DRS_5">5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="2" id="RA_5_1"><a href="#DRS_5_1">5.1</a></td>
+    <td colspan="5">Risks:</td>
+</tr>
+<tr>
+<td id="RA_5_1-RA1">5.1-RA1</td>
+<td>new risk assessment<br></td>
+<td>Unacceptable</td>
+<td><br><br><a href="#TP_5_1-RA1">Go to action.</a></td>
+<td>Unacceptable</td>
+</tr>
+<tr>
+    <td rowspan="2" id="RA_5_2"><a href="#DRS_5_2">5.2</a></td>
+    <td colspan="5">Risks:</td>
+</tr>
+<tr>
+<td id="RA_5_2-RA1">5.2-RA1</td>
+<td>new risk assessment<br></td>
+<td>Unacceptable</td>
+<td><br><br><a href="#TP_5_2-RA1">Go to action.</a></td>
+<td>Unacceptable</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6"><a href="#DRS_6">6</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6_1"><a href="#DRS_6_1">6.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6_2"><a href="#DRS_6_2">6.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6_3"><a href="#DRS_6_3">6.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6_4"><a href="#DRS_6_4">6.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_6_5"><a href="#DRS_6_5">6.5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_7"><a href="#DRS_7">7</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_7_1"><a href="#DRS_DS_7_1">DS.7.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_7_2"><a href="#DRS_DS_7_2">DS.7.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_7_3"><a href="#DRS_DS_7_3">DS.7.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_7_1"><a href="#DRS_7_1">7.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_7_2"><a href="#DRS_7_2">7.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_7_3"><a href="#DRS_7_3">7.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_7_3_1"><a href="#DRS_DS_7_3_1">DS.7.3.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8"><a href="#DRS_8">8</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_8_1"><a href="#DRS_DS_8_1">DS.8.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_8_2"><a href="#DRS_DS_8_2">DS.8.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_1"><a href="#DRS_8_1">8.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_2"><a href="#DRS_8_2">8.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_3"><a href="#DRS_8_3">8.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_8_3_1"><a href="#DRS_DS_8_3_1">DS.8.3.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_4"><a href="#DRS_8_4">8.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_8_4_1"><a href="#DRS_DS_8_4_1">DS.8.4.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_5"><a href="#DRS_8_5">8.5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_8_6"><a href="#DRS_8_6">8.6</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9"><a href="#DRS_9">9</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9_1"><a href="#DRS_9_1">9.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9_2"><a href="#DRS_9_2">9.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9_3"><a href="#DRS_9_3">9.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9_4"><a href="#DRS_9_4">9.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_9_5"><a href="#DRS_9_5">9.5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="2" id="RA_10"><a href="#DRS_10">10</a></td>
+    <td colspan="5">Risks:</td>
+</tr>
+<tr>
+<td id="RA_10-RA1">10-RA1</td>
+<td>A function is omitted<br>
+&#8658; Probably detectable during documentation<br>
+&#8658; But makes work impossible<br></td>
+<td>Reasonable</td>
+<td>Acceptance Tests<br><br><a href="#TP_10-RA1">Go to action.</a></td>
+<td>Acceptable</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_1"><a href="#DRS_10_1">10.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_10_1_1"><a href="#DRS_DS_10_1_1">DS.10.1.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_1_1"><a href="#DRS_10_1_1">10.1.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_1_2"><a href="#DRS_10_1_2">10.1.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_1_3"><a href="#DRS_10_1_3">10.1.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_2"><a href="#DRS_10_2">10.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_3"><a href="#DRS_10_3">10.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_10_4"><a href="#DRS_10_4">10.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11"><a href="#DRS_11">11</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11_1"><a href="#DRS_11_1">11.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11_2"><a href="#DRS_11_2">11.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11_3"><a href="#DRS_11_3">11.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11_4"><a href="#DRS_11_4">11.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_11_5"><a href="#DRS_11_5">11.5</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_11_5_1"><a href="#DRS_DS_11_5_1">DS.11.5.1</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_11_5_2"><a href="#DRS_DS_11_5_2">DS.11.5.2</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_11_5_3"><a href="#DRS_DS_11_5_3">DS.11.5.3</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_DS_11_5_4"><a href="#DRS_DS_11_5_4">DS.11.5.4</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+<tr>
+    <td rowspan="1" id="RA_12"><a href="#DRS_12">12</a></td>
+    <td colspan="5">N/A</td>
+</tr>
+
+</table>
+
+<h2 id="TP">Test Plan (TP)</h2>
+
+<table>
+<tr>
+<th style="width: 5%;">RA</th>
+<th>Preparation</th>
+<th>Action</th>
+<th>Expected Result</th>
+</tr>
+<tr>
+    <td rowspan="1" id="TP_5_1-RA1"><a href="#RA_5_1-RA1">5.1-RA1</a></td>
+    <td colspan="3">N/A</td>
+</tr>
+<tr>
+    <td rowspan="3" id="TP_5_2-RA1"><a href="#RA_5_2-RA1">5.2-RA1</a></td>
+    <td colspan="3">Tests:</td>
+</tr>
+<tr>
+    <td colspan="3"><b>5.2-RA1-T1 TestCase::TestName</b><br></td>
+</tr>
+<tr>
+    <td><br></td>
+    <td><br></td>
+    <td><br></td>
+</tr>
+<tr>
+    <td rowspan="1" id="TP_10-RA1"><a href="#RA_10-RA1">10-RA1</a></td>
+    <td colspan="3">N/A</td>
+</tr>
+
+</table>
+
+</body>
+</html>

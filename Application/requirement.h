@@ -16,11 +16,14 @@ class InvalidIndexException : public exception{
 
 };
 
-//! A requirements tree node
-/*!
+/*! A requirements tree node
   This class implements a tree of requirements.
   Each tree node represents one requirement with a
   title and a rich-text description.
+
+  Furthermore it can contain several attributes,
+  links of user-defineable types to other requirements
+  and several risk assessments.
  */
 class Requirement
 {
@@ -51,11 +54,20 @@ public:
     virtual QString number() const;
     virtual void setTitle(const QString &title);
     virtual QString getTitle() const;
+
+    /*! Returns the requirement with its number
+    - Requirements in the topmost level receive simple number
+    - Requirements in deeper levels have numbers of the form "2.3.4"
+    - For Design Requirements the number starts with "DS."
+
+
+    \return QString containing the numbered requirement title
+     */
     virtual QString getNumberedTitle() const;
     virtual QVariant getAttribute(int index) const;
     virtual void setAttribute(int index, const QVariant &value);
 
-    virtual QTextDocument *getDescription();
+    virtual QTextDocument* getDescription();
     virtual shared_ptr<RiskAssessmentModel> getRiskAssessment();
 
     virtual LinkContainer* getLinkContainer();

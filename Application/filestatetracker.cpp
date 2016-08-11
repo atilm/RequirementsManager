@@ -33,10 +33,12 @@ QDir FileStateTracker::dir() const
 
 void FileStateTracker::setFilePath(const QString &path)
 {
-    if(path != _filePath)
-        emit filePathChanged(path);
+    QString previousPath = _filePath;
 
     _filePath = path;
+
+    if(_filePath != previousPath)
+        emit filePathChanged(path);
 }
 
 QString FileStateTracker::toAbsoluteFilePath(const QString relativePath)
@@ -60,8 +62,10 @@ bool FileStateTracker::unsavedChanges() const
 
 void FileStateTracker::setChanged(bool state)
 {
-    if(state != _changed)
-        emit changedStateChanged(state);
+    bool previousState = _changed;
 
     _changed = state;
+
+    if(_changed != previousState)
+        emit changedStateChanged(_changed);
 }

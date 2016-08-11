@@ -10,21 +10,129 @@
         <LinkDeclaration index="0" name="Affects"/>
     </LinkContext>
     <RequirementSpecification>
-        <Requirement id="3" type="UserRequirement" name="Hierarchical structure">
-            <description><![CDATA[Requirements are stored in a tree structure of arbitrary depth. The following editing actions are possible <ul><li>adding and removing requirements</li><li>moving requirements</li><li>copying requirements</li></ul>]]></description>
-            <Attribute index="0" value="yes"/>
-            <Requirement id="4" type="FunctionalRequirement" name="Display to user">
-                <description><![CDATA[<ul><li>Requirements are displayed in tree form similar to the display of a file system tree.</li><li>It is possible to "collapse nodes" to make their sub-requirements invisible</li></ul>]]></description>
-                <Attribute index="0" value="yes"/>
-                <Requirement id="5" type="DesignRequirement" name="class RequirementsView">
-                    <description><![CDATA[<ul><li>The class RequirementsView is derived from QTreeView and uses its default implementation for data display.</li><li>setModel() is overridden to connect the signal "columnsChanged" to the slot "resizeColumns()"</li></ul>]]></description>
-                    <Attribute index="0" value="yes"/>
+        <Requirement id="70" type="UserRequirement" name="Introduction">
+            <description><![CDATA[The <b>Requirements Manager </b>is a desktop software which allows its user to<ul><li>Organize the requirements of (software) projects in a tree structure</li><li>Describe the requirements in rich text format</li><li>Document, which classes and functions implement a requirement</li><li>Assess the risk of requirements and of their implementation</li><li>Document, which tests are in place to mitigate a given risk and to verify that a given requirement is fullfilled</li></ul>Class and function declarations are extracted automatically from the source code along with their comments and can be mapped to the requirements they implement.<br><br>The software is written in C++ and based on the Qt library. Therefore it can easily be compiled for use on Linux, Windows and Mac. ]]></description>
+            <Attribute index="0" value="no"/>
+        </Requirement>
+        <Requirement id="71" type="UserRequirement" name="Multi Platform GUI program">
+            <description><![CDATA[The software should run as a desktop application on Windows, Linux and Mac OS and provide a graphical user interface.]]></description>
+            <Attribute index="0" value="no"/>
+            <Requirement id="72" type="FunctionalRequirement" name="C++ and Qt Library">
+                <description><![CDATA[The software is implemented in the C++ programming language and makes use of the Qt framework.]]></description>
+                <Attribute index="0" value="no"/>
+                <Requirement id="73" type="DesignRequirement" name="Compiler MinGW 32 bit">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+                <Requirement id="74" type="DesignRequirement" name="Qt 5.5.1">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
                 </Requirement>
             </Requirement>
         </Requirement>
-        <Requirement id="6" type="UserRequirement" name="The structure is editable">
-            <description><![CDATA[The requirement tree structure can be edited by the user. ]]></description>
-            <Attribute index="0" value="no"/>
+        <Requirement id="3" type="UserRequirement" name="Organizing requirements">
+            <description><![CDATA[<ul><li>The user can describe requirements with a title and a detailed description.</li><li>The requirements can be organized in a hierarchical structure.</li></ul>]]></description>
+            <Attribute index="0" value="yes"/>
+            <Requirement id="75" type="FunctionalRequirement" name="Hierarchical structure">
+                <description><![CDATA[Requirements are stored in a tree structure of arbitrary depth. Each tree node consists of a title and a description.]]></description>
+                <Attribute index="0" value="no"/>
+                <Requirement id="76" type="DesignRequirement" name="Architecture">
+                    <description><![CDATA[]]></description>
+                    <Attribute index="0" value="no"/>
+                </Requirement>
+                <DesignReference id="77" type="DesignRequirement" class="RequirementsModel" func="">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="78" type="DesignRequirement" class="Requirement" func="">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+            </Requirement>
+            <Requirement id="4" type="FunctionalRequirement" name="Display to user">
+                <description><![CDATA[<img src="./RequirementsManagerImages/c04904fd139588fa385e65c1d585e1383fc3b409.png"><ul><li>Requirements are displayed in tree form similar to the display of a file system tree.</li><li>The detailed information about a requirement is displayed in a text field next to the tree view.</li></ul>]]></description>
+                <Attribute index="0" value="yes"/>
+                <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="0" finalDamage="3">
+                    <scenario>A requirement is not shown</scenario>
+                    <mitigationStrategy>Integration Tests</mitigationStrategy>
+                </RiskAssessment>
+                <RiskAssessment initialProbability="1" initialDamage="3" finalProbability="0" finalDamage="3">
+                    <scenario>A requirment title is adulterated</scenario>
+                    <mitigationStrategy>Integration Tests</mitigationStrategy>
+                </RiskAssessment>
+                <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="0" finalDamage="3">
+                    <scenario>A requirement is not numbered correctly
+-&gt; Loss of traceability in documentation</scenario>
+                    <mitigationStrategy>Integration Tests</mitigationStrategy>
+                    <TestReference class="Requirement" func="getNumberedTitle" case="Requirement_getNumberedTitle" name="when_parent_is_root_number_is_child_index"/>
+                    <TestReference class="Requirement" func="getNumberedTitle" case="Requirement_getNumberedTitle" name="number_is_combined_from_parent_number_and_child_index"/>
+                    <TestReference class="Requirement" func="getNumberedTitle" case="Requirement_getNumberedTitle" name="for_design_requirements_number_starts_with_DS"/>
+                </RiskAssessment>
+                <Requirement id="99" type="DesignRequirement" name="Architecture">
+                    <description><![CDATA[<img src="./RequirementsManagerImages/cc05442e4e31bbbc750a4e4aca4880799e74f7fd.png">]]></description>
+                    <Attribute index="0" value="no"/>
+                    <RiskAssessment initialProbability="2" initialDamage="1" finalProbability="0" finalDamage="1">
+                        <scenario>new risk assessment</scenario>
+                        <mitigationStrategy></mitigationStrategy>
+                    </RiskAssessment>
+                </Requirement>
+                <DesignReference id="84" type="DesignRequirement" class="MainWindow" func="injectViews">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="83" type="DesignRequirement" class="RequirementsView" func="setModel">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="85" type="DesignRequirement" class="DescriptionView" func="setModel">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="86" type="DesignRequirement" class="DescriptionView" func="switchItem">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="87" type="DesignRequirement" class="DescriptionView" func="showItem">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="97" type="DesignRequirement" class="RequirementsModel" func="getRequirement">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="98" type="DesignRequirement" class="Requirement" func="getDescription">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="88" type="DesignRequirement" class="RequirementsModel" func="columnCount">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="89" type="DesignRequirement" class="RequirementsModel" func="rowCount">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="90" type="DesignRequirement" class="RequirementsModel" func="data">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="92" type="DesignRequirement" class="RequirementsModel" func="index">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="93" type="DesignRequirement" class="RequirementsModel" func="parent">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="94" type="DesignRequirement" class="RequirementsModel" func="headerData">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="95" type="DesignRequirement" class="RequirementToModelMapper" func="getDisplayRole">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="96" type="DesignRequirement" class="RequirementToModelMapper" func="getHeaderDisplayRole">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
+                <DesignReference id="100" type="DesignRequirement" class="Requirement" func="getNumberedTitle">
+                    <Attribute index="0" value="no"/>
+                    <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="0" finalDamage="3">
+                        <scenario>Design requirements are not numbered correctly
+-&gt; Loss of traceability in documentation</scenario>
+                        <mitigationStrategy>Unit Tests</mitigationStrategy>
+                    </RiskAssessment>
+                    <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="0" finalDamage="3">
+                        <scenario>Ordinary requirments are not numbered correctly
+-&gt; Loss of traceability in documentation</scenario>
+                        <mitigationStrategy>Unit Tests</mitigationStrategy>
+                    </RiskAssessment>
+                </DesignReference>
+            </Requirement>
             <Requirement id="7" type="FunctionalRequirement" name="Edit titles">
                 <description><![CDATA[The requirements' titles can be edited by double-clicking on a requirement or by selecting the requirement and pressing F2. ]]></description>
                 <Attribute index="0" value="yes"/>
@@ -52,6 +160,17 @@
             <Requirement id="13" type="FunctionalRequirement" name="Copying">
                 <description><![CDATA[Requirements can be copied within the tree view by drag and drop with the keyboard modifier 'ctrl'. ]]></description>
                 <Attribute index="0" value="no"/>
+            </Requirement>
+        </Requirement>
+        <Requirement id="79" type="UserRequirement" name="Traceability of requirements">
+            <description><![CDATA[Requirements should be traceable throughout the whole project life cycle.]]></description>
+            <Attribute index="0" value="no"/>
+            <Requirement id="80" type="FunctionalRequirement" name="Unique ID numbers for requirements">
+                <description><![CDATA[A unique and permanent ID number is assigned to each requirement.]]></description>
+                <Attribute index="0" value="no"/>
+                <DesignReference id="81" type="DesignRequirement" class="UniqueIDManager" func="">
+                    <Attribute index="0" value="no"/>
+                </DesignReference>
             </Requirement>
         </Requirement>
         <Requirement id="14" type="UserRequirement" name="Requirement types">
@@ -186,22 +305,6 @@
             <Link group="0" id="35"/>
             <Link group="0" id="17"/>
             <Link group="0" id="14"/>
-            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
-                <scenario>new risk assessment</scenario>
-                <mitigationStrategy></mitigationStrategy>
-            </RiskAssessment>
-            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
-                <scenario>new risk assessment</scenario>
-                <mitigationStrategy></mitigationStrategy>
-            </RiskAssessment>
-            <RiskAssessment initialProbability="3" initialDamage="3" finalProbability="3" finalDamage="3">
-                <scenario>new risk assessment</scenario>
-                <mitigationStrategy></mitigationStrategy>
-            </RiskAssessment>
-            <RiskAssessment initialProbability="2" initialDamage="3" finalProbability="2" finalDamage="3">
-                <scenario>Entered data is adulterated</scenario>
-                <mitigationStrategy>Unit Tests</mitigationStrategy>
-            </RiskAssessment>
             <Requirement id="41" type="FunctionalRequirement" name="Display">
                 <description><![CDATA[When a requirement in the tree view is selected, the table view "Risks" is updated with the list of risks related to this requirement. Each entry in the "Risks" view consists of the following fields Title | Initial risk (text (high, acceptable, low) and color coded (red, yellow, green)) | Final risk When a risk in the list is selected, a detailed report of the risk is shown in the "Risk / Action Description" text view. ]]></description>
                 <Attribute index="0" value="yes"/>
@@ -264,6 +367,10 @@
                 <description><![CDATA[]]></description>
                 <Attribute index="0" value="no"/>
             </Requirement>
+        </Requirement>
+        <Requirement id="82" type="UserRequirement" name="Detecting changes in source code">
+            <description><![CDATA[The software constantly observes all source code and test code files. When a file has changed, the user is asked if he wants to update the information.]]></description>
+            <Attribute index="0" value="no"/>
         </Requirement>
         <Requirement id="23" type="UserRequirement" name="Saving and Loading of Projects">
             <description><![CDATA[All information edited in the software can be saved to file and loaded again. ]]></description>

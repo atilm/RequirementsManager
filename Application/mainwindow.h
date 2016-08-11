@@ -83,7 +83,7 @@ private:
 
 private slots:
     void handleFilePathChanged(const QString &fPath);
-    void handleChangedStateChanged(bool unsavedChanges);
+    void handleChangedStateChanged();
     void setSplitterBehaviour();
 };
 

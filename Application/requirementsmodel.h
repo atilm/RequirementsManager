@@ -13,6 +13,12 @@ class InvalidModelIndexException : public std::exception{
 
 };
 
+/*! Editable tree data model for the requirements
+
+  The class RequirementsModel extends the class QAbstractItemModel.
+  It holds the root pointer to a tree structure and provides access
+  and edit functions to it, which work together with the Qt view classes.
+ */
 class RequirementsModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -33,8 +39,8 @@ public:
     virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;
     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const ;
     virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-    virtual QModelIndex	index(int row, int column, const QModelIndex & parent = QModelIndex()) const;
-    virtual QModelIndex	parent(const QModelIndex & index) const;
+    virtual QModelIndex	 index(int row, int column, const QModelIndex & parent = QModelIndex()) const;
+    virtual QModelIndex	 parent(const QModelIndex & index) const;
 
     // additional overriden functions
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -53,15 +59,9 @@ public:
                                     Requirement::Type type = Requirement::UserRequirement,
                                     uint requestedID = 0);
 
-    /*!
-     \brief insertChild
-     \param newItem
-     \param index
-     \param beforeRow
+    /*! Insert a requirement before the given row under the given parent
 
      If beforeRow = -1, the item is appended to the end.
-
-     \return
      */
     virtual QModelIndex insertChild(Requirement *newItem,
                                     const QModelIndex &parentIndex,
@@ -75,6 +75,7 @@ public:
     virtual QTextDocument* getDescription(const QModelIndex &index);
     virtual shared_ptr<RiskAssessmentModel> getRiskAssessment(const QModelIndex &index);
     virtual LinkContainer* getLinkContainer(const QModelIndex &index);
+
 signals:
     void columnsChanged();
     void requirementRemoved(unsigned int id);
