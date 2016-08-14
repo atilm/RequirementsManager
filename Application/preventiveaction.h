@@ -1,4 +1,4 @@
-#ifndef PREVENTIVEACTION_H
+ #ifndef PREVENTIVEACTION_H
 #define PREVENTIVEACTION_H
 
 #include <QString>

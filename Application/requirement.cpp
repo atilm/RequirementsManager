@@ -235,8 +235,10 @@ void Requirement::assertValidIndex(int index)
     }
 }
 
-void Requirement::initialize(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                             AttributeContainer *attributes, LinkContainer *links)
+void Requirement::initialize(UniqueIDManager *idManager,
+                             shared_ptr<RiskAssessmentModel> riskAssessment,
+                             AttributeContainer *attributes,
+                             LinkContainer *links)
 {
     this->attributes = attributes;
     this->links = links;
@@ -244,7 +246,7 @@ void Requirement::initialize(UniqueIDManager *idManager, shared_ptr<RiskAssessme
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     this->idManager->setRequirement(id, this);
-    parent = NULL;
+    parent = nullptr;
 
     type = UserRequirement;
     title = "Requirement";

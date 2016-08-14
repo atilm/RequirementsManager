@@ -106,8 +106,10 @@ protected:
     shared_ptr<RiskAssessmentModel> riskAssessment;
 
     void assertValidIndex(int index);
-    void initialize(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                    AttributeContainer *attributes, LinkContainer *links);
+    void initialize(UniqueIDManager *idManager,
+                    shared_ptr<RiskAssessmentModel> riskAssessment,
+                    AttributeContainer *attributes,
+                    LinkContainer *links);
     bool sameTypeGroup(Type a, Type b) const;
 };
 
