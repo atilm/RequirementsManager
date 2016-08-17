@@ -35,7 +35,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Probability of appearence</string>
+      <string>Probability of appearance</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

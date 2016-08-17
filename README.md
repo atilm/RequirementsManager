@@ -7,7 +7,7 @@ imported source code comments can be used.
 
 The program implements a simple risk assessment procedure, which helps you to focus test effort on the most critical
 parts of your project. Test documentation can be imported from the source code and assigned to the risks they mitigate.
-The implemented structure provides full traceability of the test and risks back their corresponding requirements.
+The implemented structure provides full traceability of the tests and risks back their corresponding requirements.
 
 ![Application Screenshot](Documentation/Images/00_AppOverview.PNG)
 
