@@ -128,7 +128,7 @@ void ProjectFileController::load()
             emit fileLoaded();
         }
         catch(...){
-            QMessageBox::information(0, tr("Error"), tr("The file could not be loaded."));
+            messageBox->showInfoBox(0, tr("Error"), tr("The file could not be loaded."));
         }
     }
 }

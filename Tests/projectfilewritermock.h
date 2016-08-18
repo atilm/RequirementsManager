@@ -8,7 +8,7 @@ class ProjectFileWriterMock : public ProjectFileWriter {
  public:
     ProjectFileWriterMock() : ProjectFileWriter(NULL, NULL, NULL) {}
 
-    MOCK_METHOD2(save, void (RequirementsModel *model, QFileAdapter *file));
+    MOCK_METHOD2(save, void (ProjectFileController *fileController, QFileAdapter *file));
 };
 
 #endif // PROJECTFILEWRITERMOCK_H

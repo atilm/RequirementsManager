@@ -31,7 +31,8 @@ HEADERS += \
     attributecontainermock.h \
     mockattributecontainerfactory.h \
     riskassessmentmodelmock.h \
-    linkcontainermock.h
+    linkcontainermock.h \
+    directorylistmodelmock.h
 
 INCLUDEPATH += $$PWD/../Application/
 
@@ -67,7 +68,9 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/riskmodel.o \
         $$PWD/../Application/release/moc_riskmodel.o \
         $$PWD/../Application/release/riskassessment.o \
-        $$PWD/../Application/release/designreference.o
+        $$PWD/../Application/release/designreference.o \
+        $$PWD/../Application/release/directorylistmodel.o \
+        $$PWD/../Application/release/moc_directorylistmodel.o
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 
