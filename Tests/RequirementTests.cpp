@@ -20,7 +20,7 @@ protected:
     RequirementTests(){
         rng = std::mt19937(rd());
         idManager = new UniqueIDManager();
-        riskAssessmentModelMock = shared_ptr<RiskAssessmentModelMock>(new RiskAssessmentModelMock());
+        riskAssessmentModelMock = make_shared<RiskAssessmentModelMock>();
         attributesMock = new AttributeContainerMock();
         linksMock = new LinkContainerMock();
     }
@@ -37,10 +37,10 @@ protected:
     Requirement *newRequirement(unsigned int proposedID = -1){
         if(proposedID == -1)
             return new Requirement(idManager, riskAssessmentModelMock,
-                                   attributesMock, linksMock);
+                                   new AttributeContainerMock(), new LinkContainerMock());
         else{
             return new Requirement(idManager, riskAssessmentModelMock,
-                                   attributesMock, linksMock,
+                                   new AttributeContainerMock(), new LinkContainerMock(),
                                    proposedID);
         }
     }
@@ -104,20 +104,27 @@ When the parent is the root element, the requirement's number
 is its index within the parent's children plus 1.
 
 PREPARATION
-- Create a mock requirement "parentMock"
-- Create an object "requirement" with its parent set to "parentMock"
-- Prepare "parentMock" to return an empty string from number()
-- Prepare "parentMock" to return 4 from displayIndexOf(_)
-- Set requirement's title to "test title"
 
 ACTION
-- Call requirement.getNumberedTitle()
 
 RESULT
-- The function returns "4 test title"
+
 */
 TEST_F(Requirement_getNumberedTitle, when_parent_is_root_number_is_child_index){
-    EXPECT_TRUE(false);
+    Requirement *parent = newRequirement();
+    Requirement *child1 = newRequirement();
+    Requirement *child2 = newRequirement();
+    Requirement *child3 = newRequirement();
+
+    parent->appendChild(child1);
+    parent->appendChild(child2);
+    parent->appendChild(child3);
+
+    EXPECT_EQ(QString("1 Requirement"), child1->getNumberedTitle());
+    EXPECT_EQ(QString("2 Requirement"), child2->getNumberedTitle());
+    EXPECT_EQ(QString("3 Requirement"), child3->getNumberedTitle());
+
+    delete parent;
 }
 
 /*! TEST_SPEC Requirement::getNumberedTitle()
@@ -127,20 +134,31 @@ is combined from the parent's number and the requirement's
 index within the parent's children plus 1.
 
 PREPARATION
-- Create a mock requirement "parentMock"
-- Create an object "requirement" with its parent set to "parentMock"
-- Prepare "parentMock" to return "2.3" from number()
-- Prepare "parentMock" to return 5 from displayIndexOf(_)
-- Set requirement's title to "test title"
 
 ACTION
-- Call requirement.getNumberedTitle()
 
 RESULT
-- The function returns "2.3.5 test title"
+
 */
 TEST_F(Requirement_getNumberedTitle, number_is_combined_from_parent_number_and_child_index){
-    EXPECT_TRUE(false);
+    Requirement *root = newRequirement();
+    Requirement *lastChild;
+
+    for(int i=0;i<3;i++){
+        lastChild = newRequirement();
+        root->appendChild(lastChild);
+    }
+
+    for(int i=0;i<4;i++){
+        lastChild->appendChild(newRequirement());
+    }
+
+    Requirement *child = newRequirement();
+    lastChild->appendChild(child);
+
+    EXPECT_EQ(QString("3.5 Requirement"), child->getNumberedTitle());
+
+    delete root;
 }
 
 /*! TEST_SPEC Requirement::getNumberedTitle()
@@ -149,19 +167,66 @@ When the requirement is a "DesignRequirement" the requirement's
 title number begins with "DS.".
 
 PREPARATION
-- Create a mock requirement "parentMock"
-- Create an object "requirement" with its parent set to "parentMock"
-- Make the "requirement" a DesignRequirement
-- Prepare "parentMock" to return "1.4" from number()
-- Prepare "parentMock" to return 7 from displayIndexOf(_)
-- Set requirement's title to "test title"
 
 ACTION
-- Call requirement.getNumberedTitle()
 
 RESULT
-- The function returns "DS.1.4.7 test title"
+
 */
 TEST_F(Requirement_getNumberedTitle, for_design_requirements_number_starts_with_DS){
-    EXPECT_TRUE(false);
+    Requirement *root = newRequirement();
+    Requirement *lastChild;
+
+    for(int i=0;i<5;i++){
+        lastChild = newRequirement();
+        root->appendChild(lastChild);
+    }
+
+    Requirement *child = newRequirement();
+    lastChild->appendChild(child);
+
+    child->setType(Requirement::DesignRequirement);
+
+    EXPECT_EQ(QString("DS.5.1 Requirement"), child->getNumberedTitle());
+
+    delete root;
+}
+
+/*! TEST_SPEC Requirement::getNumberedTitle()
+SHORT
+When the requirement is a "DesignRequirement" the requirement's
+title number begins with "DS.".
+
+PREPARATION
+
+ACTION
+
+RESULT
+
+*/
+TEST_F(Requirement_getNumberedTitle, for_design_requirements_numbering_is_parallel_to_functional_requirements){
+    Requirement *root = newRequirement();
+    Requirement *lastChild;
+
+    for(int i=0;i<2;i++){
+        lastChild = newRequirement();
+        root->appendChild(lastChild);
+    }
+
+    for(int i=0;i<5;i++){
+        lastChild->appendChild(newRequirement());
+    }
+
+    Requirement *child = newRequirement();
+    lastChild->appendChild(child);
+
+    child->setType(Requirement::DesignRequirement);
+
+    // The numbers 2.1 to 2.5 exist as well,
+    // but the counting for DS-numbers starts
+    // at DS.2.1 independently:
+
+    EXPECT_EQ(QString("DS.2.1 Requirement"), child->getNumberedTitle());
+
+    delete root;
 }

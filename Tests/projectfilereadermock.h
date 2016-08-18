@@ -8,7 +8,7 @@ class ProjectFileReaderMock : public ProjectFileReader {
  public:
     ProjectFileReaderMock() : ProjectFileReader(NULL, NULL) {}
 
-    MOCK_METHOD2(load, void (RequirementsModel *model, QFileAdapter *file));
+    MOCK_METHOD2(load, void (ProjectFileController *fileController, QFileAdapter *file));
 };
 
 #endif // PROJECTFILEREADERMOCK_H

@@ -94,6 +94,10 @@ protected:
                 .Times(AtLeast(0));
         EXPECT_CALL(*settingsMock, setDirectory(_))
                 .Times(AtLeast(0));
+        EXPECT_CALL(*sourceDirsMock, clear())
+                .Times(AtLeast(0));
+        EXPECT_CALL(*testDirsMock, clear())
+                .Times(AtLeast(0));
     }
 };
 
