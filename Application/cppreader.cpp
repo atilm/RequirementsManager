@@ -49,6 +49,7 @@ QStringList CppReader::getFilePaths() const
 void CppReader::nextLine()
 {
     currentLine = inStream->readLine().trimmed();
+    qDebug()  << currentLine;
 }
 
 void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)

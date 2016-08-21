@@ -23,7 +23,8 @@ SOURCES += \
     qcoreapplicationadapter.cpp \
     qxmlstreamwriteradapter.cpp \
     qplaintexteditadapter.cpp \
-    qlineeditadapter.cpp
+    qlineeditadapter.cpp \
+    instreamprogrammer.cpp
 
 HEADERS += \
     qtextstreamadapter.h \
@@ -49,7 +50,8 @@ HEADERS += \
     qxmlstreamwriteradapter.h \
     QXmlStreamWriterMock.h \
     qplaintexteditadapter.h \
-    qlineeditadapter.h
+    qlineeditadapter.h \
+    instreamprogrammer.h
 unix:!symbian {
     maemo5 {
         target.path = /opt/usr/lib
@@ -61,10 +63,10 @@ unix:!symbian {
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 
-INCLUDEPATH += $$PWD/../gtest/include/gtest
-DEPENDPATH += $$PWD/../gtest/include/gtest
-INCLUDEPATH += $$PWD/../gtest/include/gmock
-DEPENDPATH += $$PWD/../gtest/include/gmock
+INCLUDEPATH += $$PWD/../gtest/include
+DEPENDPATH += $$PWD/../gtest/include
+INCLUDEPATH += $$PWD/../gtest/include
+DEPENDPATH += $$PWD/../gtest/include
 
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../gtest/gmock.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../gtest/libgmock.a

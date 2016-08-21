@@ -15,8 +15,8 @@ public:
 signals:
 
 public slots:
-    void setFilePathChanged(const QString &s);
-    void setChangedStateChanged(bool state);
+    void setFilePathChanged(const QString &);
+    void setChangedStateChanged(bool);
 
 };
 

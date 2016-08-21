@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     filestatetrackertests.cpp \
     eventlistener.cpp \
     appsettingstests.cpp \
-    mockattributecontainerfactory.cpp
+    mockattributecontainerfactory.cpp \
+    cppreadertests.cpp
 
 HEADERS += \
     projectfilereadermock.h \
@@ -70,7 +71,14 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/riskassessment.o \
         $$PWD/../Application/release/designreference.o \
         $$PWD/../Application/release/directorylistmodel.o \
-        $$PWD/../Application/release/moc_directorylistmodel.o
+        $$PWD/../Application/release/moc_directorylistmodel.o \
+        $$PWD/../Application/release/cppreader.o \
+        $$PWD/../Application/release/sourcenode.o \
+        $$PWD/../Application/release/functionnode.o \
+        $$PWD/../Application/release/testnode.o \
+        $$PWD/../Application/release/classnode.o \
+        $$PWD/../Application/release/sourcecodemodel.o \
+        $$PWD/../Application/release/moc_sourcecodemodel.o \
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 

@@ -7,10 +7,10 @@ EventListener::EventListener(QObject *parent) :
     changeStateChanged_called = false;
 }
 
-void EventListener::setFilePathChanged(const QString &s) {
+void EventListener::setFilePathChanged(const QString &) {
     filePathChanged_called = true;
 }
 
-void EventListener::setChangedStateChanged(bool state) {
+void EventListener::setChangedStateChanged(bool) {
     changeStateChanged_called = true;
 }
