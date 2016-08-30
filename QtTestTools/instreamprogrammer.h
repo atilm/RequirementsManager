@@ -4,6 +4,7 @@
 #include "QTextStreamAdapterMock.h"
 
 #include <QStringList>
+using ::testing::Sequence;
 
 class InStreamProgrammer
 {
@@ -23,6 +24,7 @@ public:
      */
     static void prepareSream(QTextStreamAdapterMock *stream,
                              const QStringList &lines,
+                             Sequence seq,
                              int fileEndAfterNLines = -1);
 };
 

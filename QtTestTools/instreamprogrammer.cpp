@@ -4,6 +4,7 @@ using ::testing::Return;
 
 void InStreamProgrammer::prepareSream(QTextStreamAdapterMock *stream,
                                       const QStringList &lines,
+                                      Sequence seq,
                                       int fileEndAfterNLines)
 {
     QListIterator<QString> it(lines);
@@ -13,6 +14,7 @@ void InStreamProgrammer::prepareSream(QTextStreamAdapterMock *stream,
         QString s = it.previous();
 
         EXPECT_CALL(*stream, readLine())
+                .InSequence(seq)
                 .WillOnce(Return(s));
     }
 

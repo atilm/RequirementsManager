@@ -33,7 +33,8 @@ HEADERS += \
     mockattributecontainerfactory.h \
     riskassessmentmodelmock.h \
     linkcontainermock.h \
-    directorylistmodelmock.h
+    directorylistmodelmock.h \
+    directorylistermock.h
 
 INCLUDEPATH += $$PWD/../Application/
 
@@ -79,6 +80,7 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/classnode.o \
         $$PWD/../Application/release/sourcecodemodel.o \
         $$PWD/../Application/release/moc_sourcecodemodel.o \
+        $$PWD/../Application/release/directorylister.o \
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 

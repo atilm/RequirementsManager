@@ -94,7 +94,8 @@ SOURCES += main.cpp\
     riskscenariotextedit.cpp \
     testnamelineedit.cpp \
     aboutbox.cpp \
-    version.cpp
+    version.cpp \
+    directorylister.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -162,7 +163,8 @@ HEADERS  += mainwindow.h \
     riskscenariotextedit.h \
     testnamelineedit.h \
     aboutbox.h \
-    version.h
+    version.h \
+    directorylister.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

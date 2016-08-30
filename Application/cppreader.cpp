@@ -10,11 +10,13 @@
 #include <QRegularExpressionMatch>
 
 CppReader::CppReader(QFileAdapter *file,
-                     QTextStreamAdapter *inStream)
+                     QTextStreamAdapter *inStream,
+                     shared_ptr<DirectoryLister> dirLister)
 {
     model = nullptr;
     this->file = file;
     this->inStream = inStream;
+    this->dirLister = dirLister;
 }
 
 CppReader::~CppReader()
@@ -49,7 +51,6 @@ QStringList CppReader::getFilePaths() const
 void CppReader::nextLine()
 {
     currentLine = inStream->readLine().trimmed();
-    qDebug()  << currentLine;
 }
 
 void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)
@@ -70,22 +71,7 @@ void CppReader::parseSourceFilesInDirectory(const QString &dirPath)
 
 QStringList CppReader::listHeaderFiles(const QString &dirPath)
 {
-    QStringList headerFiles;
-
-    QStringList nameFilters;
-    nameFilters << "*.h";
-
-
-    QDir dir(dirPath);
-    QFileInfoList entries = dir.entryInfoList(nameFilters, QDir::Files);
-
-    for(int f=0;f<entries.count();f++){
-        QFileInfo entry = entries[f];
-        if(!entry.fileName().contains("ui_"))
-            headerFiles << entry.absoluteFilePath();
-    }
-
-    return headerFiles;
+    return dirLister->listFiles(dirPath, "^(?!ui_).+\\.h");
 }
 
 void CppReader::extractClassesFromFile(const QString &filePath)
@@ -241,21 +227,7 @@ void CppReader::parseTestFilesInDirectory(const QString &dirPath)
 
 QStringList CppReader::listCppFiles(const QString &dirPath)
 {
-    QStringList cppFiles;
-
-    QStringList nameFilters;
-    nameFilters << "*.cpp";
-
-
-    QDir dir(dirPath);
-    QFileInfoList entries = dir.entryInfoList(nameFilters, QDir::Files);
-
-    for(int f=0;f<entries.count();f++){
-        QFileInfo entry = entries[f];
-        cppFiles << entry.absoluteFilePath();
-    }
-
-    return cppFiles;
+    return dirLister->listFiles(dirPath, ".+\\.cpp");
 }
 
 void CppReader::extractTestsFromFile(const QString &dirPath)

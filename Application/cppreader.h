@@ -1,17 +1,22 @@
 #ifndef CPPREADER_H
 #define CPPREADER_H
 
+#include "directorylister.h"
 #include "isourcecodereader.h"
 #include "sourcecodemodel.h"
 #include "qfileadapter.h"
 #include "qtextstreamadapter.h"
 #include "testnode.h"
 
+#include <memory>
+using namespace std;
+
 class CppReader : public ISourceCodeReader
 {
 public:
     CppReader(QFileAdapter *file,
-              QTextStreamAdapter *inStream);
+              QTextStreamAdapter *inStream,
+              shared_ptr<DirectoryLister> dirLister);
     virtual ~CppReader();
 
     /*! Get the reader's programming language name
@@ -27,6 +32,7 @@ private:
     SourceCodeModel *model;
     QFileAdapter *file;
     QTextStreamAdapter *inStream;
+    shared_ptr<DirectoryLister> dirLister;
     QString currentLine;
     QString lineBuffer;
     QStringList headerFiles;

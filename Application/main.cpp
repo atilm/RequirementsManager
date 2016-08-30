@@ -83,7 +83,8 @@ int main(int argc, char *argv[])
 
     SourceCodeReaderProvider *readerProvider = new SourceCodeReaderProvider();
     readerProvider->addReader(new CppReader(new QFileAdapter(),
-                                            new QTextStreamAdapter()));
+                                            new QTextStreamAdapter(),
+                                            make_shared<DirectoryLister>(make_shared<QDir>())));
 
     SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
                                                         fileController,
