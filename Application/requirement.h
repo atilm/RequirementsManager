@@ -1,8 +1,9 @@
 #ifndef REQUIREMENT_H
 #define REQUIREMENT_H
 
-#include "uniqueidmanager.h"
+#include "appsettings.h"
 #include "attributecontainer.h"
+#include "uniqueidmanager.h"
 #include "linkcontainer.h"
 #include "riskassessmentmodel.h"
 
@@ -36,10 +37,11 @@ public:
     };
 
     Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                AttributeContainer *attributes, LinkContainer *links);
+                AttributeContainer *attributes, LinkContainer *links,
+                AppSettings *settings);
     Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links,
-                unsigned int proposedID);
+                AppSettings *settings, unsigned int proposedID);
     virtual ~Requirement();
 
     virtual uint getID();
@@ -102,6 +104,7 @@ protected:
     QTextDocument *description;
     AttributeContainer *attributes;
     LinkContainer *links;
+    AppSettings *settings;
 
     shared_ptr<RiskAssessmentModel> riskAssessment;
 
@@ -109,7 +112,8 @@ protected:
     void initialize(UniqueIDManager *idManager,
                     shared_ptr<RiskAssessmentModel> riskAssessment,
                     AttributeContainer *attributes,
-                    LinkContainer *links);
+                    LinkContainer *links,
+                    AppSettings *settings);
     bool sameTypeGroup(Type a, Type b) const;
 };
 

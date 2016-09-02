@@ -1,7 +1,8 @@
 #include "gtest/gtest.h"
+#include "appsettings.h"
+#include "attributecontainermock.h"
 #include "requirement.h"
 #include "riskassessmentmodelmock.h"
-#include "attributecontainermock.h"
 #include "linkcontainermock.h"
 #include <iostream>
 #include <random>
@@ -16,6 +17,7 @@ protected:
     shared_ptr<RiskAssessmentModelMock> riskAssessmentModelMock;
     AttributeContainerMock *attributesMock;
     LinkContainerMock *linksMock;
+    AppSettings *settings;
 
     RequirementTests(){
         rng = std::mt19937(rd());
@@ -23,10 +25,12 @@ protected:
         riskAssessmentModelMock = make_shared<RiskAssessmentModelMock>();
         attributesMock = new AttributeContainerMock();
         linksMock = new LinkContainerMock();
+        settings = new AppSettings();
     }
 
     virtual ~RequirementTests(){
         delete idManager;
+        delete settings;
     }
 
     uint getRandomID(){
@@ -37,11 +41,12 @@ protected:
     Requirement *newRequirement(unsigned int proposedID = -1){
         if(proposedID == -1)
             return new Requirement(idManager, riskAssessmentModelMock,
-                                   new AttributeContainerMock(), new LinkContainerMock());
+                                   new AttributeContainerMock(), new LinkContainerMock(),
+                                   settings);
         else{
             return new Requirement(idManager, riskAssessmentModelMock,
                                    new AttributeContainerMock(), new LinkContainerMock(),
-                                   proposedID);
+                                   settings, proposedID);
         }
     }
 };
@@ -63,7 +68,8 @@ TEST_F(RequirementTests, when_inserting_a_child_an_item_sets_itself_as_parent){
     Requirement *child = new Requirement(idManager,
                                          shared_ptr<RiskAssessmentModelMock>(new RiskAssessmentModelMock()),
                                          new AttributeContainerMock(),
-                                         new LinkContainerMock());
+                                         new LinkContainerMock(),
+                                         settings);
 
     parent->appendChild(child);
 

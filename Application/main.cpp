@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     AppSettings *appSettings = new AppSettings();
+    appSettings->load();
+
     shared_ptr<FileStateTracker> fileState(make_shared<FileStateTracker>());
     RichTextResourceManager *docResourcesManager = new RichTextResourceManager(fileState);
 
@@ -99,7 +101,7 @@ int main(int argc, char *argv[])
                                                                       0);
     RequirementFactory *factory = new RequirementFactory(fileState, idManager,
                                                          attributes, links,
-                                                         sourceController);
+                                                         sourceController, appSettings);
     PreventiveActionFactory *actionFactory = new PreventiveActionFactory(fileState,
                                                                          sourceController);
 

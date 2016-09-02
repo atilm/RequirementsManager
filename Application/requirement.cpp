@@ -2,18 +2,18 @@
 #include <QDebug>
 
 Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                         AttributeContainer *attributes, LinkContainer *links) :
+                         AttributeContainer *attributes, LinkContainer *links, AppSettings *settings) :
     id(idManager->newUniqueID())
 {
-    initialize(idManager, riskAssessment, attributes, links);
+    initialize(idManager, riskAssessment, attributes, links, settings);
 }
 
 Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                         AttributeContainer *attributes, LinkContainer *links,
+                         AttributeContainer *attributes, LinkContainer *links, AppSettings *settings,
                          unsigned int proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
-    initialize(idManager, riskAssessment, attributes, links);
+    initialize(idManager, riskAssessment, attributes, links, settings);
 }
 
 Requirement::~Requirement()
@@ -60,9 +60,14 @@ QString Requirement::getTitle() const
 
 QString Requirement::getNumberedTitle() const
 {
-    return QString("%1 [%2] %3")
+    QString idString;
+    if(settings->idIsVisible()){
+        idString = QString("[%1] ").arg(id, 3, 10, QChar('0'));
+    }
+
+    return QString("%1 %2%3")
             .arg(number())
-            .arg(id, 3, 10, QChar('0'))
+            .arg(idString)
             .arg(title);
 }
 
@@ -239,8 +244,9 @@ void Requirement::assertValidIndex(int index)
 void Requirement::initialize(UniqueIDManager *idManager,
                              shared_ptr<RiskAssessmentModel> riskAssessment,
                              AttributeContainer *attributes,
-                             LinkContainer *links)
+                             LinkContainer *links, AppSettings *settings)
 {
+    this->settings = settings;
     this->attributes = attributes;
     this->links = links;
     this->links->setOwner(this);

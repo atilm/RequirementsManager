@@ -1,10 +1,11 @@
 #ifndef REQUIREMENTFACTORY_H
 #define REQUIREMENTFACTORY_H
 
+#include "appsettings.h"
+#include "attributecontainerfactory.h"
 #include "uniqueidmanager.h"
 #include "requirement.h"
 #include "designreference.h"
-#include "attributecontainerfactory.h"
 #include "linkcontainerfactory.h"
 #include "riskassessmentfactory.h"
 #include "filestatetracker.h"
@@ -18,7 +19,8 @@ public:
                        UniqueIDManager *idManager,
                        AttributeContainerFactory *attrContainerFactory,
                        LinkContainerFactory *linkContainerFactory,
-                       SourceCodeController *sourceController);
+                       SourceCodeController *sourceController,
+                       AppSettings *settings);
     virtual ~RequirementFactory();
 
     Requirement* newRequirement(Requirement *parent = 0);
@@ -34,6 +36,7 @@ private:
     LinkContainerFactory *linkContainerFactory;
     UniqueIDManager *idManager;
     SourceCodeController *sourceController;
+    AppSettings *settings;
 };
 
 #endif // REQUIREMENTFACTORY_H

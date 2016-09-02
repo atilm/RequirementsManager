@@ -5,7 +5,7 @@ RequirementFactory::RequirementFactory(shared_ptr<FileStateTracker> fileState,
                                        UniqueIDManager *idManager,
                                        AttributeContainerFactory *attrContainerFactory,
                                        LinkContainerFactory *linkContainerFactory,
-                                       SourceCodeController *sourceController)
+                                       SourceCodeController *sourceController, AppSettings *settings)
 {
     this->fileState = fileState;
     this->idManager = idManager;
@@ -13,6 +13,7 @@ RequirementFactory::RequirementFactory(shared_ptr<FileStateTracker> fileState,
     this->linkContainerFactory = linkContainerFactory;
     this->sourceController = sourceController;
     this->sourceController->injectRequirementsFactory(this);
+    this->settings = settings;
 }
 
 RequirementFactory::~RequirementFactory()
@@ -27,7 +28,8 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
     Requirement *item = new Requirement(idManager,
                                         raModel,
                                         attrContainerFactory->newContainer(),
-                                        linkContainerFactory->newContainer());
+                                        linkContainerFactory->newContainer(),
+                                        settings);
     item->setParent(parent);
     return item;
 }
@@ -40,6 +42,7 @@ Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Require
                                         raModel,
                                         attrContainerFactory->newContainer(),
                                         linkContainerFactory->newContainer(),
+                                        settings,
                                         proposedID);
     item->setParent(parent);
     return item;
@@ -53,7 +56,8 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
     DesignReference *item = new DesignReference(address, sourceController,
                                                 idManager, raModel,
                                                 attrContainerFactory->newContainer(),
-                                                linkContainerFactory->newContainer());
+                                                linkContainerFactory->newContainer(),
+                                                settings);
     item->setParent(parent);
     return item;
 }
@@ -66,6 +70,7 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address, u
                                                 idManager, raModel,
                                                 attrContainerFactory->newContainer(),
                                                 linkContainerFactory->newContainer(),
+                                                settings,
                                                 proposedID);
     item->setParent(parent);
     return item;

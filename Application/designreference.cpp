@@ -5,8 +5,8 @@ DesignReference::DesignReference(SourceAddress address, SourceCodeController *co
                                  UniqueIDManager *idManager,
                                  shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
-                                 LinkContainer *links)
-    : Requirement(idManager, riskAssessment, attributes, links)
+                                 LinkContainer *links, AppSettings *settings)
+    : Requirement(idManager, riskAssessment, attributes, links, settings)
 {
     initialize(address, controller);
 }
@@ -16,9 +16,9 @@ DesignReference::DesignReference(SourceAddress address,
                                  UniqueIDManager *idManager,
                                  shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
-                                 LinkContainer *links,
+                                 LinkContainer *links, AppSettings *settings,
                                  unsigned int proposedID)
-    : Requirement(idManager, riskAssessment, attributes, links, proposedID)
+    : Requirement(idManager, riskAssessment, attributes, links, settings, proposedID)
 {
     initialize(address, controller);
 }

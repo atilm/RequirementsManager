@@ -8,9 +8,9 @@ AppSettings::AppSettings()
                              "RequirementsManager");
     settings->setUserIniPath("./RequirementsManager.ini");
     defaultDirectory = ".";
+    showIDs = false;
 
     clear();
-    load();
 }
 
 AppSettings::~AppSettings()
@@ -26,11 +26,13 @@ void AppSettings::clear()
 void AppSettings::load()
 {
     startDirectory = settings->value("File/startDir").toString();
+    showIDs = settings->value("Application/showIDs").toBool();
 }
 
 void AppSettings::save()
 {
     settings->setValue("File/startDir", startDirectory);
+    settings->setValue("Application/showIDs", showIDs);
 
     settings->sync();
 }
@@ -43,4 +45,14 @@ QString AppSettings::directory() const
 void AppSettings::setDirectory(const QString &dir)
 {
     startDirectory = dir;
+}
+
+bool AppSettings::idIsVisible() const
+{
+    return showIDs;
+}
+
+void AppSettings::setIDVisible(bool value)
+{
+    showIDs = value;
 }
