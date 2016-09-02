@@ -170,8 +170,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>89</width>
-          <height>119</height>
+          <width>370</width>
+          <height>637</height>
          </rect>
         </property>
         <attribute name="label">
@@ -321,6 +321,7 @@
     <addaction name="actionAttributes"/>
     <addaction name="actionLinkTypes"/>
     <addaction name="actionProjectSettings"/>
+    <addaction name="actionAppSettings"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -561,6 +562,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionAppSettings">
+   <property name="text">
+    <string>Application settings...</string>
    </property>
   </action>
  </widget>

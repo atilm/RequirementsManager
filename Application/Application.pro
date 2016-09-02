@@ -95,7 +95,8 @@ SOURCES += main.cpp\
     testnamelineedit.cpp \
     aboutbox.cpp \
     version.cpp \
-    directorylister.cpp
+    directorylister.cpp \
+    appsettingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -164,7 +165,8 @@ HEADERS  += mainwindow.h \
     testnamelineedit.h \
     aboutbox.h \
     version.h \
-    directorylister.h
+    directorylister.h \
+    appsettingsdialog.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
@@ -174,7 +176,8 @@ FORMS    += mainwindow.ui \
     linkeditor.ui \
     settingsdialog.ui \
     resizeimagedialog.ui \
-    aboutbox.ui
+    aboutbox.ui \
+    appsettingsdialog.ui
 
 RESOURCES += \
     resources.qrc

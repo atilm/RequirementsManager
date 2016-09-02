@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "aboutbox.h"
+#include "appsettingsdialog.h"
 #include "richtextcontroller.h"
 #include "requirementsview.h"
 #include "descriptionview.h"
@@ -47,6 +48,7 @@ public:
                         LinkTypeEditor *linkTypeEditor,
                         LinkController *linkController,
                         SourceCodeController *sourceController,
+                        AppSettingsDialog *appSettingsDialog,
                         SettingsDialog *settingsDialog,
                         ReportController *reportController,
                         QWidget *parent);
@@ -80,6 +82,7 @@ private:
     SourceCodeController *sourceController;
     SettingsDialog *settingsDialog;
     ReportController *reportController;
+    AppSettingsDialog *appSettingsDialog;
 
     void closeEvent(QCloseEvent *);
 

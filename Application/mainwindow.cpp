@@ -11,7 +11,9 @@ MainWindow::MainWindow(ProjectFileController *fileController,
                        AttributeEditor *attributeDialog,
                        RiskAssessmentEditController *riskAssessmentEditController,
                        LinkTypeEditor *linkTypeEditor, LinkController *linkController,
-                       SourceCodeController *sourceController, SettingsDialog *settingsDialog,
+                       SourceCodeController *sourceController,
+                       AppSettingsDialog *appSettingsDialog,
+                       SettingsDialog *settingsDialog,
                        ReportController *reportController,
                        QWidget *parent) :
     QMainWindow(parent),
@@ -34,6 +36,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     this->linkTypeEditor = linkTypeEditor;
     this->linkController = linkController;
     this->settingsDialog = settingsDialog;
+    this->appSettingsDialog = appSettingsDialog;
 
     linkController->setLinkView(ui->linkView);
     linkController->setAddButton(ui->addLinksButton);
@@ -56,6 +59,7 @@ MainWindow::MainWindow(ProjectFileController *fileController,
 
     connect(ui->actionAbout, SIGNAL(triggered()), about, SLOT(show()));
     connect(ui->actionProjectSettings, SIGNAL(triggered()), settingsDialog, SLOT(exec()));
+    connect(ui->actionAppSettings, SIGNAL(triggered(bool)), appSettingsDialog, SLOT(exec()));
     connect(ui->actionLinkTypes, SIGNAL(triggered()), linkTypeEditor, SLOT(exec()));
     connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));

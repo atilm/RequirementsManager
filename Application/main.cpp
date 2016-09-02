@@ -119,11 +119,16 @@ int main(int argc, char *argv[])
     ReportController *reportController = new ReportController(new ReportGeneratorFactory(fileState),
                                                               fileState);
 
+    AppSettingsDialog *appSettingsDialog = new AppSettingsDialog(appSettings);
+
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
                  linkTypeEditor, linkController,
-                 sourceController, settingsDialog,
+                 sourceController,
+                 appSettingsDialog,
+                 settingsDialog,
                  reportController, 0);
+
     w.injectViews(requirementsView, descriptionView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();
