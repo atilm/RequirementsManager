@@ -24,7 +24,8 @@ SOURCES += \
     qxmlstreamwriteradapter.cpp \
     qplaintexteditadapter.cpp \
     qlineeditadapter.cpp \
-    instreamprogrammer.cpp
+    instreamprogrammer.cpp \
+    qtextstreamfake.cpp
 
 HEADERS += \
     qtextstreamadapter.h \
@@ -51,7 +52,8 @@ HEADERS += \
     QXmlStreamWriterMock.h \
     qplaintexteditadapter.h \
     qlineeditadapter.h \
-    instreamprogrammer.h
+    instreamprogrammer.h \
+    qtextstreamfake.h
 unix:!symbian {
     maemo5 {
         target.path = /opt/usr/lib

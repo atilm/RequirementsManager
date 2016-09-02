@@ -60,8 +60,9 @@ QString Requirement::getTitle() const
 
 QString Requirement::getNumberedTitle() const
 {
-    return QString("%1 %2")
+    return QString("%1 [%2] %3")
             .arg(number())
+            .arg(id, 3, 10, QChar('0'))
             .arg(title);
 }
 

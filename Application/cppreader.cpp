@@ -145,11 +145,11 @@ void CppReader::parseClass()
                 parseDesignSpecBlock();
         }
 
-        if(currentLine.startsWith("public:"))
+        if(currentLine.startsWith("public"))
             currentScope = PUBLIC;
-        else if(currentLine.startsWith("private:"))
+        else if(currentLine.startsWith("private"))
             currentScope = PRIVATE;
-        else if(currentLine.startsWith("protected:"))
+        else if(currentLine.startsWith("protected"))
             currentScope = PROTECTED;
     }
     currentScope = PUBLIC;

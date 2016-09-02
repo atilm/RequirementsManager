@@ -25,7 +25,7 @@ public:
     static void prepareSream(QTextStreamAdapterMock *stream,
                              const QStringList &lines,
                              Sequence seq,
-                             int fileEndAfterNLines = -1);
+                             bool noFileEnd = false);
 };
 
 #endif // INSTREAMPROGRAMMER_H

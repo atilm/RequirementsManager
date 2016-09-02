@@ -3,7 +3,7 @@
 #include "directorylistermock.h"
 #include "instreamprogrammer.h"
 #include "QFileAdapterMock.h"
-#include "QTextStreamAdapterMock.h"
+#include "qtextstreamfake.h"
 
 #include <QDebug>
 
@@ -16,7 +16,7 @@ using ::testing::Sequence;
 class CppReaderTests : public ::testing::Test{
 protected:
     QFileAdapterMock *file;
-    QTextStreamAdapterMock *inStream;
+    QTextStreamFake *inStream;
     shared_ptr<DirectoryListerMock> dirLister;
     CppReader *reader;
     shared_ptr<FileStateTracker> state;
@@ -27,7 +27,7 @@ protected:
 
     CppReaderTests(){
         file = new QFileAdapterMock();
-        inStream = new QTextStreamAdapterMock();
+        inStream = new QTextStreamFake();
         dirLister = make_shared<DirectoryListerMock>();
         reader = new CppReader(file, inStream, dirLister);
 
@@ -85,13 +85,12 @@ TEST_F(CppReader_scope, when_private_slots_is_read_the_parsing_mode_becomes_priv
                 << "    void privateSlot();"
                 << "};";
 
-    Sequence s;
-    InStreamProgrammer::prepareSream(inStream, fileContent, s, fileContent.count());
+    inStream->setLines(fileContent);
 
     SourceCodeModel *model = reader->parseSourceCode(sourceDirs, testDirs);
 
     QModelIndex classIdx = model->index(0, 0, QModelIndex());
-    QModelIndex funcIdx = model->index(1, 0, classIdx);
+    QModelIndex funcIdx = model->index(0, 0, classIdx);
 
     EXPECT_EQ(1, model->rowCount(classIdx));
     EXPECT_EQ(QString("publicFunction"), model->data(funcIdx));
@@ -117,13 +116,12 @@ TEST_F(CppReader_scope, when_public_slots_is_read_the_parsing_mode_becomes_publi
                 << "    void publicSlot();"
                 << "};";
 
-    Sequence s;
-    InStreamProgrammer::prepareSream(inStream, fileContent, s, fileContent.count());
+    inStream->setLines(fileContent);
 
     SourceCodeModel *model = reader->parseSourceCode(sourceDirs, testDirs);
 
     QModelIndex classIdx = model->index(0, 0, QModelIndex());
-    QModelIndex funcIdx = model->index(1, 0, classIdx);
+    QModelIndex funcIdx = model->index(0, 0, classIdx);
 
     EXPECT_EQ(1, model->rowCount(classIdx));
     EXPECT_EQ(QString("publicSlot"), model->data(funcIdx));
