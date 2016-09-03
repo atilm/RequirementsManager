@@ -109,19 +109,27 @@ void RichTextController::handleBulletToggled(bool on)
 
 void RichTextController::handleFormatChanged(QTextCharFormat format)
 {
+    blockFormatButtonSignals(true);
     boldAction->setChecked(format.fontWeight() > QFont::Normal);
     italicAction->setChecked(format.fontItalic());
     codeAction->setChecked(format.fontFamily().contains("Courier"));
+    blockFormatButtonSignals(false);
 }
 
 void RichTextController::handleCursorPositionChanged()
 {
     QTextCursor cursor = edit->textCursor();
 
-    if(cursor.currentList())
+    blockFormatButtonSignals(true);
+
+    if(cursor.currentList()){
         bulletAction->setChecked(true);
-    else
+    }
+    else{
         bulletAction->setChecked(false);
+    }
+
+    blockFormatButtonSignals(false);
 }
 
 void RichTextController::handleInsertImage()
@@ -134,5 +142,14 @@ void RichTextController::mergeFormatOnWordOrSelection(const QTextCharFormat &for
     QTextCursor cursor = edit->textCursor();
     cursor.mergeCharFormat(format);
     edit->mergeCurrentCharFormat(format);
+}
+
+void RichTextController::blockFormatButtonSignals(bool on)
+{
+    boldAction->blockSignals(on);
+    italicAction->blockSignals(on);
+    codeAction->blockSignals(on);
+    bulletAction->blockSignals(on);
+    imageAction->blockSignals(on);
 }
 

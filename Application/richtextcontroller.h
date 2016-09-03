@@ -36,6 +36,7 @@ private:
     QAction *imageAction;
 
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
+    void blockFormatButtonSignals(bool on);
 };
 
 #endif // RICHTEXTCONTROLLER_H
