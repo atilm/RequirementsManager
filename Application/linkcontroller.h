@@ -18,12 +18,6 @@ public:
 
     virtual void setLinkView(QTreeView *view);
 
-    /*!
-     * \brief setRequirementsView
-     * \param view
-     *
-     * \todo Is this function called from anywhere?
-     */
     virtual void setRequirementsView(RequirementsView *view);
     virtual void setDescriptionView(DescriptionView *view);
     virtual void setAddButton(QToolButton *button);
@@ -34,8 +28,7 @@ public:
 signals:
 
 public slots:
-    void handleCurrentRequirementChanged(const QModelIndex &current,
-                                         const QModelIndex &previous);
+    void handleCurrentRequirementChanged(const QModelIndex &current, const QModelIndex &);
     void handleAddButtonToggled(bool on);
     void handleRemoveButtonClicked();
     void handleAddRequirementLink(const QModelIndex &index);

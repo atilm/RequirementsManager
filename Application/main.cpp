@@ -99,16 +99,23 @@ int main(int argc, char *argv[])
                                                                       readerProvider,
                                                                       new HtmlGenerator(),
                                                                       0);
-    RequirementFactory *factory = new RequirementFactory(fileState, idManager,
+
+    shared_ptr<PreventiveActionFactory> actionFactory = make_shared<PreventiveActionFactory>(fileState,
+                                                                                             sourceController);
+
+    shared_ptr<RiskAssessmentFactory> raFactory = make_shared<RiskAssessmentFactory>(fileState,
+                                                                                     actionFactory);
+
+    RequirementFactory *factory = new RequirementFactory(fileState, raFactory,idManager,
                                                          attributes, links,
                                                          sourceController, appSettings);
-    PreventiveActionFactory *actionFactory = new PreventiveActionFactory(fileState,
-                                                                         sourceController);
+
 
     reader->injectRequirementFactory(factory);
     reader->injectPreventiveActionFacotry(actionFactory);
 
     RequirementToModelMapper *dataMapper = new RequirementToModelMapper(attributeContext);
+
     shared_ptr<RequirementsModel> requirements(new RequirementsModel(factory,
                                                                      fileState,
                                                                      attributeContext,

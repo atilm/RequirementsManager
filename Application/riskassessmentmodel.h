@@ -13,7 +13,7 @@ class RiskAssessmentModel : public QAbstractTableModel
     Q_OBJECT
 public:
     RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
-                        RiskAssessmentFactory *factory);
+                        shared_ptr<RiskAssessmentFactory> factory);
     virtual ~RiskAssessmentModel();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -27,15 +27,15 @@ public:
 
     virtual shared_ptr<RiskAssessment>  getRiskAssessment(const QModelIndex &index);
 
-    virtual PreventiveActionModel* getPreventiveActions(const QModelIndex &index);
+    virtual shared_ptr<PreventiveActionModel> getPreventiveActions(const QModelIndex &index);
 
 private slots:
     void handleTestModelChanged();
 
 private:
     shared_ptr<FileStateTracker> fileState;
-    RiskAssessmentFactory *factory;
-    QVector<shared_ptr<RiskAssessment> > assessments;
+    shared_ptr<RiskAssessmentFactory> factory;
+    QVector<shared_ptr<RiskAssessment>> assessments;
 
 };
 

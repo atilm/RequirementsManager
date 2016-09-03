@@ -25,7 +25,7 @@ public:
     virtual ~ProjectFileReader();
 
     virtual void injectRequirementFactory(RequirementFactory *factory);
-    virtual void injectPreventiveActionFacotry(PreventiveActionFactory *actionFactory);
+    virtual void injectPreventiveActionFacotry(shared_ptr<PreventiveActionFactory> actionFactory);
     virtual void load(ProjectFileController *fileController, QFileAdapter *file);
 
 private:
@@ -37,7 +37,7 @@ private:
     AttributeContext *attributeContext;
     LinkContext *linkContext;
     RequirementFactory *factory;
-    PreventiveActionFactory *actionFactory;
+    shared_ptr<PreventiveActionFactory> actionFactory;
 
     void readContents();
     void parseProgrammingLanguage();

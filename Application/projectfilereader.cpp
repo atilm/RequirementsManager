@@ -23,7 +23,7 @@ void ProjectFileReader::injectRequirementFactory(RequirementFactory *factory)
     this->factory = factory;
 }
 
-void ProjectFileReader::injectPreventiveActionFacotry(PreventiveActionFactory *actionFactory)
+void ProjectFileReader::injectPreventiveActionFacotry(shared_ptr<PreventiveActionFactory> actionFactory)
 {
     this->actionFactory = actionFactory;
 }
@@ -281,8 +281,8 @@ void ProjectFileReader::parseMitigationStrategy(shared_ptr<RiskAssessment> ra)
 
 void ProjectFileReader::parsePreventiveAction(shared_ptr<RiskAssessment> ra)
 {
-    PreventiveActionModel *actionModel = ra->getPreventiveActions();
-    PreventiveAction *action = actionModel->appendAction();
+    shared_ptr<PreventiveActionModel> actionModel = ra->getPreventiveActions();
+    shared_ptr<PreventiveAction> action = actionModel->appendAction();
 
     action->setTestCase(getAttribute("case"));
     action->setTestName(getAttribute("name"));
@@ -309,7 +309,7 @@ void ProjectFileReader::parsePreventiveAction(shared_ptr<RiskAssessment> ra)
 
 void ProjectFileReader::parseTestReference(shared_ptr<RiskAssessment> ra)
 {
-    PreventiveActionModel *actionModel = ra->getPreventiveActions();
+    shared_ptr<PreventiveActionModel> actionModel = ra->getPreventiveActions();
 
     SourceAddress address;
     address.className = getAttribute("class");
@@ -317,7 +317,7 @@ void ProjectFileReader::parseTestReference(shared_ptr<RiskAssessment> ra)
     address.testCase = getAttribute("case");
     address.testName = getAttribute("name");
 
-    AutomatedTestReference *ref = actionFactory->newTestReference(address);
+    shared_ptr<AutomatedTestReference> ref = actionFactory->newTestReference(address);
 
     actionModel->appendReference(ref);
 }

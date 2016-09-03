@@ -64,7 +64,7 @@ void PreventiveActionDialog::injectWidgets(QLineEditAdapter *testCaseEdit,
     ui->gridLayout->addWidget(expectedResultEdit, row, col, rowSpan, colSpan);
 }
 
-void PreventiveActionDialog::setModel(PreventiveActionModel *model)
+void PreventiveActionDialog::setModel(shared_ptr<PreventiveActionModel> model)
 {
     this->model = model;
 }

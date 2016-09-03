@@ -15,7 +15,7 @@ public:
     explicit PreventiveActionTableView(QWidget *parent = 0);
     virtual ~PreventiveActionTableView();
 
-    virtual void appendTestReference(AutomatedTestReference *testRef);
+    virtual void appendTestReference(shared_ptr<AutomatedTestReference> testRef);
 };
 
 #endif // PREVENTIVEACTIONTABLEVIEW_H

@@ -250,10 +250,10 @@ QString HtmlReportGenerator::getTestPlan(shared_ptr<RiskAssessment> ra, const QS
 {
     QString lines;
 
-    PreventiveActionModel *actions = ra->getPreventiveActions();
+    shared_ptr<PreventiveActionModel> actions = ra->getPreventiveActions();
 
     for(int r=0; r < actions->rowCount(); r++){
-        PreventiveAction *action = actions->getAction(actions->index(r, 0));
+        shared_ptr<PreventiveAction> action = actions->getAction(actions->index(r, 0));
         QString testNumber = constructTestNumber(raNumber, r);
 
         tpTemplate->setField("NUMBER", testNumber);

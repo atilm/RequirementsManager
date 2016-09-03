@@ -12,13 +12,13 @@ PreventiveActionFactory::~PreventiveActionFactory()
 
 }
 
-PreventiveAction *PreventiveActionFactory::newPreventiveAction()
+shared_ptr<PreventiveAction> PreventiveActionFactory::newPreventiveAction()
 {
-    return new PreventiveAction(fileState);
+    return make_shared<PreventiveAction>(fileState);
 }
 
-AutomatedTestReference *PreventiveActionFactory::newTestReference(SourceAddress address)
+shared_ptr<AutomatedTestReference> PreventiveActionFactory::newTestReference(SourceAddress address)
 {
-    return new AutomatedTestReference(address, controller, fileState);
+    return make_shared<AutomatedTestReference>(address, controller, fileState);
 }
 

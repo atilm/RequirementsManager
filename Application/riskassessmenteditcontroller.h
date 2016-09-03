@@ -56,7 +56,7 @@ private:
     RiskTableView *riskView;
     RiskAssessmentDialog *dialog;
     PreventiveActionDialog *actionDialog;
-    PreventiveActionModel *actionModel;
+    shared_ptr<PreventiveActionModel> actionModel;
     PreventiveActionTableView *actionView;
     RiskDescriptionView *descriptionView;
 };

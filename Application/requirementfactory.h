@@ -16,6 +16,7 @@ class RequirementFactory
 {
 public:
     RequirementFactory(shared_ptr<FileStateTracker> fileState,
+                       shared_ptr<RiskAssessmentFactory> raFactory,
                        UniqueIDManager *idManager,
                        AttributeContainerFactory *attrContainerFactory,
                        LinkContainerFactory *linkContainerFactory,
@@ -32,6 +33,7 @@ public:
 
 private:
     shared_ptr<FileStateTracker> fileState;
+    shared_ptr<RiskAssessmentFactory> raFactory;
     AttributeContainerFactory *attrContainerFactory;
     LinkContainerFactory *linkContainerFactory;
     UniqueIDManager *idManager;

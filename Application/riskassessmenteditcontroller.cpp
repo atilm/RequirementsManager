@@ -100,7 +100,7 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
 {
     try{
         actionModel = riskModel->getPreventiveActions(current);
-        actionView->setModel(actionModel);
+        actionView->setModel(actionModel.get());
         actionView->resizeColumnsToContents();
         actionDialog->setModel(actionModel);
         descriptionView->displayRisk(riskModel->getRiskAssessment(current));
@@ -115,7 +115,7 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
 void RiskAssessmentEditController::currentActionChanged(const QModelIndex &current, const QModelIndex &)
 {
     try{
-        PreventiveAction *a = actionModel->getAction(current);
+        shared_ptr<PreventiveAction> a = actionModel->getAction(current);
         descriptionView->displayAction(a);
     }
     catch(const runtime_error &e){
@@ -168,7 +168,7 @@ void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index
     if(!actionModel)
         return;
 
-    PreventiveAction *action = actionModel->getAction(actionView->currentIndex());
+    shared_ptr<PreventiveAction> action = actionModel->getAction(actionView->currentIndex());
 
     if(action->isReference()){
         QMessageBox::information(0, tr("Edit preventive action"),
@@ -182,8 +182,9 @@ void RiskAssessmentEditController::editPreventiveAction(const QModelIndex &index
 
 void RiskAssessmentEditController::actionClicked(const QModelIndex &index)
 {
-    if(index.isValid())
+    if(index.isValid()){
         descriptionView->displayAction(actionModel->getAction(index));
+    }
 }
 
 void RiskAssessmentEditController::riskClicked(const QModelIndex &index)

@@ -3,7 +3,7 @@
 RiskAssessment::RiskAssessment(shared_ptr<FileStateTracker> fileState,
                                RiskModel *initialRisk,
                                RiskModel *finalRisk,
-                               PreventiveActionModel *preventiveActions)
+                               shared_ptr<PreventiveActionModel> preventiveActions)
 {
     this->fileState = fileState;
     this->initial = initialRisk;
@@ -16,7 +16,6 @@ RiskAssessment::~RiskAssessment()
 {
     delete initial;
     delete final;
-    delete preventiveActions;
 }
 
 QString RiskAssessment::shortScenario() const
@@ -75,7 +74,7 @@ RiskModel *RiskAssessment::finalRiskModel() const
     return final;
 }
 
-PreventiveActionModel *RiskAssessment::getPreventiveActions()
+shared_ptr<PreventiveActionModel> RiskAssessment::getPreventiveActions()
 {
     return preventiveActions;
 }

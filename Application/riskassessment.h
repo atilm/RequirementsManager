@@ -6,6 +6,9 @@
 #include "riskmodel.h"
 #include "filestatetracker.h"
 
+#include <memory>
+using namespace std;
+
 class RiskAssessment
 {
 public:
@@ -13,7 +16,7 @@ public:
     RiskAssessment(shared_ptr<FileStateTracker> fileState,
                    RiskModel *initialRisk,
                    RiskModel *finalRisk,
-                   PreventiveActionModel *preventiveActions);
+                   shared_ptr<PreventiveActionModel> preventiveActions);
     virtual ~RiskAssessment();
 
     virtual QString shortScenario() const;
@@ -26,7 +29,7 @@ public:
     virtual RiskModel* initialRiskModel() const;
     virtual RiskModel* finalRiskModel() const;
 
-    virtual PreventiveActionModel* getPreventiveActions();
+    virtual shared_ptr<PreventiveActionModel> getPreventiveActions();
     virtual int preventiveActionCount() const;
 
 private:
@@ -35,7 +38,7 @@ private:
     RiskModel *final;
     QString scenarioText;
     QString mitigationStrategyText;
-    PreventiveActionModel *preventiveActions;
+    shared_ptr<PreventiveActionModel> preventiveActions;
 };
 
 #endif // RISKASSESSMENT_H

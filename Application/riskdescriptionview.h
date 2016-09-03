@@ -17,7 +17,7 @@ public:
     virtual ~RiskDescriptionView();
 
     virtual void displayTestReference(TestNode *test);
-    virtual void displayAction(PreventiveAction *action);
+    virtual void displayAction(shared_ptr<PreventiveAction> action);
     virtual void displayRisk(shared_ptr<RiskAssessment> risk);
     virtual void clearDisplay();
 

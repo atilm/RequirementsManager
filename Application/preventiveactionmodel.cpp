@@ -1,19 +1,20 @@
 #include "preventiveactionmodel.h"
 #include "automatedtestreference.h"
+#include "preventiveactionfactory.h"
 #include <exception>
 using namespace std;
 
 PreventiveActionModel::PreventiveActionModel(shared_ptr<FileStateTracker> fileState,
+                                             shared_ptr<PreventiveActionFactory> factory,
                                              QObject *parent) :
     QAbstractTableModel(parent)
 {
     this->fileState = fileState;
+    this->factory = factory;
 }
 
 PreventiveActionModel::~PreventiveActionModel()
 {
-    foreach(PreventiveAction *action, actions)
-        delete action;
 }
 
 QVariant PreventiveActionModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -45,13 +46,13 @@ QVariant PreventiveActionModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-PreventiveAction *PreventiveActionModel::appendAction()
+shared_ptr<PreventiveAction> PreventiveActionModel::appendAction()
 {
     add(rowCount());
     return getAction(index(rowCount()-1,0));
 }
 
-void PreventiveActionModel::appendReference(AutomatedTestReference *ref)
+void PreventiveActionModel::appendReference(shared_ptr<AutomatedTestReference> ref)
 {
     int row = rowCount();
 
@@ -69,7 +70,7 @@ void PreventiveActionModel::add(int beforeRowIndex)
         beforeRow = beforeRowIndex;
 
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
-    actions.insert(beforeRow, new PreventiveAction(fileState));
+    actions.insert(beforeRow, factory->newPreventiveAction());
     endInsertRows();
     fileState->setChanged(true);
 }
@@ -80,13 +81,13 @@ void PreventiveActionModel::remove(const QModelIndex &index)
         return;
 
     beginRemoveRows(QModelIndex(), index.row(), index.row());
-    delete actions[index.row()];
+
     actions.remove(index.row());
     endRemoveRows();
     fileState->setChanged(true);
 }
 
-PreventiveAction *PreventiveActionModel::getAction(const QModelIndex &index)
+shared_ptr<PreventiveAction> PreventiveActionModel::getAction(const QModelIndex &index)
 {
     if(!index.isValid())
         throw runtime_error("Invalid preventive action index");

@@ -2,12 +2,15 @@
 #include "sourcecodecontroller.h"
 
 RequirementFactory::RequirementFactory(shared_ptr<FileStateTracker> fileState,
+                                       shared_ptr<RiskAssessmentFactory> raFactory,
                                        UniqueIDManager *idManager,
                                        AttributeContainerFactory *attrContainerFactory,
                                        LinkContainerFactory *linkContainerFactory,
-                                       SourceCodeController *sourceController, AppSettings *settings)
+                                       SourceCodeController *sourceController,
+                                       AppSettings *settings)
 {
     this->fileState = fileState;
+    this->raFactory = raFactory;
     this->idManager = idManager;
     this->attrContainerFactory = attrContainerFactory;
     this->linkContainerFactory = linkContainerFactory;
@@ -23,7 +26,7 @@ RequirementFactory::~RequirementFactory()
 
 Requirement *RequirementFactory::newRequirement(Requirement* parent)
 {
-    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
@@ -36,7 +39,7 @@ Requirement *RequirementFactory::newRequirement(Requirement* parent)
 
 Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Requirement *parent)
 {
-    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
 
     Requirement *item = new Requirement(idManager,
                                         raModel,
@@ -51,7 +54,7 @@ Requirement *RequirementFactory::newRequirement(unsigned int proposedID, Require
 DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
                                                         Requirement *parent)
 {
-    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
 
     DesignReference *item = new DesignReference(address, sourceController,
                                                 idManager, raModel,
@@ -64,7 +67,7 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
 
 DesignReference *RequirementFactory::newDesignReference(SourceAddress address, unsigned int proposedID, Requirement *parent)
 {
-    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, new RiskAssessmentFactory(fileState)));
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
 
     DesignReference *item = new DesignReference(address, sourceController,
                                                 idManager, raModel,

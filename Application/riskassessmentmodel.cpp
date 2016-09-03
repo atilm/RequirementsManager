@@ -3,7 +3,7 @@
 using namespace std;
 
 RiskAssessmentModel::RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
-                                         RiskAssessmentFactory *factory)
+                                         shared_ptr<RiskAssessmentFactory> factory)
 {
     this->fileState = fileState;
     this->factory = factory;
@@ -11,7 +11,6 @@ RiskAssessmentModel::RiskAssessmentModel(shared_ptr<FileStateTracker> fileState,
 
 RiskAssessmentModel::~RiskAssessmentModel()
 {
-    delete factory;
 }
 
 QVariant RiskAssessmentModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -78,9 +77,9 @@ void RiskAssessmentModel::add(int beforeRowIndex)
         beforeRow = beforeRowIndex;
 
     shared_ptr<RiskAssessment> assessment = factory->newAssessment();
-    connect(assessment->getPreventiveActions(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+    connect(assessment->getPreventiveActions().get(), SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(handleTestModelChanged()));
-    connect(assessment->getPreventiveActions(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
+    connect(assessment->getPreventiveActions().get(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SLOT(handleTestModelChanged()));
 
     beginInsertRows(QModelIndex(), beforeRow, beforeRow);
@@ -108,7 +107,7 @@ shared_ptr<RiskAssessment> RiskAssessmentModel::getRiskAssessment(const QModelIn
     return assessments[index.row()];
 }
 
-PreventiveActionModel *RiskAssessmentModel::getPreventiveActions(const QModelIndex &index)
+shared_ptr<PreventiveActionModel> RiskAssessmentModel::getPreventiveActions(const QModelIndex &index)
 {
     if(!index.isValid())
         throw runtime_error("Invalid risk assessment index");

@@ -63,7 +63,7 @@ void LinkController::setUpAddModeConnections()
 }
 
 void LinkController::handleCurrentRequirementChanged(const QModelIndex &current,
-                                                     const QModelIndex &previous)
+                                                     const QModelIndex &)
 {
     RequirementsModel *model = static_cast<RequirementsModel*>(reqView->model());
     try{
@@ -71,7 +71,7 @@ void LinkController::handleCurrentRequirementChanged(const QModelIndex &current,
         linkView->setModel(currentLinks);
         linkView->expandToDepth(1);
     }
-    catch(const InvalidIndexException &e){
+    catch(const InvalidIndexException &){
         linkView->setModel(nullptr);
     }
 }

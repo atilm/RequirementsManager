@@ -11,8 +11,8 @@ public:
                             SourceCodeController *controller);
     virtual ~PreventiveActionFactory();
 
-    virtual PreventiveAction* newPreventiveAction();
-    virtual AutomatedTestReference* newTestReference(SourceAddress address);
+    virtual shared_ptr<PreventiveAction> newPreventiveAction();
+    virtual shared_ptr<AutomatedTestReference> newTestReference(SourceAddress address);
 
 private:
     shared_ptr<FileStateTracker> fileState;

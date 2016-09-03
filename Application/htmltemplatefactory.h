@@ -7,6 +7,7 @@ class HtmlTemplateFactory
 {
 public:
     HtmlTemplateFactory();
+    virtual ~HtmlTemplateFactory();
 
     virtual HtmlTemplate* newTemplate();
 };

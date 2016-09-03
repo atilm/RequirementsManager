@@ -21,7 +21,7 @@ void RiskDescriptionView::displayTestReference(TestNode *test)
     document()->setHtml(html->toHtml(*test));
 }
 
-void RiskDescriptionView::displayAction(PreventiveAction *action)
+void RiskDescriptionView::displayAction(shared_ptr<PreventiveAction> action)
 {
     document()->setHtml(html->toHtml(*action));
 }

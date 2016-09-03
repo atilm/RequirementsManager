@@ -186,9 +186,10 @@ void SourceCodeController::handleClassOrFunctionDoubleClicked(const QModelIndex 
 
 void SourceCodeController::handleTestDoubleClicked(const QModelIndex &index)
 {
-    AutomatedTestReference *testRef = new AutomatedTestReference(model->getAddress(index),
-                                                                 this,
-                                                                 stateTracker);
+    auto testRef = make_shared<AutomatedTestReference>(model->getAddress(index),
+                                                       this,
+                                                       stateTracker);
+
     preventiveActionView->appendTestReference(testRef);
 }
 

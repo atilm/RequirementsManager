@@ -6,13 +6,19 @@
 #include "preventiveaction.h"
 #include "filestatetracker.h"
 
+#include <memory>
+using namespace std;
+
 class AutomatedTestReference;
+class PreventiveActionFactory;
 
 class PreventiveActionModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit PreventiveActionModel(shared_ptr<FileStateTracker> fileState, QObject *parent = 0);
+    explicit PreventiveActionModel(shared_ptr<FileStateTracker> fileState,
+                                   shared_ptr<PreventiveActionFactory> factory,
+                                   QObject *parent = 0);
     virtual ~PreventiveActionModel();
 
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
@@ -20,18 +26,16 @@ public:
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
 
-    virtual PreventiveAction* appendAction();
-    virtual void appendReference(AutomatedTestReference *ref);
+    virtual shared_ptr<PreventiveAction> appendAction();
+    virtual void appendReference(shared_ptr<AutomatedTestReference> ref);
     virtual void add(int beforeRowIndex);
     virtual void remove(const QModelIndex &index);
-    virtual PreventiveAction* getAction(const QModelIndex &index);
-signals:
-
-public slots:
+    virtual shared_ptr<PreventiveAction> getAction(const QModelIndex &index);
 
 private:
     shared_ptr<FileStateTracker> fileState;
-    QVector<PreventiveAction*> actions;
+    shared_ptr<PreventiveActionFactory> factory;
+    QVector<shared_ptr<PreventiveAction>> actions;
 };
 
 #endif // PREVENTIVEACTIONMODEL_H

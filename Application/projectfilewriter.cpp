@@ -249,13 +249,13 @@ void ProjectFileWriter::writeRiskAssessment(shared_ptr<RiskAssessment> risk)
     xml->writeEndElement();
 }
 
-void ProjectFileWriter::writePreventiveActions(PreventiveActionModel *actions)
+void ProjectFileWriter::writePreventiveActions(shared_ptr<PreventiveActionModel> actions)
 {
     for(int r=0;r<actions->rowCount();r++)
         writePreventiveAction(actions->getAction(actions->index(r,0)));
 }
 
-void ProjectFileWriter::writePreventiveAction(PreventiveAction *action)
+void ProjectFileWriter::writePreventiveAction(shared_ptr<PreventiveAction> action)
 {
     if(action->isReference())
         writeTestReference(action);
@@ -263,9 +263,9 @@ void ProjectFileWriter::writePreventiveAction(PreventiveAction *action)
         writePreventiveActionContent(action);
 }
 
-void ProjectFileWriter::writeTestReference(PreventiveAction *action)
+void ProjectFileWriter::writeTestReference(shared_ptr<PreventiveAction> action)
 {
-    AutomatedTestReference *ref = static_cast<AutomatedTestReference*>(action);
+    shared_ptr<AutomatedTestReference> ref = static_pointer_cast<AutomatedTestReference>(action);
     SourceAddress address = ref->getAddress();
 
     xml->writeStartElement("TestReference");
@@ -276,7 +276,7 @@ void ProjectFileWriter::writeTestReference(PreventiveAction *action)
     xml->writeEndElement();
 }
 
-void ProjectFileWriter::writePreventiveActionContent(PreventiveAction *action)
+void ProjectFileWriter::writePreventiveActionContent(shared_ptr<PreventiveAction> action)
 {
     xml->writeStartElement("Action");
     xml->writeAttribute("case", action->getTestCase());

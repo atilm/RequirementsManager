@@ -6,6 +6,11 @@ HtmlTemplateFactory::HtmlTemplateFactory()
 {
 }
 
+HtmlTemplateFactory::~HtmlTemplateFactory()
+{
+
+}
+
 HtmlTemplate *HtmlTemplateFactory::newTemplate()
 {
     return new HtmlTemplate(new QFileAdapter(), new QTextStreamAdapter());

@@ -10,7 +10,7 @@ PreventiveActionTableView::~PreventiveActionTableView()
 
 }
 
-void PreventiveActionTableView::appendTestReference(AutomatedTestReference *testRef)
+void PreventiveActionTableView::appendTestReference(shared_ptr<AutomatedTestReference> testRef)
 {
     PreventiveActionModel *testModel = static_cast<PreventiveActionModel*>(model());
 

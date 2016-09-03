@@ -25,7 +25,7 @@ public:
                        QPlainTextEditAdapter *actionEdit,
                        QPlainTextEditAdapter *expectedResultEdit);
 
-    void setModel(PreventiveActionModel *model);
+    void setModel(shared_ptr<PreventiveActionModel> model);
 
 public slots:
     virtual int exec(const QModelIndex &index);
@@ -40,8 +40,8 @@ private:
     QPlainTextEditAdapter *actionEdit;
     QPlainTextEditAdapter *expectedResultEdit;
 
-    PreventiveActionModel *model;
-    PreventiveAction *currentAction;
+    shared_ptr<PreventiveActionModel> model;
+    shared_ptr<PreventiveAction> currentAction;
 
     void setCurrentIndex(const QModelIndex &index);
 };

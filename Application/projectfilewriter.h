@@ -52,10 +52,10 @@ private:
     void writeLinks(const QModelIndex &itemIdx);
     void writeRiskAssessmentModel(shared_ptr<RiskAssessmentModel> risks);
     void writeRiskAssessment(shared_ptr<RiskAssessment> risk);
-    void writePreventiveActions(PreventiveActionModel *actions);
-    void writePreventiveAction(PreventiveAction *action);
-    void writeTestReference(PreventiveAction *action);
-    void writePreventiveActionContent(PreventiveAction *action);
+    void writePreventiveActions(shared_ptr<PreventiveActionModel> actions);
+    void writePreventiveAction(shared_ptr<PreventiveAction> action);
+    void writeTestReference(shared_ptr<PreventiveAction> action);
+    void writePreventiveActionContent(shared_ptr<PreventiveAction> action);
 
     QString getAttributeValue(const QModelIndex &parent, int row, int attributeIndex);
     QString checkStateToString(const QVariant &value);
