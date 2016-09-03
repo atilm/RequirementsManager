@@ -24,6 +24,7 @@ public:
      \return A QString, representing the programming language.
      */
     virtual QString language() const;
+
     virtual SourceCodeModel* parseSourceCode(DirectoryListModel *sourceDirs,
                                              DirectoryListModel *testDirs);
     virtual QStringList getFilePaths() const;
@@ -56,8 +57,11 @@ private:
     };
 
     Scope currentScope;
+    bool insideComment;
 
-    void nextLine();
+    void nextLine(bool removeComments = true);
+    QString removeInlineComment(const QString &s);
+    void updateBlockCommentState(const QString &s);
     void readDesignSpecification(DirectoryListModel *sourceDirs);
     void parseSourceFilesInDirectory(const QString &dirPath);
     QStringList listHeaderFiles(const QString &dirPath);
@@ -87,7 +91,7 @@ private:
 
     QString extractBetween(const QString &start,
                            const QString &end,
-                           const QString &s);
+                           const QString &s); 
 };
 
 #endif // CPPREADER_H

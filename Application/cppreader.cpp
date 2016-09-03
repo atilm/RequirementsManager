@@ -48,9 +48,32 @@ QStringList CppReader::getFilePaths() const
     return headerFiles + testFiles;
 }
 
-void CppReader::nextLine()
+void CppReader::nextLine(bool removeComments)
 {
     currentLine = inStream->readLine().trimmed();
+
+    if(removeComments)
+    {
+        currentLine = removeInlineComment(currentLine);
+    }
+
+    updateBlockCommentState(currentLine);
+}
+
+QString CppReader::removeInlineComment(const QString &s)
+{
+    return s.split("//").first();
+}
+
+void CppReader::updateBlockCommentState(const QString &s)
+{
+    if(s.startsWith("/*")){
+        insideComment = true;
+    }
+
+    if(s.endsWith("*/")){
+        insideComment = false;
+    }
 }
 
 void CppReader::readDesignSpecification(DirectoryListModel *sourceDirs)
@@ -96,13 +119,20 @@ bool CppReader::openStream(const QString &filePath)
 
 void CppReader::parseSourceLines()
 {
+    currentScope = PUBLIC;
+    insideComment = false;
+
     while(!inStream->atEnd()){
         nextLine();
 
         if(atClassBegin())
+        {
             parseClass();
+        }
         else if(currentLine.startsWith("/*!"))
+        {
             parseDesignSpecBlock();
+        }
     }
 }
 
@@ -111,7 +141,7 @@ bool CppReader::atClassBegin()
     bool isCandidate = currentLine.startsWith("class");
 
     // discard forward declarations of classes
-    if( isCandidate && !(currentLine.endsWith(";")))
+    if( isCandidate && !insideComment && !currentLine.endsWith(";") )
         return true;
     else
         return false;
@@ -132,7 +162,11 @@ void CppReader::parseClass()
     while(!atClassEnd()){
         nextLine();
 
-        if(currentScope == PUBLIC){
+        if(currentLine.startsWith("/*!")){
+            parseDesignSpecBlock();
+        }
+
+        if(currentScope == PUBLIC && !insideComment){
             if(atClassBegin())
                 parseClass();
             else if(currentLine.startsWith("enum"))
@@ -140,9 +174,7 @@ void CppReader::parseClass()
             else if(currentLine.startsWith("struct"))
                 skipDeclaration();
             else if(currentLine.contains("("))
-                parseFunction(classIdx);
-            else if(currentLine.startsWith("/*!"))
-                parseDesignSpecBlock();
+                parseFunction(classIdx);                
         }
 
         if(currentLine.startsWith("public"))
@@ -171,6 +203,8 @@ QString CppReader::extractClassName()
 
     if(match.hasMatch())
         return match.captured(1);
+    else
+        return QString();
 }
 
 void CppReader::parseFunction(QModelIndex classIndex)
@@ -204,8 +238,9 @@ QString CppReader::extractFunctionName()
 void CppReader::parseDesignSpecBlock()
 {
     do{
-        lineBuffer += currentLine.replace("/*!","").replace("*/","") + QString("\n");
-        currentLine = inStream->readLine();
+        QString stripped = currentLine.replace("/*!","").replace("*/","").trimmed();
+        lineBuffer += stripped + QString("\n");
+        nextLine(false);
     } while(!currentLine.contains("*/"));
 }
 
@@ -348,5 +383,7 @@ QString CppReader::extractBetween(const QString &start,
 
     return s.mid(startPos, count).trimmed();
 }
+
+
 
 
