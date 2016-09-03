@@ -296,7 +296,9 @@ void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelI
 Requirement *RequirementsModel::getRequirement(const QModelIndex &index) const
 {
     if(!index.isValid())
+    {
         throw InvalidModelIndexException();
+    }
 
     return asRequirement(index);
 }
@@ -314,7 +316,9 @@ LinkContext *RequirementsModel::getLinkContext() const
 QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
 {
     if(!index.isValid())
+    {
         throw InvalidModelIndexException();
+    }
 
     Requirement *item = asRequirement(index);
     return item->getDescription();
@@ -323,7 +327,9 @@ QTextDocument *RequirementsModel::getDescription(const QModelIndex &index)
 shared_ptr<RiskAssessmentModel> RequirementsModel::getRiskAssessment(const QModelIndex &index)
 {
     if(!index.isValid())
+    {
         throw InvalidIndexException();
+    }
 
     Requirement *item = asRequirement(index);
     return item->getRiskAssessment();
@@ -332,7 +338,9 @@ shared_ptr<RiskAssessmentModel> RequirementsModel::getRiskAssessment(const QMode
 LinkContainer *RequirementsModel::getLinkContainer(const QModelIndex &index)
 {
     if(!index.isValid())
+    {
         throw InvalidIndexException();
+    }
 
     return asRequirement(index)->getLinkContainer();
 }

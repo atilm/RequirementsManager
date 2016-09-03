@@ -27,7 +27,7 @@ public:
     // are called in toHtml
     QString toHtml(PreventiveAction &s);
     QString toHtml(const RiskAssessment &risk);
-    QString htmlReplacements(QString s);
+    QString escape(QString s);
     QString toHtml(const QString &markupText, HeaderType headingType = NO_HEADER);
 
 private:

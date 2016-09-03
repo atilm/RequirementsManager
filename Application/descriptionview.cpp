@@ -74,7 +74,7 @@ void DescriptionView::insertImage()
     }
 }
 
-void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &previous)
+void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &)
 {
     try{
         Requirement *req = data->getRequirement(current);

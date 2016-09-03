@@ -30,7 +30,7 @@ signals:
 public slots:
 
     void insertImage();
-    void switchItem(const QModelIndex &current, const QModelIndex &previous);
+    void switchItem(const QModelIndex &current, const QModelIndex &);
     void showItem(const QModelIndex &index);
     void setReadOnly(bool on);
 

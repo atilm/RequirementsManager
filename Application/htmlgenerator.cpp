@@ -136,10 +136,10 @@ QString HtmlGenerator::toHtml(const QString &markupText, HeaderType headingType)
     return nLines.join("\r\n");
 }
 
-QString HtmlGenerator::htmlReplacements(QString s)
+QString HtmlGenerator::escape(QString s)
 {
     s.replace("\n", "<br>\n")
-     .replace(" ", "&nbsp;");
+            .replace(" ", "&nbsp;");
 
     return s;
 }
