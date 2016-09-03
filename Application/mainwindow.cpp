@@ -84,6 +84,8 @@ MainWindow::~MainWindow()
     delete requirementsView;
     delete messageBox;
     delete settings;
+    delete settingsDialog;
+    delete appSettingsDialog;
     delete attributeDialog;
     delete riskAssessmentEditController;
     delete linkTypeEditor;
