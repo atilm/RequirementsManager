@@ -1,6 +1,7 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
 
+#include <QMainWindow>
 #include <QString>
 #include <QSettings>
 
@@ -13,6 +14,9 @@ public:
     virtual void clear();
     virtual void load();
     virtual void save();
+
+    virtual void saveGeometry(QMainWindow *window);
+    virtual void restoreGeometry(QMainWindow *window);
 
     virtual QString directory() const;
     virtual void setDirectory(const QString &dir);

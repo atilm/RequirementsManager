@@ -73,6 +73,8 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     connect(fileController, SIGNAL(fileLoaded()), sourceController, SLOT(parseProjectCode()));
     connect(settingsDialog, SIGNAL(settingsChanged()), sourceController, SLOT(parseProjectCode()));
     connect(settingsDialog, SIGNAL(settingsChanged()), fileState.get(), SLOT(setChanged()));
+
+    settings->restoreGeometry(this);
 }
 
 MainWindow::~MainWindow()
@@ -182,6 +184,7 @@ void MainWindow::injectRiskViews(RiskDescriptionView *riskDescriptionView,
 void MainWindow::closeEvent(QCloseEvent *e)
 {
     fileController->askSaveUnsavedChanges();
+    settings->saveGeometry(this);
     settings->save();
     e->accept();
 }

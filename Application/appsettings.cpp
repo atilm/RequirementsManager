@@ -4,7 +4,7 @@ AppSettings::AppSettings()
 {
     settings = new QSettings(QSettings::IniFormat,
                              QSettings::UserScope,
-                             "TilmSoft",
+                             "RequirementsManager",
                              "RequirementsManager");
     settings->setUserIniPath("./RequirementsManager.ini");
     defaultDirectory = ".";
@@ -35,6 +35,18 @@ void AppSettings::save()
     settings->setValue("Application/showIDs", showIDs);
 
     settings->sync();
+}
+
+void AppSettings::saveGeometry(QMainWindow *window)
+{
+    settings->setValue("geometry", window->saveGeometry());
+    settings->setValue("windowState", window->saveState());
+}
+
+void AppSettings::restoreGeometry(QMainWindow *window)
+{
+    window->restoreGeometry(settings->value("geometry").toByteArray());
+    window->restoreState(settings->value("windowState").toByteArray());
 }
 
 QString AppSettings::directory() const
