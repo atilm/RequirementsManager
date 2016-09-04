@@ -45,6 +45,7 @@ private:
     void writeRequirementSpecification();
     void writeChildrenOf(QModelIndex parent);
     void writeRequirement(int row, QModelIndex &parent);
+    void writeReqReferenceContent(const QModelIndex &index, RequirementReference *reqRef);
     void writeReferenceContent(const QModelIndex &index, Requirement *requirement);
     void writeRequirementContent(const QModelIndex &index, Requirement *requirement);
     void write_ID_and_Type(const QModelIndex &itemIdx);

@@ -45,3 +45,8 @@ QTextDocument *RequirementReference::getDescription()
     refDescription->setHtml(s);
     return refDescription.get();
 }
+
+uint RequirementReference::getTargetID() const
+{
+    return source->getID();
+}

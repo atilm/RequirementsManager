@@ -1,10 +1,12 @@
 #include "projectfilewriter.h"
+#include "requirementreference.h"
 #include "requirementsmodel.h"
 #include "projectfilecontroller.h"
 #include "automatedtestreference.h"
 #include <stdexcept>
-#include <QString>
+#include <QDebug>
 #include <QObject>
+#include <QString>
 using namespace std;
 
 ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml,
@@ -144,7 +146,13 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 
     Requirement *requirement = model->getRequirement(itemIdx);
 
-    if(requirement->isReference()){
+    RequirementReference *reqRef = dynamic_cast<RequirementReference*>(requirement);
+
+    if(reqRef){
+        xml->writeStartElement("RequirementReference");
+        writeReqReferenceContent(itemIdx, reqRef);
+    }
+    else if(requirement->isReference()){
         xml->writeStartElement("DesignReference");
         writeReferenceContent(itemIdx, requirement);
     }
@@ -162,7 +170,15 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 
     writeChildrenOf(itemIdx);
 
-    xml->writeEndElement(); // Requirement
+    xml->writeEndElement(); // Requirement / DesignReference / RequirementReference
+}
+
+void ProjectFileWriter::writeReqReferenceContent(const QModelIndex &index,
+                                                 RequirementReference *reqRef)
+{
+    write_ID_and_Type(index);
+
+    xml->writeAttribute("linkID", QString::number(reqRef->getTargetID()));
 }
 
 void ProjectFileWriter::writeReferenceContent(const QModelIndex &index,
@@ -297,6 +313,8 @@ QString ProjectFileWriter::getAttributeValue(const QModelIndex &parent, int row,
         return checkStateToString(model->data(itemIdx, Qt::CheckStateRole));
     case AttributeContext::TEXT:
         return model->data(itemIdx, Qt::DisplayRole).toString();
+    default:
+        return QString();
     }
 }
 

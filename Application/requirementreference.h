@@ -16,6 +16,8 @@ public:
     virtual QString getNumberedTitle() const;
     virtual QTextDocument* getDescription();
 
+    virtual uint getTargetID() const;
+
 protected:
     Requirement *source;
     shared_ptr<QTextDocument> refDescription;
