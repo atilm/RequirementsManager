@@ -2,6 +2,7 @@
 #include "projectfilecontroller.h"
 #include "automatedtestreference.h"
 #include "preventiveactionfactory.h"
+#include "requirementreference.h"
 #include <stdexcept>
 #include <iostream>
 #include <QDebug>
@@ -66,6 +67,8 @@ void ProjectFileReader::readContents()
                 parseLinkDeclaration();
             else if(xml->name() == "Requirement")
                 parseRequirement(QModelIndex());
+            else if(xml->name() == "RequirementReference")
+                parseRequirementReference(QModelIndex());
             else if(xml->name() == "DesignReference")
                 parseDesignReference(QModelIndex());
             else
@@ -138,6 +141,21 @@ void ProjectFileReader::parseRequirement(QModelIndex parent)
     parseRequirementContent(itemIdx, "Requirement");
 }
 
+void ProjectFileReader::parseRequirementReference(QModelIndex parent)
+{
+    uint id = getAttribute("id").toUInt();
+    QString typeString = getAttribute("type");
+    Requirement::Type type = Requirement::stringToType(typeString);
+    uint linkID = getAttribute("linkID").toUInt();
+
+    RequirementReference *ref = factory->newRequirementReference(linkID, id);
+    ref->setType(type);
+
+    QModelIndex itemIdx = model->insertChild(ref, parent, -1);
+
+    parseRequirementContent(itemIdx, "RequirementReference");
+}
+
 void ProjectFileReader::parseDesignReference(QModelIndex parent)
 {
     uint id = getAttribute("id").toUInt();
@@ -167,6 +185,9 @@ void ProjectFileReader::parseRequirementContent(QModelIndex itemIdx,
         if(xml->tokenType() == QXmlStreamReader::StartElement){
             if(xml->name() == "Requirement"){
                 parseRequirement(itemIdx);
+            }
+            else if(xml->name() == "RequirementReference"){
+                parseRequirementReference(itemIdx);
             }
             else if(xml->name() == "DesignReference"){
                 parseDesignReference(itemIdx);

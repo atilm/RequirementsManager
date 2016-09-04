@@ -32,7 +32,8 @@ public:
     DesignReference* newDesignReference(SourceAddress address, unsigned int proposedID,
                                         Requirement *parent = 0);
 
-    RequirementReference *newRequirementReference(Requirement *source);
+    RequirementReference *newRequirementReference(Requirement *source, Requirement *parent = 0);
+    RequirementReference *newRequirementReference(uint targetID, uint proposedID, Requirement *parent = 0);
 
 private:
     shared_ptr<FileStateTracker> fileState;

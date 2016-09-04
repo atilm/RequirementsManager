@@ -10,17 +10,26 @@ public:
                          UniqueIDManager *idManager,
                          shared_ptr<RiskAssessmentModel> riskAssessment,
                          AppSettings *settings);
+
+    RequirementReference(uint targetID,
+                         UniqueIDManager *idManager,
+                         shared_ptr<RiskAssessmentModel> riskAssessment, AttributeContainer *attributes, LinkContainer *links,
+                         AppSettings *settings, uint proposedID);
+
     virtual ~RequirementReference();
 
     virtual bool isReference();
     virtual QString getNumberedTitle() const;
     virtual QTextDocument* getDescription();
 
+    virtual void setTargetID(uint id);
     virtual uint getTargetID() const;
 
 protected:
-    Requirement *source;
+    uint targetID;
     shared_ptr<QTextDocument> refDescription;
+
+    void initialize(uint targetID, Type type);
 };
 
 #endif // REQUIREMENTREFERENCE_H

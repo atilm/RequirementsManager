@@ -46,6 +46,7 @@ private:
     void parseAttributeDeclaration();
     void parseLinkDeclaration();
     void parseRequirement(QModelIndex parent);
+    void parseRequirementReference(QModelIndex parent);
     void parseDesignReference(QModelIndex parent);
     void parseRequirementContent(QModelIndex itemIdx, const QString &typeString);
     void parseDescription(QModelIndex itemIdx);

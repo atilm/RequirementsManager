@@ -66,7 +66,8 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address,
     return item;
 }
 
-DesignReference *RequirementFactory::newDesignReference(SourceAddress address, unsigned int proposedID, Requirement *parent)
+DesignReference *RequirementFactory::newDesignReference(SourceAddress address, unsigned int proposedID,
+                                                        Requirement *parent)
 {
     shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
 
@@ -80,10 +81,31 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address, u
     return item;
 }
 
-RequirementReference *RequirementFactory::newRequirementReference(Requirement *source)
+RequirementReference *RequirementFactory::newRequirementReference(Requirement *source,
+                                                                  Requirement *parent)
 {
     shared_ptr<RiskAssessmentModel> raModel = make_shared<RiskAssessmentModel>(fileState, raFactory);
 
     RequirementReference *item = new RequirementReference(source, idManager, raModel, settings);
+
+    item->setParent(parent);
+    return item;
+}
+
+RequirementReference *RequirementFactory::newRequirementReference(uint targetID,
+                                                                  uint proposedID,
+                                                                  Requirement *parent)
+{
+    shared_ptr<RiskAssessmentModel> raModel(make_shared<RiskAssessmentModel>(fileState, raFactory));
+
+    RequirementReference *item = new RequirementReference(targetID,
+                                                          idManager,
+                                                          raModel,
+                                                          attrContainerFactory->newContainer(),
+                                                          linkContainerFactory->newContainer(),
+                                                          settings,
+                                                          proposedID);
+
+    item->setParent(parent);
     return item;
 }

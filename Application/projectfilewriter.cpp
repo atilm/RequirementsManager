@@ -148,21 +148,25 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 
     RequirementReference *reqRef = dynamic_cast<RequirementReference*>(requirement);
 
-    if(reqRef){
+    if(reqRef)
+    {
         xml->writeStartElement("RequirementReference");
         writeReqReferenceContent(itemIdx, reqRef);
     }
-    else if(requirement->isReference()){
+    else if(requirement->isReference())
+    {
         xml->writeStartElement("DesignReference");
         writeReferenceContent(itemIdx, requirement);
     }
-    else{
+    else
+    {
         xml->writeStartElement("Requirement");
         writeRequirementContent(itemIdx, requirement);
     }
 
-    for(int a=0;a < attributeContext->rowCount();a++)
+    for(int a=0;a < attributeContext->rowCount();a++){
         writeAttribute(parent, row, a);
+    }
 
     writeLinks(itemIdx);
 
