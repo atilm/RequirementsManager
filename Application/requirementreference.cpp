@@ -11,6 +11,7 @@ RequirementReference::RequirementReference(Requirement *source,
 {
     this->source = source;
     refDescription = make_shared<QTextDocument>();
+    setType(source->getType());
 }
 
 RequirementReference::~RequirementReference()
