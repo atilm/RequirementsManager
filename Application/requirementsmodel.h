@@ -69,6 +69,7 @@ public:
     virtual bool removeRequirement(const QModelIndex &index);
     virtual void moveRequirement(const QModelIndex &source, const QModelIndex &destination);
     virtual Requirement* getRequirement(const QModelIndex &index) const;
+    virtual QModelIndex createReferenceTo(const QModelIndex &index);
 
     virtual AttributeContext* getAttributeContext() const;
     virtual LinkContext* getLinkContext() const;

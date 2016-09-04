@@ -1,4 +1,5 @@
 #include "requirementfactory.h"
+#include "requirementreference.h"
 #include "sourcecodecontroller.h"
 
 RequirementFactory::RequirementFactory(shared_ptr<FileStateTracker> fileState,
@@ -76,5 +77,13 @@ DesignReference *RequirementFactory::newDesignReference(SourceAddress address, u
                                                 settings,
                                                 proposedID);
     item->setParent(parent);
+    return item;
+}
+
+RequirementReference *RequirementFactory::newRequirementReference(Requirement *source)
+{
+    shared_ptr<RiskAssessmentModel> raModel = make_shared<RiskAssessmentModel>(fileState, raFactory);
+
+    RequirementReference *item = new RequirementReference(source, idManager, raModel, settings);
     return item;
 }

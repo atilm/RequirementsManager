@@ -234,6 +234,11 @@ Requirement::Type Requirement::stringToType(const QString &typeString)
         return UserRequirement;
 }
 
+AttributeContainer *Requirement::getAttributeContainer() const
+{
+    return attributes;
+}
+
 void Requirement::assertValidIndex(int index)
 {
     if(index < 0 || index > children.size()-1){

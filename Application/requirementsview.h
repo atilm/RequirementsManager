@@ -50,6 +50,7 @@ private slots:
     void handleToUserRequirement();
     void handleToFunctionalRequirement();
     void handleToDesignRequirement();
+    void handleCreateReference();
 };
 
 #endif // REQUIREMENTSVIEW_H

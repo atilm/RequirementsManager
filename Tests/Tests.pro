@@ -81,6 +81,7 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/sourcecodemodel.o \
         $$PWD/../Application/release/moc_sourcecodemodel.o \
         $$PWD/../Application/release/directorylister.o \
+        $$PWD/../Application/release/requirementreference.o \
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 

@@ -72,6 +72,8 @@ public:
     virtual QTextDocument* getDescription();
     virtual shared_ptr<RiskAssessmentModel> getRiskAssessment();
 
+    AttributeContainer *getAttributeContainer() const;
+
     virtual LinkContainer* getLinkContainer();
     virtual void addRequirementLink(int groupIdx, uint reqID);
 
@@ -91,6 +93,8 @@ public:
 
     static QString typeToString(Type type);
     static Type stringToType(const QString &typeString);
+
+
 
 protected:
     const unsigned int id;

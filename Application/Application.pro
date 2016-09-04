@@ -96,7 +96,8 @@ SOURCES += main.cpp\
     aboutbox.cpp \
     version.cpp \
     directorylister.cpp \
-    appsettingsdialog.cpp
+    appsettingsdialog.cpp \
+    requirementreference.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -166,7 +167,8 @@ HEADERS  += mainwindow.h \
     aboutbox.h \
     version.h \
     directorylister.h \
-    appsettingsdialog.h
+    appsettingsdialog.h \
+    requirementreference.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

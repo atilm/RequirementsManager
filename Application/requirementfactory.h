@@ -11,6 +11,7 @@
 #include "filestatetracker.h"
 
 class SourceCodeController;
+class RequirementReference;
 
 class RequirementFactory
 {
@@ -30,6 +31,8 @@ public:
     DesignReference* newDesignReference(SourceAddress address, Requirement *parent = 0);
     DesignReference* newDesignReference(SourceAddress address, unsigned int proposedID,
                                         Requirement *parent = 0);
+
+    RequirementReference *newRequirementReference(Requirement *source);
 
 private:
     shared_ptr<FileStateTracker> fileState;

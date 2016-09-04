@@ -1,4 +1,5 @@
 #include "requirementsmodel.h"
+#include "requirementreference.h"
 #include <QDebug>
 #include <iostream>
 using namespace std;
@@ -301,6 +302,28 @@ Requirement *RequirementsModel::getRequirement(const QModelIndex &index) const
     }
 
     return asRequirement(index);
+}
+
+QModelIndex RequirementsModel::createReferenceTo(const QModelIndex &index)
+{
+    if(!index.isValid()){
+        return QModelIndex();
+    }
+
+    Requirement *parent = getValidItem(index.parent());
+
+    if(index.row() < parent->childCount()){
+        beginInsertRows(index.parent(), index.row()+1, index.row()+1);
+        Requirement *child = factory->newRequirementReference(asRequirement(index));
+        parent->insertChild(index.row()+1, child);
+        endInsertRows();
+
+        fileState->setChanged(true);
+        return this->index(index.row()+1, 0, index.parent());
+    }
+    else{
+        return QModelIndex();
+    }
 }
 
 AttributeContext *RequirementsModel::getAttributeContext() const

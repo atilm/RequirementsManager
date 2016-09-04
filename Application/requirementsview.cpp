@@ -118,6 +118,8 @@ void RequirementsView::setUpContextMenu(QMenu *contextMenu)
     contextMenu->addAction(tr("User Requirement"), this, SLOT(handleToUserRequirement()));
     contextMenu->addAction(tr("Functional Requirement"), this, SLOT(handleToFunctionalRequirement()));
     contextMenu->addAction(tr("Design Requirement"), this, SLOT(handleToDesignRequirement()));
+    contextMenu->addSeparator();
+    contextMenu->addAction(tr("Create Reference"), this, SLOT(handleCreateReference()));
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
@@ -145,4 +147,9 @@ void RequirementsView::handleToFunctionalRequirement()
 void RequirementsView::handleToDesignRequirement()
 {
     requirementsModel()->setType(currentIndex(), Requirement::DesignRequirement);
+}
+
+void RequirementsView::handleCreateReference()
+{
+    requirementsModel()->createReferenceTo(currentIndex());
 }
