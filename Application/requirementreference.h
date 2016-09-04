@@ -19,6 +19,7 @@ public:
     virtual ~RequirementReference();
 
     virtual bool isReference();
+    virtual QString getTitle() const;
     virtual QString getNumberedTitle() const;
     virtual QTextDocument* getDescription();
 
@@ -29,6 +30,7 @@ protected:
     uint targetID;
     shared_ptr<QTextDocument> refDescription;
 
+    Requirement *getSource() const;
     void initialize(uint targetID, Type type);
 };
 
