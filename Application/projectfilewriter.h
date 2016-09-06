@@ -61,6 +61,7 @@ private:
     QString getAttributeValue(const QModelIndex &parent, int row, int attributeIndex);
     QString checkStateToString(const QVariant &value);
     QString intToString(int n);
+    void createBackupFile(QFile *file);
 };
 
 #endif // PROJECTFILEWRITER_H

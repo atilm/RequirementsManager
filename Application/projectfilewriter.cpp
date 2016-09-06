@@ -5,6 +5,7 @@
 #include "automatedtestreference.h"
 #include <stdexcept>
 #include <QDebug>
+#include <QFileInfo>
 #include <QObject>
 #include <QString>
 using namespace std;
@@ -27,6 +28,8 @@ ProjectFileWriter::~ProjectFileWriter()
 void ProjectFileWriter::save(ProjectFileController *fileController,
                              QFileAdapter *file)
 {
+    createBackupFile(file);
+
     if(!file->open(QIODevice::WriteOnly | QIODevice::Text))
         throw runtime_error(QObject::tr("Could not open file.").toStdString());
 
@@ -337,5 +340,18 @@ QString ProjectFileWriter::checkStateToString(const QVariant &value)
 QString ProjectFileWriter::intToString(int n)
 {
     return QString("%1").arg(n);
+}
+
+void ProjectFileWriter::createBackupFile(QFile *file)
+{
+    QFileInfo fInfo(*file);
+    QFileInfo fBackup(QString("%1/~%2").arg(fInfo.dir().absolutePath()).arg(fInfo.fileName()));
+
+    if(fInfo.exists()){
+        if(fBackup.exists()){
+            QFile::remove(fBackup.absoluteFilePath());
+        }
+        QFile::copy(fInfo.absoluteFilePath(), fBackup.absoluteFilePath());
+    }
 }
 
