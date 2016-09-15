@@ -244,8 +244,11 @@ QModelIndex RequirementsModel::insertChild(Requirement *newItem,
 bool RequirementsModel::removeRequirement(const QModelIndex &index)
 {
     if(!index.isValid())
+    {
         return false;
-    else{
+    }
+    else
+    {
         Requirement *parent = getValidItem(index.parent());
         beginRemoveRows(index.parent(), index.row(), index.row());
         parent->removeChild(index.row());
@@ -310,16 +313,19 @@ QModelIndex RequirementsModel::createReferenceTo(const QModelIndex &index)
         return QModelIndex();
     }
 
+    QModelIndex parentIdx = index.parent();
+    int newRow = index.row() + 1;
     Requirement *parent = getValidItem(index.parent());
 
     if(index.row() < parent->childCount()){
-        beginInsertRows(index.parent(), index.row()+1, index.row()+1);
         Requirement *child = factory->newRequirementReference(asRequirement(index));
-        parent->insertChild(index.row()+1, child);
+
+        beginInsertRows(parentIdx, newRow, newRow);
+        parent->insertChild(newRow, child);
         endInsertRows();
 
         fileState->setChanged(true);
-        return this->index(index.row()+1, 0, index.parent());
+        return this->index(newRow, 0, parentIdx);
     }
     else{
         return QModelIndex();

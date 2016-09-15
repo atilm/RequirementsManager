@@ -6,17 +6,21 @@
 class RequirementReference : public Requirement
 {
 public:
-    RequirementReference(Requirement *source,
+    RequirementReference(uint targetID,
+                         Type type,
                          UniqueIDManager *idManager,
                          shared_ptr<RiskAssessmentModel> riskAssessment,
+                         AttributeContainer *attributes,
+                         LinkContainer *links,
                          AppSettings *settings);
 
     RequirementReference(uint targetID,
                          UniqueIDManager *idManager,
-                         shared_ptr<RiskAssessmentModel> riskAssessment, AttributeContainer *attributes, LinkContainer *links,
-                         AppSettings *settings, uint proposedID);
-
-    virtual ~RequirementReference();
+                         shared_ptr<RiskAssessmentModel> riskAssessment,
+                         AttributeContainer *attributes,
+                         LinkContainer *links,
+                         AppSettings *settings,
+                         uint proposedID);
 
     virtual bool isReference();
     virtual QString getTitle() const;

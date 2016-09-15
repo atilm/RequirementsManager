@@ -1,15 +1,17 @@
 #include "requirementreference.h"
+#include <QDebug>
 
-RequirementReference::RequirementReference(Requirement *source,
+RequirementReference::RequirementReference(uint targetID,
+                                           Requirement::Type type,
                                            UniqueIDManager *idManager,
                                            shared_ptr<RiskAssessmentModel> riskAssessment,
+                                           AttributeContainer *attributes,
+                                           LinkContainer *links,
                                            AppSettings *settings)
     : Requirement(idManager, riskAssessment,
-                  source->getAttributeContainer(),
-                  source->getLinkContainer(),
-                  settings)
+                  attributes, links, settings)
 {
-    initialize(source->getID(), source->getType());
+    initialize(targetID, type);
 }
 
 RequirementReference::RequirementReference(uint targetID,
@@ -24,11 +26,6 @@ RequirementReference::RequirementReference(uint targetID,
                   settings, proposedID)
 {
     initialize(targetID, getType());
-}
-
-RequirementReference::~RequirementReference()
-{
-
 }
 
 bool RequirementReference::isReference()

@@ -86,7 +86,13 @@ RequirementReference *RequirementFactory::newRequirementReference(Requirement *s
 {
     shared_ptr<RiskAssessmentModel> raModel = make_shared<RiskAssessmentModel>(fileState, raFactory);
 
-    RequirementReference *item = new RequirementReference(source, idManager, raModel, settings);
+    RequirementReference *item = new RequirementReference(source->getID(),
+                                                          source->getType(),
+                                                          idManager,
+                                                          raModel,
+                                                          attrContainerFactory->newContainer(),
+                                                          linkContainerFactory->newContainer(),
+                                                          settings);
 
     item->setParent(parent);
     return item;

@@ -41,27 +41,36 @@ void RequirementsView::appendChild()
     QModelIndex newIdx = requirementsModel()->appendChild(selectionModel()->currentIndex());
 
     if(newIdx.isValid())
+    {
         selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    }
 }
 
 void RequirementsView::appendChild(Requirement *item)
 {
     QModelIndex newIdx = requirementsModel()->insertChild(item, selectionModel()->currentIndex(), -1);
 
-    if(newIdx.isValid()){
+    if(newIdx.isValid())
+    {
         setExpanded(selectionModel()->currentIndex(), true);
 
         if(!item->isReference())
+        {
             selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+        }
     }
 }
 
 void RequirementsView::removeCurrent()
 {
-    if(selectionModel()->currentIndex().isValid()){
+    if(selectionModel()->currentIndex().isValid())
+    {
         QMessageBox::StandardButton answer = msg->showQuestion(this, tr("Delete requirement"), tr("Delete the current requirement?"));
+
         if(answer == QMessageBox::Yes)
+        {
             requirementsModel()->removeRequirement(selectionModel()->currentIndex());
+        }
     }
 }
 
@@ -151,5 +160,10 @@ void RequirementsView::handleToDesignRequirement()
 
 void RequirementsView::handleCreateReference()
 {
-    requirementsModel()->createReferenceTo(currentIndex());
+    QModelIndex newIdx = requirementsModel()->createReferenceTo(currentIndex());
+
+    if(newIdx.isValid())
+    {
+        selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    }
 }
