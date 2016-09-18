@@ -11,6 +11,8 @@
 #include "qmessageboxprovider.h"
 #include "directorylistmodel.h"
 #include "directorylistmodel.h"
+#include "requirementrefcounter.h"
+#include "uniqueidmanager.h"
 
 #include <memory>
 using namespace std;

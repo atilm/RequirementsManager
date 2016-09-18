@@ -1,19 +1,28 @@
 #include "requirement.h"
+#include "requirementreference.h"
 #include <QDebug>
 
-Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                         AttributeContainer *attributes, LinkContainer *links, AppSettings *settings) :
+Requirement::Requirement(UniqueIDManager *idManager,
+                         RequirementRefCounter *refCounter,
+                         shared_ptr<RiskAssessmentModel> riskAssessment,
+                         AttributeContainer *attributes,
+                         LinkContainer *links,
+                         AppSettings *settings) :
     id(idManager->newUniqueID())
 {
-    initialize(idManager, riskAssessment, attributes, links, settings);
+    initialize(idManager, refCounter, riskAssessment, attributes, links, settings);
 }
 
-Requirement::Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                         AttributeContainer *attributes, LinkContainer *links, AppSettings *settings,
+Requirement::Requirement(UniqueIDManager *idManager,
+                         RequirementRefCounter *refCounter,
+                         shared_ptr<RiskAssessmentModel> riskAssessment,
+                         AttributeContainer *attributes,
+                         LinkContainer *links,
+                         AppSettings *settings,
                          unsigned int proposedID) :
     id(idManager->newUniqueID(proposedID))
 {
-    initialize(idManager, riskAssessment, attributes, links, settings);
+    initialize(idManager, refCounter, riskAssessment, attributes, links, settings);
 }
 
 Requirement::~Requirement()
@@ -234,6 +243,34 @@ Requirement::Type Requirement::stringToType(const QString &typeString)
         return UserRequirement;
 }
 
+QList<Requirement *> Requirement::getReferenceList()
+{
+    QList<Requirement*> refList;
+
+    try{
+        QSet<uint> refIds = refCounter->getReferences(this->getID());
+
+        foreach(uint refId, refIds){
+            try{
+                refList.append(idManager->getRequirement(refId));
+            }
+            catch(const IDUnknownException &){
+                qDebug() << "Requirement: unkown refernce id.";
+            }
+        }
+    }
+    catch(const runtime_error &e){
+        qDebug() << e.what();
+    }
+
+    return refList;
+}
+
+AttributeContainer *Requirement::getAttributeContainer() const
+{
+    return attributes;
+}
+
 void Requirement::assertValidIndex(int index)
 {
     if(index < 0 || index > children.size()-1){
@@ -242,6 +279,7 @@ void Requirement::assertValidIndex(int index)
 }
 
 void Requirement::initialize(UniqueIDManager *idManager,
+                             RequirementRefCounter *refCounter,
                              shared_ptr<RiskAssessmentModel> riskAssessment,
                              AttributeContainer *attributes,
                              LinkContainer *links, AppSettings *settings)
@@ -253,6 +291,7 @@ void Requirement::initialize(UniqueIDManager *idManager,
     this->riskAssessment = riskAssessment;
     this->idManager = idManager;
     this->idManager->setRequirement(id, this);
+    this->refCounter = refCounter;
     parent = nullptr;
 
     type = UserRequirement;

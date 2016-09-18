@@ -96,7 +96,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView *descriptionView)
+void MainWindow::injectViews(RequirementsView *requirementsView,
+                             DescriptionView *descriptionView,
+                             RequirementRefView *referenceList)
 {
     this->requirementsView = requirementsView;
     delete ui->treeView;
@@ -110,6 +112,19 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             requirementsView, SLOT(appendChild()));
     connect(ui->actionRemoveRequirement, SIGNAL(triggered()),
             requirementsView, SLOT(removeCurrent()));
+
+    QVBoxLayout *vLayout = reinterpret_cast<QVBoxLayout*>(ui->linkPage->layout());
+    int index = vLayout->indexOf(ui->referenceList);
+    this->referenceListView = referenceList;
+    delete ui->referenceList;
+    ui->referenceList = referenceList;
+    vLayout->insertWidget(index, referenceList);
+
+    referenceListView->setModel(requirements);
+    connect(requirementsView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+            referenceListView, SLOT(switchItem(QModelIndex,QModelIndex)));
+    connect(requirementsView, SIGNAL(clicked(QModelIndex)),
+            referenceListView, SLOT(showItem(QModelIndex)));
 
     descriptionView->setModel(requirements);
     this->descriptionView = descriptionView;
@@ -129,6 +144,7 @@ void MainWindow::injectViews(RequirementsView *requirementsView, DescriptionView
             descriptionView, SLOT(switchItem(QModelIndex,QModelIndex)));
     connect(requirementsView, SIGNAL(clicked(QModelIndex)),
             descriptionView, SLOT(showItem(QModelIndex)));
+
     connect(fileController, SIGNAL(fileLoaded()),
             requirementsView, SLOT(resizeColumns()));
 

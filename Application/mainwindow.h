@@ -22,6 +22,7 @@
 #include "sourcecodecontroller.h"
 #include "settingsdialog.h"
 #include "reportcontroller.h"
+#include "requirementrefview.h"
 
 #include <QMainWindow>
 
@@ -55,7 +56,8 @@ public:
     ~MainWindow();
 
     void injectViews(RequirementsView *requirementsView,
-                     DescriptionView *descriptionView);
+                     DescriptionView *descriptionView,
+                     RequirementRefView *referenceList);
     void injectRiskViews(RiskDescriptionView *riskDescriptionView,
                          RiskTableView *riskTableView,
                          PreventiveActionTableView *preventiveActionTableView);
@@ -69,6 +71,7 @@ private:
     ProjectFileController *fileController;
     RequirementsView *requirementsView;
     DescriptionView *descriptionView;
+    RequirementRefView *referenceListView;
     shared_ptr<FileStateTracker> fileState;
     QMessageBoxProvider *messageBox;
     AppSettings *settings;

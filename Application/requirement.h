@@ -5,6 +5,7 @@
 #include "attributecontainer.h"
 #include "uniqueidmanager.h"
 #include "linkcontainer.h"
+#include "requirementrefcounter.h"
 #include "riskassessmentmodel.h"
 
 #include <QTextDocument>
@@ -36,10 +37,14 @@ public:
         DesignRequirement
     };
 
-    Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
+    Requirement(UniqueIDManager *idManager,
+                RequirementRefCounter *refCounter,
+                shared_ptr<RiskAssessmentModel> riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links,
                 AppSettings *settings);
-    Requirement(UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
+    Requirement(UniqueIDManager *idManager,
+                RequirementRefCounter *refCounter,
+                shared_ptr<RiskAssessmentModel> riskAssessment,
                 AttributeContainer *attributes, LinkContainer *links,
                 AppSettings *settings, unsigned int proposedID);
     virtual ~Requirement();
@@ -72,6 +77,8 @@ public:
     virtual QTextDocument* getDescription();
     virtual shared_ptr<RiskAssessmentModel> getRiskAssessment();
 
+    AttributeContainer *getAttributeContainer() const;
+
     virtual LinkContainer* getLinkContainer();
     virtual void addRequirementLink(int groupIdx, uint reqID);
 
@@ -92,11 +99,14 @@ public:
     static QString typeToString(Type type);
     static Type stringToType(const QString &typeString);
 
+    QList<Requirement*> getReferenceList();
+
 protected:
     const unsigned int id;
 
     Type type;
     UniqueIDManager *idManager;
+    RequirementRefCounter *refCounter;
     Requirement *parent;
     QVector<Requirement*> children;
 
@@ -108,8 +118,9 @@ protected:
 
     shared_ptr<RiskAssessmentModel> riskAssessment;
 
+
     void assertValidIndex(int index);
-    void initialize(UniqueIDManager *idManager,
+    void initialize(UniqueIDManager *idManager, RequirementRefCounter *refCounter,
                     shared_ptr<RiskAssessmentModel> riskAssessment,
                     AttributeContainer *attributes,
                     LinkContainer *links,

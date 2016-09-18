@@ -24,6 +24,7 @@ public:
     UniqueIDManager(QObject *parent = 0);
     virtual ~UniqueIDManager();
 
+    virtual void reset();
     /*! Check if an id exists
      Returns true, if the given id exists.
      Returns false otherwise.

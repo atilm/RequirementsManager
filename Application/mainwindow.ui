@@ -163,7 +163,7 @@
       </widget>
       <widget class="QToolBox" name="linkViewContainer">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="linkPage">
         <property name="geometry">
@@ -181,17 +181,17 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
+             <property name="text">
+              <string>User-defined links:</string>
              </property>
-            </spacer>
+            </widget>
            </item>
            <item>
             <widget class="QToolButton" name="addLinksButton">
@@ -222,6 +222,22 @@
          </item>
          <item>
           <widget class="QTreeView" name="linkView"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Current Requirment linked by:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="RequirementRefView" name="referenceList"/>
          </item>
         </layout>
        </widget>
@@ -302,35 +318,12 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionNewFile"/>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSaveAs"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="actionAddSibling"/>
-    <addaction name="actionAddChild"/>
-    <addaction name="actionRemoveRequirement"/>
-    <addaction name="actionAttributes"/>
-    <addaction name="actionLinkTypes"/>
-    <addaction name="actionProjectSettings"/>
-    <addaction name="actionAppSettings"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Info</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -571,6 +564,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>RequirementRefView</class>
+   <extends>QListWidget</extends>
+   <header>requirementrefview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

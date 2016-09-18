@@ -40,11 +40,14 @@ protected:
 
     Requirement *newRequirement(unsigned int proposedID = -1){
         if(proposedID == -1)
-            return new Requirement(idManager, riskAssessmentModelMock,
+            return new Requirement(idManager,
+                                   new RequirementRefCounter(),
+                                   riskAssessmentModelMock,
                                    new AttributeContainerMock(), new LinkContainerMock(),
                                    settings);
         else{
-            return new Requirement(idManager, riskAssessmentModelMock,
+            return new Requirement(idManager,
+                                   new RequirementRefCounter(), riskAssessmentModelMock,
                                    new AttributeContainerMock(), new LinkContainerMock(),
                                    settings, proposedID);
         }
@@ -66,6 +69,7 @@ TEST_F(RequirementTests, when_deleted_a_requirement_unregisters_its_id){
 TEST_F(RequirementTests, when_inserting_a_child_an_item_sets_itself_as_parent){
     Requirement *parent = newRequirement();
     Requirement *child = new Requirement(idManager,
+                                         new RequirementRefCounter(),
                                          shared_ptr<RiskAssessmentModelMock>(new RiskAssessmentModelMock()),
                                          new AttributeContainerMock(),
                                          new LinkContainerMock(),

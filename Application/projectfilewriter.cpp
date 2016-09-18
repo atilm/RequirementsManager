@@ -1,10 +1,13 @@
 #include "projectfilewriter.h"
+#include "requirementreference.h"
 #include "requirementsmodel.h"
 #include "projectfilecontroller.h"
 #include "automatedtestreference.h"
 #include <stdexcept>
-#include <QString>
+#include <QDebug>
+#include <QFileInfo>
 #include <QObject>
+#include <QString>
 using namespace std;
 
 ProjectFileWriter::ProjectFileWriter(QXmlStreamWriter *xml,
@@ -25,6 +28,8 @@ ProjectFileWriter::~ProjectFileWriter()
 void ProjectFileWriter::save(ProjectFileController *fileController,
                              QFileAdapter *file)
 {
+    createBackupFile(file);
+
     if(!file->open(QIODevice::WriteOnly | QIODevice::Text))
         throw runtime_error(QObject::tr("Could not open file.").toStdString());
 
@@ -144,17 +149,27 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 
     Requirement *requirement = model->getRequirement(itemIdx);
 
-    if(requirement->isReference()){
+    RequirementReference *reqRef = dynamic_cast<RequirementReference*>(requirement);
+
+    if(reqRef)
+    {
+        xml->writeStartElement("RequirementReference");
+        writeReqReferenceContent(itemIdx, reqRef);
+    }
+    else if(requirement->isReference())
+    {
         xml->writeStartElement("DesignReference");
         writeReferenceContent(itemIdx, requirement);
     }
-    else{
+    else
+    {
         xml->writeStartElement("Requirement");
         writeRequirementContent(itemIdx, requirement);
     }
 
-    for(int a=0;a < attributeContext->rowCount();a++)
+    for(int a=0;a < attributeContext->rowCount();a++){
         writeAttribute(parent, row, a);
+    }
 
     writeLinks(itemIdx);
 
@@ -162,7 +177,15 @@ void ProjectFileWriter::writeRequirement(int row, QModelIndex &parent)
 
     writeChildrenOf(itemIdx);
 
-    xml->writeEndElement(); // Requirement
+    xml->writeEndElement(); // Requirement / DesignReference / RequirementReference
+}
+
+void ProjectFileWriter::writeReqReferenceContent(const QModelIndex &index,
+                                                 RequirementReference *reqRef)
+{
+    write_ID_and_Type(index);
+
+    xml->writeAttribute("linkID", QString::number(reqRef->getTargetID()));
 }
 
 void ProjectFileWriter::writeReferenceContent(const QModelIndex &index,
@@ -297,6 +320,8 @@ QString ProjectFileWriter::getAttributeValue(const QModelIndex &parent, int row,
         return checkStateToString(model->data(itemIdx, Qt::CheckStateRole));
     case AttributeContext::TEXT:
         return model->data(itemIdx, Qt::DisplayRole).toString();
+    default:
+        return QString();
     }
 }
 
@@ -315,5 +340,18 @@ QString ProjectFileWriter::checkStateToString(const QVariant &value)
 QString ProjectFileWriter::intToString(int n)
 {
     return QString("%1").arg(n);
+}
+
+void ProjectFileWriter::createBackupFile(QFile *file)
+{
+    QFileInfo fInfo(*file);
+    QFileInfo fBackup(QString("%1/~%2").arg(fInfo.dir().absolutePath()).arg(fInfo.fileName()));
+
+    if(fInfo.exists()){
+        if(fBackup.exists()){
+            QFile::remove(fBackup.absoluteFilePath());
+        }
+        QFile::copy(fInfo.absoluteFilePath(), fBackup.absoluteFilePath());
+    }
 }
 

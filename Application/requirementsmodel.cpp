@@ -1,4 +1,5 @@
 #include "requirementsmodel.h"
+#include "requirementreference.h"
 #include <QDebug>
 #include <iostream>
 using namespace std;
@@ -30,7 +31,9 @@ void RequirementsModel::init()
 
 void RequirementsModel::clearModel()
 {
+    qDebug() << "attributeContext->clear();...";
     attributeContext->clear();
+    qDebug() << "linkContext->clear();...";
     linkContext->clear();
 
     int rows = rowCount();
@@ -38,6 +41,9 @@ void RequirementsModel::clearModel()
     for(int r=0;r<rows;r++){
         removeRequirement(index(0, 0));
     }
+
+    qDebug() << "factory->resetManagers();...";
+    factory->resetManagers();
 }
 
 int RequirementsModel::columnCount(const QModelIndex &parent) const
@@ -243,8 +249,12 @@ QModelIndex RequirementsModel::insertChild(Requirement *newItem,
 bool RequirementsModel::removeRequirement(const QModelIndex &index)
 {
     if(!index.isValid())
+    {
         return false;
-    else{
+    }
+    else
+    {
+        qDebug() << QString("removing ") << index;
         Requirement *parent = getValidItem(index.parent());
         beginRemoveRows(index.parent(), index.row(), index.row());
         parent->removeChild(index.row());
@@ -301,6 +311,31 @@ Requirement *RequirementsModel::getRequirement(const QModelIndex &index) const
     }
 
     return asRequirement(index);
+}
+
+QModelIndex RequirementsModel::createReferenceTo(const QModelIndex &index)
+{
+    if(!index.isValid()){
+        return QModelIndex();
+    }
+
+    QModelIndex parentIdx = index.parent();
+    int newRow = index.row() + 1;
+    Requirement *parent = getValidItem(index.parent());
+
+    if(index.row() < parent->childCount()){
+        Requirement *child = factory->newRequirementReference(asRequirement(index));
+
+        beginInsertRows(parentIdx, newRow, newRow);
+        parent->insertChild(newRow, child);
+        endInsertRows();
+
+        fileState->setChanged(true);
+        return this->index(newRow, 0, parentIdx);
+    }
+    else{
+        return QModelIndex();
+    }
 }
 
 AttributeContext *RequirementsModel::getAttributeContext() const

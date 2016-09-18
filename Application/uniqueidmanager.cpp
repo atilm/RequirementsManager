@@ -1,4 +1,5 @@
 #include "uniqueidmanager.h"
+#include <QDebug>
 
 UniqueIDManager::UniqueIDManager(QObject *parent)
     : QObject(parent)
@@ -9,6 +10,17 @@ UniqueIDManager::UniqueIDManager(QObject *parent)
 UniqueIDManager::~UniqueIDManager()
 {
 
+}
+
+void UniqueIDManager::reset()
+{
+    qDebug() << "idManager before reset: ";
+    qDebug() << "count: " << ids.count();
+    qDebug() << "maxID: " << maxID;
+
+    // UniqueIDManager still contains the requirement
+    // model's root requirement.
+    maxID = 1;
 }
 
 bool UniqueIDManager::hasID(unsigned int id) const

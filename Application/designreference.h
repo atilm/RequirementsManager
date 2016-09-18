@@ -10,13 +10,23 @@ class SourceCodeController;
 class DesignReference : public Requirement
 {
 public:
-    DesignReference(SourceAddress address, SourceCodeController *controller,
-                    UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                    AttributeContainer *attributes, LinkContainer *links, AppSettings *settings);
+    DesignReference(SourceAddress address,
+                    SourceCodeController *controller,
+                    UniqueIDManager *idManager,
+                    RequirementRefCounter *refCounter,
+                    shared_ptr<RiskAssessmentModel> riskAssessment,
+                    AttributeContainer *attributes,
+                    LinkContainer *links,
+                    AppSettings *settings);
 
-    DesignReference(SourceAddress address, SourceCodeController *controller,
-                    UniqueIDManager *idManager, shared_ptr<RiskAssessmentModel> riskAssessment,
-                    AttributeContainer *attributes, LinkContainer *links, AppSettings *settings,
+    DesignReference(SourceAddress address,
+                    SourceCodeController *controller,
+                    UniqueIDManager *idManager,
+                    RequirementRefCounter *refCounter,
+                    shared_ptr<RiskAssessmentModel> riskAssessment,
+                    AttributeContainer *attributes,
+                    LinkContainer *links,
+                    AppSettings *settings,
                     unsigned int proposedID);
 
     virtual bool isReference();

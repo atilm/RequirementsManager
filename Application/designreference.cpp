@@ -1,12 +1,15 @@
 #include "designreference.h"
 #include "sourcecodecontroller.h"
 
-DesignReference::DesignReference(SourceAddress address, SourceCodeController *controller,
+DesignReference::DesignReference(SourceAddress address,
+                                 SourceCodeController *controller,
                                  UniqueIDManager *idManager,
+                                 RequirementRefCounter *refCounter,
                                  shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
-                                 LinkContainer *links, AppSettings *settings)
-    : Requirement(idManager, riskAssessment, attributes, links, settings)
+                                 LinkContainer *links,
+                                 AppSettings *settings)
+    : Requirement(idManager, refCounter, riskAssessment, attributes, links, settings)
 {
     initialize(address, controller);
 }
@@ -14,11 +17,12 @@ DesignReference::DesignReference(SourceAddress address, SourceCodeController *co
 DesignReference::DesignReference(SourceAddress address,
                                  SourceCodeController *controller,
                                  UniqueIDManager *idManager,
+                                 RequirementRefCounter *refCounter,
                                  shared_ptr<RiskAssessmentModel> riskAssessment,
                                  AttributeContainer *attributes,
                                  LinkContainer *links, AppSettings *settings,
                                  unsigned int proposedID)
-    : Requirement(idManager, riskAssessment, attributes, links, settings, proposedID)
+    : Requirement(idManager, refCounter, riskAssessment, attributes, links, settings, proposedID)
 {
     initialize(address, controller);
 }

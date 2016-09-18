@@ -106,7 +106,9 @@ int main(int argc, char *argv[])
     shared_ptr<RiskAssessmentFactory> raFactory = make_shared<RiskAssessmentFactory>(fileState,
                                                                                      actionFactory);
 
-    RequirementFactory *factory = new RequirementFactory(fileState, raFactory,idManager,
+    RequirementRefCounter *refCounter = new RequirementRefCounter();
+    RequirementFactory *factory = new RequirementFactory(fileState, raFactory,
+                                                         idManager, refCounter,
                                                          attributes, links,
                                                          sourceController, appSettings);
 
@@ -128,6 +130,8 @@ int main(int argc, char *argv[])
 
     AppSettingsDialog *appSettingsDialog = new AppSettingsDialog(appSettings);
 
+    RequirementRefView *refView = new RequirementRefView();
+
     MainWindow w(fileController, requirements, richText,
                  fileState, msg, appSettings, attributeEditor, raEditController,
                  linkTypeEditor, linkController,
@@ -136,7 +140,7 @@ int main(int argc, char *argv[])
                  settingsDialog,
                  reportController, 0);
 
-    w.injectViews(requirementsView, descriptionView);
+    w.injectViews(requirementsView, descriptionView, refView);
     w.injectRiskViews(riskDescriptionView, riskTableView, actionTableView);
     w.show();
 

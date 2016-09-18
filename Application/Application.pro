@@ -9,7 +9,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 VERSION_MAJOR = 0
-VERSION_MINOR = 1
+VERSION_MINOR = 2
 VERSION_BUILD = 0
 
 DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
@@ -96,7 +96,10 @@ SOURCES += main.cpp\
     aboutbox.cpp \
     version.cpp \
     directorylister.cpp \
-    appsettingsdialog.cpp
+    appsettingsdialog.cpp \
+    requirementreference.cpp \
+    requirementrefcounter.cpp \
+    requirementrefview.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -166,7 +169,10 @@ HEADERS  += mainwindow.h \
     aboutbox.h \
     version.h \
     directorylister.h \
-    appsettingsdialog.h
+    appsettingsdialog.h \
+    requirementreference.h \
+    requirementrefcounter.h \
+    requirementrefview.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

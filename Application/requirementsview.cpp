@@ -41,27 +41,36 @@ void RequirementsView::appendChild()
     QModelIndex newIdx = requirementsModel()->appendChild(selectionModel()->currentIndex());
 
     if(newIdx.isValid())
+    {
         selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    }
 }
 
 void RequirementsView::appendChild(Requirement *item)
 {
     QModelIndex newIdx = requirementsModel()->insertChild(item, selectionModel()->currentIndex(), -1);
 
-    if(newIdx.isValid()){
+    if(newIdx.isValid())
+    {
         setExpanded(selectionModel()->currentIndex(), true);
 
         if(!item->isReference())
+        {
             selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+        }
     }
 }
 
 void RequirementsView::removeCurrent()
 {
-    if(selectionModel()->currentIndex().isValid()){
+    if(selectionModel()->currentIndex().isValid())
+    {
         QMessageBox::StandardButton answer = msg->showQuestion(this, tr("Delete requirement"), tr("Delete the current requirement?"));
+
         if(answer == QMessageBox::Yes)
+        {
             requirementsModel()->removeRequirement(selectionModel()->currentIndex());
+        }
     }
 }
 
@@ -118,6 +127,8 @@ void RequirementsView::setUpContextMenu(QMenu *contextMenu)
     contextMenu->addAction(tr("User Requirement"), this, SLOT(handleToUserRequirement()));
     contextMenu->addAction(tr("Functional Requirement"), this, SLOT(handleToFunctionalRequirement()));
     contextMenu->addAction(tr("Design Requirement"), this, SLOT(handleToDesignRequirement()));
+    contextMenu->addSeparator();
+    contextMenu->addAction(tr("Create Reference"), this, SLOT(handleCreateReference()));
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
@@ -145,4 +156,14 @@ void RequirementsView::handleToFunctionalRequirement()
 void RequirementsView::handleToDesignRequirement()
 {
     requirementsModel()->setType(currentIndex(), Requirement::DesignRequirement);
+}
+
+void RequirementsView::handleCreateReference()
+{
+    QModelIndex newIdx = requirementsModel()->createReferenceTo(currentIndex());
+
+    if(newIdx.isValid())
+    {
+        selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect);
+    }
 }
