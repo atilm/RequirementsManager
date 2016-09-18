@@ -4,6 +4,7 @@
 #include "tagextractor.h"
 #include "testnode.h"
 
+#include <QDebug>
 #include <QFileInfo>
 
 AerobasicReader::AerobasicReader(QFileAdapter *file,
@@ -121,7 +122,10 @@ void AerobasicReader::parseFunctionDefinition(const QModelIndex &parent,
 
     FunctionNode *functionNode = new FunctionNode();
     functionNode->setName(extractor.getFirstInTag("name"));
-    functionNode->setDescription(extractor.getFirstInTag("short"));
+
+    QString shortDesc = removeCommentsFromLineStart(extractor.getFirstInTag("short"), ";");
+
+    functionNode->setDescription(shortDesc);
 
     model->insertFunctionAlphabetically(parent, functionNode);
 }
@@ -177,10 +181,16 @@ void AerobasicReader::parseTestDefinition(const QString &definition)
 
     testNode->setTestCase(currentTestCase);
     testNode->setTestName(extractTestName(definition));
-    testNode->appendToShortDescription(extractor.getFirstInTag("short"));
-    testNode->appendToPreparation(extractor.getFirstInTag("preparation"));
-    testNode->appendToAction(extractor.getFirstInTag("action"));
-    testNode->appendToResult(extractor.getFirstInTag("result"));
+
+    QString shortDesc = removeCommentsFromLineStart(extractor.getFirstInTag("short"), ";");
+    QString preparation = removeCommentsFromLineStart(extractor.getFirstInTag("preparation"), ";");
+    QString action = removeCommentsFromLineStart(extractor.getFirstInTag("action"), ";");
+    QString result = removeCommentsFromLineStart(extractor.getFirstInTag("result"), ";");
+
+    testNode->appendToShortDescription(shortDesc);
+    testNode->appendToPreparation(preparation);
+    testNode->appendToAction(action);
+    testNode->appendToResult(result);
 
     model->appendTest(address, testNode);
 }
@@ -189,4 +199,24 @@ QString AerobasicReader::extractTestName(const QString &definition)
 {
     int lineEnd = definition.indexOf("\n");
     return definition.mid(0, lineEnd).trimmed();
+}
+
+QString AerobasicReader::removeCommentsFromLineStart(const QString &s,
+                                                     const QString &commentStr)
+{
+    QStringList lines = s.split("\r\n");
+
+    QString outLines;
+
+    foreach(QString line, lines){
+        line = line.trimmed();
+        if(line.startsWith(commentStr)){
+            outLines.append(line.replace(0, commentStr.size(), "") + "\r\n");
+        }
+        else{
+            outLines.append(line + "\r\n");
+        }
+    }
+
+    return outLines;
 }

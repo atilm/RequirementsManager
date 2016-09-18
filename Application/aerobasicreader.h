@@ -51,6 +51,8 @@ private:
     void extractTestCase(const QString &filePath);
     void parseTestDefinition(const QString &definition);
     QString extractTestName(const QString &definition);
+
+    QString removeCommentsFromLineStart(const QString &s, const QString &commentStr);
 };
 
 #endif // AEROBASICREADER_H
