@@ -100,7 +100,8 @@ SOURCES += main.cpp\
     requirementreference.cpp \
     requirementrefcounter.cpp \
     requirementrefview.cpp \
-    aerobasicreader.cpp
+    aerobasicreader.cpp \
+    tagextractor.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -174,7 +175,8 @@ HEADERS  += mainwindow.h \
     requirementreference.h \
     requirementrefcounter.h \
     requirementrefview.h \
-    aerobasicreader.h
+    aerobasicreader.h \
+    tagextractor.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

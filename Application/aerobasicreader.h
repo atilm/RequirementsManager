@@ -30,10 +30,17 @@ private:
     QFileAdapter *file;
     QTextStreamAdapter *inStream;
     shared_ptr<DirectoryLister> dirLister;
-    QStringList headerFiles;
+    QStringList sourceFiles;
     QStringList testFiles;
 
     void readDesignSpecification(DirectoryListModel *sourceDirs);
+    void parseSourceFilesInDirectory(const QString &dirPath);
+    QStringList listSourceFiles(const QString &dirPath);
+    void extractFunctionsFromFile(const QString &filePath);
+    bool openStream(const QString &filePath);
+    void parseSourceLines(const QString &filePath);
+    QString extractModuleName(const QString &filePath);
+    void parseFunctionDefinition(const QModelIndex &parent, const QString &definition);
 };
 
 #endif // AEROBASICREADER_H
