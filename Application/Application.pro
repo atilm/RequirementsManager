@@ -99,7 +99,8 @@ SOURCES += main.cpp\
     appsettingsdialog.cpp \
     requirementreference.cpp \
     requirementrefcounter.cpp \
-    requirementrefview.cpp
+    requirementrefview.cpp \
+    aerobasicreader.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -172,7 +173,8 @@ HEADERS  += mainwindow.h \
     appsettingsdialog.h \
     requirementreference.h \
     requirementrefcounter.h \
-    requirementrefview.h
+    requirementrefview.h \
+    aerobasicreader.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \

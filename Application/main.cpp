@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "aerobasicreader.h"
 #include "cppreader.h"
 #include "preventiveactionfactory.h"
 #include "riskscenariotextedit.h"
@@ -87,6 +88,9 @@ int main(int argc, char *argv[])
     readerProvider->addReader(new CppReader(new QFileAdapter(),
                                             new QTextStreamAdapter(),
                                             make_shared<DirectoryLister>(make_shared<QDir>())));
+    readerProvider->addReader(new AerobasicReader(new QFileAdapter(),
+                                                  new QTextStreamAdapter(),
+                                                  make_shared<DirectoryLister>(make_shared<QDir>())));
 
     SettingsDialog *settingsDialog = new SettingsDialog(readerProvider,
                                                         fileController,
