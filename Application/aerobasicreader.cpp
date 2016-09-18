@@ -34,7 +34,7 @@ SourceCodeModel *AerobasicReader::parseSourceCode(DirectoryListModel *sourceDirs
     testFiles.clear();
 
     readDesignSpecification(sourceDirs);
-    //readTestSpecification(testDirs);
+    readTestSpecification(testDirs);
 
     return model;
 }
@@ -48,6 +48,12 @@ void AerobasicReader::readDesignSpecification(DirectoryListModel *sourceDirs)
 {
     for(int i=0;i<sourceDirs->rowCount();i++)
         parseSourceFilesInDirectory(sourceDirs->absolutePath(i));
+}
+
+void AerobasicReader::readTestSpecification(DirectoryListModel *testDirs)
+{
+    for(int i=0;i<testDirs->rowCount();i++)
+        parseTestFilesInDirectory(testDirs->absolutePath(i));
 }
 
 void AerobasicReader::parseSourceFilesInDirectory(const QString &dirPath)
@@ -118,4 +124,69 @@ void AerobasicReader::parseFunctionDefinition(const QModelIndex &parent,
     functionNode->setDescription(extractor.getFirstInTag("short"));
 
     model->insertFunctionAlphabetically(parent, functionNode);
+}
+
+void AerobasicReader::parseTestFilesInDirectory(const QString &dirPath)
+{
+    QStringList fileInCurrentDir = listSourceFiles(dirPath);
+
+    foreach(QString filePath, fileInCurrentDir)
+        extractTestsFromFile(filePath);
+
+    testFiles += fileInCurrentDir;
+}
+
+void AerobasicReader::extractTestsFromFile(const QString &filePath)
+{
+    if(!openStream(filePath))
+        return;
+
+    parseTestDefinitionFile(filePath);
+
+    file->close();
+}
+
+void AerobasicReader::parseTestDefinitionFile(const QString &filePath)
+{
+    extractTestCase(filePath);
+
+    TagExtractor extractor(inStream->readAll());
+
+    QStringList testDefinitions = extractor.getAllInDelimiters("DFS", "ENDDFS");
+
+    foreach(QString definition, testDefinitions){
+        parseTestDefinition(definition);
+    }
+}
+
+void AerobasicReader::extractTestCase(const QString &filePath)
+{
+    QFileInfo fInfo(filePath);
+    currentTestCase = fInfo.baseName();
+}
+
+void AerobasicReader::parseTestDefinition(const QString &definition)
+{
+    TagExtractor extractor(definition);
+
+    SourceAddress address;
+    TestNode *testNode = new TestNode();
+
+    address.className = extractor.getFirstInTag("file").trimmed();
+    address.functionName = extractor.getFirstInTag("function").trimmed();
+
+    testNode->setTestCase(currentTestCase);
+    testNode->setTestName(extractTestName(definition));
+    testNode->appendToShortDescription(extractor.getFirstInTag("short"));
+    testNode->appendToPreparation(extractor.getFirstInTag("preparation"));
+    testNode->appendToAction(extractor.getFirstInTag("action"));
+    testNode->appendToResult(extractor.getFirstInTag("result"));
+
+    model->appendTest(address, testNode);
+}
+
+QString AerobasicReader::extractTestName(const QString &definition)
+{
+    int lineEnd = definition.indexOf("\n");
+    return definition.mid(0, lineEnd).trimmed();
 }

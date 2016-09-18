@@ -32,8 +32,11 @@ private:
     shared_ptr<DirectoryLister> dirLister;
     QStringList sourceFiles;
     QStringList testFiles;
+    QString currentTestCase;
 
     void readDesignSpecification(DirectoryListModel *sourceDirs);
+    void readTestSpecification(DirectoryListModel *testDirs);
+
     void parseSourceFilesInDirectory(const QString &dirPath);
     QStringList listSourceFiles(const QString &dirPath);
     void extractFunctionsFromFile(const QString &filePath);
@@ -41,6 +44,13 @@ private:
     void parseSourceLines(const QString &filePath);
     QString extractModuleName(const QString &filePath);
     void parseFunctionDefinition(const QModelIndex &parent, const QString &definition);
+
+    void parseTestFilesInDirectory(const QString &dirPath);
+    void extractTestsFromFile(const QString &filePath);
+    void parseTestDefinitionFile(const QString &filePath);
+    void extractTestCase(const QString &filePath);
+    void parseTestDefinition(const QString &definition);
+    QString extractTestName(const QString &definition);
 };
 
 #endif // AEROBASICREADER_H
