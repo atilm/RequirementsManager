@@ -36,7 +36,7 @@ public:
 
 protected:
     uint targetID;
-    shared_ptr<QTextDocument> refDescription;
+    QTextDocument *refDescription;
 
     Requirement *getSource() const;
     void initialize(uint targetID, Type type);

@@ -33,6 +33,8 @@ RequirementReference::RequirementReference(uint targetID,
 RequirementReference::~RequirementReference()
 {
     refCounter->removeReference(targetID, id);
+
+    delete refDescription;
 }
 
 bool RequirementReference::isReference()
@@ -88,7 +90,7 @@ QTextDocument *RequirementReference::getDescription()
     }
 
     refDescription->setHtml(s);
-    return refDescription.get();
+    return refDescription;
 }
 
 void RequirementReference::setTargetID(uint id)
@@ -115,7 +117,7 @@ void RequirementReference::initialize(uint targetID, Requirement::Type type)
 {
     this->targetID = targetID;
     setType(type);
-    refDescription = make_shared<QTextDocument>();
+    refDescription = new QTextDocument();
 
     // register yourself with the refernce counter:
     refCounter->addReference(targetID, id);

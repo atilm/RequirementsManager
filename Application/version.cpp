@@ -1,6 +1,5 @@
 #include "version.h"
 
-
 QString Version::versionNumberString()
 {
     return QString("%1.%2.%3")
