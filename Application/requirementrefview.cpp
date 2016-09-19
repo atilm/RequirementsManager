@@ -4,7 +4,6 @@ RequirementRefView::RequirementRefView(QWidget *parent)
     : QListWidget(parent)
 {
     model = nullptr;
-    addItem("Test");
 }
 
 RequirementRefView::~RequirementRefView()
