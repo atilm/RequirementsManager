@@ -64,8 +64,8 @@ MainWindow::MainWindow(ProjectFileController *fileController,
     connect(ui->actionAttributes, SIGNAL(triggered()), attributeDialog, SLOT(exec()));
     connect(ui->actionSave, SIGNAL(triggered()), fileController, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), fileController, SLOT(saveAs()));
-    connect(ui->actionOpen, SIGNAL(triggered()), fileController, SLOT(load()));
-    connect(ui->actionNewFile, SIGNAL(triggered()), fileController, SLOT(newFile()));
+    connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(executeLoad()));
+    connect(ui->actionNewFile, SIGNAL(triggered()), this, SLOT(executeNewFile()));
     connect(ui->actionReport, SIGNAL(triggered()), reportController, SLOT(generateReport()));
     connect(fileState.get(), SIGNAL(filePathChanged(QString)), this, SLOT(handleChangedStateChanged()));
     connect(fileState.get(), SIGNAL(changedStateChanged(bool)), this, SLOT(handleChangedStateChanged()));
@@ -242,6 +242,20 @@ void MainWindow::setSplitterBehaviour()
     QList<int> sizes;
     sizes << 500 << 200;
     ui->splitter_2->setSizes(sizes);
+}
+
+void MainWindow::executeLoad()
+{
+    descriptionView->setDocument(nullptr);
+
+    fileController->load();
+}
+
+void MainWindow::executeNewFile()
+{
+    descriptionView->setDocument(nullptr);
+
+    fileController->newFile();
 }
 
 

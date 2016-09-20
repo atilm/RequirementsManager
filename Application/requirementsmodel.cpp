@@ -31,9 +31,7 @@ void RequirementsModel::init()
 
 void RequirementsModel::clearModel()
 {
-    qDebug() << "attributeContext->clear();...";
     attributeContext->clear();
-    qDebug() << "linkContext->clear();...";
     linkContext->clear();
 
     int rows = rowCount();
@@ -42,7 +40,6 @@ void RequirementsModel::clearModel()
         removeRequirement(index(0, 0));
     }
 
-    qDebug() << "factory->resetManagers();...";
     factory->resetManagers();
 }
 
@@ -254,7 +251,6 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
     }
     else
     {
-        qDebug() << QString("removing ") << index;
         Requirement *parent = getValidItem(index.parent());
         beginRemoveRows(index.parent(), index.row(), index.row());
         parent->removeChild(index.row());

@@ -93,6 +93,8 @@ private slots:
     void handleFilePathChanged(const QString &fPath);
     void handleChangedStateChanged();
     void setSplitterBehaviour();
+    void executeLoad();
+    void executeNewFile();
 };
 
 #endif // MAINWINDOW_H
