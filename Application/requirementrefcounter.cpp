@@ -16,7 +16,6 @@ RequirementRefCounter::~RequirementRefCounter()
 
 void RequirementRefCounter::reset()
 {
-    qDebug() << "refCounter before reset: " << linkMap.count();
     linkMap.clear();
 }
 

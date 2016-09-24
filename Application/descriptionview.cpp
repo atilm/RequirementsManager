@@ -76,13 +76,13 @@ void DescriptionView::insertImage()
 
 void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &)
 {
-    qDebug() << Q_FUNC_INFO;
     try{
         Requirement *req = data->getRequirement(current);
 
-        qDebug() << "setDocument()...";
+        // First set the document to a nullptr to avoid crashes due to
+        // function calls to deleted instances:
+        setDocument(nullptr);
         setDocument(req->getDescription());
-        qDebug() << "documentSet()";
 
         if(req->isReference())
             setReadOnly(true);
@@ -96,7 +96,6 @@ void DescriptionView::switchItem(const QModelIndex &current, const QModelIndex &
         setDisabled(true);
         emit readOnlyToggled(true);
     }
-    qDebug() << "complete";
 }
 
 void DescriptionView::showItem(const QModelIndex &index)

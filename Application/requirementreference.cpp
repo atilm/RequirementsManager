@@ -1,5 +1,8 @@
-#include "requirementreference.h"
 #include <QDebug>
+#include <QTextCursor>
+
+#include "requirementreference.h"
+
 
 RequirementReference::RequirementReference(uint targetID,
                                            Requirement::Type type,
@@ -79,17 +82,27 @@ QString RequirementReference::getNumberedTitle() const
 
 QTextDocument *RequirementReference::getDescription()
 {
-    QString s = QString("UNRESOLVED LINK to [%1]").arg(targetID, 3, 10, QChar('0'));
-
     Requirement *source = getSource();
 
-    if(source){
-        QString html = source->getDescription()->toHtml();
-        QString ref = QString("LINK to %1").arg(source->getNumberedTitle());
-        s = QString("%1<br>\n%2").arg(ref).arg(html);
+    if(refDescription){
+        delete refDescription;
     }
 
-    refDescription->setHtml(s);
+    if(source){
+        refDescription = source->getDescription()->clone();
+
+        QString ref = QString("LINK to %1\n\n").arg(source->getNumberedTitle());
+
+        QTextCursor cursor(refDescription);
+        cursor.setPosition(0);
+        cursor.insertText(ref);
+    }
+    else{
+        refDescription = new QTextDocument();
+        QString s = QString("UNRESOLVED LINK to [%1]").arg(targetID, 3, 10, QChar('0'));
+        refDescription->setHtml(s);
+    }
+
     return refDescription;
 }
 
@@ -117,7 +130,7 @@ void RequirementReference::initialize(uint targetID, Requirement::Type type)
 {
     this->targetID = targetID;
     setType(type);
-    refDescription = new QTextDocument();
+    refDescription = nullptr;
 
     // register yourself with the refernce counter:
     refCounter->addReference(targetID, id);

@@ -255,12 +255,10 @@ QList<Requirement *> Requirement::getReferenceList()
                 refList.append(idManager->getRequirement(refId));
             }
             catch(const IDUnknownException &){
-                qDebug() << "Requirement: unkown refernce id.";
             }
         }
     }
-    catch(const runtime_error &e){
-        qDebug() << e.what();
+    catch(const runtime_error &){
     }
 
     return refList;

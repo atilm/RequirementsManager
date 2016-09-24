@@ -14,12 +14,13 @@ UniqueIDManager::~UniqueIDManager()
 
 void UniqueIDManager::reset()
 {
-    qDebug() << "idManager before reset: ";
-    qDebug() << "count: " << ids.count();
-    qDebug() << "maxID: " << maxID;
-
     // UniqueIDManager still contains the requirement
     // model's root requirement.
+
+    if(ids.count() != 1){
+        throw IDNotRemovedException();
+    }
+
     maxID = 1;
 }
 

@@ -17,6 +17,10 @@ class IDUnknownException : public exception{
 
 };
 
+class IDNotRemovedException : public exception{
+
+};
+
 class UniqueIDManager : public QObject
 {
     Q_OBJECT
@@ -25,6 +29,7 @@ public:
     virtual ~UniqueIDManager();
 
     virtual void reset();
+
     /*! Check if an id exists
      Returns true, if the given id exists.
      Returns false otherwise.
