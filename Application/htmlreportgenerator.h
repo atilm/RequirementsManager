@@ -17,6 +17,8 @@ public:
                         HtmlGenerator *html);
     virtual ~HtmlReportGenerator();
 
+    virtual QString getTypeString();
+    virtual QString getDescription();
     virtual void setModel(shared_ptr<RequirementsModel> model);
     virtual void generate(const QString &filePath);
 

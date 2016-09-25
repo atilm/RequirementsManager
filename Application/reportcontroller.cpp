@@ -3,18 +3,22 @@
 #include <QFileInfo>
 #include <QMessageBox>
 
-ReportController::ReportController(ReportGeneratorFactory *generatorFactory,
+ReportController::ReportController(ReportGeneratorProvider *generatorProvider,
                                    shared_ptr<FileStateTracker> fileState,
+                                   ReportTypeChooserDialog *typeChooser,
                                    QObject *parent)
     : QObject(parent)
 {
-    this->generatorFactory = generatorFactory;
+    this->generatorProvider = generatorProvider;
     this->fileState = fileState;
+    this->typeChooser = typeChooser;
+
+    this->typeChooser->setGeneratorProvider(generatorProvider);
 }
 
 ReportController::~ReportController()
 {
-    delete generatorFactory;
+    delete generatorProvider;
 }
 
 void ReportController::setModel(shared_ptr<RequirementsModel> model)
@@ -27,13 +31,17 @@ void ReportController::generateReport()
     if(!model)
         throw runtime_error("ReportController: model has not been set.");
 
+    if(!typeChooser->exec()){
+        return;
+    }
+
     if(!fileState->filePath().isEmpty()){
         QString targetFile = swapFileExtension(fileState->filePath(), ".html");
 
-        ReportGenerator *generator = generatorFactory->newGenerator("html");
+        ReportGenerator *generator =
+                generatorProvider->getGenerator(typeChooser->getType());
         generator->setModel(model);
         generator->generate(targetFile);
-        delete generator;
 
         QDesktopServices::openUrl(QString("file:///%1")
                                   .arg(targetFile));
