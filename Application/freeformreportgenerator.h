@@ -23,10 +23,19 @@ public:
     virtual void generate(const QString &filePath);
 
 private:
+    QFile file;
+    QTextStream out;
     shared_ptr<HtmlTemplateFactory> templateFactory;
     shared_ptr<TextDocumentSerializer> documentSerializer;
     shared_ptr<HtmlGenerator> htmlGenerator;
     shared_ptr<RequirementsModel> model;
+
+    HtmlTemplate *documentTemplate;
+
+    void initializeTemplates();
+    QString generateHtml();
+    QString generateContent(const QModelIndex &index, uint depth);
+    QString buildSectionString(Requirement *requirement, uint depth);
 };
 
 #endif // FREEFORMREPORTGENERATOR_H

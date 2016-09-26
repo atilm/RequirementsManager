@@ -62,6 +62,7 @@ private:
     QString constructRANumber(const QString &reqNumber, int raModelIndex);
     QString constructTestNumber(const QString &raNumber, int testModelIndex);
     bool isUserRequirement(const QModelIndex &index);
+    bool isFunctionalRequirement(const QModelIndex &index);
     bool isDesignSpecification(const QModelIndex &index);
     bool isUserOrFunctionalRequirement(const QModelIndex &index);
 };
