@@ -222,6 +222,10 @@ int Requirement::displayIndexOf(const Requirement *item) const
 QString Requirement::typeToString(Requirement::Type type)
 {
     switch(type){
+    case Section:
+        return "Section";
+    case TableRow:
+        return "TableRow";
     case UserRequirement:
         return "UserRequirement";
     case FunctionalRequirement:
@@ -235,12 +239,21 @@ QString Requirement::typeToString(Requirement::Type type)
 
 Requirement::Type Requirement::stringToType(const QString &typeString)
 {
-    if(typeString == "DesignRequirement")
+    if(typeString == "Section"){
+        return Section;
+    }
+    else if(typeString == "TableRow"){
+        return TableRow;
+    }
+    else if(typeString == "DesignRequirement"){
         return DesignRequirement;
-    else if(typeString == "FunctionalRequirement")
+    }
+    else if(typeString == "FunctionalRequirement"){
         return FunctionalRequirement;
-    else
+    }
+    else{
         return UserRequirement;
+    }
 }
 
 QList<Requirement *> Requirement::getReferenceList()

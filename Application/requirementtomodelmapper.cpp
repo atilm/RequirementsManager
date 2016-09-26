@@ -53,7 +53,7 @@ QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirem
         case Requirement::Section:
             return QColor("#000000");
         case Requirement::TableRow:
-            return QColor("#4CBB17");
+            return QColor("#488214");
         case Requirement::UserRequirement:
             return QColor("#000000");
         case Requirement::FunctionalRequirement:
