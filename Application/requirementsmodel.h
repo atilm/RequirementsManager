@@ -36,7 +36,7 @@ public:
     virtual void clearModel();
 
     // required overriden functions
-    virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;
+    virtual int columnCount(const QModelIndex & = QModelIndex()) const;
     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const ;
     virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     virtual QModelIndex	 index(int row, int column, const QModelIndex & parent = QModelIndex()) const;

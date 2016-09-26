@@ -34,7 +34,9 @@ public:
     enum Type{
         UserRequirement,
         FunctionalRequirement,
-        DesignRequirement
+        DesignRequirement,
+        Section,
+        TableRow
     };
 
     Requirement(UniqueIDManager *idManager,

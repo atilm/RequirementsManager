@@ -28,6 +28,7 @@ public:
     QVariant getDisplayRole(const Requirement *requirement, int column) const;
     QVariant getEditRole(const Requirement *requirement, int column) const;
     QVariant getCheckStateRole(const Requirement *requirement, int column) const;
+    QVariant getFontRole(const Requirement *requirement, int column) const;
 
     bool setEditRole(const QVariant &value, Requirement *requirement, int column);
     bool setCheckStateRole(const QVariant &value, Requirement *requirement, int column);

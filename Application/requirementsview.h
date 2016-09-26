@@ -50,6 +50,8 @@ private slots:
     void handleToUserRequirement();
     void handleToFunctionalRequirement();
     void handleToDesignRequirement();
+    void handleToSection();
+    void handleToTableRow();
     void handleCreateReference();
 };
 
