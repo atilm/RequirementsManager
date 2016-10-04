@@ -51,6 +51,7 @@ void FreeFormReportGenerator::initializeTemplates()
 QString FreeFormReportGenerator::generateHtml()
 {
     documentTemplate->setField("TITLE", "Software Specification");
+
     documentTemplate->setField("CONTENT", generateContent(QModelIndex(), 1));
 
     return documentTemplate->getHtml();
@@ -67,6 +68,9 @@ QString FreeFormReportGenerator::generateContent(const QModelIndex &index,
         if(requirement->getType() == Requirement::Section){
             lines.append(buildSectionString(requirement, depth));
         }
+        else if(requirement->getType() == Requirement::TableRow){
+            lines.append(buildTableString(index));
+        }
     }
 
     for(int i = 0; i < model->rowCount(index); i++){
@@ -80,11 +84,46 @@ QString FreeFormReportGenerator::generateContent(const QModelIndex &index,
 QString FreeFormReportGenerator::buildSectionString(Requirement *requirement,
                                                     uint depth)
 {
-    QString temp = "<h%1>%2</h%1>\r\n"
+    QString temp = "<h%1>%2 [%3] %4</h%1>\r\n"
                    "<p>%3</p>\r\n";
 
     return temp
             .arg(depth)
-            .arg(requirement->getNumberedTitle())
+            .arg(requirement->number())
+            .arg(requirement->getID(), 3, 10, QChar('0'))
+            .arg(requirement->getTitle())
             .arg(documentSerializer->toSimpleHtml(requirement->getDescription()));
 }
+
+QString FreeFormReportGenerator::buildTableString(const QModelIndex &index)
+{
+//    QModelIndex parentIdx = index.parent();
+//    Requirement *parent = model->getRequirement(parentIdx);
+
+    QString lines;
+//    for(int row = currentIdx.row(); row < parent->childCount(); row++){
+
+//        QModelIndex currentIdx = model->index(row, 0, parentIdx);
+//        Requirement *currentReq = model->getRequirement(currentIdx);
+
+//        if(currentReq->getType() != Requirement::TableRow){
+//            break;
+//        }
+
+//        lines.append(buildTableRow(model->getRequirement(currentIdx)));
+
+//        row++;
+//        currentReq = model->getRequirement(index);
+
+//    }
+
+    return lines;
+}
+
+
+
+QString FreeFormReportGenerator::buildTableRow(Requirement *requirement)
+{
+    return QString();
+}
+

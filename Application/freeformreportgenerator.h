@@ -31,11 +31,15 @@ private:
     shared_ptr<RequirementsModel> model;
 
     HtmlTemplate *documentTemplate;
+    HtmlTemplate *tableTemplate;
+    HtmlTemplate *tableRowTemplate;
 
     void initializeTemplates();
     QString generateHtml();
     QString generateContent(const QModelIndex &index, uint depth);
     QString buildSectionString(Requirement *requirement, uint depth);
+    QString buildTableString(const QModelIndex &index);
+    QString buildTableRow(Requirement *requirement);
 };
 
 #endif // FREEFORMREPORTGENERATOR_H

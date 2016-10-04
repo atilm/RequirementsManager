@@ -103,7 +103,8 @@ SOURCES += main.cpp\
     aerobasicreader.cpp \
     tagextractor.cpp \
     freeformreportgenerator.cpp \
-    reporttypechooserdialog.cpp
+    reporttypechooserdialog.cpp \
+    requirementsmodeliterator.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -180,7 +181,8 @@ HEADERS  += mainwindow.h \
     aerobasicreader.h \
     tagextractor.h \
     freeformreportgenerator.h \
-    reporttypechooserdialog.h
+    reporttypechooserdialog.h \
+    requirementsmodeliterator.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
