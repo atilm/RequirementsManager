@@ -6,7 +6,7 @@
 class RequirementsModelIterator
 {
 public:
-    RequirementsModelIterator(RequirementsModel *model);
+    RequirementsModelIterator(shared_ptr<RequirementsModel> model);
 
     void toBegin();
     bool hasNext();
@@ -14,7 +14,7 @@ public:
     Requirement* currentRequirement();
 
 private:
-    RequirementsModel *model;
+    shared_ptr<RequirementsModel> model;
     QModelIndex currentIndex;
 
     bool currentNodeHasChildNodes();

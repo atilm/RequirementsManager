@@ -1,4 +1,7 @@
+#include <QDebug>
+
 #include "freeformreportgenerator.h"
+#include "requirementsmodeliterator.h"
 
 FreeFormReportGenerator::
 FreeFormReportGenerator(shared_ptr<HtmlTemplateFactory> templateFactory,
@@ -62,21 +65,36 @@ QString FreeFormReportGenerator::generateContent(const QModelIndex &index,
 {
     QString lines;
 
-    if(index.isValid()){
-        Requirement *requirement = model->getRequirement(index);
+//    if(index.isValid()){
+//        Requirement *requirement = model->getRequirement(index);
 
-        if(requirement->getType() == Requirement::Section){
-            lines.append(buildSectionString(requirement, depth));
-        }
-        else if(requirement->getType() == Requirement::TableRow){
-            lines.append(buildTableString(index));
+//        if(requirement->getType() == Requirement::Section){
+//            lines.append(buildSectionString(requirement, depth));
+//        }
+//        else if(requirement->getType() == Requirement::TableRow){
+//            lines.append(buildTableString(index));
+//        }
+//    }
+
+//    for(int i = 0; i < model->rowCount(index); i++){
+//        QModelIndex childIndex = model->index(i, 0, index);
+//        lines.append(generateContent(childIndex, depth + 1));
+//    }
+
+    RequirementsModelIterator it(model);
+
+    lines.append("<table>\r\n");
+    do{
+        Requirement *req = it.currentRequirement();
+
+        if(req){
+            lines.append(QString("<tr><td>%1</td></tr>\r\n")
+                         .arg(req->getNumberedTitle()));
         }
     }
+    while(it.next());
 
-    for(int i = 0; i < model->rowCount(index); i++){
-        QModelIndex childIndex = model->index(i, 0, index);
-        lines.append(generateContent(childIndex, depth + 1));
-    }
+    lines.append("</table>\r\n");
 
     return lines;
 }

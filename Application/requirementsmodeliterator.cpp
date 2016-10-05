@@ -1,6 +1,9 @@
+#include <QDebug>
+
 #include "requirementsmodeliterator.h"
 
-RequirementsModelIterator::RequirementsModelIterator(RequirementsModel *model)
+RequirementsModelIterator::
+RequirementsModelIterator(shared_ptr<RequirementsModel> model)
 {
     this->model = model;
     toBegin();
@@ -30,32 +33,20 @@ bool RequirementsModelIterator::hasNext()
 
 bool RequirementsModelIterator::next()
 {
-    if(currentIndex.isValid())
-    {
-        if(currentNodeHasChildNodes())
-        {
+    if(currentIndex.isValid()){
+        if(currentNodeHasChildNodes()){
             goToFirstChild();
         }
-        else
-        {
-            while(!currentHasNextSibling() && currentIndex.isValid())
-            {
+        else{
+            while(!currentHasNextSibling() && currentIndex.isValid()){
                 goToParent();
             }
             goToNextSibling();
         }
 
-        if(currentIndex.isValid())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return currentIndex.isValid();
     }
-    else
-    {
+    else{
         return false;
     }
 }
@@ -72,7 +63,7 @@ Requirement *RequirementsModelIterator::currentRequirement()
 
 bool RequirementsModelIterator::currentNodeHasChildNodes()
 {
-    return ( model->getRequirement(currentIndex)->childCount() > 0 );
+    return ( model->rowCount(currentIndex) > 0 );
 }
 
 void RequirementsModelIterator::goToFirstChild()
@@ -89,8 +80,8 @@ bool RequirementsModelIterator::currentHasNextSibling()
 {
     QModelIndex parent = currentIndex.parent();
 
-    if(parent.isValid()){
-        int siblingCount = model->getRequirement(parent)->childCount();
+    if(currentIndex.isValid()){
+        int siblingCount = model->rowCount(parent);
         return currentIndex.row() + 1 < siblingCount;
     }
     else{
