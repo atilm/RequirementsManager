@@ -12,6 +12,7 @@ RequirementsModelIterator(shared_ptr<RequirementsModel> model)
 void RequirementsModelIterator::toBegin()
 {
     currentIndex = QModelIndex();
+    currentDepth = 0;
 
     if(currentNodeHasChildNodes()){
         goToFirstChild();
@@ -61,6 +62,11 @@ Requirement *RequirementsModelIterator::currentRequirement()
     }
 }
 
+int RequirementsModelIterator::getCurrentDepth()
+{
+    return currentDepth;
+}
+
 bool RequirementsModelIterator::currentNodeHasChildNodes()
 {
     return ( model->rowCount(currentIndex) > 0 );
@@ -69,11 +75,13 @@ bool RequirementsModelIterator::currentNodeHasChildNodes()
 void RequirementsModelIterator::goToFirstChild()
 {
     currentIndex = model->index(0, 0, currentIndex);
+    currentDepth++;
 }
 
 void RequirementsModelIterator::goToParent()
 {
     currentIndex = currentIndex.parent();
+    currentDepth--;
 }
 
 bool RequirementsModelIterator::currentHasNextSibling()

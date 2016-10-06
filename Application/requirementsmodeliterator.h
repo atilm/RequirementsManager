@@ -12,10 +12,12 @@ public:
     bool hasNext();
     bool next();
     Requirement* currentRequirement();
+    int getCurrentDepth();
 
 private:
     shared_ptr<RequirementsModel> model;
     QModelIndex currentIndex;
+    int currentDepth;
 
     bool currentNodeHasChildNodes();
     void goToFirstChild();

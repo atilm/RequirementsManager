@@ -84,11 +84,14 @@ QString FreeFormReportGenerator::generateContent(const QModelIndex &index,
     RequirementsModelIterator it(model);
 
     lines.append("<table>\r\n");
-    do{
+    do
+    {
         Requirement *req = it.currentRequirement();
 
         if(req){
-            lines.append(QString("<tr><td>%1</td></tr>\r\n")
+            lines.append(QString("<tr><td>%1</td>\r\n"
+                                 "<td>%2</td></tr>\r\n")
+                         .arg(it.getCurrentDepth())
                          .arg(req->getNumberedTitle()));
         }
     }
