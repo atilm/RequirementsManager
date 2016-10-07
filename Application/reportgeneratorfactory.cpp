@@ -1,28 +1,47 @@
 #include "reportgeneratorfactory.h"
 #include "htmlreportgenerator.h"
 
-ReportGeneratorFactory::ReportGeneratorFactory(shared_ptr<FileStateTracker> fileState)
+ReportGeneratorProvider::ReportGeneratorProvider()
 {
-    this->fileState = fileState;
 }
 
-ReportGeneratorFactory::~ReportGeneratorFactory()
+ReportGeneratorProvider::~ReportGeneratorProvider()
 {
 
 }
 
-ReportGenerator *ReportGeneratorFactory::newGenerator(const QString &type)
+void ReportGeneratorProvider::addGenerator(ReportGenerator *generator)
 {
-    if(type == "html")
-        return newHtmlReportGenerator();
-    else
-        throw runtime_error("ReportGeneratorFactory: unkown generator type requested.");
+    generators[generator->getTypeString()] = generator;
 }
 
-ReportGenerator *ReportGeneratorFactory::newHtmlReportGenerator()
+QStringList ReportGeneratorProvider::availableGenerators()
 {
-    return new HtmlReportGenerator(new HtmlTemplateFactory(),
-                                   new TextDocumentSerializer(new RichTextResourceManager(fileState)),
-                                   new HtmlGenerator());
+    QStringList types;
+
+    foreach(QString type, generators.keys())
+        types.append(type);
+
+    return types;
+}
+
+ReportGenerator *ReportGeneratorProvider::getGenerator(const QString &type) const
+{
+    if(!generators.contains(type)){
+        throw std::runtime_error(
+                    QString("No generator of type %1").arg(type).toStdString());
+    }
+
+    return generators[type];
+}
+
+QString ReportGeneratorProvider::getDescription(const QString &type) const
+{
+    if(generators.contains(type)){
+        return generators[type]->getDescription();
+    }
+    else{
+        return QString();
+    }
 }
 

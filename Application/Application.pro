@@ -101,7 +101,10 @@ SOURCES += main.cpp\
     requirementrefcounter.cpp \
     requirementrefview.cpp \
     aerobasicreader.cpp \
-    tagextractor.cpp
+    tagextractor.cpp \
+    freeformreportgenerator.cpp \
+    reporttypechooserdialog.cpp \
+    requirementsmodeliterator.cpp
 
 HEADERS  += mainwindow.h \
     richtextcontroller.h \
@@ -176,7 +179,10 @@ HEADERS  += mainwindow.h \
     requirementrefcounter.h \
     requirementrefview.h \
     aerobasicreader.h \
-    tagextractor.h
+    tagextractor.h \
+    freeformreportgenerator.h \
+    reporttypechooserdialog.h \
+    requirementsmodeliterator.h
 
 FORMS    += mainwindow.ui \
     attributeeditor.ui \
@@ -187,7 +193,8 @@ FORMS    += mainwindow.ui \
     settingsdialog.ui \
     resizeimagedialog.ui \
     aboutbox.ui \
-    appsettingsdialog.ui
+    appsettingsdialog.ui \
+    reporttypechooserdialog.ui
 
 RESOURCES += \
     resources.qrc

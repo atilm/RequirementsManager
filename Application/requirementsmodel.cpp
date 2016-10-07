@@ -5,7 +5,9 @@
 using namespace std;
 
 RequirementsModel::RequirementsModel(RequirementFactory *factory,
-                                     shared_ptr<FileStateTracker> fileState, AttributeContext *attributeContext, LinkContext *linkContext,
+                                     shared_ptr<FileStateTracker> fileState,
+                                     AttributeContext *attributeContext,
+                                     LinkContext *linkContext,
                                      RequirementToModelMapper *dataMapper,
                                      QObject *parent) :
     QAbstractItemModel(parent)
@@ -43,7 +45,7 @@ void RequirementsModel::clearModel()
     factory->resetManagers();
 }
 
-int RequirementsModel::columnCount(const QModelIndex &parent) const
+int RequirementsModel::columnCount(const QModelIndex &) const
 {
     return dataMapper->columns();
 }
@@ -72,6 +74,8 @@ QVariant RequirementsModel::data(const QModelIndex &index, int role) const
         return dataMapper->getCheckStateRole(requirement, column);
     case Qt::ForegroundRole:
         return dataMapper->getForegroundRole(requirement, column);
+    case Qt::FontRole:
+        return dataMapper->getFontRole(requirement, column);
     }
 
     return QVariant();
@@ -125,7 +129,8 @@ Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
     return dataMapper->flags(index.column());
 }
 
-bool RequirementsModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool RequirementsModel::setData(const QModelIndex &index,
+                                const QVariant &value, int role)
 {
     if (!index.isValid())
         return false;
@@ -197,8 +202,10 @@ QModelIndex RequirementsModel::appendSibling(const QModelIndex &index)
     }
 }
 
-QModelIndex RequirementsModel::appendChild(const QModelIndex &index, const QString &name,
-                                           Requirement::Type type, uint requestedID)
+QModelIndex RequirementsModel::appendChild(const QModelIndex &index,
+                                           const QString &name,
+                                           Requirement::Type type,
+                                           uint requestedID)
 {
     Requirement *item = getValidItem(index);
     Requirement *newItem;
@@ -260,7 +267,8 @@ bool RequirementsModel::removeRequirement(const QModelIndex &index)
     }
 }
 
-void RequirementsModel::moveRequirement(const QModelIndex &source, const QModelIndex &destination)
+void RequirementsModel::moveRequirement(const QModelIndex &source,
+                                        const QModelIndex &destination)
 {
     QModelIndex sourceParent = parent(source);
     QModelIndex destinationParent = parent(destination);

@@ -2,6 +2,8 @@
 #include <QApplication>
 #include "aerobasicreader.h"
 #include "cppreader.h"
+#include "freeformreportgenerator.h"
+#include "htmlreportgenerator.h"
 #include "preventiveactionfactory.h"
 #include "riskscenariotextedit.h"
 #include "testnamelineedit.h"
@@ -129,8 +131,28 @@ int main(int argc, char *argv[])
                                                                      dataMapper));
     requirements->init();
 
-    ReportController *reportController = new ReportController(new ReportGeneratorFactory(fileState),
-                                                              fileState);
+
+    HtmlReportGenerator *htmlGenerator =
+            new HtmlReportGenerator(new HtmlTemplateFactory(),
+                                    new TextDocumentSerializer(
+                                        new RichTextResourceManager(fileState)),
+                                    new HtmlGenerator());
+
+    FreeFormReportGenerator *freeFormGenerator =
+            new FreeFormReportGenerator(make_shared<HtmlTemplateFactory>(),
+                                        make_shared<TextDocumentSerializer>(
+                                            new RichTextResourceManager(fileState)),
+                                        make_shared<HtmlGenerator>());
+
+    ReportGeneratorProvider *generatorProvider = new ReportGeneratorProvider();
+    generatorProvider->addGenerator(htmlGenerator);
+    generatorProvider->addGenerator(freeFormGenerator);
+
+    ReportTypeChooserDialog *typeChooser = new ReportTypeChooserDialog();
+
+    ReportController *reportController = new ReportController(generatorProvider,
+                                                              fileState,
+                                                              typeChooser);
 
     AppSettingsDialog *appSettingsDialog = new AppSettingsDialog(appSettings);
 

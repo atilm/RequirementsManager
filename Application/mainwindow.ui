@@ -232,7 +232,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Current Requirement linked by:</string>
+            <string>Current Requirement referenced by:</string>
            </property>
           </widget>
          </item>

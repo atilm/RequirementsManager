@@ -10,6 +10,7 @@ RequirementsView::RequirementsView(QMessageBoxProvider *msg, QMenu *contextMenu,
     setAcceptDrops(true);
     setDropIndicatorShown(true);
     setDragDropMode(QAbstractItemView::InternalMove);
+    setIndentation(10);
 
     setUpContextMenu(contextMenu);
     this->msg = msg;
@@ -124,11 +125,20 @@ void RequirementsView::setUpContextMenu(QMenu *contextMenu)
 {
     this->contextMenu = contextMenu;
 
-    contextMenu->addAction(tr("User Requirement"), this, SLOT(handleToUserRequirement()));
-    contextMenu->addAction(tr("Functional Requirement"), this, SLOT(handleToFunctionalRequirement()));
-    contextMenu->addAction(tr("Design Requirement"), this, SLOT(handleToDesignRequirement()));
+    contextMenu->addAction(tr("Section"),
+                           this, SLOT(handleToSection()));
+    contextMenu->addAction(tr("Table Row"),
+                           this, SLOT(handleToTableRow()));
+    contextMenu->addAction(tr("User Requirement"),
+                           this, SLOT(handleToUserRequirement()));
+    contextMenu->addAction(tr("Functional Requirement"),
+                           this, SLOT(handleToFunctionalRequirement()));
+    contextMenu->addAction(tr("Design Requirement"),
+                           this, SLOT(handleToDesignRequirement()));
+
     contextMenu->addSeparator();
-    contextMenu->addAction(tr("Create Reference"), this, SLOT(handleCreateReference()));
+    contextMenu->addAction(tr("Create Reference"),
+                           this, SLOT(handleCreateReference()));
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
@@ -156,6 +166,16 @@ void RequirementsView::handleToFunctionalRequirement()
 void RequirementsView::handleToDesignRequirement()
 {
     requirementsModel()->setType(currentIndex(), Requirement::DesignRequirement);
+}
+
+void RequirementsView::handleToSection()
+{
+    requirementsModel()->setType(currentIndex(), Requirement::Section);
+}
+
+void RequirementsView::handleToTableRow()
+{
+    requirementsModel()->setType(currentIndex(), Requirement::TableRow);
 }
 
 void RequirementsView::handleCreateReference()

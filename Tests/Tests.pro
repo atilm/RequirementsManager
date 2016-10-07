@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     eventlistener.cpp \
     appsettingstests.cpp \
     mockattributecontainerfactory.cpp \
-    cppreadertests.cpp
+    cppreadertests.cpp \
+    requirementsmodeliteratortests.cpp
 
 HEADERS += \
     projectfilereadermock.h \
@@ -34,7 +35,8 @@ HEADERS += \
     riskassessmentmodelmock.h \
     linkcontainermock.h \
     directorylistmodelmock.h \
-    directorylistermock.h
+    directorylistermock.h \
+    sourcecodecontrollermock.h
 
 INCLUDEPATH += $$PWD/../Application/
 
@@ -61,6 +63,7 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/moc_linkcontainer.o \
         $$PWD/../Application/release/riskassessmentfactory.o \
         $$PWD/../Application/release/linkcontainerfactory.o \
+        $$PWD/../Application/release/preventiveactionfactory.o \
         $$PWD/../Application/release/preventiveaction.o \
         $$PWD/../Application/release/preventiveactionmodel.o \
         $$PWD/../Application/release/moc_preventiveactionmodel.o \
@@ -83,6 +86,18 @@ LIBS += $$PWD/../Application/release/uniqueidmanager.o \
         $$PWD/../Application/release/directorylister.o \
         $$PWD/../Application/release/requirementreference.o \
         $$PWD/../Application/release/requirementrefcounter.o \
+        $$PWD/../Application/release/sourcecodecontroller.o \
+        $$PWD/../Application/release/moc_sourcecodecontroller.o \
+        $$PWD/../Application/release/attributecontext.o \
+        $$PWD/../Application/release/moc_attributecontext.o \
+        $$PWD/../Application/release/linkcontext.o \
+        $$PWD/../Application/release/moc_linkcontext.o \
+        $$PWD/../Application/release/automatedtestreference.o \
+        $$PWD/../Application/release/htmlgenerator.o \
+        $$PWD/../Application/release/descriptionview.o \
+        $$PWD/../Application/release/moc_descriptionview.o \
+        $$PWD/../Application/release/resizeimagedialog.o \
+        $$PWD/../Application/release/moc_resizeimagedialog.o
 
 win32: LIBS += -L$$PWD/../gtest/ -lgmock
 

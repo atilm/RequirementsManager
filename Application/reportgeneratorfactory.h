@@ -1,19 +1,24 @@
 #ifndef REPORTGENERATORFACTORY_H
 #define REPORTGENERATORFACTORY_H
 
+#include <QStringList>
+#include <QMap>
+
 #include "reportgenerator.h"
 
-class ReportGeneratorFactory
+class ReportGeneratorProvider
 {
 public:
-    ReportGeneratorFactory(shared_ptr<FileStateTracker> fileState);
-    virtual ~ReportGeneratorFactory();
+    ReportGeneratorProvider();
+    virtual ~ReportGeneratorProvider();
 
-    virtual ReportGenerator *newGenerator(const QString &type);
+    virtual void addGenerator(ReportGenerator *generator);
+    virtual QStringList availableGenerators();
+    virtual ReportGenerator *getGenerator(const QString &type) const;
+    virtual QString getDescription(const QString &type) const;
 
 private:
-    shared_ptr<FileStateTracker> fileState;
-    ReportGenerator *newHtmlReportGenerator();
+    QMap<QString, ReportGenerator*> generators;
 };
 
 #endif // REPORTGENERATORFACTORY_H

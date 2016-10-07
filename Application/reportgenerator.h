@@ -13,6 +13,8 @@ public:
     ReportGenerator();
     virtual ~ReportGenerator();
 
+    virtual QString getTypeString() = 0;
+    virtual QString getDescription() = 0;
     virtual void setModel(shared_ptr<RequirementsModel> model) = 0;
     virtual void generate(const QString &filePath) = 0;
 };

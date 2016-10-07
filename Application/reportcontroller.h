@@ -4,6 +4,7 @@
 #include <QObject>
 #include "filestatetracker.h"
 #include "reportgeneratorfactory.h"
+#include "reporttypechooserdialog.h"
 #include "requirementsmodel.h"
 
 #include <memory>
@@ -13,8 +14,9 @@ class ReportController : public QObject
 {
     Q_OBJECT
 public:
-    ReportController(ReportGeneratorFactory *generatorFactory,
+    ReportController(ReportGeneratorProvider *generatorProvider,
                      shared_ptr<FileStateTracker> fileState,
+                     ReportTypeChooserDialog *typeChooser,
                      QObject *parent = 0);
     virtual ~ReportController();
 
@@ -25,8 +27,9 @@ public slots:
 
 private:
     shared_ptr<FileStateTracker> fileState;
-    ReportGeneratorFactory *generatorFactory;
+    ReportGeneratorProvider *generatorProvider;
     shared_ptr<RequirementsModel> model;
+    ReportTypeChooserDialog *typeChooser;
 
     QString swapFileExtension(const QString &filePath, const QString &newExtension);
 };

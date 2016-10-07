@@ -1,7 +1,8 @@
 #include "htmlreportgenerator.h"
 
 HtmlReportGenerator::HtmlReportGenerator(HtmlTemplateFactory *templateFactory,
-                                         TextDocumentSerializer *documentSerializer, HtmlGenerator *html)
+                                         TextDocumentSerializer *documentSerializer,
+                                         HtmlGenerator *html)
 {
     model = nullptr;
     this->templateFactory = templateFactory;
@@ -18,6 +19,18 @@ HtmlReportGenerator::~HtmlReportGenerator()
     delete html;
 }
 
+QString HtmlReportGenerator::getTypeString()
+{
+    return "Structured Html";
+}
+
+QString HtmlReportGenerator::getDescription()
+{
+    return "Generates a html report with a fixed structure. A SRS table"
+           "contains all SRS nodes. A FRS table contains all SRS and FRS nodes."
+           "A DS table contains SRS, FRS and DS nodes.";
+}
+
 void HtmlReportGenerator::setModel(shared_ptr<RequirementsModel> model)
 {
     this->model = model;
@@ -28,7 +41,6 @@ void HtmlReportGenerator::generate(const QString &filePath)
     file.setFileName(filePath);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
         out.setDevice(&file);
-
         out << generateHtml();
     }
     file.close();
@@ -320,6 +332,14 @@ bool HtmlReportGenerator::isUserRequirement(const QModelIndex &index)
         return model->getType(index) == Requirement::UserRequirement;
 }
 
+bool HtmlReportGenerator::isFunctionalRequirement(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return false;
+    else
+        return model->getType(index) == Requirement::FunctionalRequirement;
+}
+
 bool HtmlReportGenerator::isDesignSpecification(const QModelIndex &index)
 {
     if(!index.isValid())
@@ -333,6 +353,6 @@ bool HtmlReportGenerator::isUserOrFunctionalRequirement(const QModelIndex &index
     if(!index.isValid())
         return false;
     else
-        return !isDesignSpecification(index);
+        return isUserRequirement(index) || isFunctionalRequirement(index);
 }
 

@@ -33,7 +33,8 @@ Qt::ItemFlags RequirementToModelMapper::flags(int column) const
     return flags;
 }
 
-QVariant RequirementToModelMapper::getHeaderDisplayRole(int section, Qt::Orientation orientation) const
+QVariant RequirementToModelMapper::getHeaderDisplayRole(int section,
+                                                        Qt::Orientation orientation) const
 {
     if(orientation == Qt::Horizontal){
         if(section == 0)
@@ -44,10 +45,15 @@ QVariant RequirementToModelMapper::getHeaderDisplayRole(int section, Qt::Orienta
     return QVariant();
 }
 
-QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirement, int column) const
+QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirement,
+                                                     int column) const
 {
     if(column == 0){
         switch(requirement->getType()){
+        case Requirement::Section:
+            return QColor("#000000");
+        case Requirement::TableRow:
+            return QColor("#488214");
         case Requirement::UserRequirement:
             return QColor("#000000");
         case Requirement::FunctionalRequirement:
@@ -60,7 +66,8 @@ QVariant RequirementToModelMapper::getForegroundRole(const Requirement *requirem
         return QVariant();
 }
 
-QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement, int column) const
+QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement,
+                                                  int column) const
 {
     if(column == 0)
         return requirement->getNumberedTitle();
@@ -75,7 +82,8 @@ QVariant RequirementToModelMapper::getDisplayRole(const Requirement *requirement
         return QVariant();
 }
 
-QVariant RequirementToModelMapper::getEditRole(const Requirement *requirement, int column) const
+QVariant RequirementToModelMapper::getEditRole(const Requirement *requirement,
+                                               int column) const
 {
     if(column == 0)
         return requirement->getTitle();
@@ -83,7 +91,8 @@ QVariant RequirementToModelMapper::getEditRole(const Requirement *requirement, i
         return getDisplayRole(requirement, column);
 }
 
-QVariant RequirementToModelMapper::getCheckStateRole(const Requirement *requirement, int column) const
+QVariant RequirementToModelMapper::getCheckStateRole(const Requirement *requirement,
+                                                     int column) const
 {
     if(column > 0 && column <= context->rowCount()){
         int attributeIndex = column - 1;
@@ -94,7 +103,22 @@ QVariant RequirementToModelMapper::getCheckStateRole(const Requirement *requirem
     return QVariant();
 }
 
-bool RequirementToModelMapper::setEditRole(const QVariant &value, Requirement *requirement, int column)
+QVariant RequirementToModelMapper::getFontRole(const Requirement *requirement,
+                                               int column) const
+{
+    if(column == 0 && requirement->getType() == Requirement::Section){
+        QFont boldFont;
+        boldFont.setBold(true);
+        return boldFont;
+    }
+    else{
+        return QVariant();
+    }
+}
+
+bool RequirementToModelMapper::setEditRole(const QVariant &value,
+                                           Requirement *requirement,
+                                           int column)
 {
     if(column == 0){
         requirement->setTitle(value.toString());
@@ -113,7 +137,9 @@ bool RequirementToModelMapper::setEditRole(const QVariant &value, Requirement *r
         return false;
 }
 
-bool RequirementToModelMapper::setCheckStateRole(const QVariant &value, Requirement *requirement, int column)
+bool RequirementToModelMapper::setCheckStateRole(const QVariant &value,
+                                                 Requirement *requirement,
+                                                 int column)
 {
     if(column > 0 && column <= context->rowCount()){
         int attributeIndex = column - 1;
