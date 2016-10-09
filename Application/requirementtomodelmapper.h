@@ -20,7 +20,7 @@ public:
 
     int columns() const;
 
-    Qt::ItemFlags flags(int column) const;
+    Qt::ItemFlags flags(const Requirement *requirement, int column) const;
 
     QVariant getHeaderDisplayRole(int section, Qt::Orientation orientation) const;
 

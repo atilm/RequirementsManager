@@ -34,6 +34,7 @@ public:
     virtual void addAttribute(const QString &name, const QString &typeString);
     virtual void removeAttribute(int row);
     virtual QString name(int index) const;
+    virtual void setName(const QModelIndex &index, const QString &name);
     virtual DataType type(int index) const;
     virtual QString typeString(int index) const;
     virtual QString typeString(DataType type) const;

@@ -26,7 +26,7 @@ public:
 
     virtual ~RequirementReference();
 
-    virtual bool isReference();
+    virtual bool isReference() const;
     virtual QString getTitle() const;
     virtual QString getNumberedTitle() const;
     virtual QTextDocument* getDescription();

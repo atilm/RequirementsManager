@@ -40,7 +40,7 @@ RequirementReference::~RequirementReference()
     delete refDescription;
 }
 
-bool RequirementReference::isReference()
+bool RequirementReference::isReference() const
 {
     return true;
 }
@@ -132,6 +132,6 @@ void RequirementReference::initialize(uint targetID, Requirement::Type type)
     setType(type);
     refDescription = nullptr;
 
-    // register yourself with the refernce counter:
+    // register yourself with the reference counter:
     refCounter->addReference(targetID, id);
 }

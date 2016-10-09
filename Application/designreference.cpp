@@ -27,7 +27,7 @@ DesignReference::DesignReference(SourceAddress address,
     initialize(address, controller);
 }
 
-bool DesignReference::isReference()
+bool DesignReference::isReference() const
 {
     return true;
 }

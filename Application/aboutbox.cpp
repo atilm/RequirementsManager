@@ -15,7 +15,7 @@ AboutBox::AboutBox(QWidget *parent) :
                 "<html>"
                 "<p>Version: %1</p>"
                 "<h1>Project Home:</h1>"
-                "<a href=\https://github.com/atilm/TaskBoard\">https://github.com/atilm/TaskBoard</a>"
+                "<a href=\https://github.com/atilm/TaskBoard\">https://github.com/atilm/RequirementsManager</a>"
                 "<h1>GNU General Public License</h1>"
                 "<p>Copyright (C) 2016  Andreas Thielmann</p>"
                 "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>"

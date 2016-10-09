@@ -29,7 +29,7 @@ public:
                     AppSettings *settings,
                     unsigned int proposedID);
 
-    virtual bool isReference();
+    virtual bool isReference() const;
     virtual SourceAddress getAddress();
     virtual QTextDocument *getDescription();
 

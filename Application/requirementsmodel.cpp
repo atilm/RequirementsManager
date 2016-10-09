@@ -126,7 +126,9 @@ Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
     if(!index.isValid())
         return Qt::ItemIsDropEnabled;
 
-    return dataMapper->flags(index.column());
+    Requirement *requirement = asRequirement(index);
+
+    return dataMapper->flags(requirement, index.column());
 }
 
 bool RequirementsModel::setData(const QModelIndex &index,
@@ -414,6 +416,12 @@ void RequirementsModel::handleAttributeRemoved()
     emit columnsChanged();
 }
 
+void RequirementsModel::handleAttributeChanged(const QModelIndex &begin,
+                                               const QModelIndex &end)
+{
+    emit headerDataChanged(Qt::Horizontal, begin.column() + 1, end.column() + 1);
+}
+
 void RequirementsModel::connectSignals()
 {
     if(attributeContext){
@@ -425,6 +433,8 @@ void RequirementsModel::connectSignals()
                 this, SLOT(handleAttributeAboutToBeRemoved(int)));
         connect(attributeContext, SIGNAL(attributeRemoved()),
                 this, SLOT(handleAttributeRemoved()));
+        connect(attributeContext, SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),
+                this, SLOT(handleAttributeChanged(QModelIndex, QModelIndex)));
     }
 }
 

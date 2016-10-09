@@ -46,7 +46,7 @@ void RiskAssessmentEditController::setRiskView(RiskTableView *view)
 
 void RiskAssessmentEditController::setAddRiskButton(QToolButton *addRiskButton)
 {
-    connect(addRiskButton, SIGNAL(clicked()), this, SLOT(insertBeforeCurrent()));
+    connect(addRiskButton, SIGNAL(clicked()), this, SLOT(appendRisk()));
 }
 
 void RiskAssessmentEditController::setRemoveRiskButton(QToolButton *removeRiskButton)
@@ -65,7 +65,7 @@ void RiskAssessmentEditController::setActionView(PreventiveActionTableView *acti
 
 void RiskAssessmentEditController::setAddActionButton(QToolButton *addActionButton)
 {
-    connect(addActionButton, SIGNAL(clicked()), this, SLOT(insertActionBeforeCurrent()));
+    connect(addActionButton, SIGNAL(clicked()), this, SLOT(appendAction()));
 }
 
 void RiskAssessmentEditController::setRemoveActionButton(QToolButton *removeActionButton)
@@ -85,6 +85,7 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
         riskModel = reqModel->getRiskAssessment(current);
         riskView->setModel(riskModel.get());
         riskView->resizeColumnsToContents();
+        riskView->resizeRowsToContents();
         dialog->setModel(riskModel);
         actionView->setModel(nullptr);
         descriptionView->clearDisplay();
@@ -102,6 +103,7 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
         actionModel = riskModel->getPreventiveActions(current);
         actionView->setModel(actionModel.get());
         actionView->resizeColumnsToContents();
+        actionView->resizeRowsToContents();
         actionDialog->setModel(actionModel);
         descriptionView->displayRisk(riskModel->getRiskAssessment(current));
         connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
@@ -123,11 +125,12 @@ void RiskAssessmentEditController::currentActionChanged(const QModelIndex &curre
     }
 }
 
-void RiskAssessmentEditController::insertBeforeCurrent()
+void RiskAssessmentEditController::appendRisk()
 {
     if(riskModel){
-        riskModel->add(riskView->currentIndex().row());
+        riskModel->appendAssessment();
         riskView->resizeColumnsToContents();
+        riskView->resizeRowsToContents();
     }
 }
 
@@ -136,14 +139,16 @@ void RiskAssessmentEditController::removeCurrent()
     if(riskModel){
         riskModel->remove(riskView->currentIndex());
         riskView->resizeColumnsToContents();
+        actionView->setModel(nullptr);
     }
 }
 
-void RiskAssessmentEditController::insertActionBeforeCurrent()
+void RiskAssessmentEditController::appendAction()
 {
     if(actionModel){
-        actionModel->add(actionView->currentIndex().row());
+        actionModel->appendAction();
         actionView->resizeColumnsToContents();
+        actionView->resizeRowsToContents();
     }
 }
 
