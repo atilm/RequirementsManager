@@ -42,7 +42,7 @@ uint Requirement::getID()
     return id;
 }
 
-bool Requirement::isReference()
+bool Requirement::isReference() const
 {
     return false;
 }

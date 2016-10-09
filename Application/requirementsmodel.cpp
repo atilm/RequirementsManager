@@ -126,7 +126,9 @@ Qt::ItemFlags RequirementsModel::flags(const QModelIndex &index) const
     if(!index.isValid())
         return Qt::ItemIsDropEnabled;
 
-    return dataMapper->flags(index.column());
+    Requirement *requirement = asRequirement(index);
+
+    return dataMapper->flags(requirement, index.column());
 }
 
 bool RequirementsModel::setData(const QModelIndex &index,

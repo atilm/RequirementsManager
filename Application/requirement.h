@@ -52,7 +52,7 @@ public:
     virtual ~Requirement();
 
     virtual uint getID();
-    virtual bool isReference();
+    virtual bool isReference() const;
 
     virtual void setType(Type type);
     virtual Type getType() const;

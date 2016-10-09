@@ -11,7 +11,8 @@ int RequirementToModelMapper::columns() const
     return context->rowCount() + 1;
 }
 
-Qt::ItemFlags RequirementToModelMapper::flags(int column) const
+Qt::ItemFlags RequirementToModelMapper::flags(const Requirement *requirement,
+                                              int column) const
 {
     Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable |
                           Qt::ItemIsDragEnabled |
@@ -21,13 +22,12 @@ Qt::ItemFlags RequirementToModelMapper::flags(int column) const
     if(column > 0 && column  <= context->rowCount()){
         int attributeIndex = column - 1;
 
-        if(context->type(attributeIndex) == AttributeContext::BOOLEAN){
+        if(context->type(attributeIndex) == AttributeContext::BOOLEAN)
             flags |= Qt::ItemIsUserCheckable;
-        }
         else
             flags |= Qt::ItemIsEditable;
     }
-    else if(column == 0)
+    else if( (column == 0) && !requirement->isReference())
         flags |= Qt::ItemIsEditable;
 
     return flags;
@@ -38,7 +38,7 @@ QVariant RequirementToModelMapper::getHeaderDisplayRole(int section,
 {
     if(orientation == Qt::Horizontal){
         if(section == 0)
-            return QObject::tr("Requirement");
+            return QObject::tr("Requirements");
         else if(section <= context->rowCount())
             return context->name(section - 1);
     }

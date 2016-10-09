@@ -97,25 +97,6 @@ void RequirementsView::dropEvent(QDropEvent *event)
     event->accept();
 }
 
-bool RequirementsView::edit(const QModelIndex &index,
-                            QAbstractItemView::EditTrigger trigger,
-                            QEvent *event)
-{
-    if(!index.isValid())
-    {
-        return false;
-    }
-
-    if(!requirementsModel()->getRequirement(index)->isReference())
-    {
-        return QTreeView::edit(index, trigger, event);
-    }
-    else
-    {
-        return false;
-    }
-}
-
 RequirementsModel *RequirementsView::requirementsModel()
 {
     return static_cast<RequirementsModel*>(model());
