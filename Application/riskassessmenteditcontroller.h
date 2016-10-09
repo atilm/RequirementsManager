@@ -39,9 +39,9 @@ public slots:
     virtual void currentRequirementChanged(const QModelIndex &current, const QModelIndex &);
     virtual void currentRiskChanged(const QModelIndex &current, const QModelIndex &);
     virtual void currentActionChanged(const QModelIndex &current, const QModelIndex &);
-    virtual void insertBeforeCurrent();
+    virtual void appendRisk();
     virtual void removeCurrent();
-    virtual void insertActionBeforeCurrent();
+    virtual void appendAction();
     virtual void removeCurrentAction();
     virtual void editRiskAssessment(const QModelIndex &index);
     virtual void editPreventiveAction(const QModelIndex &index);
