@@ -136,6 +136,7 @@ void RiskAssessmentEditController::removeCurrent()
     if(riskModel){
         riskModel->remove(riskView->currentIndex());
         riskView->resizeColumnsToContents();
+        actionView->setModel(nullptr);
     }
 }
 
