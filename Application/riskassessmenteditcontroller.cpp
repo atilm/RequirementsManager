@@ -85,6 +85,7 @@ void RiskAssessmentEditController::currentRequirementChanged(const QModelIndex &
         riskModel = reqModel->getRiskAssessment(current);
         riskView->setModel(riskModel.get());
         riskView->resizeColumnsToContents();
+        riskView->resizeRowsToContents();
         dialog->setModel(riskModel);
         actionView->setModel(nullptr);
         descriptionView->clearDisplay();
@@ -102,6 +103,7 @@ void RiskAssessmentEditController::currentRiskChanged(const QModelIndex &current
         actionModel = riskModel->getPreventiveActions(current);
         actionView->setModel(actionModel.get());
         actionView->resizeColumnsToContents();
+        actionView->resizeRowsToContents();
         actionDialog->setModel(actionModel);
         descriptionView->displayRisk(riskModel->getRiskAssessment(current));
         connect(actionView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
@@ -128,6 +130,7 @@ void RiskAssessmentEditController::insertBeforeCurrent()
     if(riskModel){
         riskModel->add(riskView->currentIndex().row());
         riskView->resizeColumnsToContents();
+        riskView->resizeRowsToContents();
     }
 }
 
@@ -145,6 +148,7 @@ void RiskAssessmentEditController::insertActionBeforeCurrent()
     if(actionModel){
         actionModel->add(actionView->currentIndex().row());
         actionView->resizeColumnsToContents();
+        actionView->resizeRowsToContents();
     }
 }
 
