@@ -87,6 +87,8 @@ public slots:
     void handleAttributeInserted();
     void handleAttributeAboutToBeRemoved(int index);
     void handleAttributeRemoved();
+    void handleAttributeChanged(const QModelIndex &begin,
+                                const QModelIndex &end);
 
 private:
     RequirementFactory *factory;

@@ -25,6 +25,7 @@ private:
 private slots:
     void handleAddClicked();
     void handleRemoveClicked();
+    void handleRenameClicked();
 };
 
 #endif // ATTRIBUTEEDITOR_H

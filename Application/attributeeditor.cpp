@@ -16,6 +16,7 @@ AttributeEditor::AttributeEditor(AttributeContext *context, QWidget *parent) :
 
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(handleAddClicked()));
     connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(handleRemoveClicked()));
+    connect(ui->renameButton, SIGNAL(clicked(bool)), this, SLOT(handleRenameClicked()));
 }
 
 AttributeEditor::~AttributeEditor()
@@ -44,4 +45,11 @@ void AttributeEditor::handleRemoveClicked()
 {
     QModelIndex index = ui->tableView->currentIndex();
     context->removeAttribute(index.row());
+}
+
+void AttributeEditor::handleRenameClicked()
+{
+    QModelIndex index = ui->tableView->currentIndex();
+    context->setName(index, ui->nameEdit->text());
+    ui->nameEdit->clear();
 }

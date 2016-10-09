@@ -105,6 +105,15 @@ QString AttributeContext::name(int index) const
     return attributes[index].name;
 }
 
+void AttributeContext::setName(const QModelIndex &index, const QString &name)
+{
+    if(!index.isValid())
+        return;
+
+    attributes[index.row()].name = name;
+    emit dataChanged(index, index);
+}
+
 AttributeContext::DataType AttributeContext::type(int index) const
 {
     return attributes[index].type;
@@ -127,7 +136,8 @@ QString AttributeContext::typeString(AttributeContext::DataType type) const
     }
 }
 
-AttributeContext::DataType AttributeContext::stringToDataType(const QString &typeString)
+AttributeContext::DataType
+AttributeContext::stringToDataType(const QString &typeString)
 {
     if(typeString == booleanTypeString)
         return BOOLEAN;
