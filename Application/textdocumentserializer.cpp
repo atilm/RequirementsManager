@@ -104,7 +104,7 @@ QString TextDocumentSerializer::processFragment(QTextFragment fragment)
         text = getImageTag(format.toImageFormat());
 
     if(format.fontFamily().contains("Courier"))
-        text = QString("<code>%1</code>").arg(text);
+        text = QString("<code>%1</code>").arg(preserveSpaces(text));
 
     if(format.fontWeight() == QFont::Bold)
         text = QString("<b>%1</b>").arg(text);
@@ -152,5 +152,10 @@ QString TextDocumentSerializer::removeTrailingLineBreaks(QString s)
     }
 
     return s;
+}
+
+QString TextDocumentSerializer::preserveSpaces(QString s)
+{
+    return s.replace(" ", "&nbsp;");
 }
 

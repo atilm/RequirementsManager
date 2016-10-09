@@ -29,6 +29,7 @@ private:
     QString getImageTag(QTextImageFormat format);
     QString relativeImagePath(QTextImageFormat format);
     QString removeTrailingLineBreaks(QString s);
+    QString preserveSpaces(QString s);
 };
 
 #endif // TEXTDOCUMENTSERIALIZER_H
